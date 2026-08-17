@@ -119,7 +119,7 @@ def _reset_module_caches() -> None:
     single process. Post-C1 the language directory owns one of the two."""
     from app.services import language_directory
     language_directory.reset_caches()
-    px._pivot_eligible_cache = None
+    px.reset_caches()
 
 
 def _report(title: str, wall: float, trees: int, nodes: int) -> None:

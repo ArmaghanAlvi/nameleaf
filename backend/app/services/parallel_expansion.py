@@ -86,9 +86,16 @@ def _pivot_eligible_languages(db: Session) -> set[str]:
     all_non_en_rows = [
         row for row in visible_languages(db) if row.code != "en"
     ]
-    code_to_id = {
-        code: lid for (lid, code) in db.execute(
-            select(Language.id, Language.code)
+    # Language.has_wordnet_edges persists this answer (migration a1c7f3e94b28).
+    # Reading it replaces the probe loop below, which cost ~17s cold: the 14
+    # languages that genuinely have NO wordnet edges cannot short-circuit a
+    # LIMIT 1, so proving the negative touches every sense of each (measured:
+    # sw, 12,819 senses, 1,184ms). NULL means "not yet backfilled" -- those
+    # languages still pay the live probe, so behavior is identical before and
+    # after scripts/prune/backfill_wordnet_edge_flags.py runs.
+    stored = {
+        code: (lid, flag) for (lid, code, flag) in db.execute(
+            select(Language.id, Language.code, Language.has_wordnet_edges)
             .where(Language.code.in_([r.code for r in all_non_en_rows]))
         )
     }
@@ -103,11 +110,25 @@ def _pivot_eligible_languages(db: Session) -> set[str]:
             .limit(1)
         ) is not None
 
+    def _resolve(code: str) -> bool:
+        language_id, flag = stored[code]
+        if flag is not None:
+            return flag
+        return _has_wordnet_edge(language_id)
+
     _pivot_eligible_cache = {
         row.code for row in all_non_en_rows
-        if not _has_wordnet_edge(code_to_id[row.code])
+        if not _resolve(row.code)
     }
     return _pivot_eligible_cache
+
+
+def reset_caches() -> None:
+    """Mirror of language_directory.reset_caches(). Exists so the eval harness
+    has a supported way to force a cold run instead of assigning the private
+    global directly -- a new cache added here is then reset in one place."""
+    global _pivot_eligible_cache
+    _pivot_eligible_cache = None
 
 
 @dataclass(frozen=True)

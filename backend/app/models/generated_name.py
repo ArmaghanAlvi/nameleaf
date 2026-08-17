@@ -73,6 +73,18 @@ class Language(Base):
     # English is pinned first in code at both ordering sites regardless.
     display_order: Mapped[int | None] = mapped_column(nullable=True)
 
+    # Persisted pivot eligibility input: does this language have ANY wordnet
+    # synonym edge (pivot_counting_provenances -- oewn excluded)? Recomputing
+    # this per process cost ~17s cold, because proving the NEGATIVE for the 14
+    # wordnet-free languages means touching every sense of each. See
+    # notes/LATENCY_INVESTIGATION.md F11.
+    # NULL = not yet computed; readers fall back to the live probe, so the
+    # column is byte-identical to the old behavior until it is backfilled.
+    # ⚠ Derived from sense_relations. Re-run scripts/prune/backfill_wordnet_
+    # edge_flags.py after ANY import that adds or removes wordnet edges, or
+    # after adding a slug to WORDNET_PROVENANCES.
+    has_wordnet_edges: Mapped[bool | None] = mapped_column(nullable=True)
+
     __table_args__ = (
         UniqueConstraint(
             "code",

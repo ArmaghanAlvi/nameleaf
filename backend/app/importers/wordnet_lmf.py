@@ -57,7 +57,7 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 
 from app.db.session import SessionLocal
 from app.models.generated_name import Language
-from app.utils.provenance import WORDNET_PROVENANCES
+from app.utils.provenance import WORDNET_PROVENANCES, pivot_counting_provenances
 from app.models.semantic import Lexeme, Sense, SenseRelation, SenseSynset, Source
 from app.utils.text import normalize_lemma
 
@@ -358,10 +358,32 @@ def run(args: argparse.Namespace) -> None:
             db.execute(stmt)
             db.commit()
 
+        # Refresh persisted pivot eligibility for THIS language only
+        # (Language.has_wordnet_edges, migration a1c7f3e94b28). Recomputed
+        # from the edge inventory rather than inferred from args.provenance:
+        # this importer can also write 'oewn', which pivot_counting_
+        # provenances() deliberately excludes, so "we just wrote edges" does
+        # not imply "this language is now pivot-ineligible". ON CONFLICT DO
+        # NOTHING above also means a non-empty edge_rows may have landed zero
+        # new rows. One query, at import time -- cost irrelevant here.
+        lang.has_wordnet_edges = db.scalar(
+            select(Lexeme.id)
+            .join(Sense, Sense.lexeme_id == Lexeme.id)
+            .join(SenseRelation, SenseRelation.from_sense_id == Sense.id)
+            .where(Lexeme.language_id == lang.id,
+                   SenseRelation.provenance.in_(
+                       tuple(sorted(pivot_counting_provenances()))))
+            .limit(1)
+        ) is not None
+        db.commit()
+
         print(
             f"\nApplied: {len(membership_rows)} memberships, "
             f"{len(edge_rows)} edges (provenance={args.provenance})."
         )
+        print(f"has_wordnet_edges[{args.language_code}] = "
+              f"{lang.has_wordnet_edges}  (other languages unchanged; re-run "
+              f"scripts/prune/backfill_wordnet_edge_flags.py to refresh all)")
 
 
 def main() -> None:
