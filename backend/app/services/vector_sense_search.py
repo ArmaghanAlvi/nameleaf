@@ -229,11 +229,19 @@ def expand_from_selected_senses(
     min_length: int = 0,
     max_length: int = 30,
     query_vector: list[float] | None = None,
+    selected_senses: list[Sense] | None = None,
 ) -> list[SenseSearchHit]:
-    selected_senses = get_selected_senses(
-        db,
-        sense_ids=selected_sense_ids,
-    )
+    # Same reuse contract as query_vector below: expand() has already loaded
+    # exactly these senses (4 round trips -- base SELECT plus a selectin each
+    # for lexeme, language, relations) and passes them down rather than
+    # paying for them twice on every one of the ~156 expansion calls per
+    # search. Same Session and same ids, so SQLAlchemy's identity map would
+    # hand back these very instances anyway; only the SQL is skipped.
+    if selected_senses is None:
+        selected_senses = get_selected_senses(
+            db,
+            sense_ids=selected_sense_ids,
+        )
     selected_lemmas = {
         normalize_text(sense.lexeme.lemma)
         for sense in selected_senses

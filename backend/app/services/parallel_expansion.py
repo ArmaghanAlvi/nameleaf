@@ -217,10 +217,17 @@ def _pivot_top_up(
 # model doc rejected in Model 2. Rescue borrows only hard evidence.
 _RESCUE_RUNGS = ("corroborated", "primary", "ili", "ili_override")
 
+# Shared by _pivot_root_rescue's own default and by parallel_expand's hoisted
+# en_anchor. ONE constant deliberately: the hoist prebuilds the synonym
+# expansion, so if the two ever disagreed the hoisted anchor would silently
+# carry a different synonym set than the un-hoisted path computes.
+_RESCUE_MAX_SYNONYMS = 5
+
 
 def _pivot_root_rescue(
     db: Session, *, english_sense_id: int, language_code: str,
-    max_synonyms: int = 5,
+    max_synonyms: int = _RESCUE_MAX_SYNONYMS,
+    en_anchor: tuple[list[float] | None, list] | None = None,
 ) -> RootCandidate | None:
     """
     Root-level pivot rescue (Breakdown 4, Step 6 revision).
@@ -235,16 +242,31 @@ def _pivot_root_rescue(
 
     Returns a RootCandidate tagged rung='pivoted_root' so a rescued root is
     diagnosable at a glance, exactly like depth-1 'pivoted' nodes.
+
+    `en_anchor` is a pure hoist (F7): the English side -- the query sense's
+    vector and its synonym expansion -- takes NO language input, so it is
+    identical for every pivot-eligible language that starves in one request,
+    up to 10 repetitions of the same SQL. embed_query is LRU-cached but the
+    queries underneath expand() are not. Omitting it reproduces the original
+    per-call fetches exactly.
+
+    ⚠ This hoist stops at the English side. It must NOT be extended into the
+    select_root() call below, which runs on each SYNONYM: that call's anchor
+    has to be the synonym's own, not the original query's (root_selection.py
+    documents the same hazard for select_roots' anchor/lang hoist).
     """
     from app.services.root_selection import (
         ROOT_RESCUE_FLOORS, _cross_sim, _en_vector, select_root,
     )
 
-    en_vector = _en_vector(db, english_sense_id)
-    hits = expand(
-        db, selected_sense_ids=[english_sense_id],
-        expansion_count=max_synonyms, min_length=0, max_length=30,
-    )
+    if en_anchor is None:
+        en_vector = _en_vector(db, english_sense_id)
+        hits = expand(
+            db, selected_sense_ids=[english_sense_id],
+            expansion_count=max_synonyms, min_length=0, max_length=30,
+        )
+    else:
+        en_vector, hits = en_anchor
     floor = ROOT_RESCUE_FLOORS.get(language_code)
 
     for h in hits:
@@ -280,6 +302,25 @@ def parallel_expand(
                          language_codes=non_en,
                          include_vector_fallback=False) if non_en else {}
 
+    # Lazily-built English anchor shared by every pivot rescue in this request
+    # (F7). LAZY, not computed in the preamble: rescue only fires when a
+    # language's ladder starves, which most requests never do -- an eager
+    # expand() here would ADD a query to the common path to save one on the
+    # rare path. Scoped to this call, so the Sense instances stay bound to
+    # this Session.
+    _en_anchor: list = []
+
+    def en_anchor():
+        if not _en_anchor:
+            from app.services.root_selection import _en_vector
+            _en_anchor.append((
+                _en_vector(db, english_sense_id),
+                expand(db, selected_sense_ids=[english_sense_id],
+                       expansion_count=_RESCUE_MAX_SYNONYMS,
+                       min_length=0, max_length=30),
+            ))
+        return _en_anchor[0]
+
     trees: dict[str, LanguageTree] = {}
     for code in codes:
         if code == "en":
@@ -308,6 +349,7 @@ def parallel_expand(
             # measured at 15-19%.
             rc = _pivot_root_rescue(
                 db, english_sense_id=english_sense_id, language_code=code,
+                en_anchor=en_anchor(),
             )
         if rc is None:
             rc = vector_fallback_root(

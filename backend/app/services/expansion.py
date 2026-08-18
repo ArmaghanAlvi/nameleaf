@@ -312,6 +312,7 @@ def expand(
             min_length=min_length,
             max_length=max_length,
             query_vector=_get_query_vector(),
+            selected_senses=selected_senses,
         )
         for vh in vector_hits:
             if vh.match_type == "selected":
