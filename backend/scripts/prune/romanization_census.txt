@@ -1,0 +1,38 @@
+lang  script       n    forms_tagged  forms_romankey  head_templates          sounds       top_roman    UNION  maxlen
+ar    Arab     20000   19984  99.9%   19357  96.8%      14   0.1%       0   0.0%       0   0.0%   100.0%      24
+      forms_tagged   אבן->ibn, אהל->ʔahl, אחל->ʔaḥalla, אל->ʔāl
+      forms_romankey אבן->ʔabnāʔ, אחל->yuḥillu, אסם->ʔasmāʔ, אפה->ʔāfāt
+      head_templates אחל->ʔaḥalla, אל->ʔāl, כאן->kāna, מאת->māta
+el    Grek     20000   19997 100.0%   15864  79.3%       0   0.0%       0   0.0%       0   0.0%   100.0%      30
+      forms_tagged   ΑΒΑ->AVA, αβάγιστος->avágistos, αβάδιστος->avádistos, αβαείο->avaeío
+      forms_romankey αβάγιστος->avágistos, αβάδιστος->avádistos, αβαείο->avaeío, άβαθα->ávatha
+fa    Arab     11525   11476  99.6%    3323  28.8%    7371  64.0%       0   0.0%       0   0.0%    99.8%      63
+      forms_tagged   אהל->ahl, אהל->ahl, זמאן->zamân, חק->haqq
+      forms_romankey آئین->âyin, آب->āb-hā / âb-hâ, آباد->âbâdam, آبادان->āwādān /âvâdân
+      head_templates אהל->ahl, אהל->ahl, זמאן->zamân, חק->haqq
+he    Hebr      9920    9871  99.5%     118   1.2%    9889  99.7%       0   0.0%       0   0.0%    99.7%      28
+      forms_tagged   זוטה->zutá, חורשף->khursháf, שפחה->shifkhá, גסס->gasás
+      forms_romankey לשבת->lashávet, תנ״כי->tanakhí, פלסטיני->palestina'í, גלידרייה->g'lideríya
+      head_templates זוטה->zutá, חורשף->khursháf, שפחה->shifkhá, גסס->gasás
+hi    Deva     18226   18211  99.9%   13346  73.2%    1017   5.6%       0   0.0%       0   0.0%   100.0%      22
+      forms_tagged   ॐ->om, अऊत->aūt, अऊत->aūt, अक->ak
+      forms_romankey ॐ->om, अऊत->ūt, अऊत->aūt, अक->ak
+      head_templates अंकगणित->aṅkgaṇit, अंकगणितीय->aṅkgaṇitīya, अकथित->akathit, अक़्ल->aql
+ja    Jpan     20000   19941  99.7%    6584  32.9%       3   0.0%       0   0.0%       0   0.0%    99.7%      33
+      forms_tagged   急->kyū, 痛い->itai, 重い->omoi, 易しい->yasashii
+      forms_romankey 急->kyū na, 痛い->itaku, 重い->omoku, 易しい->yasashiku
+      head_templates あるいは->aruiwa, ヶ->ka, ヶ->ko
+ko    Kore     20000   19991 100.0%    1311   6.6%       0   0.0%       0   0.0%       0   0.0%   100.0%      17
+      forms_tagged   가->ga, 가->ga, 가->ga, 가->ga
+      forms_romankey 끙->kkeueung, 납->rap, 낯->nat, 냉->raeng
+ru    Cyrl     20000   19982  99.9%   18689  93.4%       1   0.0%       0   0.0%       0   0.0%   100.0%      32
+      forms_tagged   b-кварк->b-kvark, c-кварк->c-kvark, d-кварк->d-kvark, n-гранник->n-gránnik
+      forms_romankey b-кварк->b-kvárk, c-moll'ный->c-móll’nyj, c-кварк->c-kvárk, d-кварк->d-kvárk
+      head_templates геотермальному->gèotɛrmálʹnomu
+sa    Deva      9639    9569  99.3%    8072  83.7%    4118  42.7%       0   0.0%       0   0.0%    99.8%      21
+      forms_tagged   विश्व->víśva, विश्व->víśva, मेक्षण->mekṣaṇa, स्खलति->skhalati
+      forms_romankey विश्व->víśvaḥ, विश्व->víśvam, स्खलति->skhalati, वितरम्->vitarā́m
+      head_templates विश्व->víśva, विश्व->víśva, वितरम्->vitarám, रघुया->raghuyā́
+zh    Hani     20000       0   0.0%      23   0.1%       0   0.0%   16532  82.7%       0   0.0%    82.7%      33
+      forms_romankey sweet->si⁴ wit¹, perfect->poe1 fik4 ci4, fit->fit¹, OK->ōukè
+      sounds         十五十六->sap⁶ ng⁵ sap⁶ luk⁶, sweet->si⁴ wit¹, champ->cem¹, 高跟->gāogēn

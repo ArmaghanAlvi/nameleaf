@@ -1,0 +1,22 @@
+lang   rows_shown  romanized     pct
+ang            15          0    0.0%  (Latn -- filled MUST be 0)
+ar             55         55  100.0%
+cy             42          0    0.0%  (Latn -- filled MUST be 0)
+de             32          0    0.0%  (Latn -- filled MUST be 0)
+el             47         47  100.0%
+en             42          0    0.0%  (Latn -- filled MUST be 0)
+es             39          0    0.0%  (Latn -- filled MUST be 0)
+fa             28         28  100.0%
+ga             44          0    0.0%  (Latn -- filled MUST be 0)
+he             31         31  100.0%
+hi             40         40  100.0%
+is             39          0    0.0%  (Latn -- filled MUST be 0)
+ja             31         31  100.0%
+ko             47         47  100.0%
+la             49          0    0.0%  (Latn -- filled MUST be 0)
+non            18          0    0.0%  (Latn -- filled MUST be 0)
+pl             47          0    0.0%  (Latn -- filled MUST be 0)
+ru             50         50  100.0%
+sa             40         40  100.0%
+sw             29          0    0.0%  (Latn -- filled MUST be 0)
+zh             47         40   85.1%

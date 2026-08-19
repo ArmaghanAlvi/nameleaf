@@ -83,6 +83,11 @@ export interface NameResult {
   // Multilingual fields (Breakdown 5, real backend output)
   languageCode?: string | null;
   rootRung?: string | null;
+
+  // Phase D: Latin-script rendering of `name`. null/undefined renders as
+  // nothing -- the backend sends null wherever no trustworthy value exists,
+  // and a guess is worse than a blank.
+  romanization?: string | null;
 }
 
 export interface SelectedSense {

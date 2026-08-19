@@ -196,6 +196,14 @@ def lookup_sense_options(
                 word=override.label_override
                 if override and override.label_override
                 else candidate.lexeme.lemma,
+                # Suppressed when an admin label_override replaces the lemma:
+                # the romanization is of `lemma`, and pairing it with a
+                # different displayed word would be actively misleading.
+                romanization=(
+                    None
+                    if override and override.label_override
+                    else candidate.lexeme.romanization
+                ),
                 language=candidate.language.name,
                 languageCode=candidate.language.code,
                 partOfSpeech=candidate.lexeme.part_of_speech,

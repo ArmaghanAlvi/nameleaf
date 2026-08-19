@@ -4,6 +4,8 @@ from pydantic import BaseModel
 class SenseOptionResponse(BaseModel):
     senseId: int
     word: str
+    # Phase D. Latin-script rendering of `word`; None renders as nothing.
+    romanization: str | None = None
     language: str
     languageCode: str | None
     partOfSpeech: str

@@ -658,6 +658,22 @@ class Lexeme(Base):
         nullable=False,
     )
 
+    # Latin-script rendering of `lemma`, for readers of neither the script nor
+    # the language. NULL means "no trustworthy value" and MUST render as
+    # nothing -- never as a guess. Populated only for non-Latn
+    # Language.script; see app/services/romanization.py for the source
+    # hierarchy (Kaikki raw_entry, evidence-driven per script) and
+    # scripts/backfill_romanization.py for the derivation pass.
+    #
+    # 400, not lemma's 300: romanizations expand (щ -> shch, Arabic vowel
+    # insertion; census maxlen for fa hit 63 on a single word with multiple
+    # dialectal variants). The backfill DISCARDS over-length values rather
+    # than truncating -- a truncated romanization is a wrong one.
+    romanization: Mapped[str | None] = mapped_column(
+        String(400),
+        nullable=True,
+    )
+
     part_of_speech: Mapped[str] = mapped_column(
         String(80),
         nullable=False,

@@ -3,6 +3,7 @@ import type { HopPathStep, NameResult } from "@/features/generator/types";
 export interface SenseOption {
   senseId: number;
   word: string;
+  romanization: string | null;
   language: string;
   languageCode: string | null;
   partOfSpeech: string;
@@ -80,6 +81,7 @@ export interface ExploreV2Result {
   path: HopPathStep[];
   languageCode: string | null;
   rootRung: string | null;
+  romanization: string | null;
 }
 
 export interface ExploreSelectedSensesResponse {
@@ -133,6 +135,7 @@ export function toNameResult(r: ExploreV2Result): NameResult {
     path: r.path,
     languageCode: r.languageCode,
     rootRung: r.rootRung,
+    romanization: r.romanization,
   };
 }
 

@@ -406,7 +406,22 @@ export function GeneratorPrototype() {
               {result.name}
             </h3>
 
-            {/* Phase D6 puts the romanized form here. */}
+            {/* Phase D. dir="ltr" is explicit, not inherited: a Latin string
+                inside an RTL card gets its punctuation reordered otherwise.
+                Sized up from typical secondary text (text-base, not text-xs)
+                because for zh/ja/ko/ar/he this is the only line on the card
+                a non-reader of the script can actually pronounce.
+                The equality guard is belt-and-braces -- the backfill already
+                refuses to store a value identical to the lemma. */}
+            {result.romanization &&
+              result.romanization !== result.name && (
+                <p
+                  dir="ltr"
+                  className="mt-1 text-base italic text-slate-500"
+                >
+                  {result.romanization}
+                </p>
+              )}
 
             {result.matchType && (
               <span
@@ -552,11 +567,22 @@ export function GeneratorPrototype() {
           aria-expanded={expandedIds.has(result.id)}
           className="flex w-full items-center gap-3 px-4 py-3 text-left transition hover:brightness-95"
         >
-          <span
-            className="min-w-0 flex-1 truncate text-base font-bold text-slate-900"
-            dir={dirFor(result.languageCode)}
-          >
-            {result.name}
+          <span className="min-w-0 flex-1">
+            <span
+              className="block truncate text-base font-bold text-slate-900"
+              dir={dirFor(result.languageCode)}
+            >
+              {result.name}
+            </span>
+            {result.romanization &&
+              result.romanization !== result.name && (
+                <span
+                  dir="ltr"
+                  className="block truncate text-xs italic text-slate-500"
+                >
+                  {result.romanization}
+                </span>
+              )}
           </span>
 
           {result.matchType && (
@@ -810,6 +836,15 @@ export function GeneratorPrototype() {
                       >
                         <span className="block font-semibold text-slate-900">
                           <span dir={dirFor(option.languageCode)}>{option.word}</span>
+                          {option.romanization &&
+                            option.romanization !== option.word && (
+                              <span
+                                dir="ltr"
+                                className="ml-2 font-normal italic text-slate-500"
+                              >
+                                {option.romanization}
+                              </span>
+                            )}
                           {" · "}{option.partOfSpeech}
                           {option.duplicateCount > 1 && (
                             <span className="ml-2 rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-500">

@@ -35,7 +35,6 @@ class ExploreV2Result(BaseModel):
         "established",
         "related",
         "translation",
-        "root",
         "generated",
     ]
     meaning: str
@@ -55,6 +54,9 @@ class ExploreV2Result(BaseModel):
     languageCode: str | None = None   # ISO code of THIS result's language (RTL, filtering)
     rootRung: str | None = None       # depth-0 rows only: selected | corroborated |
                                       # primary | ili | llm | pivoted_root | fallback
+    # Phase D. Latin-script rendering of `name`, or None where no trustworthy
+    # value exists. None MUST render as nothing -- never as a guess.
+    romanization: str | None = None
 
 
 class ExpandedSenseResponse(BaseModel):

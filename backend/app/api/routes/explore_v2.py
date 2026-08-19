@@ -52,6 +52,9 @@ def _hopnode_to_result(
         path=path,
         languageCode=language.code,
         rootRung=root_rung if is_selected else None,
+        # No extra query: romanization is a column on the already-loaded
+        # Lexeme row that `lexeme.lemma` above came from.
+        romanization=lexeme.romanization,
     )
 
 
