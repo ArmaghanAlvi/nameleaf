@@ -995,9 +995,14 @@ export function GeneratorPrototype() {
             <span className="block text-sm font-semibold text-slate-700">
               Expansion
               <InfoTip label="Expansion">
-                <strong>Breadth</strong> is related words per hop.{" "}
-                <strong>Depth</strong> is how many hops outward the walk
-                travels. Zero on either returns the exact meaning only.
+                A <strong>hop</strong> refers to the retreiveing of related words.
+                For example, searching one hop away from "light" will also retrieve "luminance."
+                <br />
+                <strong>Breadth</strong> is the amount of words related to 
+                your searched meaning that will be retrieved per hop for each language.
+                <br />
+                <strong>Depth</strong> is how many hops away from the original
+                meaning the expansion will stray.
               </InfoTip>
             </span>
 
@@ -1061,6 +1066,7 @@ export function GeneratorPrototype() {
                 <span>2</span>
                 <span>3</span>
               </div>
+              <p className="mt-2 text-sm text-slate-600" style={{ fontSize: '11px' }}><i>*Note that increasing the expansion depth beyond 1 can increase search times</i></p>
             </div>
 
             <datalist id="expansion-ticks">
