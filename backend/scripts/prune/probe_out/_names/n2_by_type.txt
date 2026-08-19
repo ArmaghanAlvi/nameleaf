@@ -1,0 +1,2361 @@
+========================================================================
+LANG ang   type=GIVEN   senses considered: 1053   shadow set: 12700
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         18 (1.71%)
+      'Daniel' -> 'Daniel'   [a male given name, equivalent to English Danie]
+      'Carl' -> 'Charles'   [a male given name, equivalent to English Charl]
+      'Leo' -> 'Leo'   [a male given name, equivalent to English Leo]
+      'Odda' -> 'Otto'   [a male given name, equivalent to English Otto]
+      'Æðelred' -> 'Ethelred'   [a male given name, variant of Æþelred or Æþelr]
+      'Symon' -> 'Simon'   [a male given name, equivalent to English Simon]
+      'Dauid' -> 'David'   [a male given name, equivalent to English David]
+      'Waldhere' -> 'Walter'   [a male given name, variant of Wealdhere, equiv]
+  ETYM_MARKER             4 (0.38%)
+      'Michahel' -> 'who is like God?'   [a male given name from Latin]
+      'Stigand' -> 'wanderer'   [a male given name]
+      'Scule' -> 'to protect'   [a male given name]
+      'Amilcor' -> 'brother of Melqart'   [a male given name of historical usage, Hamilca]
+  ETYM_QUOTED           773 (73.41%)
+      'Harold' -> 'army'   [a male given name]
+      'Alda' -> 'wise, old'   [a male given name]
+      'Bar' -> 'boar'   [a male given name]
+      'Beda' -> 'announce, offer'   [a male given name, notably held by the Venerab]
+      'Sola' -> 'sun'   [a male given name]
+      'Eadwulf' -> 'happiness, prosperity'   [a male given name]
+      'Eadgar' -> 'wealth, riches'   [a male given name]
+      'Ægenwulf' -> 'to possess, own'   [a male given name]
+  HOMOGRAPH              29 (2.75%)
+      'Gold' -> 'gold'   [a male given name]
+      'Budda' -> 'budda'   [a male given name]
+      'Hun' -> 'hun'   [a male given name]
+      'Mann' -> 'mann'   [a male given name]
+      'Winter' -> 'winter'   [a male given name]
+      'Becca' -> 'becca'   [a male given name]
+      'Ing' -> 'ing'   [a male given name from legend]
+      'Ebba' -> 'ebba'   [a male given name]
+  NONE                  229 (21.75%)
+      'Andreas' -> ''   [a male given name]
+      'Cuda' -> ''   [a male given name]
+      'Cana' -> ''   [a male given name]
+      'Cater' -> ''   [a male given name]
+      'Cola' -> ''   [a male given name]
+      'Regulus' -> ''   [a male given name, held by Marcus Atilius Regu]
+      'Fræna' -> ''   [a male given name]
+      'Inga' -> ''   [a male given name]
+
+  ANY CHANNEL .... 824 (78.25%)
+  WITHOUT the loose ETYM_QUOTED channel .... 51 (4.84%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         18 (1.71%)
+  ETYM_MARKER             5 (0.47%)
+  ETYM_QUOTED           784 (74.45%)
+  HOMOGRAPH              59 (5.60%)
+--- channels available per name ---
+  0 channel(s): 229
+  1 channel(s): 783
+  2 channel(s): 40
+  3 channel(s): 1
+
+========================================================================
+LANG ar   type=GIVEN   senses considered: 547   shadow set: 16039
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING          15 (2.74%)
+      'شكرية' -> 'thankful'   [a female given name meaning “thankful”, mascul]
+      'حسني' -> 'handsome, good'   [a male given name, Husni or Hosni, meaning “ha]
+      'شوقي' -> 'desirous, longing'   [a male given name, Shawqi, meaning “desirous, ]
+      'صبري' -> 'patient'   [a male given name meaning “patient”, feminine ]
+      'عناية الله' -> 'solicitude of God'   [A given name meaning “solicitude of God”.]
+      'شكري' -> 'thankful'   [a male given name, Shukri or Shokri, meaning “]
+      'محيي الدين' -> 'Renewer of the Faith'   [a male given name, Muhyi'd-Din, meaning “Renew]
+      'صفي الدين' -> 'pure of religion'   [a male given name meaning “pure of religion”]
+  GLOSS_EQUIV_EN         89 (16.27%)
+      'ميكائيل' -> 'Michael'   [a male given name, equivalent to English Micha]
+      'كريستوفر' -> 'Christopher'   [a male given name from Ancient Greek, equivale]
+      'يوحنا' -> 'John'   [a male given name, equivalent to English John]
+      'نانسي' -> 'Nancy'   [a female given name, equivalent to English Nan]
+      'حنا' -> 'John'   [a male given name, Hanna, of Christian usage, ]
+      'بطرس' -> 'Peter'   [a male given name from Ancient Greek, equivale]
+      'هارون' -> 'Aaron'   [a male given name, Haroon, Harun, or Haroun, e]
+      'عيسى' -> 'Isa'   [a male given name, equivalent to English Isa]
+  ETYM_MARKER            10 (1.83%)
+      'عبد الله' -> 'servant of God'   [a male given name, Abdullah, feminine equivale]
+      'برهان' -> 'to make white'   [a male given name, Burhan]
+      'نورة' -> 'burnt stones'   [a female given name]
+      'فيروز' -> 'victorious'   [a female given name]
+      'فتح الله' -> 'victory of God'   [a male given name, Fath Allah, Fathallah, or F]
+      'نصر الله' -> 'victory of God'   [a male given name]
+      'أورنكزيب' -> 'Ornament of the Throne'   [a male given name of historical usage]
+      'ماهينور' -> 'light of the moon'   [a female given name, Mahinur or Mahinour, from]
+  ETYM_QUOTED            93 (17.00%)
+      'مسلم' -> 'to surrender, to become a Muslim'   [a male given name]
+      'جمال' -> 'to be beautiful'   [a male given name, Jamal or Gamal]
+      'رمضان' -> 'parchedness, scorchedness'   [a male given name]
+      'كامل' -> 'to be complete, to be finished'   [a male given name, Kamil]
+      'محمد' -> 'to praise, commend, laud'   [a male given name, variously transliterated as]
+      'حافظ' -> 'to guard, to keep; to memorize'   [a male given name, Hafez or Hafiz]
+      'آدم' -> 'man, person'   [a male given name, Adam]
+      'نور' -> 'light'   [a unisex given name, Noor]
+  HOMOGRAPH             118 (21.57%)
+      'حسن' -> 'حسن'   [a male given name, Hasan or Hassan]
+      'جميل' -> 'جميل'   [a male given name, Jamil or Jameel, feminine e]
+      'أمل' -> 'أمل'   [a female given name, Amal]
+      'فجر' -> 'فجر'   [a female given name]
+      'صدام' -> 'صدام'   [a male given name, Saddam]
+      'إسلام' -> 'إسلام'   [a male given name]
+      'بندر' -> 'بندر'   [a male given name]
+      'رضا' -> 'رضا'   [a male given name]
+  NONE                  222 (40.59%)
+      'زياد' -> ''   [a male given name, Ziyad]
+      'لؤلؤة' -> ''   [a female given name]
+      'إبراهيم' -> ''   [a male given name, Ibrahim]
+      'هند' -> ''   [a female given name, Hind]
+      'יוסף' -> ''   [Judeo-Arabic spelling of يُوسُف (yūsuf, “Josep]
+      'أنوار' -> ''   [a female given name, Anwar]
+      'مي' -> ''   [a female given name]
+      'الأمين' -> ''   [a male given name, Alamin]
+
+  ANY CHANNEL .... 325 (59.41%)
+  WITHOUT the loose ETYM_QUOTED channel .... 232 (42.41%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING          15 (2.74%)
+  GLOSS_EQUIV_EN         89 (16.27%)
+  ETYM_MARKER            14 (2.56%)
+  ETYM_QUOTED           121 (22.12%)
+  HOMOGRAPH             204 (37.29%)
+--- channels available per name ---
+  0 channel(s): 222
+  1 channel(s): 217
+  2 channel(s): 98
+  3 channel(s): 10
+
+========================================================================
+LANG cy   type=GIVEN   senses considered: 280   shadow set: 11414
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           2 (0.71%)
+      'Addien' -> 'fine'   [a female given name meaning “fine” or “fair”]
+      'Anwylyn' -> 'dear one'   [a female given name meaning “dear one”]
+  GLOSS_EQUIV_EN         70 (25.00%)
+      'Paul' -> 'Paul'   [a male given name, equivalent to English Paul]
+      'Andreas' -> 'Andrew'   [a male given name from Ancient Greek Ἀνδρέᾱς (]
+      'Lowri' -> 'Laura'   [a female given name, equivalent to English Lau]
+      'Samuel' -> 'Samuel'   [a male given name, equivalent to English Samue]
+      'Marc' -> 'Mark'   [a male given name from Latin, equivalent to En]
+      'Mari' -> 'Mary'   [a female given name, equivalent to English Mar]
+      'Joel' -> 'Joel'   [a male given name, equivalent to English Joel]
+      'Deiniol' -> 'Daniel'   [a male given name, equivalent to English Danie]
+  ETYM_MARKER             6 (2.14%)
+      'Anna' -> 'grace, gracious'   [a female given name from Ancient Greek Ἄννα (Á]
+      'Morgan' -> 'great chief'   [a male given name]
+      'Rhianwen' -> 'fair maiden'   [a female given name from Middle Welsh]
+      'Arianrhod' -> 'silver wheel'   [a female given name]
+      'Euryn' -> 'golden one'   [a male given name]
+      'Aldwyn' -> 'old friend'   [a male given name from Old English]
+  ETYM_QUOTED            75 (26.79%)
+      'Awen' -> 'breeze, wind'   [a female given name, meaning inspiration]
+      'Dai' -> 'David'   [a diminutive of the male given name Dafydd]
+      'Hywel' -> 'good'   [a male given name meaning eminent or conspicuo]
+      'Gwynedd' -> 'white, fair'   [a male given name]
+      'Gwynedd' -> 'white, fair'   [a female given name]
+      'Alwyn' -> 'noble'   [a male given name, feminine equivalent Alwen, ]
+      'Angharad' -> 'love'   [a female given name]
+      'Rhian' -> 'maiden'   [a female given name from Middle Welsh]
+  HOMOGRAPH              17 (6.07%)
+      'Alan' -> 'alan'   [a male given name, feminine equivalent Alana]
+      'Arial' -> 'arial'   [a male given name from arial (“vigour”); varia]
+      'Alban' -> 'alban'   [a male given name from Old Irish Albu (“Scotla]
+      'Aur' -> 'aur'   [a female given name from aur (“gold”)]
+      'Ceri' -> 'ceri'   [a unisex given name]
+      'Gŵyr' -> 'gŵyr'   [a male given name]
+      'Gwyn' -> 'gwyn'   [a male given name, feminine equivalent Gwen]
+      'Elain' -> 'elain'   [a female given name]
+  NONE                  110 (39.29%)
+      'Arwel' -> ''   [a male given name]
+      'Megan' -> ''   [a female given name]
+      'Arthur' -> ''   [a male given name from arth (“bear”)]
+      'Ann' -> ''   [a female given name from Ancient Greek Ἄννα (Á]
+      'Nest' -> ''   [a female given name]
+      'Ruth' -> ''   [a female given name from Hebrew]
+      'Aran' -> ''   [a male given name transferred from the place n]
+      'Alec' -> ''   [a male given name from Ancient Greek Ἀλέξανδρο]
+
+  ANY CHANNEL .... 170 (60.71%)
+  WITHOUT the loose ETYM_QUOTED channel .... 95 (33.93%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           2 (0.71%)
+  GLOSS_EQUIV_EN         70 (25.00%)
+  ETYM_MARKER            10 (3.57%)
+  ETYM_QUOTED            93 (33.21%)
+  HOMOGRAPH              30 (10.71%)
+--- channels available per name ---
+  0 channel(s): 110
+  1 channel(s): 140
+  2 channel(s): 25
+  3 channel(s): 5
+
+========================================================================
+LANG de   type=GIVEN   senses considered: 1162   shadow set: 73359
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        230 (19.79%)
+      'Fanny' -> 'Fanny'   [a female given name from English, equivalent t]
+      'Daniel' -> 'Daniel'   [a male given name from Hebrew, feminine equiva]
+      'Larissa' -> 'Larissa'   [a female given name, equivalent to English Lar]
+      'Alexander' -> 'Alexander'   [a male given name, feminine equivalent Alexand]
+      'Aaron' -> 'Aaron'   [a male given name from Hebrew, equivalent to E]
+      'Paul' -> 'Paul'   [a male given name from Latin, feminine equival]
+      'Andreas' -> 'Andrew'   [a male given name from Ancient Greek, equivale]
+      'Richard' -> 'Richard'   [a male given name, equivalent to English Richa]
+  ETYM_MARKER             8 (0.69%)
+      'Michael' -> 'who is like God?'   [a male given name of common usage]
+      'Scheherazade' -> 'child of the city'   [a female given name]
+      'Hildegard' -> 'battle protector'   [a female given name from the West Germanic lan]
+      'Isaak' -> 'he laughs'   [a male given name of rare usage]
+      'Germund' -> 'spear'   [a male given name]
+      'Florentin' -> 'Florentine, from Florence'   [a male given name]
+      'Florentina' -> 'Florentine, from Florence'   [a female given name, masculine equivalent Flor]
+      'Nadeschda' -> 'hope'   [a female given name of Russian origin]
+  ETYM_QUOTED           178 (15.32%)
+      'Fabian' -> 'belonging to Fabius'   [a male given name]
+      'Albert' -> 'noble'   [a male given name from Old High German]
+      'Peter' -> 'stone, rock'   [a male given name, feminine equivalent Petra]
+      'Adam' -> 'man, soil, light brown'   [a male given name; variant form Adi]
+      'Maximilian' -> 'the greatest'   [a male given name, popular currently in German]
+      'Irene' -> 'peace'   [a female given name from Ancient Greek]
+      'Melanie' -> 'black, dark'   [a female given name]
+      'Günter' -> 'battle'   [a male given name from Old High German, varian]
+  HOMOGRAPH              44 (3.79%)
+      'Milan' -> 'milan'   [a male given name from the Slavic languages, p]
+      'Maya' -> 'maya'   [a female given name of modern usage, variant o]
+      'Charlotte' -> 'charlotte'   [a female given name from French; variant forms]
+      'Erika' -> 'erika'   [a female given name from the North Germanic la]
+      'Adel' -> 'adel'   [a surname transferred from the given name]
+      'Anke' -> 'anke'   [a diminutive of the female given name Anna, fr]
+      'Benjamin' -> 'benjamin'   [a male given name]
+      'Bob' -> 'bob'   [a male given name from English]
+  NONE                  702 (60.41%)
+      'Victoria' -> ''   [a female given name from Latin, variant of Vik]
+      'Leon' -> ''   [a male given name, variant of Leo]
+      'Christian' -> ''   [a male given name, feminine equivalent Christi]
+      'Laura' -> ''   [a female given name]
+      'Ursula' -> ''   [a female given name, very popular in German-sp]
+      'Christopher' -> ''   [a male given name from English]
+      'Michelle' -> ''   [a female given name]
+      'Verona' -> ''   [a female given name]
+
+  ANY CHANNEL .... 460 (39.59%)
+  WITHOUT the loose ETYM_QUOTED channel .... 282 (24.27%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        230 (19.79%)
+  ETYM_MARKER            11 (0.95%)
+  ETYM_QUOTED           222 (19.10%)
+  HOMOGRAPH              69 (5.94%)
+--- channels available per name ---
+  0 channel(s): 702
+  1 channel(s): 393
+  2 channel(s): 62
+  3 channel(s): 5
+
+========================================================================
+LANG el   type=GIVEN   senses considered: 472   shadow set: 24213
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           1 (0.21%)
+      'Ειρήνη' -> 'peace'   [a female given name, Eirini, meaning “peace”, ]
+  GLOSS_EQUIV_EN        171 (36.23%)
+      'Άγγελος' -> 'Angelo'   [a male given name, Angelos, equivalent to Engl]
+      'Αχιλλέας' -> 'Achilles'   [a male given name, equivalent to English Achil]
+      'Αλέξανδρος' -> 'Alexander'   [a male given name, Alexandros, equivalent to E]
+      'Μαρία' -> 'Mary'   [a female given name from Hebrew, equivalent to]
+      'Γαβριήλ' -> 'Gabriel'   [a male given name, Gavriil, from Hebrew, equiv]
+      'Πέτρος' -> 'Peter'   [a male given name, Petros, equivalent to Engli]
+      'Φίλιππος' -> 'Philip'   [a male given name, Filippos, equivalent to Eng]
+      'Καϊάφας' -> 'Caiaphas'   [a male given name, equivalent to English Caiap]
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED            53 (11.23%)
+      'Κωστάκης' -> 'short for Constantine'   [a diminutive of the male given name Κωνσταντίν]
+      'Σμαράγδα' -> 'emerald'   [a female given name, Smaragda]
+      'Γιαννάκης' -> 'John'   [a diminutive of the male given name Γιάννης (G]
+      'Δέσποινα' -> 'lady of the house, mistress'   [a female given name, Despoina]
+      'Γεωργάκης' -> 'George'   [a diminutive of the male given name Γεώργιος (]
+      'Αρτεμισία' -> 'Artemis, the goddess'   [a female given name (Artemisia)]
+      'Αθανασία' -> 'absence of'   [a female given name]
+      'Υπαπαντή' -> 'encounter'   [a female given name, Ypapanti]
+  HOMOGRAPH              16 (3.39%)
+      'Βούλα' -> 'βούλα'   [a diminutive of the female given name Βασιλική]
+      'Βούλα' -> 'βούλα'   [a diminutive of the female given name Παρασκευ]
+      'Βούλα' -> 'βούλα'   [a diminutive of the female given name Σταυρούλ]
+      'Δήμος' -> 'δήμοσ'   [a diminutive of the male given name Δημήτριος ]
+      'Δήμος' -> 'δήμοσ'   [a diminutive of the male given name Δημοσθένης]
+      'Απόστολος' -> 'απόστολοσ'   [a male given name, Apostolos]
+      'Βέρα' -> 'βέρα'   [a female given name, Vera]
+      'Λεμονιά' -> 'λεμονιά'   [a female given name]
+  NONE                  231 (48.94%)
+      'Κυριακή' -> ''   [a female given name]
+      'Αγρίππας' -> ''   [a male given name, Agrippas, from Latin]
+      'Ευριπίδης' -> ''   [a male given name, Efripidis]
+      'Αισχύλος' -> ''   [a male given name, Aeschylus]
+      'Αλφόνσος' -> ''   [a male given name, the Greek form of Alfonso]
+      'Αλφρέδος' -> ''   [a male given name, the Greek form of Alfred]
+      'Άρτεμις' -> ''   [a female given name, Artemis]
+      'Χάρης' -> ''   [a diminutive of the male given name Χαράλαμπος]
+
+  ANY CHANNEL .... 241 (51.06%)
+  WITHOUT the loose ETYM_QUOTED channel .... 188 (39.83%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           1 (0.21%)
+  GLOSS_EQUIV_EN        172 (36.44%)
+  ETYM_MARKER             2 (0.42%)
+  ETYM_QUOTED            75 (15.89%)
+  HOMOGRAPH              38 (8.05%)
+--- channels available per name ---
+  0 channel(s): 231
+  1 channel(s): 201
+  2 channel(s): 33
+  3 channel(s): 7
+
+========================================================================
+LANG en   type=GIVEN   senses considered: 11041   shadow set: 401701
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING          30 (0.27%)
+      'Atkins' -> 'son of Atkin (Adam)'   [A surname transferred from the given name mean]
+      'Dheeraj' -> 'patience'   [A male given name from Hindi, meaning “patienc]
+      'Shravas' -> 'fame'   [A male given name from Sanskrit, meaning “fame]
+      'Ron' -> 'Song of Joy'   [A male given name from Hebrew of Hebrew origin]
+      'Beryl' -> 'little bear'   [A male given name from Yiddish, meaning “littl]
+      'Bret' -> 'a Breton'   [A male given name transferred from the surname]
+      'Arnab' -> 'sea'   [A male given name from Sanskrit or Bengali, me]
+      'Ritesh' -> 'god of seasons'   [A male given name from India, common amongst p]
+  GLOSS_EQUIV_EN        133 (1.20%)
+      'Jan' -> 'John'   [A male given name, equivalent to English John.]
+      'Jorge' -> 'George'   [A male given name from Spanish or Portuguese, ]
+      'Mercedes' -> 'Mercy'   [A female given name from Spanish, equivalent t]
+      'Sophie' -> 'Sophia'   [A female given name from French Sophie, equiva]
+      'Francisco' -> 'Francis'   [A male given name from Spanish or Portuguese, ]
+      'Jose' -> 'Joseph'   [A male given name from Spanish, equivalent to ]
+      'Ian' -> 'John'   [A male given name from Scottish Gaelic Eòin, e]
+      'Karl' -> 'Charles'   [A male given name from the Germanic languages,]
+  ETYM_MARKER           352 (3.19%)
+      'April' -> 'Easter month'   [A female given name transferred from the month]
+      'November' -> 'sacrifice month'   [A female given name.]
+      'Jupiter' -> 'sky father'   [A unisex given name.]
+      'Michael' -> 'who is like God?'   [A male given name from Hebrew.]
+      'Michael' -> 'who is like God?'   [A surname transferred from the given name.]
+      'Daniel' -> 'God is my judge'   [A male given name from Hebrew in regular use s]
+      'Jesus' -> 'the Lord saves'   [A male given name from Spanish in Spanish cult]
+      'Jesus' -> 'the Lord saves'   [A male given name from Aramaic.]
+  ETYM_QUOTED          1887 (17.09%)
+      'December' -> 'tenth month'   [A female given name transferred from the month]
+      'January' -> '(month) of Janus'   [A female given name transferred from the month]
+      'February' -> 'the month of the Februa'   [A female given name transferred from the month]
+      'June' -> 'Juno'   [A female given name transferred from the month]
+      'July' -> 'descended from Jove'   [A female given name from English.]
+      'September' -> 'seventh month'   [A male or female given name transferred from t]
+      'October' -> 'eighth month'   [A female given name transferred from the month]
+      'Fabian' -> 'belonging to Fabius'   [A male given name from Latin.]
+  HOMOGRAPH            1166 (10.56%)
+      'Fanny' -> 'fanny'   [A diminutive of the female given name Frances,]
+      'Danish' -> 'danish'   [A male given name.]
+      'Daman' -> 'daman'   [A male given name from Sanskrit used in India.]
+      'Berlin' -> 'berlin'   [A female given name from German.]
+      'Lyssa' -> 'lyssa'   [A female given name.]
+      'Venus' -> 'venus'   [A female given name.]
+      'Jim' -> 'jim'   [A diminutive of the male given name James.]
+      'Maya' -> 'maya'   [A female given name from Hebrew of modern usag]
+  NONE                 7473 (67.68%)
+      'June' -> ''   [A male given name, or more often nickname, for]
+      'Mauritius' -> ''   [A male given name of historical usage, found e]
+      'Achilles' -> ''   [A male given name from Ancient Greek.]
+      'Alberta' -> ''   [A female given name from the Germanic language]
+      'Sydney' -> ''   [A unisex given name transferred from the surna]
+      'Hobart' -> ''   [A patronymic English surname transferred from ]
+      'Ursula' -> ''   [A female given name from Latin.]
+      'Paris' -> ''   [A male given name from Ancient Greek, from the]
+
+  ANY CHANNEL .... 3568 (32.32%)
+  WITHOUT the loose ETYM_QUOTED channel .... 1681 (15.23%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING          30 (0.27%)
+  GLOSS_EQUIV_EN        133 (1.20%)
+  ETYM_MARKER           356 (3.22%)
+  ETYM_QUOTED          2260 (20.47%)
+  HOMOGRAPH            1595 (14.45%)
+--- channels available per name ---
+  0 channel(s): 7473
+  1 channel(s): 2829
+  2 channel(s): 673
+  3 channel(s): 65
+  4 channel(s): 1
+
+========================================================================
+LANG es   type=GIVEN   senses considered: 1366   shadow set: 80014
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           1 (0.07%)
+      'Margarita' -> 'Daisy'   [a female given name meaning “Daisy”, equivalen]
+  GLOSS_EQUIV_EN        452 (33.09%)
+      'Israel' -> 'Israel'   [a male given name from Hebrew, equivalent to E]
+      'Daniel' -> 'Daniel'   [a male given name from Hebrew, equivalent to E]
+      'Virginia' -> 'Virginia'   [a female given name, equivalent to English Vir]
+      'Alfredo' -> 'Alfred'   [a male given name from English, equivalent to ]
+      'Douglas' -> 'Douglas'   [a male given name from Scottish Gaelic, equiva]
+      'Teresa' -> 'Teresa'   [a female given name, equivalent to English Ter]
+      'Jorge' -> 'George'   [a male given name from Ancient Greek, equivale]
+      'Xavier' -> 'Xavier'   [a male given name, variant of Javier, equivale]
+  ETYM_MARKER            14 (1.02%)
+      'Yago' -> 'he will/shall heel'   [a male given name from Latin]
+      'Rodrigo' -> 'famous ruler'   [a surname, derived from the given name]
+      'Cuauhtémoc' -> 'one that descends like an eagle'   [a male given name from Classical Nahuatl]
+      'Noemí' -> 'my pleasantness'   [a female given name from Hebrew]
+      'Mateo' -> 'gift of the Lord'   [a male given name]
+      'Modesto' -> 'modest'   [a male given name, feminine equivalent Modesta]
+      'Eleuterio' -> 'liberator'   [a male given name]
+      'Merlín' -> 'of the sea-hills,'   [a male given name]
+  ETYM_QUOTED           133 (9.74%)
+      'Montserrat' -> 'hill'   [a female given name transferred from the place]
+      'Victoria' -> 'Our Lady of Victory'   [a female given name from Latin]
+      'Salvador' -> 'savior'   [a male given name]
+      'Trinidad' -> 'trinity'   [a female given name, referring to the Holy Tri]
+      'Irene' -> 'peace'   [a female given name from Ancient Greek]
+      'Jesús' -> 'Muhammad'   [a male given name, mainly popular in Mexico an]
+      'Cruz' -> 'cross'   [a female given name]
+      'Cruz' -> 'cross'   [a male given name]
+  HOMOGRAPH             107 (7.83%)
+      'Ababa' -> 'ababa'   [a female given name]
+      'Minerva' -> 'minerva'   [a female given name from Latin]
+      'Lolita' -> 'lolita'   [Lolita: a diminutive of the female given name ]
+      'Alba' -> 'alba'   [a female given name from alba (“dawn”), of mod]
+      'Ale' -> 'ale'   [a diminutive of the male given name Alejandro]
+      'Ale' -> 'ale'   [a diminutive of the female given name Alejandr]
+      'Bob' -> 'bob'   [a male given name from English]
+      'Caro' -> 'caro'   [a diminutive of the female given name Carolina]
+  NONE                  659 (48.24%)
+      'Milton' -> ''   [a male given name]
+      'Laura' -> ''   [a female given name from Latin]
+      'Alexander' -> ''   [a male given name]
+      'Martha' -> ''   [a female given name, variant of Marta]
+      'Abner' -> ''   [a male given name from Hebrew]
+      'Richard' -> ''   [a male given name from English]
+      'Jacky' -> ''   [a diminutive of the female given name Jacqueli]
+      'Brian' -> ''   [a male given name from Irish]
+
+  ANY CHANNEL .... 707 (51.76%)
+  WITHOUT the loose ETYM_QUOTED channel .... 574 (42.02%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           1 (0.07%)
+  GLOSS_EQUIV_EN        453 (33.16%)
+  ETYM_MARKER            30 (2.20%)
+  ETYM_QUOTED           220 (16.11%)
+  HOMOGRAPH             243 (17.79%)
+--- channels available per name ---
+  0 channel(s): 659
+  1 channel(s): 506
+  2 channel(s): 166
+  3 channel(s): 31
+  4 channel(s): 4
+
+========================================================================
+LANG fa   type=GIVEN   senses considered: 532   shadow set: 10302
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           7 (1.32%)
+      'رضا' -> 'contentment, satisfaction'   [a male given name, Riza, Rizā, Reza, Rezā, Raz]
+      'عبدالرضا' -> 'slave of Rida'   [a male given name, Abdorreza, from Arabic, mea]
+      'عبدالله' -> 'slave of God, servant of God'   [a male given name, Abdollah, from Arabic, mean]
+      'عنایت\u200cالله' -> 'solicitude of God'   [A given name meaning “solicitude of God”.]
+      'فتح\u200cالله' -> 'victory of God'   [a male given name, Fathollah, from Arabic, mea]
+      'عبدالمسیح' -> 'servant of the Messiah'   [a male given name, Abd-ol-Masih, from Arabic, ]
+      'جانیار' -> 'friend of the soul'   [a male given name, Janyar, meaning “friend of ]
+  GLOSS_EQUIV_EN         28 (5.26%)
+      'مسلم' -> 'Muslim'   [a male given name from Arabic, equivalent to E]
+      'ابراهیم' -> 'Abraham'   [a male given name, Ibrahim, equivalent to Engl]
+      'داریوش' -> 'Darius'   [a male given name, Daryush, Daryoush, or Daryo]
+      'کوروش' -> 'Cyrus'   [a male given name, Kourosh or Kurosh, from Old]
+      'حوا' -> 'Eve'   [a female given name, Havva, Hawwa, or Havvo, f]
+      'یاس' -> 'Jasmine'   [a female given name, Yas, equivalent to Englis]
+      'نوح' -> 'Noah'   [a male given name, Nuh, Noh, Nooh, or Nouh, eq]
+      'مریم' -> 'Mary'   [a female given name, Maryam, from Arabic, equi]
+  ETYM_MARKER            32 (6.02%)
+      'شاهین' -> 'majestic, kingly'   [a male given name, Shahin, Shaahin, or Shaheen]
+      'لاله' -> 'red'   [a female given name, Laleh, Lala, Lale, Lalah,]
+      'کیوان' -> 'regular, usual, steady, staying, abiding always'   [a male given name, Keyvan or Kayvan, from Midd]
+      'روان' -> 'what has created a wide room for itself'   [a female given name, Ravan, from Middle Persia]
+      'مروارید' -> 'born from the shell of a bird'   [a female given name, Morvarid, Murwarid, or Mu]
+      'اسفندیار' -> 'given by Amesha Spenta'   [a male given name, Esfandiyar, Esfandyar, or E]
+      'فرهاد' -> 'gained, earned'   [a male given name, Farhad]
+      'برخوردار' -> 'fruit eater'   [a male given name, Barkhurdar or Barkhordar]
+  ETYM_QUOTED           129 (24.25%)
+      'جهان' -> 'worldly creatures; world'   [a male or female given name, Jahan]
+      'پروانه' -> 'guide, leader'   [a female given name, Parvaneh or Parwana, from]
+      'نوید' -> 'good news'   [a male given name, Navid, Nawid, Naveed, or Na]
+      'انوشه' -> 'immortal'   [a male or female given name, Anousheh, Anosha,]
+      'گلی' -> 'flower, rose'   [a female given name, Goli]
+      'امید' -> 'hope'   [a male given name, Omid, Umed, Umid, or Ummed,]
+      'اختر' -> 'planet'   [a unisex given name, Akhtar]
+      'خورشید' -> 'bright sun (an epithet)'   [a unisex given name, Khorshid or Khurshed]
+  HOMOGRAPH             124 (23.31%)
+      'سلم' -> 'سلم'   [a male given name from Avestan]
+      'حسن' -> 'حسن'   [a male given name, Hasan or Hassan, from Arabi]
+      'جمال' -> 'جمال'   [a male given name, Jamal]
+      'رمضان' -> 'رمضان'   [a male given name, Ramazan]
+      'باب' -> 'باب'   [a transliteration of the English male given na]
+      'امیر' -> 'امیر'   [a male given name, Amir, from Arabic]
+      'گیتا' -> 'گیتا'   [a female given name, Gita]
+      'سحر' -> 'سحر'   [a female given name, Sahar, from Arabic]
+  NONE                  212 (39.85%)
+      'ایران' -> ''   [a female given name, Iran, from Middle Persian]
+      'محمد' -> ''   [a male given name, Muhammad, Mohammed, or Moha]
+      'ناهید' -> ''   [a female given name, Nahid]
+      'عیسی' -> ''   [a male given name, Issa]
+      'تارا' -> ''   [a female given name, Tara]
+      'آذر' -> ''   [a female given name, Azar]
+      'عباس' -> ''   [a male given name, Abbas, from Arabic]
+      'سورنا' -> ''   [a male given name, Sorena]
+
+  ANY CHANNEL .... 320 (60.15%)
+  WITHOUT the loose ETYM_QUOTED channel .... 191 (35.90%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           7 (1.32%)
+  GLOSS_EQUIV_EN         28 (5.26%)
+  ETYM_MARKER            32 (6.02%)
+  ETYM_QUOTED           166 (31.20%)
+  HOMOGRAPH             214 (40.23%)
+--- channels available per name ---
+  0 channel(s): 212
+  1 channel(s): 199
+  2 channel(s): 115
+  3 channel(s): 6
+
+========================================================================
+LANG ga   type=GIVEN   senses considered: 185   shadow set: 15077
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           1 (0.54%)
+      'Deághadh' -> 'good luck'   [a male given name meaning “good luck”]
+  GLOSS_EQUIV_EN        102 (55.14%)
+      'Caoimhín' -> 'Kevin'   [a male given name from Old Irish, equivalent t]
+      'Ruairí' -> 'Rory'   [a male given name from Old Irish, equivalent t]
+      'Nollaig' -> 'Noel'   [a male given name from Latin or female, equiva]
+      'Seán' -> 'John'   [a male given name from Old French, equivalent ]
+      'Alastar' -> 'Alexander'   [a male given name, equivalent to English Alexa]
+      'Fionnghuala' -> 'Fenella'   [a female given name from Old Irish, equivalent]
+      'Máire' -> 'Mary'   [a female given name from Hebrew, equivalent to]
+      'Máirín' -> 'Molly'   [a diminutive of the female given name Máire, e]
+  ETYM_MARKER             6 (3.24%)
+      'Siobhán' -> 'God is gracious'   [a female given name]
+      'Eoghan' -> 'yew-born'   [a male given name]
+      'Toirdhealbhach' -> 'instigator'   [a male given name from Old Irish, often anglic]
+      'Coileán' -> 'pup, youth, trickster'   [a male given name often anglicized as Colin, w]
+      'Fínín' -> 'wine-born'   [a male given name from Old Irish]
+      'Fiachra' -> 'fighting king'   [a male given name from Proto-Celtic]
+  ETYM_QUOTED            45 (24.32%)
+      'Oscar' -> 'outsider, newcomer'   [a male given name from Old Irish]
+      'Ardal' -> 'high, noble'   [a male given name from Old Irish]
+      'Cian' -> 'long, distant, lasting'   [a male given name from Old Irish used in Irela]
+      'Fionn' -> 'white, bright, fair, handsome'   [a male given name from Old Irish]
+      'Niall' -> 'cloud'   [a male given name from Old Irish]
+      'Niamh' -> 'brightness, lustre, sheen'   [a female given name]
+      'Sorcha' -> 'bright, clear, conspicuous'   [a female given name from Old Irish, sometimes ]
+      'Áine' -> 'bright, brilliant; splendid, noble'   [a female given name from Old Irish]
+  HOMOGRAPH               4 (2.16%)
+      'Eithne' -> 'eithne'   [a female given name from Old Irish]
+      'Réiltín' -> 'réiltín'   [a female given name, a diminutive of réalta (“]
+      'Cathaoir' -> 'cathaoir'   [a male given name anglicized as Cahir]
+      'Ceallach' -> 'ceallach'   [a male given name]
+  NONE                   27 (14.59%)
+      'Brian' -> ''   [a male given name]
+      'Deirdre' -> ''   [a female given name from Old Irish]
+      'Sinéad' -> ''   [a female given name from Old French]
+      'Fearghas' -> ''   [a male given name from Old Irish of Gaelic ori]
+      'Caitlín' -> ''   [a diminutive of the female given name Caitríon]
+      'Síle' -> ''   [a female given name of Irish origin, Anglicize]
+      'Cormac' -> ''   [a male given name from Old Irish]
+      'Róisín' -> ''   [a diminutive of the female given name Róis]
+
+  ANY CHANNEL .... 158 (85.41%)
+  WITHOUT the loose ETYM_QUOTED channel .... 113 (61.08%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           1 (0.54%)
+  GLOSS_EQUIV_EN        102 (55.14%)
+  ETYM_MARKER            11 (5.95%)
+  ETYM_QUOTED           102 (55.14%)
+  HOMOGRAPH              29 (15.68%)
+--- channels available per name ---
+  0 channel(s): 27
+  1 channel(s): 82
+  2 channel(s): 66
+  3 channel(s): 9
+  4 channel(s): 1
+
+========================================================================
+LANG he   type=GIVEN   senses considered: 363   shadow set: 8720
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        117 (32.23%)
+      'ישראל' -> 'Israel'   [a male given name, Yisrael, equivalent to Engl]
+      'חגב' -> 'Agabus'   [a male given name, Khagav or Chagav, equivalen]
+      'רחל' -> 'Rachel'   [a female given name, equivalent to English Rac]
+      'מיכאל' -> 'Michael'   [a male given name, equivalent to English Micha]
+      'גבריאל' -> 'Gabriel'   [a male given name, equivalent to English Gabri]
+      'שלמה' -> 'Solomon'   [a male given name, Shlomo, equivalent to Engli]
+      'נתן' -> 'Nathan'   [a male given name, equivalent to English Natha]
+      'אבישלום' -> 'Avshalom'   [a male given name, equivalent to English Avsha]
+  ETYM_MARKER            19 (5.23%)
+      'אביב' -> 'to be thick,'   [a male given name]
+      'שיר' -> 'song'   [a female or male given name, Shir]
+      'איוב' -> 'where is the father?'   [a male given name, Iyov]
+      'ישעיהו' -> 'Yahweh is salvation'   [a male given name]
+      'למואל' -> 'dedicated to God'   [a male given name, Lemuel]
+      'ארם' -> 'lowlands.'   [a male given name]
+      'אלעד' -> 'God is eternal'   [a male given name]
+      'אלישבע' -> 'my God is an oath'   [a female given name, Elisheba or Elisheva]
+  ETYM_QUOTED            73 (20.11%)
+      'שלום' -> 'to be quiet, tranquil'   [a male given name, Shalom]
+      'מרים' -> 'to be bitter'   [a female given name, Miriam]
+      'מרים' -> 'to be bitter'   [a female given name, Miriam]
+      'לאה' -> 'cow'   [a female given name, Leah]
+      'אלון' -> 'tree'   [a male given name, Alon or Elon]
+      'בן' -> 'Joshua son of Nun'   [a male given name, Ben]
+      'אמר' -> 'to command'   [a male given name]
+      'לוי' -> 'he will join'   [a male given name, Levi or Levy]
+  HOMOGRAPH              82 (22.59%)
+      'זוהר' -> 'זוהר'   [a male or female given name, Zohar]
+      'זאב' -> 'זאב'   [a male given name, Zeeb or Zeev]
+      'ציון' -> 'ציון'   [a male given name]
+      'ויקי' -> 'ויקי'   [a transliteration of the English female given ]
+      'שני' -> 'שני'   [a female given name, Shani or Shany]
+      'עזר' -> 'עזר'   [a male given name, Ezer]
+      'אדר' -> 'אדר'   [a male or female given name]
+      'צור' -> 'צור'   [a male given name]
+  NONE                   72 (19.83%)
+      'מתן' -> ''   [a male given name, Matan]
+      'זבולון' -> ''   [a male given name]
+      'רות' -> ''   [a female given name, Ruth]
+      'חגי' -> ''   [a male given name, Haggai]
+      'אשר' -> ''   [a male given name]
+      'אסא' -> ''   [a male given name, Asa or Assa]
+      'מדין' -> ''   [a male given name, Midian]
+      'שלו' -> ''   [a male given name, Shalev]
+
+  ANY CHANNEL .... 291 (80.17%)
+  WITHOUT the loose ETYM_QUOTED channel .... 218 (60.06%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        117 (32.23%)
+  ETYM_MARKER            44 (12.12%)
+  ETYM_QUOTED           165 (45.45%)
+  HOMOGRAPH             159 (43.80%)
+--- channels available per name ---
+  0 channel(s): 72
+  1 channel(s): 139
+  2 channel(s): 111
+  3 channel(s): 40
+  4 channel(s): 1
+
+========================================================================
+LANG hi   type=GIVEN   senses considered: 813   shadow set: 16640
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           3 (0.37%)
+      'अनिल' -> 'god of the wind'   [a male given name meaning “god of the wind”]
+      'एकता' -> 'unity'   [a female given name, Ekta, meaning “unity”]
+      'तैमूर' -> 'strong, steel'   [a male given name, Taimur or Taimoor, from Tur]
+  GLOSS_EQUIV_EN         46 (5.66%)
+      'अमृत' -> 'Amrit'   [a male given name from Sanskrit, equivalent to]
+      'दीप' -> 'Deep'   [a male given name from Sanskrit, equivalent to]
+      'अमृता' -> 'Amrita'   [a female given name from Sanskrit, equivalent ]
+      'यहूदा' -> 'Judah'   [a male given name from Hebrew, equivalent to E]
+      'आदम' -> 'Adam'   [a male given name from Arabic or Hebrew, equiv]
+      'ऋषि' -> 'Rishi'   [a male given name, Rishi, equivalent to Englis]
+      'सेलेना' -> 'Selena'   [a female given name from Ancient Greek, equiva]
+      'बलि' -> 'Bali'   [a male given name, equivalent to English Bali]
+  ETYM_MARKER             8 (0.98%)
+      'मनीष' -> 'Manish'   [a male given name, Manish, of central and nort]
+      'अशोक' -> 'without grief'   [a male given name, Ashok, from Sanskrit]
+      'वेदांत' -> 'end of the Vedas'   [a male given name, Vedant, from Sanskrit]
+      'भास्कर' -> 'light maker'   [a male given name, Bhaskar, from Sanskrit]
+      'रामबोल' -> 'speaking Rāma'   [a male given name, Rambol]
+      'औरंगज़ेब' -> 'Ornament of the Throne'   [a male given name, Aurangzeb, from Persian]
+      'आलमगीर' -> 'conqueror of the world'   [a male given name, Alamgir, from Persian]
+      'मैथिलीशरण' -> 'having Maithilī as refuge'   [a male given name from Sanskrit]
+  ETYM_QUOTED            88 (10.82%)
+      'स्वस्तिक' -> 'a lucky or auspicious object'   [a male given name, Swastik, from Sanskrit]
+      'लाल' -> 'to be caressed'   [a male given name, Lal]
+      'अंशुल' -> 'small ray of light'   [a male given name, Anshul, from Sanskrit]
+      'सारा' -> 'lady, princess'   [a female given name, Sara or Sarah, from Hebre]
+      'अद्वैत' -> 'not dual'   [a male given name, Advait, from Sanskrit]
+      'झील' -> 'to bathe'   [a female given name, Jheel]
+      'आज्ञा' -> 'order, command, authority'   [a female given name, Agya or Aagya, from Sansk]
+      'शबनम' -> 'night'   [a female given name, Shabnam, from Persian]
+  HOMOGRAPH             507 (62.36%)
+      'आकाश' -> 'आकाश'   [a male given name, Akash, from Sanskrit]
+      'मधुर' -> 'मधुर'   [a male given name, Madhur, from Sanskrit]
+      'मुक्ति' -> 'मुक्ति'   [a female given name, Mukti, from Sanskrit]
+      'अनुराग' -> 'अनुराग'   [a male given name, Anurag, from Sanskrit]
+      'कृष्ण' -> 'कृष्ण'   [a male given name, Krishna, from Sanskrit]
+      'संस्कृति' -> 'संस्कृति'   [a female given name, Sanskriti, from Sanskrit]
+      'गगन' -> 'गगन'   [a male given name, Gagan, from Sanskrit]
+      'राजा' -> 'राजा'   [a male given name, Raja, from Sanskrit]
+  NONE                  161 (19.80%)
+      'गणेश' -> ''   [a male given name, Ganesh or Ganesha, from San]
+      'गणपति' -> ''   [a male given name, Ganapati or Ganpati, from S]
+      'श्वेता' -> ''   [a female given name, Shweta, from Sanskrit]
+      'जाह्नवी' -> ''   [a female given name, Jahnavi or Jahnvi, from S]
+      'सूर्य' -> ''   [a male given name, Surya, from Sanskrit]
+      'गंगा' -> ''   [a female given name, Ganga, from Sanskrit]
+      'उमर' -> ''   [a male given name, Umar, from Arabic]
+      'सूरज' -> ''   [a male given name, Suraj, from Sanskrit]
+
+  ANY CHANNEL .... 652 (80.20%)
+  WITHOUT the loose ETYM_QUOTED channel .... 564 (69.37%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           3 (0.37%)
+  GLOSS_EQUIV_EN         46 (5.66%)
+  ETYM_MARKER             9 (1.11%)
+  ETYM_QUOTED           103 (12.67%)
+  HOMOGRAPH             590 (72.57%)
+--- channels available per name ---
+  0 channel(s): 161
+  1 channel(s): 559
+  2 channel(s): 87
+  3 channel(s): 6
+
+========================================================================
+LANG is   type=GIVEN   senses considered: 1271   shadow set: 14603
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           5 (0.39%)
+      'Örn' -> 'eagle'   [a male given name meaning “eagle”]
+      'Svanur' -> 'swan'   [a male given name meaning “swan”]
+      'Hrafn' -> 'raven'   [a male given name meaning “raven”, feminine eq]
+      'Bera' -> 'she-bear'   [a female given name from Old Norse, meaning “s]
+      'Úlfur' -> 'wolf'   [a male given name from Old Norse, meaning “wol]
+  GLOSS_EQUIV_EN         84 (6.61%)
+      'Albert' -> 'Albert'   [a male given name, equivalent to English Alber]
+      'Alexander' -> 'Alexander'   [a male given name, equivalent to English Alexa]
+      'Alexandra' -> 'Alexandra'   [a female given name, equivalent to English Ale]
+      'Alex' -> 'Alex'   [a male given name, equivalent to English Alex]
+      'Ólafur' -> 'Olaf'   [a male given name, equivalent to English Olaf]
+      'Karl' -> 'Carl'   [a male given name, equivalent to English Carl ]
+      'Anna' -> 'Ann'   [a female given name, equivalent to English Ann]
+      'Ester' -> 'Esther'   [a female given name from Hebrew, equivalent to]
+  ETYM_MARKER             7 (0.55%)
+      'Kjartan' -> 'mariner'   [a male given name from Old Irish]
+      'Skíði' -> 'skier'   [a male given name]
+      'Ljótur' -> 'bright'   [a male given name]
+      'Gísli' -> 'from a noble family'   [a male given name]
+      'Jónatan' -> 'whom the Lord gave'   [a male given name]
+      'Styrmir' -> 'one who causes storms'   [a male given name]
+      'Mýrkjartan' -> 'mariner'   [a male given name from Old Irish]
+  ETYM_QUOTED           104 (8.18%)
+      'Adam' -> 'earth, man, soil, light brown'   [a male given name]
+      'Baldur' -> 'brave'   [a male given name]
+      'Snæbjörn' -> 'snow'   [a male given name; snow-bear]
+      'Björn' -> 'bear'   [a male given name]
+      'Mist' -> 'cloud'   [a female given name]
+      'Stella' -> 'star'   [a female given name]
+      'Ver' -> 'fighter'   [a male given name]
+      'Ari' -> 'eagle'   [a male given name]
+  HOMOGRAPH             110 (8.65%)
+      'Alda' -> 'alda'   [a female given name]
+      'Berg' -> 'berg'   [a male given name]
+      'Saga' -> 'saga'   [a female given name]
+      'Vera' -> 'vera'   [a female given name]
+      'Björk' -> 'björk'   [a female given name]
+      'Hanna' -> 'hanna'   [a female given name; Hannah]
+      'Sandur' -> 'sandur'   [a male given name]
+      'Birgir' -> 'birgir'   [a male given name]
+  NONE                  961 (75.61%)
+      'Venus' -> ''   [a female given name]
+      'Thor' -> ''   [a male given name]
+      'Hera' -> ''   [a female given name]
+      'Tara' -> ''   [a female given name]
+      'Andrea' -> ''   [a female given name]
+      'Loki' -> ''   [a male given name]
+      'Abraham' -> ''   [a male given name]
+      'Adolf' -> ''   [a male given name]
+
+  ANY CHANNEL .... 310 (24.39%)
+  WITHOUT the loose ETYM_QUOTED channel .... 206 (16.21%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           5 (0.39%)
+  GLOSS_EQUIV_EN         84 (6.61%)
+  ETYM_MARKER             7 (0.55%)
+  ETYM_QUOTED           120 (9.44%)
+  HOMOGRAPH             152 (11.96%)
+--- channels available per name ---
+  0 channel(s): 961
+  1 channel(s): 255
+  2 channel(s): 52
+  3 channel(s): 3
+
+========================================================================
+LANG ja   type=GIVEN   senses considered: 9038   shadow set: 63051
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           1 (0.01%)
+      '竜児' -> 'young dragon'   [a male given name, meaning "young dragon"]
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER            33 (0.37%)
+      '京都' -> 'capital city'   [a female given name]
+      '昴' -> 'cluster of pearls'   [a male given name]
+      '港' -> 'hand'   [a male given name]
+      '皇' -> 'Han sound'   [a unisex given name]
+      '経' -> 'string, thread'   [a unisex given name]
+      '綠' -> 'old form'   [a female given name.]
+      '要' -> 'metal'   [a unisex given name]
+      '雪' -> 'eastern song'   [a female given name]
+  ETYM_QUOTED           374 (4.14%)
+      '愛' -> 'true, genuine'   [a female given name]
+      '青' -> 'rain'   [a female given name]
+      '明日' -> 'next morning'   [a female given name]
+      '明日' -> 'to pass'   [a female given name]
+      '水' -> 'freshness, youth'   [a female given name]
+      '米' -> 'stem or continuative form'   [a female given name]
+      '米' -> 'rice plant'   [a female given name]
+      '氷' -> 'stem or continuative form'   [a female given name]
+  HOMOGRAPH             703 (7.78%)
+      '月' -> '月'   [a female given name]
+      '愛' -> '愛'   [a female given name]
+      '愛' -> '愛'   [a female given name]
+      '青' -> '青'   [a female given name]
+      '水' -> '水'   [a female given name]
+      '零' -> '零'   [a male given name]
+      '一' -> '一'   [a female given name]
+      '章' -> '章'   [a male given name]
+  NONE                 7927 (87.71%)
+      'そら' -> ''   [a unisex given name]
+      '最' -> ''   [a male given name]
+      '最' -> ''   [a female given name]
+      '烈' -> ''   [a unisex given name]
+      '萬' -> ''   [a female given name]
+      '曜' -> ''   [a male given name]
+      '久' -> ''   [a male given name]
+      '之' -> ''   [a male given name]
+
+  ANY CHANNEL .... 1111 (12.29%)
+  WITHOUT the loose ETYM_QUOTED channel .... 737 (8.15%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           1 (0.01%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER            33 (0.37%)
+  ETYM_QUOTED           407 (4.50%)
+  HOMOGRAPH            1017 (11.25%)
+--- channels available per name ---
+  0 channel(s): 7927
+  1 channel(s): 788
+  2 channel(s): 299
+  3 channel(s): 24
+
+========================================================================
+LANG ko   type=GIVEN   senses considered: 67   shadow set: 27648
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             3 (4.48%)
+      '슬기' -> 'intelligent'   [a unisex given name]
+      '라온' -> 'to be joyful'   [a female given name]
+      '다솜' -> 'to adore'   [a female given name]
+  HOMOGRAPH              14 (20.90%)
+      '장' -> '장'   [a transliteration of the French male given nam]
+      '장' -> '장'   [a transliteration of the French male given nam]
+      '밥' -> '밥'   [a transliteration of the English male given na]
+      '유리' -> '유리'   [a female given name]
+      '미아' -> '미아'   [a transliteration of the English female given ]
+      '샘' -> '샘'   [Sam (European given name)]
+      '보람' -> '보람'   [a female given name]
+      '철수' -> '철수'   [a male given name]
+  NONE                   50 (74.63%)
+      '미하일' -> ''   [a transliteration of the Russian male given na]
+      '안드레이' -> ''   [Andrey (a male given name)]
+      '블라디미르' -> ''   [a transliteration of the Russian male given na]
+      '근혜' -> ''   [Geun-hye (Korean female given name)]
+      '아서' -> ''   [a transliteration of the English male given na]
+      '아라' -> ''   [a transliteration of the Armenian male given n]
+      '정은' -> ''   [a unisex given name]
+      '빅토리아' -> ''   [a transliteration of the English female given ]
+
+  ANY CHANNEL .... 17 (25.37%)
+  WITHOUT the loose ETYM_QUOTED channel .... 14 (20.90%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             3 (4.48%)
+  HOMOGRAPH              15 (22.39%)
+--- channels available per name ---
+  0 channel(s): 50
+  1 channel(s): 16
+  2 channel(s): 1
+
+========================================================================
+LANG la   type=GIVEN   senses considered: 738   shadow set: 34547
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        175 (23.71%)
+      'Leon' -> 'Leon'   [a male given name from Ancient Greek, equivale]
+      'Moses' -> 'Moses'   [a male given name from Hebrew, equivalent to E]
+      'Adam' -> 'Adam'   [a male given name, equivalent to English Adam]
+      'Andreas' -> 'Andrew'   [a male given name from Ancient Greek, equivale]
+      'Gabriel' -> 'Gabriel'   [a male given name from Ancient Greek [in turn ]
+      'Gabriel' -> 'Gabriel'   [a male given name from Ancient Greek [in turn ]
+      'Angela' -> 'Angela'   [a female given name from Ancient Greek, equiva]
+      'Ali' -> 'Ali'   [a male given name, equivalent to English Ali]
+  ETYM_MARKER            19 (2.57%)
+      'Michael' -> 'Who is like God?'   [a male given name, Michael, from Hebrew]
+      'Sergius' -> 'servant'   [a male given name]
+      'Argyrippus' -> 'white horse (or white knight)'   [a male given name from Ancient Greek, characte]
+      'Philaenium' -> 'one whose love should be avoided'   [a female given name from Ancient Greek, charac]
+      'Acropolistis' -> 'woman of the acropolis'   [a female given name from Ancient Greek, charac]
+      'Theodosius' -> 'given by God'   [a male given name from Ancient Greek]
+      'Matthaeus' -> 'gift of YHWH (the Lord)'   [a male given name from Hebrew of biblical orig]
+      'Hasdrubal' -> 'Help of the Lord (Baal)'   [a male given name from Carthage]
+  ETYM_QUOTED           124 (16.80%)
+      'Dominica' -> 'Lord’s Day, day of the Lord, Sunday'   [a female given name]
+      'Ursula' -> 'she-bear'   [a female given name]
+      'Thomas' -> 'twin'   [a male given name from Aramaic of Biblical ori]
+      'Pius' -> 'pious'   [a male given name, particularly as a regnal na]
+      'Nona' -> 'the ninth'   [a female given name]
+      'Romanus' -> 'Rome'   [a male given name made famous by a martyred 7t]
+      'Ursus' -> 'bear'   [a male given name]
+      'Aristoteles' -> 'best, excellent'   [a male given name from Ancient Greek, equivale]
+  HOMOGRAPH              27 (3.66%)
+      'Aquila' -> 'aquila'   [a male given name]
+      'Gymnasium' -> 'gymnasium'   [a female given name from Ancient Greek, charac]
+      'Petra' -> 'petra'   [a post-classical female given name, masculine ]
+      'Virgo' -> 'virgo'   [a male given name, character in the play Persa]
+      'Clemens' -> 'clemens'   [a male given name]
+      'Laetitia' -> 'laetitia'   [a female given name]
+      'Candidus' -> 'candidus'   [a male given name, male variant of Candida]
+      'Modestus' -> 'modestus'   [a male given name, male variant of Modesta]
+  NONE                  393 (53.25%)
+      'Mauritius' -> ''   [a male given name of historical usage, found e]
+      'Paris' -> ''   [a male given name from Ancient Greek, from the]
+      'Hellas' -> ''   [a female given name from Ancient Greek]
+      'Latinus' -> ''   [a male given name]
+      'Ababa' -> ''   [a female given name, the Alan mother of the la]
+      'Rachel' -> ''   [a female given name from Hebrew]
+      'Asclepius' -> ''   [a male given name]
+      'Mattathias' -> ''   [a male given name from Hebrew — famously held ]
+
+  ANY CHANNEL .... 345 (46.75%)
+  WITHOUT the loose ETYM_QUOTED channel .... 221 (29.95%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        175 (23.71%)
+  ETYM_MARKER            28 (3.79%)
+  ETYM_QUOTED           182 (24.66%)
+  HOMOGRAPH              52 (7.05%)
+--- channels available per name ---
+  0 channel(s): 393
+  1 channel(s): 264
+  2 channel(s): 70
+  3 channel(s): 11
+
+========================================================================
+LANG non   type=GIVEN   senses considered: 157   shadow set: 3736
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          3 (1.91%)
+      'Þróndr' -> 'Throwend'   [a male given name, equivalent to English Throw]
+      'Hróbjartr' -> 'Robert'   [a male given name, equivalent to English Rober]
+      'ᛋᚢᛅᛁᚾ' -> 'Sven'   [Runic spelling of Sveinn: a male given name, e]
+  ETYM_MARKER            11 (7.01%)
+      'Birgir' -> 'helper, saviour'   [a male given name]
+      'Eiríkr' -> 'ever ruler'   [a male given name]
+      'Végarðr' -> 'protection'   [a male given name]
+      'Gerðr' -> 'protection'   [a female given name, name of a giantess in Nor]
+      'Sverrir' -> 'spinning, swinging,'   [a male given name]
+      'Austri' -> 'One in the East'   [a male given name]
+      'Hróðný' -> 'fame,'   [a female given name]
+      'Gandalfr' -> 'an elf familiar'   [a male given name]
+  ETYM_QUOTED           103 (65.61%)
+      'Ari' -> 'eagle'   [a male given name]
+      'Ása' -> 'god'   [a female given name]
+      'Inga' -> 'the god Ing or Yngvi'   [a female given name]
+      'Kári' -> 'breeze'   [a male given name]
+      'Rúni' -> 'counselor'   [a male given name]
+      'Bjarni' -> 'bear'   [a male given name]
+      'Fróði' -> 'the wise'   [a male given name]
+      'Þorsteinn' -> 'Thor'   [a male given name]
+  HOMOGRAPH               1 (0.64%)
+      'Ella' -> 'ella'   [a male given name]
+  NONE                   39 (24.84%)
+      'Arni' -> ''   [a male given name]
+      'Rannveig' -> ''   [a female given name]
+      'Magnús' -> ''   [a male given name from Latin]
+      'Agmundr' -> ''   [a male given name, a younger variant of Old No]
+      'Gizurr' -> ''   [a male given name]
+      'Egill' -> ''   [a male given name]
+      'Austra' -> ''   [a female given name]
+      'Óleifr' -> ''   [a male given name, variant of Óláfr]
+
+  ANY CHANNEL .... 118 (75.16%)
+  WITHOUT the loose ETYM_QUOTED channel .... 15 (9.55%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          3 (1.91%)
+  ETYM_MARKER            11 (7.01%)
+  ETYM_QUOTED           116 (73.89%)
+  HOMOGRAPH              11 (7.01%)
+--- channels available per name ---
+  0 channel(s): 39
+  1 channel(s): 96
+  2 channel(s): 21
+  3 channel(s): 1
+
+========================================================================
+LANG pl   type=GIVEN   senses considered: 873   shadow set: 58117
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        427 (48.91%)
+      'Fabian' -> 'Fabian'   [a male given name, equivalent to English Fabia]
+      'Edward' -> 'Edward'   [a male given name, equivalent to English Edwar]
+      'Achilles' -> 'Achilles'   [a male given name from Latin [in turn from Anc]
+      'Alberta' -> 'Alberta'   [a female given name, equivalent to English Alb]
+      'Leon' -> 'Leo'   [a male given name from Latin [in turn from Anc]
+      'Laura' -> 'Laura'   [a female given name, equivalent to English Lau]
+      'Albert' -> 'Albert'   [a male given name, equivalent to English Alber]
+      'Daniel' -> 'Daniel'   [a male given name from Latin [in turn from Anc]
+  ETYM_MARKER             2 (0.23%)
+      'Przemysław' -> 'famous from being artful'   [a male given name]
+      'Gustaw' -> 'support (of the Geats, southern Swedes)'   [a male given name]
+  ETYM_QUOTED            18 (2.06%)
+      'Lech' -> 'wasteland dweller'   [a male given name]
+      'Malina' -> 'raspberry'   [a female given name]
+      'Roman' -> 'Roman, of Rome'   [a male given name from Latin]
+      'Zbigniew' -> 'chase away'   [a male given name of Slavic origin.]
+      'Dobrosława' -> 'good'   [a female given name]
+      'Bronisław' -> 'to protect'   [a male given name]
+      'Mieszko' -> "keep one's eyes closed"   [a male given name]
+      'Kochan' -> 'to love'   [a male given name]
+  HOMOGRAPH              37 (4.24%)
+      'Trojan' -> 'trojan'   [a male given name from Latin]
+      'Lola' -> 'lola'   [a diminutive of the female given name Karolina]
+      'Lola' -> 'lola'   [a diminutive of the female given name Karola]
+      'Aga' -> 'aga'   [a diminutive of the female given name Agata]
+      'Aga' -> 'aga'   [a diminutive of the female given name Agnieszk]
+      'Klima' -> 'klima'   [a diminutive of the male given name Klemens]
+      'Wojtek' -> 'wojtek'   [a diminutive of the male given name Wojciech]
+      'Maciek' -> 'maciek'   [a diminutive of the male given name Maciej]
+  NONE                  389 (44.56%)
+      'Asia' -> ''   [a diminutive of the female given name Joanna]
+      'Hania' -> ''   [a diminutive of the female given name Hanna]
+      'Ares' -> ''   [a given name for a dog]
+      'Marian' -> ''   [a male given name]
+      'Ada' -> ''   [a female given name]
+      'Ada' -> ''   [a diminutive of the female given name Adrianna]
+      'Ala' -> ''   [a diminutive of the female given name Alicja]
+      'Ala' -> ''   [a diminutive of the female given name Alina]
+
+  ANY CHANNEL .... 484 (55.44%)
+  WITHOUT the loose ETYM_QUOTED channel .... 466 (53.38%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        427 (48.91%)
+  ETYM_MARKER             3 (0.34%)
+  ETYM_QUOTED            34 (3.89%)
+  HOMOGRAPH              72 (8.25%)
+--- channels available per name ---
+  0 channel(s): 389
+  1 channel(s): 433
+  2 channel(s): 50
+  3 channel(s): 1
+
+========================================================================
+LANG ru   type=GIVEN   senses considered: 686   shadow set: 44866
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        274 (39.94%)
+      'Израиль' -> 'Israel'   [a male given name, Izrail, from Hebrew, equiva]
+      'Афина' -> 'Athena'   [a female given name, Afina, from Ancient Greek]
+      'София' -> 'Sophia'   [Sofia (a female given name from Ancient Greek,]
+      'Кирилл' -> 'Cyril'   [a male given name, Kirill, equivalent to Engli]
+      'Иван' -> 'John'   [a male given name, Ivan, equivalent to English]
+      'Лука' -> 'Luke'   [a male given name, Luka, equivalent to English]
+      'Екатерина' -> 'Catherine'   [a female given name, Ekaterina, from Ancient G]
+      'Александр' -> 'Alexander'   [a male given name, equivalent to English Alexa]
+  ETYM_MARKER             3 (0.44%)
+      'Глеб' -> 'god'   [a male given name, Gleb]
+      'Абдрахман' -> 'servant of the merciful'   [a male given name from Arabic, Abd al-Rahman, ]
+      'Сейфулла' -> 'Sword of Allah'   [a male given name, Seifulla, from Arabic, of M]
+  ETYM_QUOTED            84 (12.24%)
+      'Дон' -> 'gift'   [a transliteration of the English male given na]
+      'Дмитрий' -> 'Demeter'   [a transliteration of the Belarusian male given]
+      'Дмитрий' -> 'Demeter'   [a transliteration of the Ukrainian male given ]
+      'Андрей' -> 'manly'   [a transliteration of the Belarusian male given]
+      'Андрей' -> 'manly'   [a transliteration of the Ukrainian male given ]
+      'Дорофей' -> 'God’s gift'   [a male given name, Dorofey, from Ancient Greek]
+      'Оксана' -> 'hospitality'   [a female given name, Oksana or Oxana]
+      'Марина' -> 'of the sea'   [a female given name, Marina, from Latin]
+  HOMOGRAPH              17 (2.48%)
+      'Рамазан' -> 'рамазан'   [a male given name, Ramazan, from Arabic, of Mu]
+      'Майка' -> 'майка'   [a diminutive of the female given name Майя (Ma]
+      'Весна' -> 'весна'   [a female given name, Vesna]
+      'Тоня' -> 'тоня'   [a diminutive, Tonya, of the female given name ]
+      'Майя' -> 'майя'   [a female given name, Maya, from Ancient Greek]
+      'Аким' -> 'аким'   [a male given name, Akim]
+      'Роман' -> 'роман'   [a male given name, Roman]
+      'Пол' -> 'пол'   [a transliteration of the English male given na]
+  NONE                  308 (44.90%)
+      'Венера' -> ''   [a female given name, Venera, from Latin]
+      'Аврам' -> ''   [a male given name]
+      'Афродита' -> ''   [a female given name, Afrodita, from Ancient Gr]
+      'Ника' -> ''   [a unisex given name, Nika]
+      'Евсей' -> ''   [a male given name, Yevsey, from Ancient Greek]
+      'Авдюша' -> ''   [a diminutive, Avdyusha, of the male given name]
+      'Игорь' -> ''   [a male given name, Igor]
+      'Нина' -> ''   [a diminutive, Nina, of the female given name А]
+
+  ANY CHANNEL .... 378 (55.10%)
+  WITHOUT the loose ETYM_QUOTED channel .... 294 (42.86%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN        274 (39.94%)
+  ETYM_MARKER             9 (1.31%)
+  ETYM_QUOTED           140 (20.41%)
+  HOMOGRAPH              46 (6.71%)
+--- channels available per name ---
+  0 channel(s): 308
+  1 channel(s): 294
+  2 channel(s): 77
+  3 channel(s): 7
+
+========================================================================
+LANG sa   type=GIVEN   senses considered: 46   shadow set: 7780
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          6 (13.04%)
+      'माया' -> 'Maya'   [a female given name, equivalent to English May]
+      'रघु' -> 'Raghu'   [a male given name, equivalent to English Raghu]
+      'रघु' -> 'Raghu'   [a male given name, equivalent to English Raghu]
+      'रघु' -> 'Raghu'   [a male given name, equivalent to English Raghu]
+      'राघव' -> 'Raghava'   [a male given name, equivalent to English Ragha]
+      'धुरंधर' -> 'Dhurandhar'   [a male given name, equivalent to English Dhura]
+  ETYM_MARKER             2 (4.35%)
+      'चन्द्रगुप्त' -> 'protected by the moon/hidden by the moon'   [a male given name, Chandragupta]
+      'होरमुर्ण्डग' -> 'lord, king'   [a male given name, Horamurṇḍaga, from Scythian]
+  ETYM_QUOTED            23 (50.00%)
+      'सूर्य' -> 'sun'   [a male given name, Surya]
+      'अक्षर' -> 'perishable'   [a male given name, Akshar or Axar]
+      'अर्जुन' -> 'white, shining; silver'   [a male given name, Arjuna]
+      'राम' -> 'sooty'   [a male given name, Ram or Rāma]
+      'शिव' -> 'dear, intimate, friendly'   [a male given name, Shiva]
+      'नन्दिनी' -> 'to rejoice, delight'   [a female given name, Nandini]
+      'सुधा' -> 'good'   [a female given name, Sudha]
+      'शल्य' -> 'shafts (of arrows)'   [a male given name, Shalya, especially that of ]
+  HOMOGRAPH               8 (17.39%)
+      'उमा' -> 'उमा'   [a female given name]
+      'पार्वती' -> 'पार्वती'   [a female given name, Parvati]
+      'पुण्डरीक' -> 'पुण्डरीक'   [a male given name, Pundarika]
+      'ज्योत्स्ना' -> 'ज्योत्स्ना'   [a female given name, Jyotsna]
+      'रेणुका' -> 'रेणुका'   [a female given name, Renuka.]
+      'प्रतिभा' -> 'प्रतिभा'   [a female given name, Pratibha]
+      'वैद्यनाथ' -> 'वैद्यनाथ'   [a male given name, Vaidyanatha]
+      'सव्यसाची' -> 'सव्यसाची'   [a male given name, Savyasachi]
+  NONE                    7 (15.22%)
+      'राजेश' -> ''   [a male given name, Rajesha]
+      'रामेश्वर' -> ''   [a male given name, Rameshwara]
+      'भवानी' -> ''   [a female given name, Bhavani]
+      'कामाक्षी' -> ''   [a female given name, Kamakshi]
+      'ऊर्मिला' -> ''   [a female given name, Urmila]
+      'सोमनाथ' -> ''   [a male given name, Somanatha]
+      'क्षयर्ष' -> ''   [a male given name, Kshayarsha, from Old Persia]
+
+  ANY CHANNEL .... 39 (84.78%)
+  WITHOUT the loose ETYM_QUOTED channel .... 16 (34.78%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          6 (13.04%)
+  ETYM_MARKER             2 (4.35%)
+  ETYM_QUOTED            28 (60.87%)
+  HOMOGRAPH              27 (58.70%)
+--- channels available per name ---
+  0 channel(s): 7
+  1 channel(s): 17
+  2 channel(s): 20
+  3 channel(s): 2
+
+========================================================================
+LANG sw   type=GIVEN   senses considered: 56   shadow set: 7582
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         12 (21.43%)
+      'Ibrahim' -> 'Abraham'   [a male given name from Arabic, equivalent to E]
+      'Paulo' -> 'Paul'   [a male given name from Latin, equivalent to En]
+      'Musa' -> 'Moses'   [a male given name, Musa, from Arabic, equivale]
+      'Marko' -> 'Mark'   [a male given name, equivalent to English Mark]
+      'Zakaria' -> 'Zachariah'   [a male given name from Hebrew, equivalent to E]
+      'Adamu' -> 'Adam'   [a male given name, equivalent to English Adam]
+      'Yohana' -> 'John'   [a male given name, equivalent to English John]
+      'Mariamu' -> 'Miriam'   [a female given name, equivalent to English Mir]
+  ETYM_MARKER             2 (3.57%)
+      'Donati' -> 'given'   [a male given name from Latin]
+      'Zakayo' -> 'pure, innocent'   [a male given name from Hebrew]
+  ETYM_QUOTED            21 (37.50%)
+      'Kijana' -> 'youth'   [a unisex given name]
+      'Baraka' -> 'blessing'   [a male given name from Arabic]
+      'Tatu' -> 'number three'   [a unisex given name (given to the third born)]
+      'Zakaria' -> 'the Lord has remembered'   [a male given name from Arabic]
+      'Mosi' -> 'number one'   [a unisex given name (traditionally used for th]
+      'Jamila' -> 'beautiful'   [a female given name from Arabic]
+      'Amani' -> 'peace'   [a female given name]
+      'Imani' -> 'faith, belief'   [a female given name from Arabic]
+  HOMOGRAPH               2 (3.57%)
+      'Jabari' -> 'jabari'   [a male given name]
+      'Juma' -> 'juma'   [a male given name]
+  NONE                   19 (33.93%)
+      'Ali' -> ''   [a male given name from Arabic]
+      'Fatima' -> ''   [a female given name from Arabic]
+      'Khadija' -> ''   [a female given name from Arabic]
+      'Asha' -> ''   [a female given name from Arabic]
+      'Fatma' -> ''   [a female given name from Arabic]
+      'Gabrieli' -> ''   [a male given name from Latin]
+      'Gabrieli' -> ''   [a male given name from Latin]
+      'Aisha' -> ''   [a female given name from Arabic]
+
+  ANY CHANNEL .... 37 (66.07%)
+  WITHOUT the loose ETYM_QUOTED channel .... 16 (28.57%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         12 (21.43%)
+  ETYM_MARKER             2 (3.57%)
+  ETYM_QUOTED            24 (42.86%)
+  HOMOGRAPH              20 (35.71%)
+--- channels available per name ---
+  0 channel(s): 19
+  1 channel(s): 16
+  2 channel(s): 21
+
+========================================================================
+LANG zh   type=GIVEN   senses considered: 610   shadow set: 120968
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          2 (0.33%)
+      '米蘭' -> 'Milan'   [a female given name, equivalent to English Mil]
+      '米蘭' -> 'Milan'   [a male given name, equivalent to English Milan]
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             7 (1.15%)
+      '大衛' -> 'David'   [a transliteration of the English male given na]
+      '尼瑪' -> 'sun'   [a transliteration of the Tibetan unisex given ]
+      '額爾德尼' -> 'precious, gem, jewel'   [a transliteration of the Mongolian male given ]
+      '邁克爾' -> 'who is like God?'   [a transliteration of the English or Spanish ma]
+      '買買提' -> 'Muhammad'   [a transliteration of the Uyghur male given nam]
+      '米歇爾' -> 'Michael'   [a transliteration of the English female given ]
+      '米歇爾' -> 'Michael'   [a transliteration of the French male given nam]
+  HOMOGRAPH              18 (2.95%)
+      '斯文' -> '斯文'   [a transliteration of the Swedish male given na]
+      '馬克' -> '馬克'   [a transliteration of the English male given na]
+      '西里爾' -> '西里爾'   [a transliteration of the English, Czech, Frenc]
+      '伊斯蘭' -> '伊斯蘭'   [a transliteration of the Uzbek male given name]
+      '開爾文' -> '開爾文'   [a transliteration of the English male given na]
+      '軒轅' -> '軒轅'   [Xuanyuan, said to be the given name of the leg]
+      '亨利' -> '亨利'   [a transliteration of the English or French mal]
+      '貝爾' -> '貝爾'   [a transliteration of the English female given ]
+  NONE                  583 (95.57%)
+      '麥可' -> ''   [a transliteration of the English male given na]
+      '約翰' -> ''   [a transliteration of the English male given na]
+      '約翰' -> ''   [a transliteration of the German male given nam]
+      '悉尼' -> ''   [a transliteration of the English surname and u]
+      '喬丹' -> ''   [a transliteration of the English unisex given ]
+      '莎拉' -> ''   [a transliteration of the English female given ]
+      '莎拉' -> ''   [a transliteration of the English female given ]
+      '斯蒂芬' -> ''   [a transliteration of the English male given na]
+
+  ANY CHANNEL .... 27 (4.43%)
+  WITHOUT the loose ETYM_QUOTED channel .... 20 (3.28%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          2 (0.33%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             7 (1.15%)
+  HOMOGRAPH              20 (3.28%)
+--- channels available per name ---
+  0 channel(s): 583
+  1 channel(s): 25
+  2 channel(s): 2
+
+========================================================================
+LANG ang   type=SURNAME   senses considered: 0   shadow set: 12700
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (n/a)
+  GLOSS_EQUIV_EN          0 (n/a)
+  ETYM_MARKER             0 (n/a)
+  ETYM_QUOTED             0 (n/a)
+  HOMOGRAPH               0 (n/a)
+  NONE                    0 (n/a)
+
+  ANY CHANNEL .... 0 (n/a)
+  WITHOUT the loose ETYM_QUOTED channel .... 0 (n/a)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (n/a)
+  GLOSS_EQUIV_EN          0 (n/a)
+  ETYM_MARKER             0 (n/a)
+  ETYM_QUOTED             0 (n/a)
+  HOMOGRAPH               0 (n/a)
+--- channels available per name ---
+
+========================================================================
+LANG ar   type=SURNAME   senses considered: 83   shadow set: 16039
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           1 (1.20%)
+      'الخوارزمي' -> 'from Chorasmia'   [a surname, al-Khwarizmi, transferred from the ]
+  GLOSS_EQUIV_EN          1 (1.20%)
+      'شمعون' -> 'Simon'   [a surname from Hebrew, equivalent to English S]
+  ETYM_MARKER             2 (2.41%)
+      'شاهين' -> 'kingly, majestic'   [a surname, Shahin or Chahine]
+      'هيكل' -> 'big temple/palace'   [a surname, Haykal]
+  ETYM_QUOTED            20 (24.10%)
+      'هلال' -> 'Forming words relating to being clear and shining'   [a surname]
+      'أحمد' -> 'praiseworthy; benign'   [a surname]
+      'سعيد' -> 'to become happy'   [a surname]
+      'المصري' -> 'the Egyptian'   [a surname]
+      'عبيد' -> 'servant, slave'   [a surname]
+      'أكرم' -> 'generous; noble'   [a surname]
+      'صراف' -> 'to pay out, spend, change money'   [a surname]
+      'جليل' -> 'to be great, to be exalted'   [a surname, Jalil]
+  HOMOGRAPH              20 (24.10%)
+      'نجار' -> 'نجار'   [a surname]
+      'شهاب' -> 'شهاب'   [a surname]
+      'عباس' -> 'عباس'   [a surname, Abbas]
+      'نقاش' -> 'نقاش'   [a surname]
+      'درويش' -> 'درويش'   [a surname, Darwish]
+      'انتصار' -> 'انتصار'   [a surname, Intisar]
+      'صفير' -> 'صفير'   [a surname]
+      'حلو' -> 'حلو'   [a surname]
+  NONE                   39 (46.99%)
+      'الأمين' -> ''   [a surname, al-Amin]
+      'يعقوبيان' -> ''   [a surname, Yacoubian or Yaghoubian, from Armen]
+      'جبران' -> ''   [a surname, Jubran]
+      'العوادي' -> ''   [a surname]
+      'الكتاتني' -> ''   [a surname]
+      'الطهراني' -> ''   [a surname]
+      'الأصبهاني' -> ''   [a surname of Isfahan]
+      'كونلي' -> ''   [a transliteration of the English surname Conle]
+
+  ANY CHANNEL .... 44 (53.01%)
+  WITHOUT the loose ETYM_QUOTED channel .... 24 (28.92%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           1 (1.20%)
+  GLOSS_EQUIV_EN          1 (1.20%)
+  ETYM_MARKER             2 (2.41%)
+  ETYM_QUOTED            23 (27.71%)
+  HOMOGRAPH              36 (43.37%)
+--- channels available per name ---
+  0 channel(s): 39
+  1 channel(s): 27
+  2 channel(s): 15
+  3 channel(s): 2
+
+========================================================================
+LANG cy   type=SURNAME   senses considered: 8   shadow set: 11414
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           1 (12.50%)
+      'ap Ifan' -> 'son of Ifan'   [a surname originating as a patronymic, meaning]
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             4 (50.00%)
+      'Rhys' -> 'ardor, fiery warrior'   [a surname originating as a patronymic]
+      'Goch' -> 'red'   [a surname originating as a patronymic]
+      'Gwilym' -> 'will'   [a surname]
+      'Cadwaladr' -> 'battle'   [a surname]
+  HOMOGRAPH               0 (0.00%)
+  NONE                    3 (37.50%)
+      'Elgan' -> ''   [a surname]
+      'Gruffudd' -> ''   [a surname originating as a patronymic]
+      'Carew' -> ''   [a surname]
+
+  ANY CHANNEL .... 5 (62.50%)
+  WITHOUT the loose ETYM_QUOTED channel .... 1 (12.50%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           1 (12.50%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             4 (50.00%)
+  HOMOGRAPH               0 (0.00%)
+--- channels available per name ---
+  0 channel(s): 3
+  1 channel(s): 5
+
+========================================================================
+LANG de   type=SURNAME   senses considered: 1930   shadow set: 73359
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           1 (0.05%)
+      'Gottschlik' -> 'son/daughter of Gottschalk'   [a surname from the West Slavic languages, mean]
+  GLOSS_EQUIV_EN         12 (0.62%)
+      'Feder' -> 'Feather'   [a surname, equivalent to English Feather]
+      'Braun' -> 'Brown'   [a common surname transferred from the nickname]
+      'Schäfer' -> 'Shepherd'   [a surname originating as an occupation, equiva]
+      'Schmidt' -> 'Smith'   [a common surname originating as an occupation,]
+      'Goethe' -> 'Goethe'   [a surname, equivalent to English Goethe, notab]
+      'Hartmann' -> 'Hartmann'   [a surname, equivalent to English Hartmann]
+      'Battenberg' -> 'Mountbatten'   [a surname, Battenberg, transferred from the pl]
+      'Klein' -> 'Small'   [a common surname, Klein or Kline, transferred ]
+  ETYM_MARKER            18 (0.93%)
+      'Hitler' -> 'one who lives in a hut'   [a surname]
+      'Hase' -> 'hare'   [a surname]
+      'Homberg' -> 'high mountain'   [a habitational surname transferred from the pl]
+      'Beethoven' -> 'beetroot farms'   [a surname from Dutch, usually applying to Ludw]
+      'Schwarzenegger' -> 'someone from Schwarzenegg'   [a surname]
+      'Baumgarten' -> 'tree garden'   [a surname]
+      'Brecht' -> 'bright,'   [a surname]
+      'Schauwecker' -> 'to look'   [a surname]
+  ETYM_QUOTED           407 (21.09%)
+      'Albert' -> 'noble'   [a surname originating as a patronymic]
+      'Limburg' -> 'lake'   [a surname transferred from the place name]
+      'Zabel' -> 'board, playing-board, dice game'   [a surname]
+      'Zucker' -> 'grit, gravel; ground or candied sugar'   [a surname]
+      'Fuchs' -> 'the tailed one'   [a common surname transferred from the nickname]
+      'Fuchs' -> 'the tailed one'   [a German Jewish surname]
+      'Adler' -> 'noble'   [a German Jewish surname]
+      'Frankenstein' -> 'stone of the Franks,'   [a surname]
+  HOMOGRAPH             282 (14.61%)
+      'Apfel' -> 'apfel'   [a surname]
+      'Hesse' -> 'hesse'   [a habitational surname for an inhabitant of He]
+      'Herbst' -> 'herbst'   [a surname from Middle High German]
+      'Nebel' -> 'nebel'   [a surname]
+      'Zeit' -> 'zeit'   [a surname]
+      'Sommer' -> 'sommer'   [a surname transferred from the nickname origin]
+      'Baum' -> 'baum'   [a surname]
+      'Baum' -> 'baum'   [a German Jewish surname]
+  NONE                 1210 (62.69%)
+      'Darwin' -> ''   [Darwin (English surname)]
+      'Leberl' -> ''   [an Austrian or Bavarian surname]
+      'Engels' -> ''   [a surname]
+      'Thomas' -> ''   [a surname originating as a patronymic]
+      'Hornburg' -> ''   [a habitational surname derived from the town]
+      'Walter' -> ''   [a common surname originating as a patronymic]
+      'Simon' -> ''   [a surname originating as a patronymic]
+      'Kujath' -> ''   [a surname]
+
+  ANY CHANNEL .... 720 (37.31%)
+  WITHOUT the loose ETYM_QUOTED channel .... 313 (16.22%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           1 (0.05%)
+  GLOSS_EQUIV_EN         12 (0.62%)
+  ETYM_MARKER            20 (1.04%)
+  ETYM_QUOTED           430 (22.28%)
+  HOMOGRAPH             402 (20.83%)
+--- channels available per name ---
+  0 channel(s): 1210
+  1 channel(s): 583
+  2 channel(s): 129
+  3 channel(s): 8
+
+========================================================================
+LANG el   type=SURNAME   senses considered: 139   shadow set: 24213
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          5 (3.60%)
+      'Αρβανιτόπουλος' -> 'Arvanitopoulos'   [a male surname, equivalent to English Arvanito]
+      'Αθανασάκης' -> 'Athanassakis'   [a male surname, equivalent to English Athanass]
+      'Ορλάνδος' -> 'Orlando'   [a male surname, equivalent to English Orlando ]
+      'Ορλάνδος' -> 'Orlando'   [a male surname, equivalent to English Orlando ]
+      'Κοντοστέφανος' -> 'Contostephanus'   [a surname, Kontostefanos, equivalent to Englis]
+  ETYM_MARKER             2 (1.44%)
+      'Καργαδούρης' -> 'carrier'   [a male surname, feminine equivalent Καργαδούρη]
+      'Ντε Γκρες' -> 'of Greece'   [de Grèce, a surname from French, carried by me]
+  ETYM_QUOTED            35 (25.18%)
+      'Άγγελος' -> 'angel'   [a male surname, feminine equivalent Αγγέλου (A]
+      'Βενετσιάνος' -> 'Venetian'   [a male surname]
+      'Κωστάκης' -> 'short for Constantine'   [a male surname, feminine equivalent Κωστάκη (K]
+      'Γιαννάκης' -> 'John'   [a male surname originating as a patronymic, fe]
+      'Αγγέλου' -> 'angel'   [a common-gender surname]
+      'Τσολάκης' -> 'one-armed, one-handed'   [a male surname, Tsolakis]
+      'Ελευθερουδάκης' -> 'from ἐλεύθερος (eleútheros, “free'   [a male surname, feminine equivalent Ελευθερουδ]
+      'Θεοδωράκης' -> 'Theodore'   [a male surname, feminine equivalent Θεοδωράκη ]
+  HOMOGRAPH               4 (2.88%)
+      'Μικρούτσικος' -> 'μικρούτσικοσ'   [a male surname, Mikroutsikos; literally: μικρο]
+      'Κέλβιν' -> 'κέλβιν'   [a transliteration of the English surname Kelvi]
+      'Σκαρλάτος' -> 'σκαρλάτοσ'   [a male surname, Skarlatos; literally: σκαρλάτο]
+      'Μονομάχος' -> 'μονομάχοσ'   [a male surname from Byzantine Greek, equivalen]
+  NONE                   93 (66.91%)
+      'Χάρις' -> ''   [a transliteration of the English surname Harri]
+      'Χέμινγουεϊ' -> ''   [a transliteration of the English surname Hemin]
+      'Βενιζέλος' -> ''   [Venizelos, a male surname.]
+      'Αϊνστάιν' -> ''   [Einstein (surname)]
+      'Βασιλάκης' -> ''   [a male surname, feminine equivalent Βασιλάκη (]
+      'Κόνλεϋ' -> ''   [a transliteration of the English surname Conle]
+      'Νίκολς' -> ''   [a transliteration of the English surname Nicho]
+      'Γκούντμαν' -> ''   [a transliteration of the English surname Goodm]
+
+  ANY CHANNEL .... 46 (33.09%)
+  WITHOUT the loose ETYM_QUOTED channel .... 11 (7.91%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          5 (3.60%)
+  ETYM_MARKER             2 (1.44%)
+  ETYM_QUOTED            39 (28.06%)
+  HOMOGRAPH               7 (5.04%)
+--- channels available per name ---
+  0 channel(s): 93
+  1 channel(s): 39
+  2 channel(s): 7
+
+========================================================================
+LANG en   type=SURNAME   senses considered: 53722   shadow set: 401701
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING          27 (0.05%)
+      'Hallewell' -> 'holy well'   [A habitational surname from Old English from a]
+      'Oscar' -> 'son of Oscar'   [A surname from Irish [in turn originating as a]
+      'Brett' -> 'Breton, an inhabitant of Brittany'   [A surname transferred from the nickname meanin]
+      'Drake' -> 'dragon'   [An English surname transferred from the nickna]
+      'Drake' -> 'dragon'   [An English surname transferred from the nickna]
+      'Grant' -> 'large'   [An English surname transferred from the nickna]
+      'Wills' -> 'son/daughter of Will'   [A surname originating as a patronymic, meaning]
+      'Schneider' -> 'tailor'   [A surname from German [in turn originating as ]
+  GLOSS_EQUIV_EN         77 (0.14%)
+      'Feder' -> 'Feather'   [A surname from German, equivalent to English F]
+      'Montana' -> 'Mountain'   [A surname from Spanish, equivalent to English ]
+      'Maurice' -> 'Morris'   [A surname originating as a patronymic, equival]
+      'Olivier' -> 'Oliver'   [A surname from French, equivalent to English O]
+      'Steen' -> 'Stone'   [A surname from Germanic, equivalent to English]
+      'Sten' -> 'Stone'   [A surname from the North Germanic languages, e]
+      'Lin' -> 'Forest'   [A surname from Chinese, equivalent to English ]
+      'Lin' -> 'Forest'   [A surname from Chinese, equivalent to English ]
+  ETYM_MARKER           479 (0.89%)
+      'April' -> 'Easter month'   [A surname.]
+      'Poland' -> 'field dwellers'   [A surname.]
+      'England' -> 'land of the Angles'   [A habitational surname from Old English.]
+      'Perth' -> 'wood, copse, thicket'   [A surname]
+      'Scotland' -> 'land of the Scots'   [A habitational surname referring to someone fr]
+      'Africa' -> 'without cold'   [A surname.]
+      'Daniel' -> 'God is my judge'   [A surname.]
+      'Daniel' -> 'God is my judge'   [A surname.]
+  ETYM_QUOTED          6428 (11.97%)
+      'December' -> 'tenth month'   [A surname.]
+      'Fabian' -> 'belonging to Fabius'   [A surname.]
+      'English' -> 'of the Angles; English'   [An English surname originally denoting a non-C]
+      'Haus' -> 'house'   [A surname]
+      'German' -> 'the peoples of Germānia'   [A surname.]
+      'Irish' -> 'Irishmen'   [A surname originating as an ethnonym.]
+      'Edward' -> 'wealth, riches'   [A surname. See also Edwards.]
+      'Germany' -> 'land of the Germans'   [A surname.]
+  HOMOGRAPH            4368 (8.13%)
+      'Morocco' -> 'morocco'   [A surname from Italian.]
+      'Tonga' -> 'tonga'   [A surname.]
+      'Daman' -> 'daman'   [A surname from Dutch.]
+      'Cornish' -> 'cornish'   [A habitational surname from Old English [in tu]
+      'Highlander' -> 'highlander'   [A surname from German.]
+      'Mo' -> 'mo'   [A surname from Chinese.]
+      'Berlin' -> 'berlin'   [A surname from German.]
+      'Warsaw' -> 'warsaw'   [A habitational surname.]
+  NONE                42343 (78.82%)
+      'July' -> ''   [A surname from French.]
+      'Cuba' -> ''   [A surname.]
+      'Spain' -> ''   [An English ethnic surname transferred from the]
+      'Aruba' -> ''   [A Meitei surname from Manipuri]
+      'Catalan' -> ''   [A surname from Spanish.]
+      'Alberta' -> ''   [A surname.]
+      'Sydney' -> ''   [A surname from Old English, a spelling variant]
+      'Turk' -> ''   [A surname.]
+
+  ANY CHANNEL .... 11379 (21.18%)
+  WITHOUT the loose ETYM_QUOTED channel .... 4951 (9.22%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING          27 (0.05%)
+  GLOSS_EQUIV_EN         77 (0.14%)
+  ETYM_MARKER           487 (0.91%)
+  ETYM_QUOTED          6943 (12.92%)
+  HOMOGRAPH            5415 (10.08%)
+--- channels available per name ---
+  0 channel(s): 42343
+  1 channel(s): 9895
+  2 channel(s): 1401
+  3 channel(s): 80
+  4 channel(s): 3
+
+========================================================================
+LANG es   type=SURNAME   senses considered: 1924   shadow set: 80014
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          5 (0.26%)
+      'Goethe' -> 'Goethe'   [a surname from German, equivalent to English G]
+      'Blanco' -> 'White'   [a surname transferred from the nickname, equiv]
+      'Montaño' -> 'Mountain'   [a surname, Montano, from landforms, equivalent]
+      'Sastre' -> 'Taylor'   [a surname originating as an occupation, equiva]
+      'Panadero' -> 'Baker'   [a surname originating as an occupation, equiva]
+  ETYM_MARKER            33 (1.72%)
+      'Japón' -> 'sun origin'   [a surname]
+      'Moreno' -> 'dark'   [a characteristical surname]
+      'Miguel' -> 'Who is like God?'   [a surname]
+      'Peralta' -> 'high rock'   [a habitational surname]
+      'Alejandro' -> 'the man who repels [enemies]'   [a surname]
+      'Martín' -> 'of or like Mars'   [a surname]
+      'Romero' -> 'Roman'   [a surname]
+      'Aguilar' -> 'from the eagle'   [a surname]
+  ETYM_QUOTED           204 (10.60%)
+      'Madrid' -> 'mother or womb [of rivers]'   [a surname]
+      'Quito' -> 'center'   [a surname]
+      'Navidad' -> 'birth'   [a surname]
+      'Amor' -> 'love'   [a surname]
+      'Chan' -> 'sky'   [a surname from the Mayan languages]
+      'Cruz' -> 'cross'   [a surname]
+      'Gallo' -> 'rooster'   [a surname]
+      'Grande' -> 'big'   [a surname]
+  HOMOGRAPH             312 (16.22%)
+      'Chamorro' -> 'chamorro'   [a surname]
+      'Labrador' -> 'labrador'   [a surname]
+      'Alba' -> 'alba'   [a habitational surname from place names of obs]
+      'Bravo' -> 'bravo'   [a surname]
+      'Che' -> 'che'   [a surname]
+      'Chinchilla' -> 'chinchilla'   [a surname]
+      'Delgado' -> 'delgado'   [a surname]
+      'Junio' -> 'junio'   [a surname]
+  NONE                 1370 (71.21%)
+      'Padua' -> ''   [a surname]
+      'Frankenstein' -> ''   [a surname from German]
+      'Gabriel' -> ''   [a surname originating as a patronymic]
+      'Wilson' -> ''   [a surname from English]
+      'Noel' -> ''   [a surname]
+      'Davis' -> ''   [a surname from English]
+      'Rosales' -> ''   [a surname]
+      'Delacruz' -> ''   [a surname, variant of de la Cruz]
+
+  ANY CHANNEL .... 554 (28.79%)
+  WITHOUT the loose ETYM_QUOTED channel .... 350 (18.19%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          5 (0.26%)
+  ETYM_MARKER            33 (1.72%)
+  ETYM_QUOTED           239 (12.42%)
+  HOMOGRAPH             413 (21.47%)
+--- channels available per name ---
+  0 channel(s): 1370
+  1 channel(s): 425
+  2 channel(s): 122
+  3 channel(s): 7
+
+========================================================================
+LANG fa   type=SURNAME   senses considered: 211   shadow set: 10302
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             3 (1.42%)
+      'پهلوی' -> 'Parthian (person)'   [a surname, Pahlavi: the surname of the last sh]
+      'بدیع\u200cالزمان' -> 'marvel of the time'   [a surname, Badiozzaman, from Arabic]
+      'ثقت الاسلام' -> 'trustworthy of Islam'   [a surname, Siqatulislam, Seghatoleslam, Siqatu]
+  ETYM_QUOTED            35 (16.59%)
+      'گلی' -> 'flower, rose'   [a surname]
+      'اختر' -> 'planet'   [a surname, Akhtar]
+      'تاجیک' -> 'crown'   [a surname, Tajik]
+      'ثابت' -> 'to be firm, to be fixed'   [a surname, Sabet]
+      'دهقان' -> 'countryman, farmer'   [a surname, Dehqan, Dehghan, Dihqan, or Dihkan]
+      'نانکلی' -> 'Nankali'   [a surname]
+      'علوی' -> 'Ali'   [a surname, Alavi or Alawi]
+      'تهرانی' -> 'Tehran'   [a surname, Tehrani]
+  HOMOGRAPH              49 (23.22%)
+      'صدر' -> 'صدر'   [a surname from Arabic, usually used by descend]
+      'جعفری' -> 'جعفری'   [a surname, Jafari]
+      'پوتین' -> 'پوتین'   [a transliteration of the Russian surname Пу́ти]
+      'پوتین' -> 'پوتین'   [a transliteration of the Russian surname Пу́ти]
+      'مبارک' -> 'مبارک'   [a surname, Mobarak or Mubarak]
+      'جوان' -> 'جوان'   [a surname, Javan, from Middle Persian]
+      'شیوا' -> 'شیوا'   [a surname]
+      'رضا' -> 'رضا'   [a surname, Riza, Reza, Raza, or Rizo, from Ara]
+  NONE                  124 (58.77%)
+      'آقایان' -> ''   [a surname from Armenian, Aghayan]
+      'احمدی\u200cنژاد' -> ''   [a surname, Ahmadinejad]
+      'احمدی\u200cنژاد' -> ''   [a surname, Ahmadinejad]
+      'مگردومیان' -> ''   [a surname from Armenian]
+      'پتروسیان' -> ''   [a surname, Petrosyan, from Armenian]
+      'هاشمیان' -> ''   [a surname, Hashemian]
+      'استیونسون' -> ''   [a surname from English]
+      'مشیری' -> ''   [a surname, Moshiri]
+
+  ANY CHANNEL .... 87 (41.23%)
+  WITHOUT the loose ETYM_QUOTED channel .... 52 (24.64%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             3 (1.42%)
+  ETYM_QUOTED            38 (18.01%)
+  HOMOGRAPH              66 (31.28%)
+--- channels available per name ---
+  0 channel(s): 124
+  1 channel(s): 67
+  2 channel(s): 20
+
+========================================================================
+LANG ga   type=SURNAME   senses considered: 40   shadow set: 15077
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         11 (27.50%)
+      'Ó Maoldúin' -> 'Muldoon'   [a male surname originating as a patronymic, fe]
+      'Ó Dochartaigh' -> 'Doherty'   [a male surname originating as a patronymic, fe]
+      'Mac Carthaigh' -> 'McCarthy'   [a male surname originating as a patronymic, fe]
+      'Ó Cathasaigh' -> 'Casey'   [a male surname originating as a patronymic, fe]
+      'Mac Gabhann' -> 'Gowan'   [a male surname, feminine equivalent Nic Gabhan]
+      'Mac Artúir' -> 'Carter'   [a male surname originating as a patronymic, fe]
+      'Mac an Bhreitheamhan' -> 'Abraham'   [a male surname originating as an occupation, f]
+      'Ó Dáire' -> 'Adair'   [a male surname originating as a patronymic, fe]
+  ETYM_MARKER             3 (7.50%)
+      'Ó Brádaigh' -> 'descendant of Brádach'   [a male surname originating as a patronymic, fe]
+      'Mac Cába' -> 'son of the abbot'   [a male surname originating as a patronymic, fe]
+      'Ó Broin' -> 'descendant of Bran'   [a male surname originating as a patronymic, fe]
+  ETYM_QUOTED            14 (35.00%)
+      'de Búrca' -> 'of Burgh'   [a topographical surname from Anglo-Norman for ]
+      'Ó Cathaláin' -> 'grandchild, descendant'   [a male surname originating as a patronymic, fe]
+      'Ó hOdhráin' -> 'descendant'   [a male surname originating as a patronymic, fe]
+      'Ó Faoláin' -> 'descendant of Faolán'   [a male surname originating as a patronymic, fe]
+      'Ó Conaill' -> 'descendant of Conall'   [a male surname originating as a patronymic, fe]
+      'Ó Coinn' -> 'descendant of Conn'   [a male surname originating as a patronymic, fe]
+      'Mac Giolla Fhaoláin' -> 'son of the servant of Faolán'   [a male surname, feminine equivalent Nic Giolla]
+      'Mac Daibhéid' -> 'son of Daibhéad (“David'   [a male surname originating as a patronymic, fe]
+  HOMOGRAPH               0 (0.00%)
+  NONE                   12 (30.00%)
+      'Ó Catháin' -> ''   [a male surname originating as a patronymic, fe]
+      'Breatnach' -> ''   [a surname, feminine equivalent Bhreatnach, tra]
+      'Ó Briain' -> ''   [a male surname originating as a patronymic, fe]
+      'Ní Bhriain' -> ''   [a female surname, masculine equivalent Ó Briai]
+      'Ní Cheallaigh' -> ''   [a female surname, masculine equivalent Ó Ceall]
+      'Ó Ceallaigh' -> ''   [a male surname originating as a patronymic, fe]
+      'Ó Súilleabháin' -> ''   [a male surname originating as a patronymic, fe]
+      'Búrca' -> ''   [a topographical surname for someone who lived ]
+
+  ANY CHANNEL .... 28 (70.00%)
+  WITHOUT the loose ETYM_QUOTED channel .... 14 (35.00%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         11 (27.50%)
+  ETYM_MARKER             4 (10.00%)
+  ETYM_QUOTED            27 (67.50%)
+  HOMOGRAPH               0 (0.00%)
+--- channels available per name ---
+  0 channel(s): 12
+  1 channel(s): 15
+  2 channel(s): 12
+  3 channel(s): 1
+
+========================================================================
+LANG he   type=SURNAME   senses considered: 84   shadow set: 8720
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          7 (8.33%)
+      'פלג' -> 'Peleg'   [a surname, equivalent to English Peleg]
+      'איינשטיין' -> 'Einstein'   [a surname, equivalent to English Einstein]
+      'אדלשטיין' -> 'Edelstein'   [a surname, equivalent to English Edelstein]
+      'לאובר' -> 'Lauber'   [a surname, equivalent to English Lauber]
+      'מימון' -> 'Maimonides'   [a surname originating as a patronymic, equival]
+      'רוזנבלום' -> 'Rosenblum'   [a surname, equivalent to English Rosenblum]
+      'גדות' -> 'Banks'   [a surname, transliterated as Gadot, (riverbank]
+  ETYM_MARKER             4 (4.76%)
+      'נתניהו' -> 'The LORD gave'   [a surname: Netanyahu]
+      'קצין' -> 'to decide'   [a surname]
+      'גבריהו' -> 'Yahweh is my mighty one'   [a surname. Gvaryahu]
+      'דביר' -> 'Town of a Book'   [a surname]
+  ETYM_QUOTED            12 (14.29%)
+      'לוי' -> 'he will join'   [a surname]
+      'בר' -> 'wheat'   [a surname]
+      'ירדן' -> 'to descend'   [a surname]
+      'טל' -> 'dew'   [a surname]
+      'לביא' -> 'lion'   [a surname]
+      'נאור' -> 'light'   [a surname]
+      'דורון' -> "gift; hand's width"   [a surname: Doron]
+      'בנאי' -> 'to build'   [a surname originating as an occupation]
+  HOMOGRAPH              15 (17.86%)
+      'צור' -> 'צור'   [a surname]
+      'עז' -> 'עז'   [a surname: Oz]
+      'סדן' -> 'סדן'   [a surname]
+      'פרס' -> 'פרס'   [a surname]
+      'ברק' -> 'ברק'   [a surname]
+      'כוהן' -> 'כוהן'   [a surname originating as an occupation, Cohen]
+      'פרץ' -> 'פרץ'   [a surname]
+      'סגל' -> 'סגל'   [a surname]
+  NONE                   46 (54.76%)
+      'נחום' -> ''   [a surname]
+      'שפירא' -> ''   [a surname. Shapira, Shapiro]
+      'אסא' -> ''   [a surname]
+      'נבו' -> ''   [Nevo: a Hebrew surname.]
+      'גולן' -> ''   [a surname]
+      'אובמה' -> ''   [Obama, a surname]
+      'אובמה' -> ''   [Obama, a surname]
+      'העם' -> ''   [a surname]
+
+  ANY CHANNEL .... 38 (45.24%)
+  WITHOUT the loose ETYM_QUOTED channel .... 26 (30.95%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          7 (8.33%)
+  ETYM_MARKER             4 (4.76%)
+  ETYM_QUOTED            18 (21.43%)
+  HOMOGRAPH              27 (32.14%)
+--- channels available per name ---
+  0 channel(s): 46
+  1 channel(s): 24
+  2 channel(s): 10
+  3 channel(s): 4
+
+========================================================================
+LANG hi   type=SURNAME   senses considered: 160   shadow set: 16640
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         34 (21.25%)
+      'मित्रा' -> 'Mitra'   [a surname, equivalent to English Mitra]
+      'ओबामा' -> 'Obama'   [a surname from Luo, equivalent to English Obam]
+      'प्रभु' -> 'Prabhu'   [a surname, equivalent to English Prabhu]
+      'अरोड़ा' -> 'Arora'   [a surname, equivalent to English Arora]
+      'गांधी' -> 'Gandhi'   [a surname, equivalent to English Gandhi, famou]
+      'गांधी' -> 'Gandhi'   [a surname, equivalent to English Gandhi, famou]
+      'गांधी' -> 'Gandhi'   [a surname, equivalent to English Gandhi, famou]
+      'राय' -> 'Rai'   [a surname, equivalent to English Rai]
+  ETYM_MARKER             3 (1.88%)
+      'ओसाका' -> 'large hill'   [a surname from Japanese.]
+      'सक्सेना' -> 'friend of the army'   [a surname, Saxena]
+      'गोसाईं' -> 'lord of the cows'   [a surname, Gosai]
+  ETYM_QUOTED            17 (10.62%)
+      'लाल' -> 'to be caressed'   [a male surname, Lal]
+      'खंडेलवाल' -> 'Khandela'   [a surname, Khandelwal]
+      'ईरानी' -> 'Iran'   [a surname, Irani, from Persian]
+      'राज' -> 'royalty, kingdom, realm'   [a surname, Raj, from Sanskrit]
+      'चौधरी' -> 'name of a family or race'   [a surname, Choudhary or Chowdhary]
+      'राजपूत' -> 'prince'   [a surname, Rajput]
+      'कोठारी' -> 'storekeeper'   [a surname, Kothari]
+      'त्रिवेदी' -> 'familiar with three Vedas'   [a surname, Trivedi, from Sanskrit]
+  HOMOGRAPH              26 (16.25%)
+      'सिंह' -> 'सिंह'   [a surname, Singh, from Sanskrit, used by Kshat]
+      'गुप्त' -> 'गुप्त'   [a surname, Gupta]
+      'इक़बाल' -> 'इक़बाल'   [a surname, Iqbal, from Arabic]
+      'हक़' -> 'हक़'   [a surname, Haque, Hoque, Haq, Huq, or Haqq, fr]
+      'घोष' -> 'घोष'   [a surname, Ghosh, from Bengali]
+      'आफ़्रीदी' -> 'आफ़्रीदी'   [a surname from Pashto]
+      'ख़ान' -> 'ख़ान'   [a surname, Khan, from the Turkic languages, us]
+      'पटेल' -> 'पटेल'   [a surname, Patel, from Gujarati: taken by memb]
+  NONE                   80 (50.00%)
+      'वॉशिंगटन' -> ''   [a transliteration of the English surname Washi]
+      'हार्वर्ड' -> ''   [a surname, Harvard, from English]
+      'डिज़्नी' -> ''   [a surname, Disney, from English]
+      'केजरीवाल' -> ''   [a surname, Kejriwal]
+      'चक्रवर्ती' -> ''   [a surname, Chakravarti, from Sanskrit]
+      'आडवाणी' -> ''   [a surname, Advani, from Sindhi used by Sindhi ]
+      'शर्मा' -> ''   [a surname, Sharma, from Sanskrit, usually used]
+      'त्रिमूर्ति' -> ''   [a surname, Trimurti, from Sanskrit]
+
+  ANY CHANNEL .... 80 (50.00%)
+  WITHOUT the loose ETYM_QUOTED channel .... 63 (39.38%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         34 (21.25%)
+  ETYM_MARKER             3 (1.88%)
+  ETYM_QUOTED            30 (18.75%)
+  HOMOGRAPH              42 (26.25%)
+--- channels available per name ---
+  0 channel(s): 80
+  1 channel(s): 55
+  2 channel(s): 21
+  3 channel(s): 4
+
+========================================================================
+LANG is   type=SURNAME   senses considered: 49   shadow set: 14603
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             4 (8.16%)
+      'Waage' -> 'scale'   [a surname]
+      'Eldjárn' -> 'fire'   [a surname]
+      'Kvaran' -> 'sandal'   [a surname from Irish]
+      'Claessen' -> 'son'   [a surname]
+  HOMOGRAPH               0 (0.00%)
+  NONE                   45 (91.84%)
+      'Long' -> ''   [a surname]
+      'Bergmann' -> ''   [a surname]
+      'Petersen' -> ''   [a surname]
+      'Johnsen' -> ''   [a surname]
+      'Andersen' -> ''   [a surname]
+      'Sesar' -> ''   [Caesar (Roman family name, title of Roman empe]
+      'Jensen' -> ''   [a surname]
+      'Hansen' -> ''   [Hansen: a surname]
+
+  ANY CHANNEL .... 4 (8.16%)
+  WITHOUT the loose ETYM_QUOTED channel .... 0 (0.00%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             4 (8.16%)
+  HOMOGRAPH               0 (0.00%)
+--- channels available per name ---
+  0 channel(s): 45
+  1 channel(s): 4
+
+========================================================================
+LANG ja   type=SURNAME   senses considered: 4450   shadow set: 63051
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER            54 (1.21%)
+      '西' -> 'wild + wind'   [a surname]
+      '京都' -> 'capital city'   [a surname]
+      '幸' -> 'lucky, fortunate, auspicious'   [a surname]
+      '松' -> 'buds (are) thick'   [a surname]
+      '経' -> 'string, thread'   [a surname]
+      '蓮' -> 'beehive, honeycomb'   [a surname]
+      '日本' -> 'origin of the sun'   [a surname]
+      '長' -> 'long'   [a surname]
+  ETYM_QUOTED           471 (10.58%)
+      '青' -> 'rain'   [a surname]
+      '水' -> 'freshness, youth'   [a surname]
+      '米' -> 'stem or continuative form'   [a surname]
+      '米' -> 'rice plant'   [a surname]
+      '漢' -> 'civilized'   [a surname]
+      '氷' -> 'stem or continuative form'   [a surname]
+      '姫' -> 'sun'   [a surname]
+      '一' -> 'beginning, first'   [a surname]
+  HOMOGRAPH             563 (12.65%)
+      '数' -> '数'   [a surname]
+      '月' -> '月'   [a surname]
+      '愛' -> '愛'   [a surname]
+      '青' -> '青'   [a surname]
+      '明日' -> '明日'   [a surname]
+      '今' -> '今'   [a surname]
+      '一' -> '一'   [a surname]
+      '戦' -> '戦'   [a surname]
+  NONE                 3362 (75.55%)
+      '近' -> ''   [a surname]
+      '萬' -> ''   [a surname]
+      '萬' -> ''   [a surname]
+      '萬' -> ''   [a surname]
+      '萬' -> ''   [a surname]
+      '丕' -> ''   [an orthographic borrowing of the Chinese surna]
+      '伴' -> ''   [a surname]
+      '伴' -> ''   [a surname]
+
+  ANY CHANNEL .... 1088 (24.45%)
+  WITHOUT the loose ETYM_QUOTED channel .... 617 (13.87%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER            54 (1.21%)
+  ETYM_QUOTED           525 (11.80%)
+  HOMOGRAPH             924 (20.76%)
+--- channels available per name ---
+  0 channel(s): 3362
+  1 channel(s): 705
+  2 channel(s): 351
+  3 channel(s): 32
+
+========================================================================
+LANG ko   type=SURNAME   senses considered: 98   shadow set: 27648
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED            11 (11.22%)
+      '권' -> 'power'   [a surname]
+      '구' -> 'classifier for coffins, corpses'   [a surname]
+      '오' -> 'Wu'   [a common surname from Chinese]
+      '동' -> 'Dong (surname)'   [a surname from Chinese]
+      '박' -> 'calabash'   [a surname from Old Korean]
+      '창' -> 'flourish'   [a surname]
+      '김' -> 'gold; metal'   [a surname, Kim (most common surname in Korea)]
+      '황' -> 'yellow'   [a surname, usually romanized "Hwang."]
+  HOMOGRAPH              43 (43.88%)
+      '이' -> '이'   [a surname, the second most common Korean surna]
+      '인' -> '인'   [a surname]
+      '한' -> '한'   [a surname]
+      '한' -> '한'   [a surname]
+      '감' -> '감'   [a surname]
+      '정' -> '정'   [a surname, commonly transliterated as Chung, J]
+      '길' -> '길'   [a surname]
+      '범' -> '범'   [a surname]
+  NONE                   44 (44.90%)
+      '遤' -> ''   [extinct surname of korea]
+      '최' -> ''   [a surname, usually romanized as "Choi".]
+      '㸴' -> ''   [a rare surname]
+      '오바마' -> ''   [Obama (foreign surname)]
+      '워싱턴' -> ''   [a transliteration of the English surname Washi]
+      '콘리' -> ''   [a transliteration of the English surname Conle]
+      '선우' -> ''   [a surname, Sun-woo]
+      '보잉' -> ''   [a transliteration of the English surname Boein]
+
+  ANY CHANNEL .... 54 (55.10%)
+  WITHOUT the loose ETYM_QUOTED channel .... 43 (43.88%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED            11 (11.22%)
+  HOMOGRAPH              53 (54.08%)
+--- channels available per name ---
+  0 channel(s): 44
+  1 channel(s): 44
+  2 channel(s): 10
+
+========================================================================
+LANG la   type=SURNAME   senses considered: 1408   shadow set: 34547
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          6 (0.43%)
+      'Junta' -> 'Giunta'   [a surname, equivalent to English Giunta — famo]
+      'Junta' -> 'Giunta'   [a surname, equivalent to English Giunta — famo]
+      'Lockius' -> 'Locke'   [a male surname from English, equivalent to Eng]
+      'Lockius' -> 'Locke'   [a male surname from English, equivalent to Eng]
+      'Gerardi' -> 'Gerard'   [a surname, equivalent to English Gerard, and s]
+      'Malaspina' -> 'Malaspina'   [a surname, equivalent to English Malaspina]
+  ETYM_MARKER             2 (0.14%)
+      'Hortensius' -> 'man from Horta.'   [a Roman nomen gentile, gens or "family name" f]
+      'Hortensius' -> 'man from Horta.'   [a Roman nomen gentile, gens or "family name" f]
+  ETYM_QUOTED           241 (17.12%)
+      'Barca' -> 'lightning'   [a surname from Punic, particularly (historical]
+      'Iulius' -> 'descended from or pertaining to Jove'   [Julius; a Roman nomen gentile, gens or "family]
+      'Cassius' -> 'empty, hollow, lacking; useless, pointless'   [a Roman nomen gentile, gens or "family name" h]
+      'Murcia' -> 'myrtle'   [a surname of Venus]
+      'Pompeius' -> 'five'   [A Roman nomen gentilicium, gens or "family nam]
+      'Pompeius' -> 'five'   [A Roman nomen gentilicium, gens or "family nam]
+      'Mauricius' -> 'Maurice'   [an male Eastern Roman/Byzantine Greek surname,]
+      'Silvanus' -> 'forest'   [Silvanus; a Roman cognomen, or surname]
+  HOMOGRAPH              21 (1.49%)
+      'Crista' -> 'crista'   [A Latin surname]
+      'Morus' -> 'morus'   [a surname from English — famously held by]
+      'Morus' -> 'morus'   [a surname from English — famously held by:]
+      'Caecilia' -> 'caecilia'   [The feminine form of Caecilius, the family nam]
+      'Favonius' -> 'favonius'   [a Roman nomen gentile, gens or "family name" f]
+      'Favonius' -> 'favonius'   [a Roman nomen gentile, gens or "family name" f]
+      'Mella' -> 'mella'   [a Roman surname in the gens Annaea]
+      'Flaminius' -> 'flaminius'   [a Roman nomen gentile, gens or "family name" f]
+  NONE                 1138 (80.82%)
+      'Euphrates' -> ''   [A surname.]
+      'Nostradamus' -> ''   [a surname from French — famously held by]
+      'Nostradamus' -> ''   [a surname from French — famously held by:]
+      'Linnaeus' -> ''   [a male surname from Swedish — famously held by]
+      'Linnaeus' -> ''   [a male surname from Swedish — famously held by]
+      'Caius' -> ''   [a surname from English — famously held by]
+      'Caius' -> ''   [a surname from English — famously held by:]
+      'Libentina' -> ''   [A surname of Venus (as goddess of pleasure)]
+
+  ANY CHANNEL .... 270 (19.18%)
+  WITHOUT the loose ETYM_QUOTED channel .... 29 (2.06%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          6 (0.43%)
+  ETYM_MARKER             2 (0.14%)
+  ETYM_QUOTED           244 (17.33%)
+  HOMOGRAPH              28 (1.99%)
+--- channels available per name ---
+  0 channel(s): 1138
+  1 channel(s): 260
+  2 channel(s): 10
+
+========================================================================
+LANG non   type=SURNAME   senses considered: 0   shadow set: 3736
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (n/a)
+  GLOSS_EQUIV_EN          0 (n/a)
+  ETYM_MARKER             0 (n/a)
+  ETYM_QUOTED             0 (n/a)
+  HOMOGRAPH               0 (n/a)
+  NONE                    0 (n/a)
+
+  ANY CHANNEL .... 0 (n/a)
+  WITHOUT the loose ETYM_QUOTED channel .... 0 (n/a)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (n/a)
+  GLOSS_EQUIV_EN          0 (n/a)
+  ETYM_MARKER             0 (n/a)
+  ETYM_QUOTED             0 (n/a)
+  HOMOGRAPH               0 (n/a)
+--- channels available per name ---
+
+========================================================================
+LANG pl   type=SURNAME   senses considered: 24580   shadow set: 58117
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         10 (0.04%)
+      'Goethe' -> 'Goethe'   [a male surname from German, equivalent to Engl]
+      'Goethe' -> 'Goethe'   [a female surname from German, equivalent to En]
+      'Śliwa' -> 'Sliwa'   [a male surname, equivalent to English Sliwa]
+      'Śliwa' -> 'Sliwa'   [a female surname, equivalent to English Sliwa]
+      'Janukowycz' -> 'Yanukovych'   [a male surname from Ukrainian, equivalent to E]
+      'Juszczenko' -> 'Yushchenko'   [a male surname from Ukrainian, equivalent to E]
+      'Krawczuk' -> 'Kravchuk'   [a male surname from Ukrainian, equivalent to E]
+      'Poroszenko' -> 'Poroshenko'   [a male surname from Ukrainian, equivalent to E]
+  ETYM_MARKER             8 (0.03%)
+      'Gordon' -> 'proud'   [a male surname]
+      'Gordon' -> 'proud'   [a female surname]
+      'Kamiński' -> 'stone'   [a male surname]
+      'Moroz' -> 'frost'   [a male surname from Ukrainian]
+      'Moroz' -> 'frost'   [a female surname from Ukrainian]
+      'Zapotoczny' -> 'river-man'   [a surname]
+      'Gustaw' -> 'support (of the Geats, southern Swedes)'   [a male surname]
+      'Gustaw' -> 'support (of the Geats, southern Swedes)'   [a female surname]
+  ETYM_QUOTED          1071 (4.36%)
+      'Wierzbowski' -> 'willow'   [a male surname]
+      'Bor' -> 'to fight'   [a male surname]
+      'Bor' -> 'to fight'   [a female surname]
+      'Car' -> 'tsar'   [a male surname]
+      'Car' -> 'tsar'   [a female surname]
+      'Grab' -> 'hornbeam'   [a male surname]
+      'Grab' -> 'hornbeam'   [a female surname]
+      'Lech' -> 'wasteland dweller'   [a male surname]
+  HOMOGRAPH            2530 (10.29%)
+      'Daniel' -> 'daniel'   [a male surname from Latin]
+      'Daniel' -> 'daniel'   [a female surname from Latin]
+      'Bajan' -> 'bajan'   [a male surname]
+      'Bajan' -> 'bajan'   [a female surname]
+      'Mach' -> 'mach'   [a male surname]
+      'Mach' -> 'mach'   [a female surname]
+      'Dragon' -> 'dragon'   [a male surname]
+      'Dragon' -> 'dragon'   [a female surname]
+  NONE                20961 (85.28%)
+      'Czech' -> ''   [a male surname]
+      'Czech' -> ''   [a female surname]
+      'Paul' -> ''   [a male surname]
+      'Paul' -> ''   [a female surname]
+      'Robert' -> ''   [a male surname]
+      'Robert' -> ''   [a female surname]
+      'Sorbian' -> ''   [a male surname]
+      'Sorbian' -> ''   [a female surname]
+
+  ANY CHANNEL .... 3619 (14.72%)
+  WITHOUT the loose ETYM_QUOTED channel .... 2548 (10.37%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         10 (0.04%)
+  ETYM_MARKER             8 (0.03%)
+  ETYM_QUOTED          1081 (4.40%)
+  HOMOGRAPH            2957 (12.03%)
+--- channels available per name ---
+  0 channel(s): 20961
+  1 channel(s): 3184
+  2 channel(s): 433
+  3 channel(s): 2
+
+========================================================================
+LANG ru   type=SURNAME   senses considered: 1262   shadow set: 44866
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         36 (2.85%)
+      'Адамов' -> 'Adams'   [a surname, Adamov, equivalent to English Adams]
+      'Андреев' -> 'Anderson'   [a surname, Andreyev, equivalent to English And]
+      'Блок' -> 'Blok'   [a surname, equivalent to English Blok, particu]
+      'Ковалёв' -> 'Smith'   [a surname, Kovalyov, equivalent to English Smi]
+      'Хиль' -> 'Gil'   [a surname from Spanish, equivalent to English ]
+      'Журавлёв' -> 'Crane'   [a surname, Zhuravlyov or Zhuravlev, equivalent]
+      'Грачёв' -> 'Rook'   [a surname, Grachov or Grachev, equivalent to E]
+      'Гольдштейн' -> 'Goldstein'   [a Jewish surname, Goldshtayn, from German, equ]
+  ETYM_MARKER             3 (0.24%)
+      'Толстой' -> 'fat'   [a Russian surname, Tolstoy, particularly Leo T]
+      'Царицын' -> 'Yellow Water'   [a surname, Tsaritsyn]
+      'Росляков' -> 'son of the tall one; belonging to Roslyak'   [a surname, Roslyakov]
+  ETYM_QUOTED            49 (3.88%)
+      'Ленин' -> 'Lenin'   [a surname, Lenin (the famous alias of Russian ]
+      'Сталин' -> 'steel'   [a surname, Stalin; usually referring to the Ru]
+      'Гоголь' -> 'common goldeneye, Bucephala clangula'   [a surname, Gogol]
+      'Путин' -> 'way, path, road'   [a surname, Putin]
+      'Хрущёв' -> 'May beetle'   [a surname, Khrushchev, particular Nikita Khrus]
+      'Титарёв' -> 'ktetor'   [a surname, Titarev or Titaryov]
+      'Медведев' -> 'bear'   [a surname, Medvedev]
+      'Калашников' -> "belonging to (son of) the 'kalach-man'"   [a surname, Kalashnikov]
+  HOMOGRAPH              42 (3.33%)
+      'По' -> 'по'   [Poe (surname, especially of Edgar Allan Poe, A]
+      'Горький' -> 'горький'   [a surname, Gorky]
+      'Петров' -> 'петров'   [a surname, Petrov, one of the most common Russ]
+      'Сухой' -> 'сухой'   [a surname, Sukhoy or Sukhoi]
+      'Пастернак' -> 'пастернак'   [a surname, Pasternak]
+      'Плесецкий' -> 'плесецкий'   [a surname, Plesetsky, Plesetski, or Plesiecki]
+      'Си' -> 'си'   [a transliteration of the Mandarin surname 習 /习]
+      'Ян' -> 'ян'   [a transliteration of the Mandarin surname 楊 /杨]
+  NONE                 1132 (89.70%)
+      'Вашингтон' -> ''   [a transliteration of the English surname Washi]
+      'Лондон' -> ''   [a transliteration of the English surname Londo]
+      'Джугашвили' -> ''   [a transliteration of the Georgian surname ჯუღა]
+      'Джугашвили' -> ''   [a surname, Jughashvili or Dzhugashvili, from G]
+      'Спрус' -> ''   [Sprouse (transliteration of the English surnam]
+      'Ельцин' -> ''   [a surname, Yeltsin, particularly Russian and f]
+      'Абалкин' -> ''   [a surname, Abalkin]
+      'Абатуров' -> ''   [a surname, Abaturov]
+
+  ANY CHANNEL .... 130 (10.30%)
+  WITHOUT the loose ETYM_QUOTED channel .... 81 (6.42%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN         36 (2.85%)
+  ETYM_MARKER             3 (0.24%)
+  ETYM_QUOTED            57 (4.52%)
+  HOMOGRAPH              54 (4.28%)
+--- channels available per name ---
+  0 channel(s): 1132
+  1 channel(s): 111
+  2 channel(s): 18
+  3 channel(s): 1
+
+========================================================================
+LANG sa   type=SURNAME   senses considered: 3   shadow set: 7780
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             1 (33.33%)
+      'पुरी' -> 'stronghold, fortress'   [a surname, Puri]
+  HOMOGRAPH               0 (0.00%)
+  NONE                    2 (66.67%)
+      'भारद्वाज' -> ''   [a surname, Bharadvaja]
+      'चट्टोपाध्याय' -> ''   [a surname, Chattopadhyay]
+
+  ANY CHANNEL .... 1 (33.33%)
+  WITHOUT the loose ETYM_QUOTED channel .... 0 (0.00%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             1 (33.33%)
+  HOMOGRAPH               1 (33.33%)
+--- channels available per name ---
+  0 channel(s): 2
+  2 channel(s): 1
+
+========================================================================
+LANG sw   type=SURNAME   senses considered: 3   shadow set: 7582
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             0 (0.00%)
+  HOMOGRAPH               0 (0.00%)
+  NONE                    3 (100.00%)
+      'Obama' -> ''   [a surname from Luo]
+      'Odinga' -> ''   [a surname from Luo]
+      'Kadzo' -> ''   [a Kenyan surname]
+
+  ANY CHANNEL .... 0 (0.00%)
+  WITHOUT the loose ETYM_QUOTED channel .... 0 (0.00%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             0 (0.00%)
+  ETYM_QUOTED             0 (0.00%)
+  HOMOGRAPH               0 (0.00%)
+--- channels available per name ---
+  0 channel(s): 3
+
+========================================================================
+LANG zh   type=SURNAME   senses considered: 1116   shadow set: 120968
+========================================================================
+--- EXCLUSIVE WATERFALL (first channel that fires) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             2 (0.18%)
+      '若干' -> 'dog'   [a surname]
+      '赫連' -> 'green hobbler'   [a surname]
+  ETYM_QUOTED            15 (1.34%)
+      '大阪' -> 'Osaka'   [an orthographic borrowing of the Japanese surn]
+      '田中' -> 'Tianzhong Township'   [an orthographic borrowing of the Japanese surn]
+      '單于' -> 'chief; head; governor'   [a surname, Chanyu]
+      '盧森堡' -> 'castle'   [a transliteration of the German surname Luxemb]
+      '奧巴馬' -> 'to lean or bend'   [a transliteration of the English surname Obama]
+      '歐陽' -> 'mountain in Huzhou'   [a Chinese compound surname]
+      '鮮卑' -> 'Xianbei'   [a surname]
+      '福田' -> 'merit'   [an orthographic borrowing of the Japanese surn]
+  HOMOGRAPH             109 (9.77%)
+      '上官' -> '上官'   [a Chinese compound surname]
+      '公子' -> '公子'   [a surname]
+      '大夫' -> '大夫'   [a surname]
+      '朝日' -> '朝日'   [an orthographic borrowing of the Japanese surn]
+      '山田' -> '山田'   [an orthographic borrowing of the Japanese surn]
+      '山村' -> '山村'   [an orthographic borrowing of the Japanese surn]
+      '木蘭' -> '木蘭'   [Mulan (a legendary female warrior, usually giv]
+      '將軍' -> '將軍'   [a surname]
+  NONE                  990 (88.71%)
+      '大和' -> ''   [an orthographic borrowing of the Japanese surn]
+      '巴哈' -> ''   [a transliteration of the German surname Bach (]
+      '巴赫' -> ''   [Bach a transliteration of the German surname B]
+      '倫敦' -> ''   [a transliteration of the English surname Londo]
+      '卯月' -> ''   [an orthographic borrowing of the Japanese surn]
+      '木村' -> ''   [an orthographic borrowing of the Japanese surn]
+      '鈴木' -> ''   [an orthographic borrowing of the Japanese surn]
+      '令狐' -> ''   [a Chinese compound surname]
+
+  ANY CHANNEL .... 126 (11.29%)
+  WITHOUT the loose ETYM_QUOTED channel .... 111 (9.95%)
+
+--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---
+  GLOSS_MEANING           0 (0.00%)
+  GLOSS_EQUIV_EN          0 (0.00%)
+  ETYM_MARKER             2 (0.18%)
+  ETYM_QUOTED            17 (1.52%)
+  HOMOGRAPH             113 (10.13%)
+--- channels available per name ---
+  0 channel(s): 990
+  1 channel(s): 121
+  2 channel(s): 4
+  3 channel(s): 1
+

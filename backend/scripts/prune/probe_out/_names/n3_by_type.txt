@@ -1,0 +1,2314 @@
+visible English lemma set: 401701
+
+========================================================================
+LANG ang   type=GIVEN   senses: 1053   distinct name keys: 1049
+========================================================================
+  with an extractable meaning .... 795 (75.50%)
+  content tokens (total) ......... 1064
+  tokens that ARE a visible en lemma 1027 (96.52%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 299
+      1: 484
+      2: 237
+      3: 27
+      4: 5
+      5: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Godwine' -> 'god'
+      'Godric' -> 'god'
+      'Osberht' -> 'god'
+      'Rægenbeald' -> 'very'
+      'Ealdwine' -> 'old'
+      'Godmund' -> 'god'
+      'Osmod' -> 'god'
+      'Osfriþ' -> 'god'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 59 (5.60%)
+  distinct such names: 59
+         1  'Gold'
+         1  'Bar'
+         1  'Budda'
+         1  'Carl'
+         1  'Hun'
+         1  'Leo'
+         1  'Mann'
+         1  'Winter'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         35  'battle'
+         29  'wolf'
+         27  'beloved'
+         27  'bright'
+         26  'desire'
+         25  'elf'
+         23  'noble'
+         21  'army'
+         20  'will'
+         18  'edge'
+         18  'victory'
+         17  'ship'
+         16  'peace'
+         16  'lineage'
+         16  'clan'
+         15  'dear'
+         14  'wealth'
+         14  'sea'
+         14  'man'
+         14  'warrior'
+         13  'wise'
+         12  'people'
+         11  'happiness'
+         11  'prosperity'
+         11  'joy'
+         11  'royal'
+         11  'time'
+         10  'spear'
+         10  'high'
+         10  'cub'
+
+========================================================================
+LANG ar   type=GIVEN   senses: 547   distinct name keys: 540
+========================================================================
+  with an extractable meaning .... 207 (37.84%)
+  content tokens (total) ......... 296
+  tokens that ARE a visible en lemma 220 (74.32%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 343
+      1: 143
+      2: 43
+      3: 9
+      4: 7
+      5: 1
+      6: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'لما' -> 'for'
+      'أسامة' -> 'name'
+      'وحيد' -> 'one'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 204 (37.29%)
+  distinct such names: 204
+         1  'حسن'
+         1  'مسلم'
+         1  'جمال'
+         1  'رمضان'
+         1  'جميل'
+         1  'أمل'
+         1  'كامل'
+         1  'فجر'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          7  'noble'
+          6  'become'
+          6  'servant'
+          6  'good'
+          4  'praise'
+          4  'patient'
+          3  'michael'   [no en lexeme]
+          3  'john'
+          3  'safe'
+          3  'david'   [no en lexeme]
+          3  'george'   [no en lexeme]
+          3  'mary'   [no en lexeme]
+          3  'happy'
+          3  'philip'
+          3  'generous'
+          3  'victorious'
+          2  'beautiful'
+          2  'guard'
+          2  'keep'
+          2  'light'
+          2  'thankful'
+          2  'mysterious'
+          2  'letters'
+          2  'sound'
+          2  'etc'   [no en lexeme]
+          2  'gabriel'   [no en lexeme]
+          2  'praiseworthy'
+          2  'susanna'   [no en lexeme]
+          2  'right'
+          2  'macarius'   [no en lexeme]
+
+========================================================================
+LANG cy   type=GIVEN   senses: 280   distinct name keys: 279
+========================================================================
+  with an extractable meaning .... 153 (54.64%)
+  content tokens (total) ......... 181
+  tokens that ARE a visible en lemma 124 (68.51%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 133
+      1: 125
+      2: 14
+      3: 6
+      5: 2
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Dylan' -> 'to, of'
+      'Aldyth' -> 'old'
+      'Aldith' -> 'old'
+      'Aldwyth' -> 'old'
+      'Arfor' -> 'on'
+      'Arfryn' -> 'on'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 30 (10.71%)
+  distinct such names: 30
+         1  'Awen'
+         1  'Alan'
+         1  'Marc'
+         1  'Arial'
+         1  'Alban'
+         1  'Bronwen'
+         1  'Andras'
+         1  'Aur'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         10  'white'
+          8  'fair'
+          7  'blessed'
+          5  'john'
+          4  'andrew'   [no en lexeme]
+          4  'silver'
+          4  'near'
+          4  'snow'
+          3  'david'   [no en lexeme]
+          3  'maiden'
+          3  'battle'
+          2  'paul'
+          2  'mary'   [no en lexeme]
+          2  'love'
+          2  'james'   [no en lexeme]
+          2  'aaron'   [no en lexeme]
+          2  'alice'   [no en lexeme]
+          2  'maurice'   [no en lexeme]
+          2  'wheel'
+          2  'bear'
+          2  'valley'
+          2  'stream'
+          2  'lord'
+          2  'arnold'   [no en lexeme]
+          2  'gold'
+          2  'golden'
+          2  'mild'
+          2  'gentle'
+          2  'graceful'
+          2  'bashful'
+
+========================================================================
+LANG de   type=GIVEN   senses: 1162   distinct name keys: 1097
+========================================================================
+  with an extractable meaning .... 416 (35.80%)
+  content tokens (total) ......... 461
+  tokens that ARE a visible en lemma 267 (57.92%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 758
+      1: 355
+      2: 44
+      3: 2
+      4: 3
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Scheherazade' -> 'child of the city'
+      'Ansgar' -> 'god'
+      'Ansgar' -> 'god'
+      'Anselm' -> 'god'
+      'Anselm' -> 'god'
+      'Gotthard' -> 'God'
+      'Gottlieb' -> 'God'
+      'Gottschalk' -> 'God'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 69 (5.94%)
+  distinct such names: 61
+         3  'Leo'
+         2  'Judas'
+         2  'Kai'
+         2  'Mark'
+         2  'Wolf'
+         2  'Wolfram'
+         2  'Dietrich'
+         1  'Milan'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         11  'noble'
+         11  'people'
+         11  'victory'
+          9  'battle'
+          7  'bear'
+          6  'peace'
+          6  'john'
+          6  'spear'
+          5  'castle'
+          5  'fortress'
+          4  'riches'   [no en lexeme]
+          4  'bernard'
+          4  'margaret'   [no en lexeme]
+          4  'breastplate'
+          4  'deity'
+          3  'eagle'
+          3  'warrior'
+          3  'wolf'
+          3  'work'
+          3  'george'   [no en lexeme]
+          3  'rule'
+          3  'holy'
+          2  'who'
+          2  'like'
+          2  'man'
+          2  'robert'   [no en lexeme]
+          2  'gabriel'   [no en lexeme]
+          2  'vincent'   [no en lexeme]
+          2  'judith'   [no en lexeme]
+          2  'frederick'   [no en lexeme]
+
+========================================================================
+LANG el   type=GIVEN   senses: 472   distinct name keys: 442
+========================================================================
+  with an extractable meaning .... 225 (47.67%)
+  content tokens (total) ......... 231
+  tokens that ARE a visible en lemma 88 (38.10%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 249
+      1: 217
+      2: 4
+      3: 2
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Εμμανουήλ' -> 'God is with us'
+      'Χριστινάκι' -> 'diminutive form'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 38 (8.05%)
+  distinct such names: 34
+         3  'Βούλα'
+         2  'Δήμος'
+         2  'Τζιν'
+         1  'Άγγελος'
+         1  'Λέων'
+         1  'Ήρα'
+         1  'Δάφνη'
+         1  'Ειρήνη'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          4  'chris'   [no en lexeme]
+          4  'people'
+          4  'good'
+          3  'constantine'   [no en lexeme]
+          3  'love'
+          2  'peter'
+          2  'paul'
+          2  'george'   [no en lexeme]
+          2  'eve'
+          2  'theodore'   [no en lexeme]
+          2  'william'   [no en lexeme]
+          2  'basil'
+          2  'john'
+          2  'adam'
+          2  'nelly'
+          2  'bright'
+          2  'free'
+          2  'anastasius'   [no en lexeme]
+          2  'pole'
+          2  'mark'
+          2  'ajax'   [no en lexeme]
+          2  'stop'
+          2  'freedom'
+          2  'resurrection'
+          2  'lounge'
+          1  'angelo'   [no en lexeme]
+          1  'achilles'   [no en lexeme]
+          1  'alexander'
+          1  'mary'   [no en lexeme]
+          1  'gabriel'   [no en lexeme]
+
+========================================================================
+LANG en   type=GIVEN   senses: 11041   distinct name keys: 9971
+========================================================================
+  with an extractable meaning .... 2402 (21.76%)
+  content tokens (total) ......... 3752
+  tokens that ARE a visible en lemma 3149 (83.93%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 8684
+      1: 1399
+      2: 673
+      3: 197
+      4: 50
+      5: 20
+      6: 18
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Darwin' -> 'a given name'
+      'Theodore' -> 'god'
+      'Nawin' -> 'new'
+      'Diana' -> 'goddess'
+      'Axel' -> 'god'
+      'Nova' -> 'new'
+      'Smith' -> 'a surname'
+      'Ty' -> 'Ty'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 1595 (14.45%)
+  distinct such names: 1312
+         5  'Harry'
+         5  'Lulu'
+         4  'Barry'
+         4  'Tara'
+         4  'Gay'
+         4  'Ivy'
+         4  'Jay'
+         4  'Lee'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         47  'descendant'
+         36  'light'
+         36  'gracious'
+         35  'good'
+         34  'noble'
+         29  'lord'
+         27  'servant'
+         25  'tree'
+         22  'man'
+         21  'will'
+         21  'has'   [no en lexeme]
+         20  'king'
+         20  'sea'
+         20  'yahweh'   [no en lexeme]
+         19  'lion'
+         19  'beautiful'
+         17  'little'
+         16  'beloved'
+         15  'who'
+         15  'john'
+         15  'black'
+         15  'peace'
+         14  'stone'
+         14  'holy'
+         14  'valley'
+         13  'alexander'
+         13  'friend'
+         13  'girl'
+         13  'mark'
+         12  'land'
+
+========================================================================
+LANG es   type=GIVEN   senses: 1366   distinct name keys: 1310
+========================================================================
+  with an extractable meaning .... 600 (43.92%)
+  content tokens (total) ......... 657
+  tokens that ARE a visible en lemma 252 (38.36%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 769
+      1: 552
+      2: 34
+      3: 9
+      4: 1
+      6: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Segundo' -> '2nd'
+      'Deodato' -> 'given by God'
+      'Jimena' -> 'son'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 243 (17.79%)
+  distinct such names: 234
+         2  'Ale'
+         2  'Cruz'
+         2  'Paz'
+         2  'Clemente'
+         2  'Facundo'
+         2  'Pascual'
+         2  'Licha'
+         2  'Florentino'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          8  'lady'
+          4  'peace'
+          4  'mark'
+          3  'sea'
+          3  'james'   [no en lexeme]
+          3  'mary'   [no en lexeme]
+          3  'white'
+          3  'all'
+          3  'apollo'   [no en lexeme]
+          2  'victory'
+          2  'daniel'   [no en lexeme]
+          2  'xavier'   [no en lexeme]
+          2  'lilian'   [no en lexeme]
+          2  'walter'   [no en lexeme]
+          2  'gabriel'   [no en lexeme]
+          2  'abraham'   [no en lexeme]
+          2  'anthony'   [no en lexeme]
+          2  'cross'
+          2  'flower'
+          2  'gem'
+          2  'ruth'   [no en lexeme]
+          2  'will'
+          2  'angel'
+          2  'elizabeth'   [no en lexeme]
+          2  'father'
+          2  'angelina'   [no en lexeme]
+          2  'solomon'   [no en lexeme]
+          2  'heaven'
+          2  'benedict'
+          2  'louis'   [no en lexeme]
+
+========================================================================
+LANG fa   type=GIVEN   senses: 532   distinct name keys: 520
+========================================================================
+  with an extractable meaning .... 196 (36.84%)
+  content tokens (total) ......... 328
+  tokens that ARE a visible en lemma 279 (85.06%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 343
+      1: 98
+      2: 58
+      3: 25
+      4: 4
+      5: 1
+      6: 3
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'آرام' -> 'ad-'
+      'یگانه' -> 'one'
+      'مهوش' -> 'a female given name'
+      'رستم' -> 'river'
+      'خداداد' -> 'God'
+      'پوران\u200cدخت' -> 'daughter'
+      'پوران\u200cدخت' -> 'daughter'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 214 (40.23%)
+  distinct such names: 209
+         3  'جین'
+         2  'مارک'
+         2  'شیوا'
+         2  'میلاد'
+         1  'سلم'
+         1  'حسن'
+         1  'مسلم'
+         1  'جهان'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         12  'slave'
+          6  'good'
+          5  'rose'
+          4  'imam'
+          3  'world'
+          3  'guide'
+          3  'bright'
+          3  'jasmine'
+          3  'worthy'
+          3  'victorious'
+          3  'moon'
+          3  'friend'
+          3  'having'
+          3  'king'
+          3  'turan'   [no en lexeme]
+          2  'worldly'
+          2  'news'
+          2  'immortal'
+          2  'hope'
+          2  'sun'
+          2  'know'
+          2  'water'
+          2  'sweet'
+          2  'sharp'
+          2  'victory'
+          2  'dark'
+          2  'bird'
+          2  'light'
+          2  'intelligent'
+          2  'rida'   [no en lexeme]
+
+========================================================================
+LANG ga   type=GIVEN   senses: 185   distinct name keys: 185
+========================================================================
+  with an extractable meaning .... 154 (83.24%)
+  content tokens (total) ......... 191
+  tokens that ARE a visible en lemma 112 (58.64%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 31
+      1: 131
+      2: 13
+      3: 7
+      4: 2
+      5: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 29 (15.68%)
+  distinct such names: 29
+         1  'Oscar'
+         1  'Cian'
+         1  'Fionn'
+         1  'Sorcha'
+         1  'Bríd'
+         1  'Aodh'
+         1  'Eithne'
+         1  'Aisling'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          4  'fair'
+          3  'noble'
+          3  'bright'
+          2  'john'
+          2  'black'
+          2  'patrick'   [no en lexeme]
+          2  'charles'   [no en lexeme]
+          2  'martin'
+          2  'brendan'   [no en lexeme]
+          2  'andrew'   [no en lexeme]
+          2  'matthew'   [no en lexeme]
+          2  'anthony'   [no en lexeme]
+          2  'dog'
+          2  'adam'
+          2  'stephen'   [no en lexeme]
+          2  'evelyn'   [no en lexeme]
+          1  'outsider'
+          1  'newcomer'
+          1  'kevin'   [no en lexeme]
+          1  'high'
+          1  'long'
+          1  'distant'
+          1  'lasting'
+          1  'rory'   [no en lexeme]
+          1  'white'
+          1  'handsome'
+          1  'noel'
+          1  'cloud'
+          1  'brightness'
+          1  'lustre'
+
+========================================================================
+LANG he   type=GIVEN   senses: 363   distinct name keys: 348
+========================================================================
+  with an extractable meaning .... 209 (57.58%)
+  content tokens (total) ......... 259
+  tokens that ARE a visible en lemma 142 (54.83%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 158
+      1: 169
+      2: 25
+      3: 9
+      4: 1
+      6: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'עמנואל' -> 'God with us'
+      'אסנת' -> 'that, for'
+      'אליענה' -> 'god'
+      'ליאור' -> 'to me'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 159 (43.80%)
+  distinct such names: 155
+         3  'גד'
+         3  'שרי'
+         1  'שלום'
+         1  'אביב'
+         1  'חגב'
+         1  'זוהר'
+         1  'זאב'
+         1  'רחל'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          4  'joshua'   [no en lexeme]
+          4  'father'
+          4  'good'
+          3  'high'
+          3  'yahweh'   [no en lexeme]
+          3  'luck'
+          3  'fortune'
+          3  'light'
+          3  'lord'
+          2  'bitter'
+          2  'tree'
+          2  'avshalom'   [no en lexeme]
+          2  'height'
+          2  'elevation'
+          2  'where'
+          2  'jordan'   [no en lexeme]
+          2  'animal'
+          2  'mara'
+          2  'judah'   [no en lexeme]
+          2  'elijah'   [no en lexeme]
+          2  'mattathias'   [no en lexeme]
+          2  'abundance'
+          2  'who'
+          2  'like'
+          2  'heard'
+          1  'israel'   [no en lexeme]
+          1  'quiet'
+          1  'tranquil'
+          1  'thick'
+          1  'agabus'   [no en lexeme]
+
+========================================================================
+LANG hi   type=GIVEN   senses: 813   distinct name keys: 807
+========================================================================
+  with an extractable meaning .... 145 (17.84%)
+  content tokens (total) ......... 198
+  tokens that ARE a visible en lemma 148 (74.75%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 673
+      1: 95
+      2: 36
+      3: 7
+      4: 1
+      6: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'उन्नति' -> 'up'
+      'अविरल' -> 'not'
+      'अतुल' -> 'un-'
+      'रुस्तम' -> 'river'
+      'देवकन्या' -> 'god'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 590 (72.57%)
+  distinct such names: 587
+         2  'मधु'
+         2  'सिकंदर'
+         2  'वंदना'
+         1  'आकाश'
+         1  'मधुर'
+         1  'स्वस्तिक'
+         1  'मुक्ति'
+         1  'अनुराग'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          2  'light'
+          2  'good'
+          2  'blue'
+          2  'know'
+          2  'alexander'
+          2  'flower'
+          2  'grace'
+          2  'sun'
+          2  'after'
+          1  'lucky'
+          1  'auspicious'
+          1  'object'
+          1  'caressed'   [no en lexeme]
+          1  'small'
+          1  'ray'
+          1  'amrit'   [no en lexeme]
+          1  'lady'
+          1  'princess'
+          1  'dual'
+          1  'deep'
+          1  'bathe'
+          1  'amrita'
+          1  'order'
+          1  'command'
+          1  'authority'
+          1  'judah'   [no en lexeme]
+          1  'adam'
+          1  'night'
+          1  'victory'
+          1  'wind'
+
+========================================================================
+LANG is   type=GIVEN   senses: 1271   distinct name keys: 1263
+========================================================================
+  with an extractable meaning .... 200 (15.74%)
+  content tokens (total) ......... 241
+  tokens that ARE a visible en lemma 166 (68.88%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 1077
+      1: 166
+      2: 14
+      3: 10
+      4: 3
+      5: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Ása' -> 'god'
+      'Einbjörg' -> 'one'
+      'Ásmundur' -> 'a god'
+      'Indriði' -> 'one'
+      'Gormur' -> 'god'
+      'Guðsteinn' -> 'God'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 152 (11.96%)
+  distinct such names: 148
+         2  'Eir'
+         2  'Fríða'
+         2  'Auður'
+         2  'Halli'
+         1  'Karl'
+         1  'Alda'
+         1  'Anna'
+         1  'Berg'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          7  'thor'
+          4  'bear'
+          4  'stone'
+          3  'christian'   [no en lexeme]
+          3  'flat'
+          3  'sun'
+          3  'battle'
+          3  'wealth'
+          3  'horse'
+          3  'black'
+          2  'man'
+          2  'eagle'
+          2  'lord'
+          2  'glad'
+          2  'mariner'
+          2  'george'   [no en lexeme]
+          2  'bright'
+          2  'noble'
+          2  'sea'
+          2  'tree'
+          2  'john'
+          2  'fate'
+          2  'raven'
+          2  'edgar'   [no en lexeme]
+          2  'flame'
+          2  'victory'
+          1  'albert'   [no en lexeme]
+          1  'alexander'
+          1  'earth'
+          1  'soil'
+
+========================================================================
+LANG ja   type=GIVEN   senses: 9038   distinct name keys: 7964
+========================================================================
+  with an extractable meaning .... 408 (4.51%)
+  content tokens (total) ......... 826
+  tokens that ARE a visible en lemma 799 (96.73%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 8640
+      1: 143
+      2: 139
+      3: 79
+      4: 27
+      5: 4
+      6: 6
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      '新' -> 'new'
+      '綠' -> 'old form'
+      '里' -> 'short'
+      'きょう' -> 'this'
+      '一人' -> 'one, 1'
+      '美和子' -> 'child'
+      '最中' -> 'most'
+      '三和' -> 'three'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 1017 (11.25%)
+  distinct such names: 664
+        32  'ひろし'
+         9  '暁'
+         8  '央'
+         8  'しょうご'
+         7  '皇'
+         7  'しょういち'
+         6  '平'
+         6  '行'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         38  'wide'
+         37  'vast'
+         34  'spacious'
+         32  'stem'
+         32  'continuative'
+         12  'true'
+          9  'clear'
+          7  'calm'
+          6  'sun'
+          6  'excel'
+          6  'correct'
+          6  'long'
+          6  'time'
+          6  'fruit'
+          6  'high'
+          6  'real'
+          5  'pass'
+          5  'beginning'
+          5  'through'
+          5  'small'
+          5  'peaceful'
+          5  'tree'
+          5  'peach'
+          5  'leaf'
+          4  'visible'
+          4  'superior'
+          4  'surpass'
+          4  'rival'
+          4  'good'
+          4  'person'
+
+========================================================================
+LANG ko   type=GIVEN   senses: 67   distinct name keys: 57
+========================================================================
+  with an extractable meaning .... 3 (4.48%)
+  content tokens (total) ......... 3
+  tokens that ARE a visible en lemma 3 (100.00%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 64
+      1: 3
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 15 (22.39%)
+  distinct such names: 13
+         2  '장'
+         2  '캐시'
+         1  '밥'
+         1  '유리'
+         1  '미아'
+         1  '샘'
+         1  '보람'
+         1  '슬기'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          1  'intelligent'
+          1  'joyful'
+          1  'adore'
+
+========================================================================
+LANG la   type=GIVEN   senses: 738   distinct name keys: 695
+========================================================================
+  with an extractable meaning .... 318 (43.09%)
+  content tokens (total) ......... 396
+  tokens that ARE a visible en lemma 219 (55.30%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 425
+      1: 260
+      2: 31
+      3: 15
+      4: 6
+      5: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Didacus' -> 'god'
+      'Theodosius' -> 'given by God'
+      'Prima' -> 'first'
+      'Ansprand' -> 'god'
+      'Deodatus' -> 'God-given'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 52 (7.05%)
+  distinct such names: 52
+         1  'Dominica'
+         1  'Pius'
+         1  'Nona'
+         1  'Angelus'
+         1  'Aquila'
+         1  'Gymnasium'
+         1  'Petra'
+         1  'Ursus'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          5  'lord'
+          5  'brown'
+          5  'gift'
+          4  'moses'   [no en lexeme]
+          4  'golden'
+          4  'love'
+          4  'owen'   [no en lexeme]
+          4  'dark'
+          4  'branimir'   [no en lexeme]
+          4  'battle'
+          3  'bear'
+          3  'best'
+          3  'strength'
+          3  'christopher'   [no en lexeme]
+          3  'napoleon'
+          3  'domagoj'   [no en lexeme]
+          3  'demaratus'   [no en lexeme]
+          3  'hengist'   [no en lexeme]
+          2  'day'
+          2  'leon'   [no en lexeme]
+          2  'gabriel'   [no en lexeme]
+          2  'lucky'
+          2  'beloved'
+          2  'baal'
+          2  'polyphemus'
+          2  'victory'
+          2  'fifth'
+          2  'people'
+          2  'white'
+          2  'whose'   [no en lexeme]
+
+========================================================================
+LANG non   type=GIVEN   senses: 157   distinct name keys: 157
+========================================================================
+  with an extractable meaning .... 117 (74.52%)
+  content tokens (total) ......... 137
+  tokens that ARE a visible en lemma 127 (92.70%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 51
+      1: 80
+      2: 21
+      3: 5
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Ása' -> 'god'
+      'Ásbjǫrn' -> 'god'
+      'Áskell' -> 'god'
+      'Eilífr' -> 'one'
+      'Guðmundr' -> 'god'
+      'Guðbrandr' -> 'god'
+      'Einarr' -> 'one'
+      'Áshildr' -> 'god'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 11 (7.01%)
+  distinct such names: 11
+         1  'Ari'
+         1  'Ella'
+         1  'Helga'
+         1  'Bjǫrn'
+         1  'Geirr'
+         1  'Knútr'
+         1  'Oddr'
+         1  'Stígr'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          7  'thor'
+          5  'spear'
+          5  'battle'
+          4  'beautiful'
+          3  'yngvi'   [no en lexeme]
+          3  'victory'
+          2  'ing'
+          2  'bear'
+          2  'ancestor'
+          2  'army'
+          2  'stone'
+          2  'sharp'
+          2  'point'
+          2  'nest'
+          2  'home'
+          2  'fame'
+          2  'servant'
+          2  'protection'
+          2  'black'
+          2  'luck'
+          2  'heathen'
+          1  'eagle'
+          1  'helper'
+          1  'saviour'
+          1  'breeze'
+          1  'counselor'
+          1  'wise'
+          1  'happy'
+          1  'lucky'
+          1  'loyal'
+
+========================================================================
+LANG pl   type=GIVEN   senses: 873   distinct name keys: 844
+========================================================================
+  with an extractable meaning .... 447 (51.20%)
+  content tokens (total) ......... 461
+  tokens that ARE a visible en lemma 101 (21.91%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 426
+      1: 437
+      2: 7
+      3: 2
+      4: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 72 (8.25%)
+  distinct such names: 67
+         3  'Lola'
+         2  'Aga'
+         2  'Kajtek'
+         2  'Szerlok'
+         1  'Daniel'
+         1  'Romeo'
+         1  'Apollo'
+         1  'Aurora'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          2  'leo'
+          2  'albert'   [no en lexeme]
+          2  'saul'   [no en lexeme]
+          2  'gabriel'   [no en lexeme]
+          2  'mary'   [no en lexeme]
+          2  'apollo'   [no en lexeme]
+          2  'jane'
+          2  'marcel'
+          2  'hugh'   [no en lexeme]
+          2  'stephen'   [no en lexeme]
+          2  'tatiana'   [no en lexeme]
+          2  'johnny'
+          2  'christopher'   [no en lexeme]
+          2  'luke'
+          2  'francis'   [no en lexeme]
+          2  'ladislaus'   [no en lexeme]
+          2  'celestine'
+          2  'aurelius'   [no en lexeme]
+          2  'cornelius'   [no en lexeme]
+          2  'laurence'   [no en lexeme]
+          2  'oliver'   [no en lexeme]
+          2  'lucian'   [no en lexeme]
+          2  'eustace'   [no en lexeme]
+          2  'constantine'   [no en lexeme]
+          2  'hyacinth'
+          2  'isaac'   [no en lexeme]
+          1  'fabian'   [no en lexeme]
+          1  'edward'   [no en lexeme]
+          1  'achilles'   [no en lexeme]
+          1  'alberta'   [no en lexeme]
+
+========================================================================
+LANG ru   type=GIVEN   senses: 686   distinct name keys: 620
+========================================================================
+  with an extractable meaning .... 361 (52.62%)
+  content tokens (total) ......... 405
+  tokens that ARE a visible en lemma 174 (42.96%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 326
+      1: 323
+      2: 31
+      3: 4
+      4: 2
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Глеб' -> 'god'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 46 (6.71%)
+  distinct such names: 33
+        12  'Слава'
+         3  'Альфонс'
+         1  'Рамазан'
+         1  'Дон'
+         1  'Лука'
+         1  'Лев'
+         1  'Майка'
+         1  'Абака'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         12  'glory'
+         12  'fame'
+          8  'love'
+          6  'good'
+          4  'john'
+          4  'angela'   [no en lexeme]
+          3  'alex'   [no en lexeme]
+          3  'abel'   [no en lexeme]
+          3  'helen'
+          3  'george'   [no en lexeme]
+          3  'val'
+          2  'sophia'   [no en lexeme]
+          2  'gift'
+          2  'cyril'   [no en lexeme]
+          2  'catherine'   [no en lexeme]
+          2  'demeter'   [no en lexeme]
+          2  'sasha'   [no en lexeme]
+          2  'andrew'   [no en lexeme]
+          2  'manly'
+          2  'hospitality'
+          2  'ann'   [no en lexeme]
+          2  'anthony'   [no en lexeme]
+          2  'vladimir'   [no en lexeme]
+          2  'aaron'   [no en lexeme]
+          2  'sea'
+          2  'abraham'   [no en lexeme]
+          2  'hope'
+          2  'alice'   [no en lexeme]
+          2  'peter'
+          2  'eugene'   [no en lexeme]
+
+========================================================================
+LANG sa   type=GIVEN   senses: 46   distinct name keys: 43
+========================================================================
+  with an extractable meaning .... 31 (67.39%)
+  content tokens (total) ......... 49
+  tokens that ARE a visible en lemma 39 (79.59%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 15
+      1: 18
+      2: 9
+      3: 3
+      4: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 27 (58.70%)
+  distinct such names: 24
+         3  'रघु'
+         2  'असित'
+         1  'सूर्य'
+         1  'अक्षर'
+         1  'उमा'
+         1  'माया'
+         1  'अर्जुन'
+         1  'पार्वती'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          4  'raghu'   [no en lexeme]
+          2  'towards'
+          2  'moon'
+          2  'dark'
+          2  'black'
+          1  'sun'
+          1  'perishable'
+          1  'maya'
+          1  'white'
+          1  'shining'
+          1  'silver'
+          1  'sooty'
+          1  'dear'
+          1  'intimate'
+          1  'friendly'
+          1  'rejoice'
+          1  'delight'
+          1  'good'
+          1  'shafts'   [no en lexeme]
+          1  'arrows'
+          1  'facing'
+          1  'protected'
+          1  'hidden'
+          1  'raghava'   [no en lexeme]
+          1  'together'
+          1  'whole'
+          1  'noble'
+          1  'rightly'
+          1  'created'   [no en lexeme]
+          1  'high'
+
+========================================================================
+LANG sw   type=GIVEN   senses: 56   distinct name keys: 54
+========================================================================
+  with an extractable meaning .... 35 (62.50%)
+  content tokens (total) ......... 45
+  tokens that ARE a visible en lemma 36 (80.00%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 22
+      1: 24
+      2: 9
+      3: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Donati' -> 'given'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 20 (35.71%)
+  distinct such names: 20
+         1  'Kijana'
+         1  'Baraka'
+         1  'Tatu'
+         1  'Mosi'
+         1  'Amani'
+         1  'Jabari'
+         1  'Imani'
+         1  'Zuri'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          3  'number'
+          2  'abraham'   [no en lexeme]
+          2  'beautiful'
+          2  'peace'
+          2  'mercy'
+          2  'compassion'
+          1  'paul'
+          1  'youth'
+          1  'blessing'
+          1  'moses'   [no en lexeme]
+          1  'mark'
+          1  'zachariah'   [no en lexeme]
+          1  'lord'
+          1  'has'   [no en lexeme]
+          1  'remembered'   [no en lexeme]
+          1  'adam'
+          1  'john'
+          1  'miriam'   [no en lexeme]
+          1  'joseph'
+          1  'faith'
+          1  'belief'
+          1  'good'
+          1  'intention'
+          1  'purpose'
+          1  'safety'
+          1  'david'   [no en lexeme]
+          1  'jewel'
+          1  'pure'
+          1  'innocent'
+          1  'angel'
+
+========================================================================
+LANG zh   type=GIVEN   senses: 610   distinct name keys: 481
+========================================================================
+  with an extractable meaning .... 9 (1.48%)
+  content tokens (total) ......... 12
+  tokens that ARE a visible en lemma 6 (50.00%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 601
+      1: 7
+      2: 1
+      3: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 20 (3.28%)
+  distinct such names: 15
+         4  '埃米爾'
+         2  '米蘭'
+         2  '貝爾'
+         1  '斯文'
+         1  '馬克'
+         1  '西里爾'
+         1  '伊斯蘭'
+         1  '開爾文'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          2  'milan'   [no en lexeme]
+          2  'michael'   [no en lexeme]
+          1  'david'   [no en lexeme]
+          1  'sun'
+          1  'precious'
+          1  'gem'
+          1  'jewel'
+          1  'who'
+          1  'like'
+          1  'muhammad'   [no en lexeme]
+
+========================================================================
+CROSS-LANGUAGE NAME KEY OVERLAP   type=given
+========================================================================
+  distinct name keys (all langs) .... 27185
+  keys in 2+ languages .............. 1207 (4.44%)
+      in 2 languages: 955
+      in 3 languages: 185
+      in 4 languages: 53
+      in 5 languages: 13
+      in 6 languages: 1
+  most widely shared keys:
+        6 langs  'anna'
+        5 langs  'daniel'
+        5 langs  'inga'
+        5 langs  'andreas'
+        5 langs  'samuel'
+        5 langs  'adam'
+        5 langs  'helga'
+        5 langs  'gabriel'
+        5 langs  'marta'
+        5 langs  'abraham'
+        5 langs  'olga'
+        5 langs  'hugo'
+        5 langs  'sara'
+        5 langs  'abel'
+        4 langs  'leo'
+        4 langs  'ida'
+        4 langs  'ella'
+        4 langs  'ruth'
+        4 langs  'agnes'
+        4 langs  'anita'
+
+========================================================================
+LANG ang   type=SURNAME   senses: 0   distinct name keys: 0
+========================================================================
+  with an extractable meaning .... 0 (n/a)
+  content tokens (total) ......... 0
+  tokens that ARE a visible en lemma 0 (n/a)
+  tokens-per-meaning histogram (6 = 6 or more):
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 0 (n/a)
+  distinct such names: 0
+
+--- TOP MEANING TOKENS (flood detection) ---
+
+========================================================================
+LANG ar   type=SURNAME   senses: 83   distinct name keys: 83
+========================================================================
+  with an extractable meaning .... 24 (28.92%)
+  content tokens (total) ......... 46
+  tokens that ARE a visible en lemma 38 (82.61%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 59
+      1: 10
+      2: 10
+      3: 2
+      5: 2
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 36 (43.37%)
+  distinct such names: 36
+         1  'نجار'
+         1  'شاهين'
+         1  'شهاب'
+         1  'عباس'
+         1  'نقاش'
+         1  'هلال'
+         1  'درويش'
+         1  'أحمد'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          2  'happy'
+          1  'kingly'
+          1  'majestic'
+          1  'forming'
+          1  'relating'
+          1  'being'
+          1  'clear'
+          1  'shining'
+          1  'praiseworthy'
+          1  'benign'
+          1  'become'
+          1  'egyptian'   [no en lexeme]
+          1  'big'
+          1  'temple'
+          1  'palace'
+          1  'servant'
+          1  'slave'
+          1  'generous'
+          1  'noble'
+          1  'pay'
+          1  'out'
+          1  'spend'
+          1  'change'
+          1  'money'
+          1  'great'
+          1  'exalted'
+          1  'lucky'
+          1  'levant'
+          1  'syria'   [no en lexeme]
+          1  'damascus'   [no en lexeme]
+
+========================================================================
+LANG cy   type=SURNAME   senses: 8   distinct name keys: 8
+========================================================================
+  with an extractable meaning .... 5 (62.50%)
+  content tokens (total) ......... 7
+  tokens that ARE a visible en lemma 6 (85.71%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 3
+      1: 4
+      3: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 0 (0.00%)
+  distinct such names: 0
+
+--- TOP MEANING TOKENS (flood detection) ---
+          1  'ifan'   [no en lexeme]
+          1  'ardor'
+          1  'fiery'
+          1  'warrior'
+          1  'red'
+          1  'will'
+          1  'battle'
+
+========================================================================
+LANG de   type=SURNAME   senses: 1930   distinct name keys: 1904
+========================================================================
+  with an extractable meaning .... 438 (22.69%)
+  content tokens (total) ......... 611
+  tokens that ARE a visible en lemma 563 (92.14%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 1507
+      1: 283
+      2: 107
+      3: 22
+      4: 8
+      5: 2
+      6: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Oldenburg' -> 'old'
+      'Neumann' -> 'new'
+      'Neustadt' -> 'new'
+      'Gotthard' -> 'God'
+      'Neudorf' -> 'new'
+      'Gotthelf' -> 'god'
+      'Gottlieb' -> 'God'
+      'Gottschalk' -> 'God'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 402 (20.83%)
+  distinct such names: 394
+         2  'Fuchs'
+         2  'Baum'
+         2  'Schiff'
+         2  'Schmalz'
+         2  'Krupp'
+         2  'Wimmer'
+         2  'Weinstein'
+         2  'Quart'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         10  'victory'
+          8  'noble'
+          8  'stone'
+          8  'land'
+          8  'curly'
+          8  'little'
+          7  'rock'
+          6  'hill'
+          5  'courtyard'
+          5  'black'
+          5  'wine'
+          5  'people'
+          5  'smith'
+          5  'field'
+          5  'castle'
+          5  'fortress'
+          5  'tree'
+          4  'court'
+          4  'brown'
+          4  'dove'
+          4  'red'
+          4  'small'
+          4  'high'
+          4  'mountain'
+          4  'rose'
+          4  'stroll'
+          4  'walk'
+          4  'head'
+          3  'sugar'
+          3  'tall'
+
+========================================================================
+LANG el   type=SURNAME   senses: 139   distinct name keys: 134
+========================================================================
+  with an extractable meaning .... 42 (30.22%)
+  content tokens (total) ......... 48
+  tokens that ARE a visible en lemma 30 (62.50%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 97
+      1: 37
+      2: 4
+      3: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 7 (5.04%)
+  distinct such names: 7
+         1  'Άγγελος'
+         1  'Μικρούτσικος'
+         1  'Κέλβιν'
+         1  'Φακίρης'
+         1  'Σκαρλάτος'
+         1  'Μονομάχος'
+         1  'Σπανός'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         12  'priest'
+          4  'chris'   [no en lexeme]
+          2  'angel'
+          2  'orlando'   [no en lexeme]
+          1  'venetian'   [no en lexeme]
+          1  'constantine'   [no en lexeme]
+          1  'john'
+          1  'armed'
+          1  'handed'
+          1  'arvanitopoulos'   [no en lexeme]
+          1  'athanassakis'   [no en lexeme]
+          1  'carrier'
+          1  'ἐλεύθερος'   [no en lexeme]
+          1  'eleútheros'   [no en lexeme]
+          1  'free'
+          1  'theodore'   [no en lexeme]
+          1  'dimitris'   [no en lexeme]
+          1  'peter'
+          1  'paul'
+          1  'dragon'
+          1  'head'
+          1  'fakir'
+          1  'priests'   [no en lexeme]
+          1  'housekeeper'
+          1  'steward'
+          1  'alexius'   [no en lexeme]
+          1  'greece'   [no en lexeme]
+          1  'beardless'
+          1  'man'
+          1  'contostephanus'   [no en lexeme]
+
+========================================================================
+LANG en   type=SURNAME   senses: 53722   distinct name keys: 52272
+========================================================================
+  with an extractable meaning .... 7011 (13.05%)
+  content tokens (total) ......... 10519
+  tokens that ARE a visible en lemma 9081 (86.33%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 46874
+      1: 4070
+      2: 2124
+      3: 495
+      4: 105
+      5: 35
+      6: 19
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Darwin' -> 'a given name'
+      'Napoli' -> 'new'
+      'Avon' -> 'river'
+      'Axel' -> 'god'
+      'Base' -> 'short'
+      'Court' -> 'short'
+      'Day' -> ', or'
+      'Day' -> ', or'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 5415 (10.08%)
+  distinct such names: 5085
+        12  'Barton'
+        11  'Garland'
+        10  'Lu'
+        10  'Cutler'
+         8  'Lee'
+         8  'Jing'
+         8  'Costa'
+         6  'Tang'
+
+--- TOP MEANING TOKENS (flood detection) ---
+        387  'descendant'
+        118  'enclosure'
+         99  'tree'
+         95  'settlement'
+         83  'hill'
+         75  'belonging'
+         72  'stone'
+         71  'land'
+         67  'valley'
+         64  'servant'
+         61  'clearing'
+         48  'mountain'
+         47  'wood'
+         46  'stream'
+         44  'man'
+         42  'field'
+         39  'black'
+         37  'white'
+         37  'oak'
+         37  'glade'
+         34  'village'
+         34  'king'
+         33  'beautiful'
+         32  'small'
+         32  'meadow'
+         32  'woodland'
+         32  'homestead'
+         31  'red'
+         31  'hollow'
+         30  'who'
+
+========================================================================
+LANG es   type=SURNAME   senses: 1924   distinct name keys: 1915
+========================================================================
+  with an extractable meaning .... 242 (12.58%)
+  content tokens (total) ......... 316
+  tokens that ARE a visible en lemma 271 (85.76%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 1689
+      1: 168
+      2: 58
+      3: 5
+      4: 3
+      5: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Abanto' -> 'his daughter'
+      'Muñoz' -> 'given name'
+      'Jiménez' -> 'son'
+      'Villanueva' -> 'town'
+      'Dávila' -> 'from the town'
+      'Alcaraz' -> 'the; place of the'
+      'Bacilio' -> 'a male given name'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 413 (21.47%)
+  distinct such names: 409
+         3  'Costa'
+         2  'León'
+         2  'Bolívar'
+         1  'Quito'
+         1  'Chamorro'
+         1  'Japón'
+         1  'Labrador'
+         1  'Navidad'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          6  'house'
+          5  'valley'
+          5  'tree'
+          4  'mountain'
+          3  'meadow'
+          3  'rock'
+          3  'man'
+          3  'war'
+          3  'grove'
+          3  'white'
+          3  'good'
+          3  'holy'
+          3  'fountain'
+          3  'hill'
+          3  'beautiful'
+          3  'cave'
+          2  'rivers'   [no en lexeme]
+          2  'cross'
+          2  'who'
+          2  'like'
+          2  'high'
+          2  'castle'
+          2  'island'
+          2  'little'
+          2  'tower'
+          2  'fields'   [no en lexeme]
+          2  'monk'
+          2  'sacred'
+          2  'shoemaker'
+          2  'eagle'
+
+========================================================================
+LANG fa   type=SURNAME   senses: 211   distinct name keys: 205
+========================================================================
+  with an extractable meaning .... 38 (18.01%)
+  content tokens (total) ......... 48
+  tokens that ARE a visible en lemma 36 (75.00%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 175
+      1: 25
+      2: 10
+      3: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'یگانه' -> 'one'
+      'امان\u200cپور' -> 'son [of]'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 66 (31.28%)
+  distinct such names: 64
+         2  'پوتین'
+         2  'ماسک'
+         1  'صدر'
+         1  'گلی'
+         1  'اختر'
+         1  'جعفری'
+         1  'مبارک'
+         1  'تاجیک'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          2  'rose'
+          2  'crown'
+          2  'rafsanjan'   [no en lexeme]
+          1  'flower'
+          1  'planet'
+          1  'firm'
+          1  'fixed'
+          1  'countryman'
+          1  'farmer'
+          1  'nankali'   [no en lexeme]
+          1  'ali'   [no en lexeme]
+          1  'tehran'   [no en lexeme]
+          1  'wise'
+          1  'intelligent'
+          1  'khamaneh'   [no en lexeme]
+          1  'glory'
+          1  'engraver'
+          1  'parthian'   [no en lexeme]
+          1  'person'
+          1  'guard'
+          1  'watch'
+          1  'merchant'
+          1  'blacksmith'
+          1  'demon'
+          1  'big'
+          1  'great'
+          1  'jewellery'
+          1  'heat'
+          1  'warmth'
+          1  'portable'
+
+========================================================================
+LANG ga   type=SURNAME   senses: 40   distinct name keys: 40
+========================================================================
+  with an extractable meaning .... 28 (70.00%)
+  content tokens (total) ......... 43
+  tokens that ARE a visible en lemma 26 (60.47%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 12
+      1: 14
+      2: 13
+      3: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 0 (0.00%)
+  distinct such names: 0
+
+--- TOP MEANING TOKENS (flood detection) ---
+         11  'descendant'
+          2  'faolán'   [no en lexeme]
+          2  'servant'
+          1  'muldoon'   [no en lexeme]
+          1  'brádach'   [no en lexeme]
+          1  'doherty'   [no en lexeme]
+          1  'burgh'
+          1  'mccarthy'   [no en lexeme]
+          1  'grandchild'
+          1  'casey'   [no en lexeme]
+          1  'conall'   [no en lexeme]
+          1  'conn'
+          1  'daibhéad'   [no en lexeme]
+          1  'david'   [no en lexeme]
+          1  'abbot'
+          1  'prisoner'
+          1  'captive'
+          1  'gowan'
+          1  'conghalach'   [no en lexeme]
+          1  'carter'
+          1  'abraham'   [no en lexeme]
+          1  'adair'   [no en lexeme]
+          1  'macadam'
+          1  'joyce'   [no en lexeme]
+          1  'seed'
+          1  'red'
+          1  'haired'
+          1  'bran'
+          1  'comán'   [no en lexeme]
+          1  'bearán'   [no en lexeme]
+
+========================================================================
+LANG he   type=SURNAME   senses: 84   distinct name keys: 83
+========================================================================
+  with an extractable meaning .... 23 (27.38%)
+  content tokens (total) ......... 32
+  tokens that ARE a visible en lemma 23 (71.88%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 61
+      1: 17
+      2: 4
+      3: 1
+      4: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 27 (32.14%)
+  distinct such names: 27
+         1  'צור'
+         1  'לוי'
+         1  'בר'
+         1  'עז'
+         1  'סדן'
+         1  'פלג'
+         1  'טל'
+         1  'פרס'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          1  'will'
+          1  'join'
+          1  'wheat'
+          1  'peleg'   [no en lexeme]
+          1  'descend'
+          1  'dew'
+          1  'lion'
+          1  'lord'
+          1  'gave'   [no en lexeme]
+          1  'decide'
+          1  'einstein'
+          1  'edelstein'   [no en lexeme]
+          1  'yahweh'   [no en lexeme]
+          1  'mighty'
+          1  'light'
+          1  'lauber'   [no en lexeme]
+          1  'gift'
+          1  'hand'
+          1  'width'
+          1  'maimonides'   [no en lexeme]
+          1  'rosenblum'   [no en lexeme]
+          1  'build'
+          1  'banks'   [no en lexeme]
+          1  'spark'
+          1  'strong'
+          1  'gazelle'
+          1  'young'
+          1  'noble'
+          1  'man'
+          1  'bimbo'   [no en lexeme]
+
+========================================================================
+LANG hi   type=SURNAME   senses: 160   distinct name keys: 154
+========================================================================
+  with an extractable meaning .... 54 (33.75%)
+  content tokens (total) ......... 64
+  tokens that ARE a visible en lemma 27 (42.19%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 106
+      1: 45
+      2: 8
+      3: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 42 (26.25%)
+  distinct such names: 41
+         2  'राँझा'
+         1  'लाल'
+         1  'सिंह'
+         1  'मित्रा'
+         1  'ईरानी'
+         1  'राज'
+         1  'गुप्त'
+         1  'इक़बाल'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          5  'vedas'   [no en lexeme]
+          4  'knowing'
+          3  'gandhi'   [no en lexeme]
+          2  'nehru'   [no en lexeme]
+          2  'army'
+          1  'caressed'   [no en lexeme]
+          1  'khandela'   [no en lexeme]
+          1  'mitra'
+          1  'iran'   [no en lexeme]
+          1  'royalty'
+          1  'kingdom'
+          1  'realm'
+          1  'race'
+          1  'obama'   [no en lexeme]
+          1  'prabhu'   [no en lexeme]
+          1  'arora'   [no en lexeme]
+          1  'prince'
+          1  'rai'
+          1  'shastri'
+          1  'macron'
+          1  'maheshwari'   [no en lexeme]
+          1  'pathak'   [no en lexeme]
+          1  'madhav'   [no en lexeme]
+          1  'mishra'   [no en lexeme]
+          1  'large'
+          1  'hill'
+          1  'verma'   [no en lexeme]
+          1  'storekeeper'
+          1  'familiar'
+          1  'madrecha'   [no en lexeme]
+
+========================================================================
+LANG is   type=SURNAME   senses: 49   distinct name keys: 49
+========================================================================
+  with an extractable meaning .... 4 (8.16%)
+  content tokens (total) ......... 3
+  tokens that ARE a visible en lemma 3 (100.00%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 46
+      1: 3
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Claessen' -> 'son'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 0 (0.00%)
+  distinct such names: 0
+
+--- TOP MEANING TOKENS (flood detection) ---
+          1  'scale'
+          1  'fire'
+          1  'sandal'
+
+========================================================================
+LANG ja   type=SURNAME   senses: 4450   distinct name keys: 3897
+========================================================================
+  with an extractable meaning .... 525 (11.80%)
+  content tokens (total) ......... 902
+  tokens that ARE a visible en lemma 855 (94.79%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 3952
+      1: 219
+      2: 203
+      3: 45
+      4: 24
+      5: 2
+      6: 5
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      '新' -> 'new'
+      '里' -> 'short'
+      '川崎' -> 'river'
+      '川端' -> 'river'
+      '川口' -> 'river'
+      '河内' -> 'river'
+      '河内' -> 'river'
+      '河内' -> 'river'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 924 (20.76%)
+  distinct such names: 674
+        11  '日向'
+         9  '平'
+         9  '行方'
+         9  'チョン'
+         8  '神代'
+         7  '長'
+         7  '水口'
+         7  '大神'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         33  'stem'
+         33  'continuative'
+         16  'little'
+         12  'stone'
+         11  'great'
+         11  'out'
+         11  'white'
+         10  'mountain'
+         10  'water'
+         10  'tree'
+         10  'large'
+          9  'upper'
+          8  'bird'
+          8  'small'
+          7  'japanese'   [no en lexeme]
+          7  'come'
+          6  'rice'
+          6  'sun'
+          6  'high'
+          6  'rock'
+          5  'plant'
+          5  'east'
+          5  'field'
+          5  'big'
+          5  'flat'
+          5  'well'
+          5  'five'
+          5  'gold'
+          4  'coined'   [no en lexeme]
+          4  'character'
+
+========================================================================
+LANG ko   type=SURNAME   senses: 98   distinct name keys: 81
+========================================================================
+  with an extractable meaning .... 11 (11.22%)
+  content tokens (total) ......... 13
+  tokens that ARE a visible en lemma 11 (84.62%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 88
+      1: 8
+      2: 1
+      3: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      '오' -> 'Wu'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 53 (54.08%)
+  distinct such names: 43
+         3  '전'
+         3  '장'
+         2  '한'
+         2  '노'
+         2  '흄'
+         2  '허'
+         2  '염'
+         2  '풍'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          1  'power'
+          1  'classifier'
+          1  'coffins'   [no en lexeme]
+          1  'corpses'   [no en lexeme]
+          1  'dong'
+          1  'calabash'
+          1  'flourish'
+          1  'gold'
+          1  'metal'
+          1  'yellow'
+          1  'judge'
+          1  'jade'
+          1  'lion'
+
+========================================================================
+LANG la   type=SURNAME   senses: 1408   distinct name keys: 781
+========================================================================
+  with an extractable meaning .... 249 (17.68%)
+  content tokens (total) ......... 353
+  tokens that ARE a visible en lemma 308 (87.25%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 1173
+      1: 139
+      2: 82
+      3: 9
+      4: 2
+      5: 3
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Curtius' -> 'short'
+      'Curtius' -> 'short'
+      'Valgius' -> '-y'
+      'Veturius' -> 'old'
+      'Veturius' -> 'old'
+      'Novius' -> 'new'
+      'Novius' -> 'new'
+      'Plautius' -> '-y'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 28 (1.99%)
+  distinct such names: 16
+         5  'Silanus'
+         2  'Morus'
+         2  'Favonius'
+         2  'Tullius'
+         2  'Flaminius'
+         2  'Rufius'
+         2  'Cervarius'
+         2  'Caesius'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         14  'roman'
+         13  'cognomen'
+          8  'young'
+          6  'five'
+          6  'red'
+          4  'dedicated'
+          4  'seventh'
+          4  'thin'
+          4  'donkey'
+          4  'reddish'
+          4  'king'
+          4  'hoary'
+          4  'legendary'
+          4  'bear'
+          3  'bean'
+          3  'thief'
+          3  'eyed'
+          2  'giunta'   [no en lexeme]
+          2  'eighth'
+          2  'latin'   [no en lexeme]
+          2  'profit'
+          2  'bald'
+          2  'locke'   [no en lexeme]
+          2  'waterfall'
+          2  'downpour'
+          2  'rustic'
+          2  'yokel'   [no en lexeme]
+          2  'tarquinii'   [no en lexeme]
+          2  'livid'
+          2  'good'
+
+========================================================================
+LANG non   type=SURNAME   senses: 0   distinct name keys: 0
+========================================================================
+  with an extractable meaning .... 0 (n/a)
+  content tokens (total) ......... 0
+  tokens that ARE a visible en lemma 0 (n/a)
+  tokens-per-meaning histogram (6 = 6 or more):
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 0 (n/a)
+  distinct such names: 0
+
+--- TOP MEANING TOKENS (flood detection) ---
+
+========================================================================
+LANG pl   type=SURNAME   senses: 24580   distinct name keys: 13318
+========================================================================
+  with an extractable meaning .... 1089 (4.43%)
+  content tokens (total) ......... 1304
+  tokens that ARE a visible en lemma 1180 (90.49%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 23511
+      1: 879
+      2: 160
+      3: 19
+      4: 8
+      5: 2
+      6: 1
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Bogdał' -> 'God'
+      'Bogdał' -> 'God'
+      'Bogdała' -> 'God'
+      'Bogdała' -> 'God'
+      'Bogdoł' -> 'God'
+      'Bogdoł' -> 'God'
+      'Bugdol' -> 'God'
+      'Bugdol' -> 'God'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 2957 (12.03%)
+  distinct such names: 1591
+         4  'Kurz'
+         3  'Rędzina'
+         2  'Daniel'
+         2  'Bajan'
+         2  'Mach'
+         2  'Bor'
+         2  'Dragon'
+         2  'Gad'
+
+--- TOP MEANING TOKENS (flood detection) ---
+         27  'white'
+         18  'hair'
+         17  'grove'
+         16  'lock'
+         16  'oak'
+         16  'wolf'
+         15  'small'
+         14  'fight'
+         13  'forest'
+         12  'wildcat'
+         12  'mistletoe'
+         10  'person'
+         10  'goat'
+         10  'fish'
+         10  'wooden'
+         10  'pestle'
+          8  'aurochs'
+          8  'king'
+          8  'stalk'
+          8  'finch'
+          8  'paul'
+          8  'sparrow'
+          8  'gander'
+          8  'eagle'
+          8  'owl'
+          8  'tooth'
+          8  'vulture'
+          8  'bulrush'
+          8  'shoemaker'
+          8  'eurasian'   [no en lexeme]
+
+========================================================================
+LANG ru   type=SURNAME   senses: 1262   distinct name keys: 1154
+========================================================================
+  with an extractable meaning .... 88 (6.97%)
+  content tokens (total) ......... 112
+  tokens that ARE a visible en lemma 74 (66.07%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 1175
+      1: 67
+      2: 15
+      3: 5
+  meanings that tokenized to NOTHING (all stopwords/boilerplate):
+      'Лавров' -> 'a given name'
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 54 (4.28%)
+  distinct such names: 49
+         2  'Навальный'
+         2  'Петровский'
+         2  'Мин'
+         2  'Юань'
+         2  'Тан'
+         1  'По'
+         1  'Адамов'
+         1  'Гоголь'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          4  'bird'
+          2  'belonging'
+          2  'man'
+          2  'priest'
+          2  'peter'
+          2  'herdt'   [no en lexeme]
+          2  'sparrow'
+          2  'felgenhauer'   [no en lexeme]
+          2  'gordon'   [no en lexeme]
+          1  'adams'   [no en lexeme]
+          1  'lenin'   [no en lexeme]
+          1  'steel'
+          1  'goldeneye'
+          1  'bucephala'   [no en lexeme]
+          1  'clangula'   [no en lexeme]
+          1  'way'
+          1  'path'
+          1  'road'
+          1  'may'
+          1  'beetle'
+          1  'ktetor'
+          1  'bear'
+          1  'kalach'
+          1  'cannon'
+          1  'humpback'
+          1  'fat'
+          1  'anderson'   [no en lexeme]
+          1  'quiet'
+          1  'mild'
+          1  'meek'
+
+========================================================================
+LANG sa   type=SURNAME   senses: 3   distinct name keys: 3
+========================================================================
+  with an extractable meaning .... 1 (33.33%)
+  content tokens (total) ......... 2
+  tokens that ARE a visible en lemma 2 (100.00%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 2
+      2: 1
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 1 (33.33%)
+  distinct such names: 1
+         1  'पुरी'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          1  'stronghold'
+          1  'fortress'
+
+========================================================================
+LANG sw   type=SURNAME   senses: 3   distinct name keys: 3
+========================================================================
+  with an extractable meaning .... 0 (0.00%)
+  content tokens (total) ......... 0
+  tokens that ARE a visible en lemma 0 (n/a)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 3
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 0 (0.00%)
+  distinct such names: 0
+
+--- TOP MEANING TOKENS (flood detection) ---
+
+========================================================================
+LANG zh   type=SURNAME   senses: 1116   distinct name keys: 1013
+========================================================================
+  with an extractable meaning .... 17 (1.52%)
+  content tokens (total) ......... 27
+  tokens that ARE a visible en lemma 22 (81.48%)
+  tokens-per-meaning histogram (6 = 6 or more):
+      0: 1099
+      1: 9
+      2: 6
+      3: 2
+
+--- METHOD 2 (name lemma == visible same-language word) ---
+  name senses with a same-language word match: 113 (10.13%)
+  distinct such names: 105
+         3  '哈基米'
+         2  '西門'
+         2  '牛頓'
+         2  '沙龍'
+         2  '川普'
+         2  '瓦特'
+         2  '薩克斯'
+         1  '大阪'
+
+--- TOP MEANING TOKENS (flood detection) ---
+          2  'lean'
+          2  'bend'
+          2  'gold'
+          1  'osaka'   [no en lexeme]
+          1  'tianzhong'   [no en lexeme]
+          1  'township'
+          1  'chief'
+          1  'head'
+          1  'governor'
+          1  'castle'
+          1  'mountain'
+          1  'huzhou'   [no en lexeme]
+          1  'xianbei'   [no en lexeme]
+          1  'merit'
+          1  'dog'
+          1  'hereditary'
+          1  'clan'
+          1  'house'
+          1  'green'
+          1  'hobbler'
+          1  'king'
+          1  'royal'
+          1  'beetle'
+          1  'kumārāyana'   [no en lexeme]
+
+========================================================================
+CROSS-LANGUAGE NAME KEY OVERLAP   type=surname
+========================================================================
+  distinct name keys (all langs) .... 74132
+  keys in 2+ languages .............. 2868 (3.87%)
+      in 2 languages: 2782
+      in 3 languages: 75
+      in 4 languages: 11
+  most widely shared keys:
+        4 langs  'schwartz'
+        4 langs  'sadowski'
+        4 langs  'poniatowski'
+        4 langs  'czartoryski'
+        4 langs  'kowalski'
+        4 langs  'malaspina'
+        4 langs  'stein'
+        4 langs  'stern'
+        4 langs  'goethe'
+        4 langs  'majewski'
+        4 langs  'schwarz'
+        3 langs  'nagy'
+        3 langs  'gruber'
+        3 langs  'bender'
+        3 langs  'weintraub'
+        3 langs  'sobek'
+        3 langs  'goldfarb'
+        3 langs  'hauschild'
+        3 langs  'renault'
+        3 langs  'frankenstein'
+

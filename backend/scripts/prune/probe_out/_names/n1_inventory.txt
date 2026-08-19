@@ -1,0 +1,2091 @@
+========================================================================
+LANG ang  (script Latn)   name senses: 1953   name lexemes: 1770
+========================================================================
+  FORM_OF            17 (0.87%)
+      'Hannibale': dative/nominative singular of Hannibal
+      'West-Seaxe': alternative spelling of Westseaxe
+      'Friesa': alternative form of Frysa
+      'Wesseaxna': alternative form of Westseaxna
+      'Egipta land': alternative form of Egypta land
+      'Byrhtnoþ': alternative form of Berhtnōþ
+      'Wessexna': alternative form of Westseaxna
+      'Wendelas': alternative form of Wendlas
+  GIVEN            1053 (53.92%)
+      'Daniel': a male given name, equivalent to English Daniel
+      'Andreas': a male given name
+      'Harold': a male given name
+      'Cuda': a male given name
+      'Gold': a male given name
+      'Alda': a male given name
+      'Bar': a male given name
+      'Beda': a male given name, notably held by the Venerable Bede.
+  SURNAME             0 (0.00%)
+  PATRONYMIC          1 (0.05%)
+      'Bruning': a patronymic name
+  PLACE             142 (7.27%)
+      'Tigris': Tigris (a river in West Asia)
+      'Italia': Italy (a country in Southern Europe)
+      'Sicilia': Sicily (an island and former kingdom in Europe)
+      'Lewes': Lewes (a town in East Sussex, England)
+      'Carr': Charmouth (a village in Dorset, England)
+      'Carr': Carhampton (a village in Somerset, England)
+      'Irland': Ireland (a country in northwestern Europe)
+      'Tina': Tyne (a river in the counties of Northumberland and Tyne and Wear, in no
+  OTHER             740 (37.89%)
+      'December': December
+      'November': November
+      'Armenia': Armenia
+      'Ethiopia': Ethiopia
+      'Syria': Syria
+      'Scotland': land of the Scots in Hibernia, i.e. Ireland (a large island of Northern 
+      'Scotland': land of the Scots in Britain, i.e. Scotland (a medieval kingdom in North
+      'Rom': Rome (a major city in Italy)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 1053 (53.92%)
+  distinct lexemes ............... 1051
+  distinct normalized lemmas ..... 1049
+  gender m/f/u ................... 893 / 160 / 0
+  flag diminutive             4
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       1789  "{'name': 'Old English entries with incorrect language header"
+       1745  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       1540  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       1046  "{'name': 'Old English given names', 'kind': 'other', 'parent"
+        894  "{'name': 'Old English male given names', 'kind': 'other', 'p"
+        159  "{'name': 'Old English female given names', 'kind': 'other', "
+        133  "{'name': 'Places in England', 'kind': 'place', 'parents': ['"
+        103  "{'name': 'Old English pluralia tantum', 'kind': 'other', 'pa"
+         78  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+         69  "{'name': 'Demonyms', 'kind': 'other', 'parents': [], 'source"
+         51  "{'name': 'Old English terms suffixed with -ing (son)', 'kind"
+         43  "{'name': 'Old English entries with etymon', 'kind': 'other',"
+--- top raw_tags on name senses ---
+        677  'masculine'
+        117  'feminine'
+         80  'plural'
+         41  'neuter'
+         16  'Anglian'
+         16  'alt-of'
+         16  'alternative'
+         11  'historical'
+         10  'poetic'
+         10  'West-Saxon'
+          8  'reconstruction'
+          4  'in-plural'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          4  'the land of the'
+          3  'the mouth of the'
+          2  'the welsh'
+          2  'a personification of the'
+          2  'the angles, english, people'
+          2  'the romans'
+          2  'the carthaginians'
+          2  'the burgundians'
+          2  'the isle of thanet'
+          2  'a location in england,'
+          2  'the danes'
+          1  'an african'
+          1  'the english language; old'
+          1  'a scot'
+          1  'an irishman'
+
+========================================================================
+LANG ar  (script Arab)   name senses: 2724   name lexemes: 2302
+========================================================================
+  FORM_OF             2 (0.07%)
+      'استانبول': alternative spelling of إِسْتَانْبُول (ʔistanbūl)
+      'سانت فنسنت وجزر غرينادين': alternative form of سَانْت فِينْسِنْت وَجُزُر غْرِينَادِين (sānt fīnsint
+  GIVEN             547 (20.08%)
+      'حسن': a male given name, Hasan or Hassan
+      'مسلم': a male given name
+      'جمال': a male given name, Jamal or Gamal
+      'رمضان': a male given name
+      'جميل': a male given name, Jamil or Jameel, feminine equivalent جَمِيلَة (jamīla
+      'ميكائيل': a male given name, equivalent to English Michael
+      'زياد': a male given name, Ziyad
+      'أمل': a female given name, Amal
+  SURNAME            83 (3.05%)
+      'نجار': a surname
+      'شاهين': a surname, Shahin or Chahine
+      'شهاب': a surname
+      'عباس': a surname, Abbas
+      'نقاش': a surname
+      'الأمين': a surname, al-Amin
+      'هلال': a surname
+      'درويش': a surname, Darwish
+  PATRONYMIC          0 (0.00%)
+  PLACE             667 (24.49%)
+      'المغرب': Morocco (a country in North Africa)
+      'فلسطين': Palestine (a country in Western Asia, in the Middle East; the State of P
+      'اليابان': Japan (a country in East Asia)
+      'إيران': Iran (a country in West Asia)
+      'الأردن': Jordan (a country in West Asia in the Middle East)
+      'الأردن': Jordan (a river in West Asia in the Middle East, that empties into the D
+      'الصين': China (a region and country in East Asia)
+      'مصر': Egypt (a country in North Africa and West Asia)
+  OTHER            1425 (52.31%)
+      'حماس': Hamas (a Palestinian Islamist militant group and political organization)
+      'فاس': Fez (the capital city of the region of Fez-Meknes, Morocco)
+      'المغرب': Maghreb (the predominantly Arabic-speaking geographic region comprising 
+      'السلطة الوطنية الفلسطينية': Palestinian National Authority
+      'حسن': Ḥasan ibn ʕaliyy, the grandson and a revered companion of Muhammad, and 
+      'سيدني': Sydney (the capital city of New South Wales, Australia)
+      'الصين': Shambhala, an occulted land where particularly pious Druze are believed 
+      'مصر': Cairo (the capital and largest city of Egypt)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 630 (23.13%)
+  distinct lexemes ............... 604
+  distinct normalized lemmas ..... 603
+  gender m/f/u ................... 416 / 124 / 84
+  flag multiword              115
+  flag diminutive             5
+  romanization present ........... 601 (99.50% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       2176  "{'name': 'Arabic entries with incorrect language header', 'k"
+       1561  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       1476  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        688  "{'name': 'Arabic feminine terms lacking feminine ending', 'k"
+        536  "{'name': 'Arabic given names', 'kind': 'other', 'parents': ["
+        489  "{'name': 'Arabic nouns with basic triptote singular', 'kind'"
+        413  "{'name': 'Arabic male given names', 'kind': 'other', 'parent"
+        338  "{'name': 'Arabic nouns with basic diptote singular', 'kind':"
+        302  "{'name': 'Arabic entries with etymon', 'kind': 'other', 'par"
+        268  "{'name': 'Arabic entries with etymology texts', 'kind': 'oth"
+        243  "{'name': 'Arabic nouns with triptote singular in -a', 'kind'"
+        212  "{'name': 'Arabic entries referencing missing etymons', 'kind"
+--- top raw_tags on name senses ---
+         56  'historical'
+         47  'error-lua-exec'
+         19  'archaic'
+         17  'masculine'
+         16  'obsolete'
+         14  'Iraq'
+         14  'feminine'
+         12  'Levantine'
+         10  'Judaism'
+          9  'Egyptian'
+          8  'broadly'
+          7  'plural'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+         18  'the meaning of this'
+          4  'a diminutive of the'
+          3  'the bible'
+          2  'the islamic prophet muhammad'
+          2  'the 47th sura (chapter)'
+          2  'the 38th sura (chapter)'
+          2  'the 50th sura (chapter)'
+          2  'the 14th sura (chapter)'
+          2  'the two cities of'
+          2  'the archangel michael'
+          2  'the archangel gabriel'
+          2  'the 80th sura (chapter)'
+          2  'the 41st sura (chapter)'
+          2  'the 12th sura (chapter)'
+          2  'the southern ocean'
+
+========================================================================
+LANG cy  (script Latn)   name senses: 1510   name lexemes: 1284
+========================================================================
+  FORM_OF             3 (0.20%)
+      'Anwn': variant spelling of Annwn, the Welsh Otherworld.
+      'Aipht': obsolete spelling of yr Aifft (“Egypt”)
+      'Ffilipinau': alternative form of y Philipinau (“the Philippines”)
+  GIVEN             280 (18.54%)
+      'Paul': a male given name, equivalent to English Paul
+      'Andreas': a male given name from Ancient Greek Ἀνδρέᾱς (Andréās), equivalent to En
+      'Arwel': a male given name
+      'Megan': a female given name
+      'Arthur': a male given name from arth (“bear”)
+      'Lowri': a female given name, equivalent to English Laura
+      'Samuel': a male given name, equivalent to English Samuel
+      'Awen': a female given name, meaning inspiration
+  SURNAME             8 (0.53%)
+      'Elgan': a surname
+      'Gruffudd': a surname originating as a patronymic
+      'ap Ifan': a surname originating as a patronymic, meaning "son of Ifan"
+      'Rhys': a surname originating as a patronymic
+      'Carew': a surname
+      'Goch': a surname originating as a patronymic
+      'Gwilym': a surname
+      'Cadwaladr': a surname
+  PATRONYMIC          0 (0.00%)
+  PLACE             386 (25.56%)
+      'Japan': Japan (a country in East Asia)
+      'Israel': Israel (a country in Western Asia in the Middle East, at the eastern sho
+      'Estonia': Estonia (a country in northeastern Europe, on the southeastern coast of 
+      'Sweden': Sweden (a country in Scandinavia in Northern Europe)
+      'Algeria': Algeria (a country in North Africa)
+      'Albania': Albania (a country in Southeastern Europe)
+      'Armenia': Armenia (a country in the South Caucasus region of Asia, sometimes consi
+      'Angola': Angola (a country in Southern Africa)
+  OTHER             833 (55.17%)
+      'Andorra': Andorra (a microstate in Southern Europe, between Spain and France)
+      'Bahrain': Bahrain (an archipelago, island, and country in West Asia in the Persian
+      'Bahamas': Bahamas (an archipelago and country in the Caribbean; official name: Cym
+      'Ethiopia': Ethiopia (sub-Saharan Africa, especially the parts south of Egypt and al
+      'Comoros': the Comoros (an archipelago consisting of the Union of the Comoros and t
+      'Liechtenstein': Liechtenstein (a microstate in Central Europe)
+      'Mongolia': Mongolia (a Mongolian-speaking geographic region in East Asia, including
+      'Malta': Malta (an archipelago and country in Southern Europe, in the Mediterrane
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 288 (19.07%)
+  distinct lexemes ............... 282
+  distinct normalized lemmas ..... 282
+  gender m/f/u ................... 168 / 114 / 5
+  flag diminutive             2
+  flag multiword              1
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       1307  "{'name': 'Welsh entries with incorrect language header', 'ki"
+       1227  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+        913  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        277  "{'name': 'Welsh given names', 'kind': 'other', 'parents': []"
+        172  "{'name': 'Welsh male given names', 'kind': 'other', 'parents"
+        168  "{'name': 'Welsh links with redundant wikilinks', 'kind': 'ot"
+        149  "{'name': 'Places in Wales', 'kind': 'place', 'parents': ['Pl"
+        147  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+        113  "{'name': 'Welsh female given names', 'kind': 'other', 'paren"
+         79  "{'name': 'Bible', 'kind': 'other', 'parents': [], 'source': "
+         69  "{'name': 'Languages', 'kind': 'other', 'parents': [], 'sourc"
+         68  "{'name': 'Welsh exonyms', 'kind': 'other', 'parents': [], 's"
+--- top raw_tags on name senses ---
+        669  'feminine'
+        568  'masculine'
+        316  'not-mutable'
+         30  'literary'
+         28  'historical'
+         14  'Greek'
+         12  'Roman'
+         11  'obsolete'
+         10  'by-personal-gender'
+          6  'dated'
+          4  'broadly'
+          4  'rare'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+         12  'the milky way'
+          6  'a prophet, author of'
+          4  'the lord (god)'
+          3  'the gospel of st'
+          2  'the book of amos'
+          2  "the lord's prayer, our"
+          2  'the autumnal equinox'
+          2  'the vernal equinox'
+          2  'the national library of'
+          2  'the roman catholic church'
+          2  'the acts of the'
+          2  'the sandman'
+          2  'the arctic circle'
+          2  'the antarctic circle'
+          2  'the woodland choir (wild'
+
+========================================================================
+LANG de  (script Latn)   name senses: 10742   name lexemes: 9360
+========================================================================
+  FORM_OF            64 (0.60%)
+      'Rußland': Formerly standard spelling of Russland which was deprecated in the spell
+      'Egypten': Obsolete spelling of Ägypten which was deprecated in 1902 following the 
+      'Mazedonien': alternative form of Makedonien:
+      'Mazedonien': alternative form of Makedonien:
+      'Mazedonien': alternative form of Makedonien:
+      'Mazedonien': alternative form of Makedonien:
+      'Weißrußland': Formerly standard spelling of Weißrussland which was deprecated in the s
+      'Katmandu': alternative spelling of Kathmandu
+  GIVEN            1162 (10.82%)
+      'Fabian': a male given name
+      'Fanny': a female given name from English, equivalent to English Fanny
+      'Victoria': a female given name from Latin, variant of Viktoria
+      'Leon': a male given name, variant of Leo
+      'Christian': a male given name, feminine equivalent Christiane, Christina, or Christi
+      'Laura': a female given name
+      'Ursula': a female given name, very popular in German-speaking countries from the 
+      'Albert': a male given name from Old High German
+  SURNAME          1930 (17.97%)
+      'Darwin': Darwin (English surname)
+      'Apfel': a surname
+      'Feder': a surname, equivalent to English Feather
+      'Albert': a surname originating as a patronymic
+      'Limburg': a surname transferred from the place name
+      'Hesse': a habitational surname for an inhabitant of Hesse
+      'Leberl': an Austrian or Bavarian surname
+      'Herbst': a surname from Middle High German
+  PATRONYMIC          0 (0.00%)
+  PLACE            4350 (40.50%)
+      'Haus': a municipality of Styria, Austria
+      'Japan': Japan (a country in East Asia)
+      'Israel': Israel (a country in Western Asia in the Middle East, at the eastern sho
+      'Malaysia': Malaysia (a country in Southeast Asia)
+      'Angola': Angola (a country in Southern Africa)
+      'Burundi': Burundi (a country in East Africa)
+      'Bhutan': Bhutan (a country in South Asia, in the Himalayas)
+      'Botswana': Botswana (a country in Southern Africa)
+  OTHER            3236 (30.12%)
+      'CIA': CIA (US foreign-intelligence agency)
+      'FBI': FBI (Federal Bureau of Investigation)
+      'NASA': NASA (abbreviation of National Aeronautics and Space Administration)
+      'Esperanto': Esperanto
+      'NATO': NATO
+      'UdSSR': USSR (a former transcontinental country in Europe and Asia (1922–1991), 
+      'Eurovision': Eurovision (a European broadcasting system, created by the European Broa
+      'Eurovision': Eurovision (the Eurovision Song Contest)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 3092 (28.78%)
+  distinct lexemes ............... 3028
+  distinct normalized lemmas ..... 2921
+  gender m/f/u ................... 593 / 2447 / 51
+  flag diminutive             124
+  flag given+surname          46
+  flag multiword              3
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       8611  "{'name': 'German entries with incorrect language header', 'k"
+       7317  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       5038  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       2187  "{'name': 'Places in Germany', 'kind': 'place', 'parents': ['"
+       1963  "{'name': 'German surnames', 'kind': 'other', 'parents': [], "
+       1353  "{'name': 'Places in Austria', 'kind': 'place', 'parents': ['"
+       1206  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+       1177  "{'name': 'German entries with etymon', 'kind': 'other', 'par"
+       1129  "{'name': 'German given names', 'kind': 'other', 'parents': ["
+       1049  "{'name': 'Pages using etymon with no ID', 'kind': 'other', '"
+       1018  "{'name': 'German entries referencing missing etymons', 'kind"
+        631  "{'name': 'Towns in Germany', 'kind': 'place', 'parents': ['T"
+--- top raw_tags on name senses ---
+       9490  'proper-noun'
+       5862  'neuter'
+       2788  'masculine'
+       2452  'feminine'
+       1819  'surname'
+       1738  'strong'
+        734  'definite'
+        730  'usually'
+        399  'no-plural'
+        257  'historical'
+         82  'plural'
+         77  'plural-only'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+         24  'a diminutive of the'
+         19  'a right tributary of'
+         18  'a left tributary of'
+         15  'a tributary of the'
+          7  'the former name of'
+          4  'an urban hromada in'
+          4  'the gospel according to'
+          4  'a municipal subdivision in'
+          3  'the air force of'
+          3  'the deutsche reich'
+          3  'a party in a'
+          3  'the name of several'
+          3  'a shieldmaiden and valkyrie'
+          3  'the television newscast of'
+          3  'a quarter in bonn,'
+
+========================================================================
+LANG el  (script Grek)   name senses: 2582   name lexemes: 2111
+========================================================================
+  FORM_OF            39 (1.51%)
+      'Λέσβο': alternative form of Λέσβε (Lésve), vocative singular of Λέσβος (Lésvos)
+      'ΠαΣοΚ': alternative form of ΠΑΣΟΚ (PASOK)
+      'Βλαντίμιρ': transliteration of Vladimir (Russian male name)
+      'Κύπρο': alternative form of Κύπρε (Kýpre), vocative singular of Κύπρος (Kýpros)
+      'Ωρίωνος': the ancient genitive of Ωρίων (Oríon) (see Ὠρίωνος (Ōríōnos)) modern: Ωρ
+      'Ωρίωνα': accusative/vocative singular of Ωρίωνας (Oríonas)
+      'Άρτεμη': standard form of the formal of Άρτεμις (Ártemis)
+      'Αμοργό': alternative form of Αμοργέ (Amorgé), vocative singular of Αμοργός (Amorg
+  GIVEN             472 (18.28%)
+      'Κυριακή': a female given name
+      'Άγγελος': a male given name, Angelos, equivalent to English Angelo
+      'Αχιλλέας': a male given name, equivalent to English Achilles
+      'Αλέξανδρος': a male given name, Alexandros, equivalent to English Alexander
+      'Μαρία': a female given name from Hebrew, equivalent to English Mary or Maria
+      'Γαβριήλ': a male given name, Gavriil, from Hebrew, equivalent to English Gabriel
+      'Πέτρος': a male given name, Petros, equivalent to English Peter
+      'Φίλιππος': a male given name, Filippos, equivalent to English Philip
+  SURNAME           139 (5.38%)
+      'Άγγελος': a male surname, feminine equivalent Αγγέλου (Angélou)
+      'Χάρις': a transliteration of the English surname Harris
+      'Χέμινγουεϊ': a transliteration of the English surname Hemingway
+      'Βενετσιάνος': a male surname
+      'Βενιζέλος': Venizelos, a male surname.
+      'Κωστάκης': a male surname, feminine equivalent Κωστάκη (Kostáki)
+      'Γιαννάκης': a male surname originating as a patronymic, feminine equivalent Γιαννάκη
+      'Αγγέλου': a common-gender surname
+  PATRONYMIC          1 (0.04%)
+      'Αχαιός': Achaeus (patronymic)
+  PLACE             624 (24.17%)
+      'Ισραήλ': Israel (a country in Western Asia in the Middle East, at the eastern sho
+      'Ελλάδα': Greece (a country in Southeastern Europe)
+      'Κύπρος': Cyprus (an island and country in the Mediterranean Sea, normally conside
+      'Ηνωμένα Αραβικά Εμιράτα': United Arab Emirates (a country in West Asia in the Middle East)
+      'Ιταλία': Italy (a country in Southern Europe)
+      'Πολωνία': Poland (a country in Central Europe)
+      'Μεξικό': Mexico, United Mexican States (a country in North America; official name
+      'Κολομβία': Colombia (a country in South America)
+  OTHER            1307 (50.62%)
+      'Ισραήλ': Israel (a Biblical region of Western Asia roughly coextensive with the m
+      'Ισραήλ': Israel (an ancient kingdom in Western Asia, roughly coextensive with the
+      'Ισραήλ': Israel (an ancient kingdom that occupied the northern part of the Land o
+      'Ισραήλ': Israel (a name given to the Jewish patriarch Jacob)
+      'Ισραήλ': the Hebrew people, the children of Israel
+      'Μακεδονία': Macedon, Macedonia (an ancient Greek kingdom in the north of the Greek p
+      'Μακεδονία': Macedonia (an administrative region of Greece)
+      'Μακεδονία': Macedonia (a broader region of the Balkan peninsula, consisting of the a
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 611 (23.66%)
+  distinct lexemes ............... 562
+  distinct normalized lemmas ..... 558
+  gender m/f/u ................... 361 / 222 / 28
+  flag diminutive             68
+  flag given+surname          30
+  flag multiword              1
+  romanization present ........... 562 (100.00% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       2175  "{'name': 'Greek entries with incorrect language header', 'ki"
+       1943  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       1929  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        345  "{'name': 'Greek given names', 'kind': 'other', 'parents': []"
+        267  '{\'name\': "Greek nouns declining like \'αγγλοκρατία\'", \'kind\':'
+        233  "{'name': 'Places in Greece', 'kind': 'place', 'parents': ['P"
+        222  "{'name': 'Greek male given names', 'kind': 'other', 'parents"
+        145  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+        130  "{'name': 'Greek female given names', 'kind': 'other', 'paren"
+        129  "{'name': 'Islands', 'kind': 'other', 'parents': [], 'source'"
+        121  "{'name': 'Greek pluralia tantum', 'kind': 'other', 'parents'"
+        111  "{'name': 'Astronomy', 'kind': 'other', 'parents': [], 'sourc"
+--- top raw_tags on name senses ---
+       1153  'feminine'
+        897  'masculine'
+        445  'neuter'
+        309  'indeclinable'
+        141  'plural'
+        108  'Greek'
+         58  'historical'
+         44  'uncountable'
+         35  'singular'
+         35  'colloquial'
+         29  'alt-of'
+         26  'alternative'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          8  'a saint whose feast'
+          8  'a shortened, everyday form'
+          2  'the levant, levanter (an'
+          2  'the biblical disciple of'
+          2  'a more anglicised pronunciation'
+          2  'a name commonly applied'
+          1  'the hebrew people, the'
+          1  'the north pole'
+          1  'the pole star, polaris'
+          1  'the english, the english'
+          1  'the parthenon is a'
+          1  'the planet saturn'
+          1  'the planet venus'
+          1  'the least bright star'
+          1  'the french people (collectively)'
+
+========================================================================
+LANG en  (script Latn)   name senses: 209022   name lexemes: 140491
+========================================================================
+  FORM_OF           927 (0.44%)
+      'JUL': Alternative letter-case form of Jul (“July”).
+      'The Netherlands': Alternative letter-case form of the Netherlands.
+      'The Bahamas': Alternative letter-case form of the Bahamas.
+      'QE': Alternative form of QEW.
+      'ME': Alternative letter-case form of Me (“Windows Me (Millennium Edition)”).
+      'gram': Alternative form of 'gram (“Instagram”)
+      'Kiev': Alternative form of Kyiv:
+      'Kiev': Alternative form of Kyiv:
+  GIVEN           11041 (5.28%)
+      'December': A female given name transferred from the month name [in turn from Englis
+      'January': A female given name transferred from the month name [in turn from Englis
+      'February': A female given name transferred from the month name [in turn from Englis
+      'April': A female given name transferred from the month name [in turn from Englis
+      'June': A female given name transferred from the month name [in turn from Englis
+      'June': A male given name, or more often nickname, for a boy who is junior to so
+      'July': A female given name from English.
+      'September': A male or female given name transferred from the month name [in turn fro
+  SURNAME         53722 (25.70%)
+      'December': A surname.
+      'April': A surname.
+      'July': A surname from French.
+      'Fabian': A surname.
+      'English': An English surname originally denoting a non-Celtic or non-Danish person
+      'Haus': A surname
+      'German': A surname.
+      'Irish': A surname originating as an ethnonym.
+  PATRONYMIC          9 (0.00%)
+      'Ivanovich': A transliteration of the Russian patronymic Ива́нович (Ivánovič, “son of
+      'Ivanovna': A transliteration of the Russian patronymic Ива́новна (Ivánovna, “daught
+      'Janaki': An epithet (patronymic) of Sita in Ramayana.
+      'Raghava': Epithet (patronymic) of Rāma, descendant of Raghu.
+      'Vladimirovich': A transliteration of the Russian patronymic Влади́мирович (Vladímirovič)
+      'Ilyinichna': a female patronymic, Ильинична
+      'Dmytrovych': A transliteration of the Ukrainian patronymic Дми́трович (Dmýtrovyč, “so
+      'Dmytrivna': A transliteration of the Ukrainian patronymic Дми́трівна (Dmýtrivna, “da
+  PLACE           92493 (44.25%)
+      'English': A number of places in the United States:
+      'English': A number of places in the United States:
+      'English': A number of places in the United States:
+      'English': A number of places in the United States:
+      'English': A number of places in the United States:
+      'German': A parish of the sheading of Glenfaba, Isle of Man.
+      'Mexico': A country in North America, located south of the United States, and nort
+      'Mexico': A municipality of the province of Pampanga, Central Luzon, Philippines.
+  OTHER           50830 (24.32%)
+      'pond': Chiefly in across the pond: the Atlantic Ocean.
+      'Pope Julius': A sixteenth-century gambling card game about which little is known.
+      'GNU FDL': Partial initialism of GNU Free Documentation License.
+      'December': The twelfth and last month of the Gregorian calendar, following November
+      'January': The first month of the Gregorian calendar, following the December of the
+      'February': The short month following January and preceding March in the Roman, Juli
+      'April': The fourth month of the Gregorian calendar, following March and precedin
+      'June': The sixth month of the Gregorian calendar, following May and preceding J
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 64763 (30.98%)
+  distinct lexemes ............... 60757
+  distinct normalized lemmas ..... 60136
+  gender m/f/u ................... 5060 / 4876 / 54363
+  flag diminutive             1382
+  flag given+surname          1374
+  flag multiword              210
+
+--- top raw `categories` values on name senses (shape discovery) ---
+     149937  "{'name': 'English entries with incorrect language header', '"
+     130126  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+     112903  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+      53042  "{'name': 'English surnames', 'kind': 'other', 'parents': [],"
+      34936  "{'name': 'Places in the United States', 'kind': 'place', 'pa"
+      22143  "{'name': 'Entries with translation boxes', 'kind': 'other', "
+      21532  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+      15805  "{'name': 'Places in England', 'kind': 'place', 'parents': ['"
+       9902  "{'name': 'Places in Australia', 'kind': 'place', 'parents': "
+       9822  "{'name': 'English given names', 'kind': 'other', 'parents': "
+       6937  "{'name': 'Villages in England', 'kind': 'place', 'parents': "
+       6839  "{'name': 'Cities in the United States', 'kind': 'place', 'pa"
+--- top raw_tags on name senses ---
+      20030  'uncountable'
+      19930  'countable'
+       3503  'historical'
+        939  'informal'
+        925  'slang'
+        820  'alt-of'
+        731  'Greek'
+        696  'US'
+        660  'rare'
+        609  'alternative'
+        496  'UK'
+        406  'obsolete'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+        521  'the name of a'
+        330  'the name of many'
+        243  'a suburban area in'
+        206  'the name of several'
+        205  'the ship of characters'
+        178  'a diminutive of the'
+        165  'a barangay of san'
+        156  'a large number of'
+        155  'a number of other'
+        125  'the station code of'
+        123  'a barangay of baguio,'
+        122  'the name of various'
+        113  'a number of rivers'
+        103  'the language of these'
+        103  'a language spoken in'
+
+========================================================================
+LANG es  (script Latn)   name senses: 9560   name lexemes: 7949
+========================================================================
+  FORM_OF            22 (0.23%)
+      'EEUU': alternative form of EE. UU.
+      'Québec': alternative form of Quebec:
+      'Québec': alternative form of Quebec:
+      'citano': alternative letter-case form of Citano
+      'Fórmula Uno': alternative form of Fórmula 1
+      'Addis Abbaba': alternative form of Addis Abeba
+      'México DF': alternative form of México D.F.
+      'Ceana': alternative letter-case form of CEANA
+  GIVEN            1366 (14.29%)
+      'Israel': a male given name from Hebrew, equivalent to English Israel
+      'Montserrat': a female given name transferred from the place name or from Catalan, sho
+      'Victoria': a female given name from Latin
+      'Salvador': a male given name
+      'Milton': a male given name
+      'Laura': a female given name from Latin
+      'Daniel': a male given name from Hebrew, equivalent to English Daniel
+      'Trinidad': a female given name, referring to the Holy Trinity
+  SURNAME          1924 (20.13%)
+      'Madrid': a surname
+      'Padua': a surname
+      'Quito': a surname
+      'Chamorro': a surname
+      'Frankenstein': a surname from German
+      'Japón': a surname
+      'Labrador': a surname
+      'Navidad': a surname
+  PATRONYMIC          0 (0.00%)
+  PLACE            2703 (28.27%)
+      'Israel': Israel (a country in Western Asia in the Middle East, at the eastern sho
+      'Estonia': Estonia (a country in northeastern Europe, on the southeastern coast of 
+      'Austria': Austria (a country in Central Europe)
+      'Albania': Albania (a country in Southeastern Europe; capital and largest city: Tir
+      'Armenia': Armenia (a country in the South Caucasus region of Asia, sometimes consi
+      'Armenia': Armenia (a city in Quindío department, Colombia)
+      'Armenia': Armenia (a town in Sonsonate department, El Salvador)
+      'Angola': Angola (a country in Southern Africa)
+  OTHER            3545 (37.08%)
+      'CIA': Agencia Central de Inteligencia; CIA (Central Intelligence Agency).
+      'FBI': Buró Federal de Investigación; FBI (Federal Bureau of Investigation).
+      'KGB': KGB (soviet KGB)
+      'BBC': Corporación Británica de Radiodifusión; BBC.
+      'Yugoslavia': Yugoslavia (a former country in Southeastern Europe in the Balkans, now 
+      'Israel': Jacob
+      'Andorra': Andorra (a microstate in Southern Europe, between Spain and France)
+      'Bahamas': Bahamas (an archipelago and country in the Caribbean)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 3290 (34.41%)
+  distinct lexemes ............... 3216
+  distinct normalized lemmas ..... 3154
+  gender m/f/u ................... 727 / 2495 / 68
+  flag diminutive             227
+  flag given+surname          35
+  flag multiword              32
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       7170  "{'name': 'Spanish entries with incorrect language header', '"
+       7156  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       2866  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       2130  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+       1699  "{'name': 'Spanish surnames', 'kind': 'other', 'parents': [],"
+       1595  "{'name': 'Spanish masculine and feminine nouns by sense', 'k"
+       1382  "{'name': 'Spanish nouns with irregular gender', 'kind': 'oth"
+       1190  "{'name': 'Spanish given names', 'kind': 'other', 'parents': "
+        863  "{'name': 'Pages with etymon', 'kind': 'other', 'parents': []"
+        855  "{'name': 'Pages using etymon with no ID', 'kind': 'other', '"
+        818  "{'name': 'Pages with 3 entries', 'kind': 'other', 'parents':"
+        738  "{'name': 'Spanish entries with etymology texts', 'kind': 'ot"
+--- top raw_tags on name senses ---
+       4973  'masculine'
+       4516  'feminine'
+       1883  'by-personal-gender'
+        310  'historical'
+        138  'plural'
+        127  'Greek'
+        125  'plural-only'
+         27  'colloquial'
+         22  'informal'
+         20  'alt-of'
+         18  'rare'
+         15  'dated'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+        106  'a department of chile'
+         26  'a department of colombia'
+         25  'a department of córdoba,'
+         19  'a department of guatemala'
+         15  'a department of uruguay'
+         15  'a department of honduras'
+         13  'a diminutive of the'
+         12  'a department of el'
+         10  'a department of paraguay'
+          6  'a department of bolivia'
+          4  'a name of various'
+          4  'a former department of'
+          3  'the full name of'
+          3  'a name of several'
+          3  'a place:'
+
+========================================================================
+LANG fa  (script Arab)   name senses: 2391   name lexemes: 1877
+========================================================================
+  FORM_OF            20 (0.84%)
+      'طهران': alternative form of تهران (tehrân):
+      'طهران': alternative form of تهران (tehrân):
+      'افریقا': alternative form of آفریقا (âfriqâ):
+      'افریقا': alternative form of آفریقا (âfriqâ):
+      'پهلوی': A Northwestern Iranian language:
+      'دال': name of the letter د
+      'زرادشت': obsolete spelling of زردشت
+      'بتلیس': alternative form of بدلیس (badlis)
+  GIVEN             532 (22.25%)
+      'سلم': a male given name from Avestan
+      'حسن': a male given name, Hasan or Hassan, from Arabic
+      'مسلم': a male given name from Arabic, equivalent to English Muslim
+      'جهان': a male or female given name, Jahan
+      'جمال': a male given name, Jamal
+      'رمضان': a male given name, Ramazan
+      'باب': a transliteration of the English male given name diminutive Bob
+      'شاهین': a male given name, Shahin, Shaahin, or Shaheen, from Middle Persian
+  SURNAME           211 (8.82%)
+      'صدر': a surname from Arabic, usually used by descendants of the Shi'ite Imam M
+      'گلی': a surname
+      'اختر': a surname, Akhtar
+      'جعفری': a surname, Jafari
+      'پوتین': a transliteration of the Russian surname Пу́тин (Pútin)
+      'پوتین': a transliteration of the Russian surname Пу́тин (Pútin)
+      'مبارک': a surname, Mobarak or Mubarak
+      'تاجیک': a surname, Tajik
+  PATRONYMIC          0 (0.00%)
+  PLACE             576 (24.09%)
+      'مصر': Egypt (a country in North Africa and West Asia)
+      'قطر': Qatar (a country in West Asia in the Middle East)
+      'ایالات متحده آمریکا': United States of America (a country in North America, also including Haw
+      'ایران': Iran (a country in West Asia); (historically) Persia
+      'تهران': Tehran (a county of Iran, around the city)
+      'اورشلیم': Jerusalem (a city in the Holy Land between the Mediterranean Sea and Dea
+      'یونان': Greece (a country in Southeastern Europe)
+      'فرانسه': France (a country located primarily in Western Europe)
+  OTHER            1052 (44.00%)
+      'حماس': Hamas (a Palestinian Islamist militant group and political organization)
+      'فاس': Fez (the capital city of the region of Fez-Meknes, Morocco)
+      'اسلام': Islam
+      'سلم': Salm (Shahnameh)
+      'حسن': Hasan bin Ali
+      'شمس': Ash-Shams (Sura of the Quran)
+      'مصر': Cairo (the capital and largest city of Egypt)
+      'اردو': Urdu
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 743 (31.07%)
+  distinct lexemes ............... 703
+  distinct normalized lemmas ..... 702
+  gender m/f/u ................... 341 / 187 / 212
+  flag diminutive             8
+  flag multiword              2
+  flag given+surname          1
+  romanization present ........... 703 (100.00% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       1744  "{'name': 'Persian entries with incorrect language header', '"
+       1714  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       1253  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        565  "{'name': 'Persian links with manual fragments', 'kind': 'oth"
+        501  "{'name': 'Persian given names', 'kind': 'other', 'parents': "
+        446  "{'name': 'Persian links with redundant alt parameters', 'kin"
+        326  "{'name': 'Persian links with redundant wikilinks', 'kind': '"
+        306  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+        280  "{'name': 'Persian male given names', 'kind': 'other', 'paren"
+        191  "{'name': 'Persian female given names', 'kind': 'other', 'par"
+        181  "{'name': 'Persian surnames', 'kind': 'other', 'parents': [],"
+        151  "{'name': 'Places in Iran', 'kind': 'place', 'parents': ['Pla"
+--- top raw_tags on name senses ---
+         68  'Dari'
+         68  'Iran'
+         67  'historical'
+         41  'archaic'
+         36  'Iranian'
+         25  'obsolete'
+         15  'dated'
+         10  'alt-of'
+          8  'uncommon'
+          8  'alternative'
+          7  'broadly'
+          6  'rare'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          3  'the middle persian language'
+          2  'the milky way'
+          2  'the solar system'
+          2  'the ganges'
+          2  'the name of a'
+          2  'a nisba most notably'
+          2  'the dome of the'
+          2  'the savior or messiah'
+          2  'a toponym:'
+          1  'the tehran conference (1943).'
+          1  'the government of iran.'
+          1  'the peacock throne'
+          1  'the “land of the'
+          1  'the seine (french river)'
+          1  'the gospel, the evangel'
+
+========================================================================
+LANG ga  (script Latn)   name senses: 1470   name lexemes: 1324
+========================================================================
+  FORM_OF            64 (4.35%)
+      'Gaolainn': alternative spelling of Gaelainn: Munster form of Gaeilge (“the Irish la
+      'Finn': vocative/genitive singular of Fionn
+      'hOstaire': h-prothesized form of Ostaire
+      'Póil': vocative/genitive singular of Pól (“Paul”)
+      'Peadair': vocative/genitive of Peadar
+      'Dúglas': alternative form of Dúlais: Douglas (the capital city of the Isle of Man
+      'Domhain': vocative/genitive singular of Domhan
+      'Dé': vocative/genitive singular of Dia (“God”)
+  GIVEN             185 (12.59%)
+      'Brian': a male given name
+      'Oscar': a male given name from Old Irish
+      'Caoimhín': a male given name from Old Irish, equivalent to English Kevin
+      'Ardal': a male given name from Old Irish
+      'Cian': a male given name from Old Irish used in Ireland
+      'Deirdre': a female given name from Old Irish
+      'Ruairí': a male given name from Old Irish, equivalent to English Rory
+      'Fionn': a male given name from Old Irish
+  SURNAME            40 (2.72%)
+      'Ó Catháin': a male surname originating as a patronymic, feminine equivalent Ní Chath
+      'Breatnach': a surname, feminine equivalent Bhreatnach, traditionally anglicized as W
+      'Ó Briain': a male surname originating as a patronymic, feminine equivalent Ní Bhria
+      'Ní Bhriain': a female surname, masculine equivalent Ó Briain
+      'Ní Cheallaigh': a female surname, masculine equivalent Ó Ceallaigh
+      'Ó Ceallaigh': a male surname originating as a patronymic, feminine equivalent Ní Cheal
+      'Ó Súilleabháin': a male surname originating as a patronymic, feminine equivalent Ní Shúil
+      'Ó Maoldúin': a male surname originating as a patronymic, feminine equivalent Ní Mhaol
+  PATRONYMIC          0 (0.00%)
+  PLACE             296 (20.14%)
+      'India': India (a country in South Asia; official name: Poblacht na hIndia)
+      'Laos': Laos (a country in Southeast Asia)
+      'Panama': Panama (a country in Central America)
+      'Uganda': Uganda (a country in East Africa)
+      'Burma': Burma (a country in Southeast Asia)
+      'Éire': Ireland (a country in northwestern Europe)
+      'Siria': Syria (a country in West Asia in the Middle East)
+      'Life': Liffey (a river in Ireland)
+  OTHER             885 (60.20%)
+      'Panama': Panama City (the capital and largest city of Panama)
+      'Leon': Leo
+      'Gaeilge': Irish (the Gaelic language indigenous to Ireland, also known as Irish Ga
+      'Gaeilge': any Gaelic language
+      'Éire': Ireland (a large island in northwestern Europe)
+      'Sinn Féin': Sinn Fein
+      'Scáthach': Scáthach
+      'Cian': Son of Dian Cecht of the Tuatha Dé Danann and born with a caul on his he
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 225 (15.31%)
+  distinct lexemes ............... 225
+  distinct normalized lemmas ..... 225
+  gender m/f/u ................... 168 / 57 / 0
+  flag multiword              36
+  flag diminutive             10
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       1360  "{'name': 'Irish entries with incorrect language header', 'ki"
+       1316  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       1221  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        185  "{'name': 'Irish given names', 'kind': 'other', 'parents': []"
+        133  "{'name': 'Irish male given names', 'kind': 'other', 'parents"
+        125  "{'name': 'Places in Ireland', 'kind': 'place', 'parents': ['"
+        108  "{'name': 'Languages', 'kind': 'other', 'parents': [], 'sourc"
+         95  "{'name': 'Countries in Europe', 'kind': 'place', 'parents': "
+         94  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+         90  "{'name': 'Irish terms suffixed with -is', 'kind': 'other', '"
+         77  "{'name': 'Official names of countries', 'kind': 'other', 'pa"
+         76  "{'name': 'Countries in Asia', 'kind': 'place', 'parents': ['"
+--- top raw_tags on name senses ---
+        587  'masculine'
+        481  'feminine'
+         41  'historical'
+         38  'plural'
+         29  'alt-of'
+         21  'Judaism'
+         18  'Irish'
+         13  'Greek'
+         12  'prothesis-h'
+         11  'singular'
+         10  'alternative'
+          8  'Norse'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          3  'the milky way'
+          2  'the walloon language'
+          2  'the holy land'
+          2  'the acropolis'
+          2  'the dutch language'
+          2  'the republic of the'
+          2  'the scottish highlands'
+          2  'the book of numbers,'
+          2  'the gospel of st.'
+          2  'the garden of eden'
+          2  'the jurassic'
+          1  'the sorbian language'
+          1  'an ulster cattle-lord and'
+          1  'the lower house of'
+          1  'the daughter of the'
+
+========================================================================
+LANG he  (script Hebr)   name senses: 1944   name lexemes: 1510
+========================================================================
+  FORM_OF             1 (0.05%)
+      'שבדיה': alternative spelling of שוודיה \ שְׁוֶדְיָה (sh'védya)
+  GIVEN             363 (18.67%)
+      'ישראל': a male given name, Yisrael, equivalent to English Israel
+      'שלום': a male given name, Shalom
+      'אביב': a male given name
+      'חגב': a male given name, Khagav or Chagav, equivalent to English Agabus
+      'זוהר': a male or female given name, Zohar
+      'זאב': a male given name, Zeeb or Zeev
+      'מרים': a female given name, Miriam
+      'מרים': a female given name, Miriam
+  SURNAME            84 (4.32%)
+      'צור': a surname
+      'לוי': a surname
+      'בר': a surname
+      'עז': a surname: Oz
+      'נחום': a surname
+      'שפירא': a surname. Shapira, Shapiro
+      'סדן': a surname
+      'פלג': a surname, equivalent to English Peleg
+  PATRONYMIC          0 (0.00%)
+  PLACE             282 (14.51%)
+      'ישראל': Israel (a country in Western Asia in the Middle East, at the eastern sho
+      'צרפת': France (a country located primarily in Western Europe)
+      'ירושלים': Jerusalem (a city in the Holy Land between the Mediterranean Sea and Dea
+      'עיראק': Iraq (a country in West Asia in the Middle East; official name: הרפובליק
+      'סין': China (a country in Asia)
+      'אוקראינה': Ukraine (a country in Eastern Europe, bordering on the north shore of th
+      'מצרים': Egypt (a country in North Africa and West Asia)
+      'לבנון': Lebanon (a country in West Asia in the Middle East)
+  OTHER            1214 (62.45%)
+      'ישראל': the Kingdom of Israel
+      'ישראל': Israel (the alternative name of Jacob)
+      'ישראל': the children of Israel, the Jewish people
+      'צרפת': Sarepta, Zarephath (Phoenician city in modern-day Lebanon)
+      'שלום': A title of God.
+      'קבלה': oral tradition
+      'קבלה': oral tradition
+      'השואה': The Holocaust, Shoah
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 447 (22.99%)
+  distinct lexemes ............... 410
+  distinct normalized lemmas ..... 406
+  gender m/f/u ................... 262 / 96 / 81
+  flag diminutive             13
+  flag multiword              2
+  romanization present ........... 399 (97.32% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       1468  "{'name': 'Hebrew entries with incorrect language header', 'k"
+       1269  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       1200  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        353  "{'name': 'Hebrew given names', 'kind': 'other', 'parents': ["
+        265  "{'name': 'Hebrew male given names', 'kind': 'other', 'parent"
+        251  "{'name': 'Hebrew links with redundant alt parameters', 'kind"
+        195  "{'name': 'Hebrew links with redundant wikilinks', 'kind': 'o"
+        171  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+        157  "{'name': 'Biblical characters', 'kind': 'other', 'parents': "
+        122  "{'name': 'Hebrew female given names', 'kind': 'other', 'pare"
+         93  "{'name': 'National capitals', 'kind': 'other', 'parents': []"
+         91  "{'name': 'Judaism', 'kind': 'other', 'parents': [], 'source'"
+--- top raw_tags on name senses ---
+        104  'feminine'
+         94  'masculine'
+         82  'Judaism'
+         41  'historical'
+         23  'uncountable'
+         19  'Biblical-Hebrew'
+         12  'rare'
+          8  'Hebrew'
+          8  'Medieval'
+          8  'broadly'
+          8  'archaic'
+          6  'Modern-Israeli-Hebrew'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          2  'a substitute for the'
+          2  'the nation descended from'
+          2  'a 14-lettered form of'
+          2  'a son of haman'
+          2  'the name of multiple'
+          2  'the name of two'
+          1  'the kingdom of israel'
+          1  'the children of israel,'
+          1  'a title of god.'
+          1  'the holocaust, shoah'
+          1  'the archangel michael, associated'
+          1  'the holy spirit (literally:'
+          1  'the proper, personal name'
+          1  'the end times, the'
+          1  'the west, the western'
+
+========================================================================
+LANG hi  (script Deva)   name senses: 3650   name lexemes: 2904
+========================================================================
+  FORM_OF            14 (0.38%)
+      'उपनिषद्': alternative spelling of उपनिषद (upniṣad)
+      'हिन्द': alternative spelling of हिंद (hind):
+      'हिन्द': alternative spelling of हिंद (hind):
+      'हिन्दचीन': alternative spelling of हिंदचीन (hindcīn):
+      'हिन्दचीन': alternative spelling of हिंदचीन (hindcīn):
+      'नीदरलैण्ड': alternative spelling of नीदरलैंड (nīdarlaiṇḍ):
+      'नीदरलैण्ड': alternative spelling of नीदरलैंड (nīdarlaiṇḍ):
+      'पुण्डरी': alternative spelling of पुंडरी (puṇḍrī)
+  GIVEN             813 (22.27%)
+      'आकाश': a male given name, Akash, from Sanskrit
+      'मधुर': a male given name, Madhur, from Sanskrit
+      'स्वस्तिक': a male given name, Swastik, from Sanskrit
+      'मुक्ति': a female given name, Mukti, from Sanskrit
+      'अनुराग': a male given name, Anurag, from Sanskrit
+      'लाल': a male given name, Lal
+      'कृष्ण': a male given name, Krishna, from Sanskrit
+      'संस्कृति': a female given name, Sanskriti, from Sanskrit
+  SURNAME           160 (4.38%)
+      'लाल': a male surname, Lal
+      'खंडेलवाल': a surname, Khandelwal
+      'सिंह': a surname, Singh, from Sanskrit, used by Kshatriyas and Sikhs
+      'मित्रा': a surname, equivalent to English Mitra
+      'ईरानी': a surname, Irani, from Persian
+      'राज': a surname, Raj, from Sanskrit
+      'चौधरी': a surname, Choudhary or Chowdhary
+      'ओबामा': a surname from Luo, equivalent to English Obama
+  PATRONYMIC          0 (0.00%)
+  PLACE             951 (26.05%)
+      'मध्य प्रदेश': Madhya Pradesh (a state in central India)
+      'महाराष्ट्र': Maharashtra (a state in western India)
+      'आसाम': Assam (a state in northeastern India)
+      'कर्नाटक': Karnataka (a state in southern India)
+      'भारत': India (a country in South Asia)
+      'भारत': India (a region of South Asia, traditionally delimited by the Himalayas 
+      'अज़रबैजान': Azerbaijan (a country in the South Caucasus in Asia and Europe)
+      'अज़रबैजान': Azerbaijan (a region in northwestern Iran, where ancient Atropatene was 
+  OTHER            1712 (46.90%)
+      'कोलकाता': Kolkata (the capital city of West Bengal, India)
+      'हिंदी': Modern Standard Hindi, a standardized and Sanskritized version of the Hi
+      'हिंदी': The Central Zone of Indo-Aryan languages. These are also spoken in Fiji,
+      'हिंदी': All the lects in the Hindi Belt, which also includes lects that do not b
+      'हिंदी': A dialect spoken in Delhi, now known as Hindustani.
+      'संस्कृत': Sanskrit (a classical Indo-European language of South Asia, which is the
+      'तीर': Tir (fourth solar month of the Persian calendar)
+      'तीर': Mercury (planet)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 973 (26.66%)
+  distinct lexemes ............... 956
+  distinct normalized lemmas ..... 952
+  gender m/f/u ................... 497 / 472 / 4
+  flag diminutive             3
+  romanization present ........... 956 (100.00% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       3005  "{'name': 'Hindi entries with incorrect language header', 'ki"
+       2573  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       2061  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        811  "{'name': 'Hindi given names', 'kind': 'other', 'parents': []"
+        482  "{'name': 'Hindi male given names', 'kind': 'other', 'parents"
+        475  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+        368  "{'name': 'Hinduism', 'kind': 'other', 'parents': [], 'source"
+        344  "{'name': 'Hindi female given names', 'kind': 'other', 'paren"
+        331  "{'name': 'Places in India', 'kind': 'place', 'parents': ['Pl"
+        252  "{'name': 'Hindi terms with non-redundant manual transliterat"
+        198  "{'name': 'Cities in India', 'kind': 'place', 'parents': ['Ci"
+        153  "{'name': 'Hindi surnames', 'kind': 'other', 'parents': [], '"
+--- top raw_tags on name senses ---
+       2410  'masculine'
+       1041  'feminine'
+        350  'Hinduism'
+        143  'by-personal-gender'
+         67  'historical'
+         46  'rare'
+         18  'formal'
+         16  'Vedic'
+         11  'indeclinable'
+          9  'uncountable'
+          9  'dated'
+          8  'plural'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+         15  'an epithet of lord'
+         11  'an epithet of goddess'
+          5  'a raga of the'
+          3  'the name of a'
+          3  'an epithet of shri'
+          3  'an epithet of shiva'
+          3  'an epithet of krishna,'
+          3  'an evening raga of'
+          3  'a monsoon or 2nd'
+          3  'the ancient name of'
+          3  'an epithet of the'
+          2  'the central zone of'
+          2  'a midnight raga of'
+          2  'a thaat, named for'
+          2  'the international phonetic alphabet'
+
+========================================================================
+LANG is  (script Latn)   name senses: 2081   name lexemes: 1954
+========================================================================
+  FORM_OF             0 (0.00%)
+  GIVEN            1271 (61.08%)
+      'Albert': a male given name, equivalent to English Albert
+      'Alexander': a male given name, equivalent to English Alexander
+      'Venus': a female given name
+      'Thor': a male given name
+      'Adam': a male given name
+      'Alexandra': a female given name, equivalent to English Alexandra
+      'Hera': a female given name
+      'Alex': a male given name, equivalent to English Alex
+  SURNAME            49 (2.35%)
+      'Long': a surname
+      'Waage': a surname
+      'Bergmann': a surname
+      'Eldjárn': a surname
+      'Petersen': a surname
+      'Johnsen': a surname
+      'Andersen': a surname
+      'Sesar': Caesar (Roman family name, title of Roman emperors)
+  PATRONYMIC         71 (3.41%)
+      'Ingvarsson': a male patronymic
+      'Indriðason': a male patronymic
+      'Jakobsson': a male patronymic
+      'Halldórsdóttir': a female patronymic
+      'Sigurðsson': a male patronymic
+      'Magnússon': a male patronymic
+      'Kristjánsson': a male patronymic
+      'Ágústsson': a male patronymic
+  PLACE             244 (11.73%)
+      'Japan': Japan (a country in East Asia)
+      'Nepal': Nepal (a country in South Asia, located between China and India)
+      'Barbados': Barbados (an island and country in the Caribbean)
+      'Holland': Netherlands (a country in Western Europe, consisting of four constituent
+      'Reykjavík': Reykjavík (a city in the Capital Region, Iceland; the capital city of Ic
+      'Írland': Ireland (a country in northwestern Europe)
+      'Alaska': Alaska (a state of the United States, formerly a territory)
+      'Nevada': Nevada (a state in the western United States)
+  OTHER             446 (21.43%)
+      'Andorra': Andorra (a microstate in Southern Europe, between Spain and France)
+      'England': England (a constituent country of the United Kingdom)
+      'Amsterdam': Amsterdam (the capital of the Netherlands)
+      'Helsinki': Helsinki (the capital city of Finland; a municipality, the capital of th
+      'Holland': Netherlands (the main constituent country of the Kingdom of the Netherla
+      'Skopje': Skopje (the capital of North Macedonia)
+      'Vaduz': Vaduz (the capital of Liechtenstein)
+      'Venus': Venus (planet)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 1320 (63.43%)
+  distinct lexemes ............... 1312
+  distinct normalized lemmas ..... 1309
+  gender m/f/u ................... 662 / 638 / 20
+  flag diminutive             27
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       1975  "{'name': 'Icelandic entries with incorrect language header',"
+       1854  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       1449  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       1264  "{'name': 'Icelandic given names', 'kind': 'other', 'parents'"
+        634  "{'name': 'Icelandic female given names', 'kind': 'other', 'p"
+        630  "{'name': 'Icelandic male given names', 'kind': 'other', 'par"
+        345  "{'name': 'Icelandic nouns declined using scraped base declen"
+        242  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+         84  "{'name': 'Pages with 3 entries', 'kind': 'other', 'parents':"
+         71  "{'name': 'Icelandic patronymics', 'kind': 'other', 'parents'"
+         68  "{'name': 'Icelandic terms suffixed with -ína', 'kind': 'othe"
+         54  "{'name': 'Countries in Europe', 'kind': 'place', 'parents': "
+--- top raw_tags on name senses ---
+       1956  'proper-noun'
+        980  'feminine'
+        841  'masculine'
+        215  'neuter'
+         69  'rare'
+         39  'indeclinable'
+         38  'no-plural'
+         37  'definite'
+         36  'plural'
+         31  'plural-only'
+         23  'historical'
+         12  'Norse'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          4  'a pet form of'
+          4  'the name of several'
+          3  'a diminutive of the'
+          1  'a female nickname'
+          1  'the völuspá'
+          1  'the third reich'
+          1  'the elected parliament of'
+          1  'the pacific ocean'
+          1  'the internet'
+          1  'the british isles'
+          1  'the personification of old'
+          1  'the ten commandments'
+          1  'the icelandic parliament house'
+          1  'a celebrated religious poem'
+          1  'the english channel'
+
+========================================================================
+LANG ja  (script Jpan)   name senses: 22160   name lexemes: 18245
+========================================================================
+  FORM_OF            55 (0.25%)
+      '漢': alternative name for 漢中 (Kanchū, “Hanzhong”)
+      '韓国': alternative form of 唐国 (Karakuni; Karakoku):
+      '韓国': alternative form of 唐国 (Karakuni; Karakoku):
+      '濠太剌利': obsolete spelling of オーストラリア:
+      '濠太剌利': obsolete spelling of オーストラリア:
+      '希臘': obsolete spelling of ギリシア (“Greece”)
+      'ネプチューン': alternative form of ネプトゥヌス
+      '亜細亜': alternative spelling of アジヤ (Ajiya): Asia (the largest continent, locate
+  GIVEN            9038 (40.79%)
+      '月': a female given name
+      'そら': a unisex given name
+      '愛': a female given name
+      '愛': a female given name
+      '愛': a female given name
+      '青': a female given name
+      '青': a female given name
+      '明日': a female given name
+  SURNAME          4450 (20.08%)
+      '数': a surname
+      '西': a surname
+      '月': a surname
+      '愛': a surname
+      '青': a surname
+      '青': a surname
+      '明日': a surname
+      '水': a surname
+  PATRONYMIC          0 (0.00%)
+  PLACE            2830 (12.77%)
+      '西': a red-light district in Edo-period Shinjuku (as it was located west of E
+      '西': a place name, especially the name of various wards in major cities throu
+      'アメリカ': America, United States of America (a country in North America)
+      'リトアニア': Lithuania (a country in northeastern Europe)
+      '姫': a place name
+      'アルゴス': Argos (a city in Greece)
+      'メイン': Maine (a state of the United States)
+      'メイン': a river in Maine, United States
+  OTHER            5787 (26.11%)
+      '西': synonym of 西方浄土 (Saihō Jōdo): the western paradise of Amitabha Buddha
+      '酉': the Rooster, the tenth of the twelve Earthly Branches
+      '酉': the Rooster, the tenth of the twelve Earthly Branches
+      'ASCII': ASCII (character encoding)
+      'CIA': synonym of 中央情報局 (Chūō Jōhōkyoku, “Central Intelligence Agency”)
+      'FBI': synonym of 連邦捜査局 (Renpō Sōsakyoku, “Federal Bureau of Investigation”); t
+      'NATO': NATO
+      'FIFA': synonym of 国際サッカー連盟 (Kokusai Sakkā Renmei, “International Federation of 
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 13488 (60.87%)
+  distinct lexemes ............... 12329
+  distinct normalized lemmas ..... 11512
+  gender m/f/u ................... 5585 / 3239 / 4478
+  flag given+surname          10
+  flag diminutive             1
+  romanization present ........... 12300 (99.76% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+      17636  "{'name': 'Japanese entries with incorrect language header', "
+      17376  "{'name': 'Japanese links with redundant alt parameters', 'ki"
+      16896  "{'name': 'Japanese links with redundant wikilinks', 'kind': "
+       8825  "{'name': 'Japanese given names', 'kind': 'other', 'parents':"
+       7227  "{'name': 'Japanese terms with 2 kanji', 'kind': 'other', 'pa"
+       5692  "{'name': 'Japanese male given names', 'kind': 'other', 'pare"
+       5411  "{'name': 'Japanese terms with non-redundant non-automated so"
+       4293  "{'name': 'Japanese surnames', 'kind': 'other', 'parents': []"
+       3970  "{'name': 'Japanese terms with redundant sortkeys', 'kind': '"
+       3409  "{'name': 'Japanese female given names', 'kind': 'other', 'pa"
+       2933  '{\'name\': "Japanese terms read with kun\'yomi", \'kind\': \'other'
+       2848  '{\'name\': "Japanese terms read with on\'yomi", \'kind\': \'other\''
+--- top raw_tags on name senses ---
+        420  'historical'
+         91  'Greek'
+         82  'obsolete'
+         76  'Japanese'
+         65  'dated'
+         60  'rare'
+         52  'Chinese'
+         38  'archaic'
+         33  'Roman'
+         32  'alt-of'
+         29  'attributive'
+         29  'Shin'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+         35  'a 律令 (ritsuryō) position'
+         15  'the name of several'
+         13  'a 律令 (ritsuryō) department'
+          8  'the name of various'
+          8  'the ministry of the'
+          7  'a japanese go tournament,'
+          6  'the japanese god of'
+          5  'the snake, the sixth'
+          5  'the first of the'
+          4  'the full form of'
+          4  'an ancient korean kingdom'
+          4  'the ministry of justice'
+          4  'a 律令 (ritsuryō) treasury'
+          3  'the second of the'
+          3  'the name of a'
+
+========================================================================
+LANG ko  (script Kore)   name senses: 3037   name lexemes: 2711
+========================================================================
+  FORM_OF            16 (0.53%)
+      '回教': alternative form of 回敎 (“Islam”)
+      '이': alternative form of 伊 (I, “Italy (in news headlines)”)
+      '上座部佛教': alternative form of 上座部佛敎 (“(Buddhism) Theravada Buddhism”)
+      '리': North Korea standard form of 이(李) (I, “Lee”, the second most common Kore
+      '青島': alternative form of 靑島 (“Qingdao”)
+      '青銅器時代': alternative form of 靑銅器時代 (“Bronze Age”)
+      '青龍': alternative form of 靑龍 (hanja form of 청룡 (“Azure Dragon, one of the Four
+      '摩尼教': alternative form of 摩尼敎 (“Manichaeism”)
+  GIVEN              67 (2.21%)
+      '장': a transliteration of the French male given name Jean
+      '장': a transliteration of the French male given name Jean
+      '밥': a transliteration of the English male given name diminutive Bob
+      '유리': a female given name
+      '미하일': a transliteration of the Russian male given name Михаи́л (Mixaíl), Mikha
+      '안드레이': Andrey (a male given name)
+      '미아': a transliteration of the English female given name Mia
+      '블라디미르': a transliteration of the Russian male given name Влади́мир (Vladímir), V
+  SURNAME            98 (3.23%)
+      '遤': extinct surname of korea
+      '이': a surname, the second most common Korean surname, used by roughly 7.3 mi
+      '인': a surname
+      '한': a surname
+      '한': a surname
+      '감': a surname
+      '정': a surname, commonly transliterated as Chung, Jung, or Jeong
+      '권': a surname
+  PATRONYMIC          0 (0.00%)
+  PLACE             929 (30.59%)
+      '일본': Japan (a country in East Asia)
+      '아라비아': Arabia (the region of West Asia within or adjacent to the Arabian Plate;
+      '소주': Suzhou (a city in Jiangsu, China)
+      '미국': United States of America (a country in North America, also including Haw
+      '나라': Nara (a city in Japan)
+      '독일': Germany (a country in Central Europe)
+      '스웨덴': Sweden (a country in Scandinavia in Northern Europe)
+      '한국': Korea (a region in East Asia consisting of North Korea and South Korea)
+  OTHER            1927 (63.45%)
+      'CIA': KCIA; abbreviation of 중앙정보부 (jung'angjeongbobu, “Korean Central Intellig
+      'CIA': CIA; abbreviation of 중앙정보국 (jung'angjeongboguk, “United States Central I
+      '西藏': hanja form of 서장 :
+      '西藏': hanja form of 서장 :
+      '濠洲': hanja form of 호주 :
+      '濠洲': hanja form of 호주 :
+      '셋': Seth (the third son of Adam and Eve)
+      '하나님': God, creator
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 165 (5.43%)
+  distinct lexemes ............... 146
+  distinct normalized lemmas ..... 136
+  gender m/f/u ................... 37 / 26 / 99
+  flag diminutive             1
+  romanization present ........... 145 (99.32% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       2605  "{'name': 'Korean entries with incorrect language header', 'k"
+       2569  "{'name': 'Korean terms with non-redundant manual translitera"
+       2542  "{'name': 'Korean terms with redundant script codes', 'kind':"
+       2304  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       2248  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+        633  "{'name': 'Sino-Korean words', 'kind': 'other', 'parents': []"
+        190  "{'name': 'Korean terms with long vowels in the first syllabl"
+        180  "{'name': 'North Korean', 'kind': 'other', 'parents': [], 'so"
+        135  "{'name': 'Places in China', 'kind': 'place', 'parents': ['Pl"
+         94  "{'name': 'Korean terms with redundant transliterations', 'ki"
+         87  "{'name': 'Biblical characters', 'kind': 'other', 'parents': "
+         76  "{'name': 'South Korean', 'kind': 'other', 'parents': [], 'so"
+--- top raw_tags on name senses ---
+        196  'historical'
+        184  'North-Korea'
+         92  'South-Korea'
+         45  'Greek'
+         26  'dated'
+         26  'obsolete'
+         25  'China'
+         16  'alt-of'
+         15  'Russia'
+         13  'alternative'
+         13  'Chinese'
+         12  'Roman'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          6  'a geographical area to'
+          4  'the korean war'
+          3  'the united nations'
+          3  'a temple name used'
+          2  'the lu, an ancient'
+          2  'the imperial chinese ministry'
+          2  'the korean ministry of'
+          2  'the japanese invasion of'
+          2  'a hangul keyboard layout'
+          2  'a political faction in'
+          2  'the internationale'
+          2  'the gobi desert (a'
+          2  'the north area of'
+          2  'the twelve signs of'
+          2  'the state council of'
+
+========================================================================
+LANG la  (script Latn)   name senses: 11535   name lexemes: 9425
+========================================================================
+  FORM_OF           313 (2.71%)
+      'Europe': alternative form of Eurōpa:
+      'Europe': alternative form of Eurōpa:
+      'Londinii': genitive/locative of Londīnium
+      'Corinthi': genitive/locative singular of Corinthus and Corinthos
+      'Iupiter': alternative spelling of Iuppiter and earlier form of the word
+      'Sami': genitive/locative singular of Samos and Samus
+      'Abbi': genitive/vocative singular of Abbius
+      'Mai': genitive/vocative singular of Maius
+  GIVEN             738 (6.40%)
+      'Mauritius': a male given name of historical usage, found e.g. in St. Mauritius.
+      'Dominica': a female given name
+      'Leon': a male given name from Ancient Greek, equivalent to English Leon
+      'Ursula': a female given name
+      'Paris': a male given name from Ancient Greek, from the Trojan hero
+      'Hellas': a female given name from Ancient Greek
+      'Michael': a male given name, Michael, from Hebrew
+      'Moses': a male given name from Hebrew, equivalent to English Moses
+  SURNAME          1408 (12.21%)
+      'Euphrates': A surname.
+      'Barca': a surname from Punic, particularly (historical) a dynasty of Carthaginia
+      'Junta': a surname, equivalent to English Giunta — famously held by
+      'Junta': a surname, equivalent to English Giunta — famously held by:
+      'Nostradamus': a surname from French — famously held by
+      'Nostradamus': a surname from French — famously held by:
+      'Iulius': Julius; a Roman nomen gentile, gens or "family name".
+      'Linnaeus': a male surname from Swedish — famously held by
+  PATRONYMIC         27 (0.23%)
+      'Abantias': A patronymic for female descendants of Abas, particularly
+      'Abantias': A patronymic for female descendants of Abas
+      'Abantiades': A patronymic for male descendants of Abas
+      'Abantiades': A patronymic for male descendants of Abas
+      'Acrisioniades': A patronymic for male descendants of Acrisius, particularly
+      'Acrisioniades': A patronymic for male descendants of Acrisius
+      'Aeacides': A patronymic for male descendants of Aeacus
+      'Aeacides': A patronymic for male descendants of Aeacus
+  PLACE            3850 (33.38%)
+      'Belgium': synonym of Belgica: Belgium (a country in Western Europe that has border
+      'Israel': Israel (a country in Western Asia in the Middle East, at the eastern sho
+      'Estonia': Estonia (a country in northeastern Europe, on the southeastern coast of 
+      'Libya': a region of North Africa, west of Egypt, encompassing the regions of Mar
+      'Libya': Libya (a country in North Africa)
+      'Austria': Austria (a country in Central Europe)
+      'Albania': Albania (a country in Southeastern Europe)
+      'Armenia': Armenia (a country in the South Caucasus region of Asia, sometimes consi
+  OTHER            5199 (45.07%)
+      'December': December
+      'September': September
+      'October': October
+      'November': November
+      'Abaddon': the name of the angel of Tartarus
+      'Israel': Israel, another name of the patriarch Jacob
+      'Libya': the African continent (chiefly North Africa, which was well-known to the
+      'Andorra': Andorra (a microstate in Southern Europe, between Spain and France)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 2146 (18.60%)
+  distinct lexemes ............... 1470
+  distinct normalized lemmas ..... 1468
+  gender m/f/u ................... 1511 / 136 / 499
+  flag diminutive             1
+
+--- top raw `categories` values on name senses (shape discovery) ---
+      10045  "{'name': 'Latin entries with incorrect language header', 'ki"
+       7003  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       5911  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       3566  "{'name': 'Latin masculine nouns in the second declension', '"
+       2627  "{'name': 'Latin entries with etymon', 'kind': 'other', 'pare"
+       2534  "{'name': 'Latin entries with etymology texts', 'kind': 'othe"
+       2522  "{'name': 'Latin feminine nouns in the first declension', 'ki"
+       2143  "{'name': 'Latin entries referencing missing etymons', 'kind'"
+       1654  "{'name': 'Pages using etymon with no ID', 'kind': 'other', '"
+       1212  "{'name': 'Latin pluralia tantum', 'kind': 'other', 'parents'"
+       1131  "{'name': 'Latin nomina gentilia', 'kind': 'other', 'parents'"
+       1070  "{'name': 'Latin masculine nouns in the third declension', 'k"
+--- top raw_tags on name senses ---
+       5347  'declension-2'
+       4672  'singular'
+       3707  'declension-1'
+       2810  'masculine'
+       1954  'feminine'
+       1862  'declension-3'
+        598  'neuter'
+        593  'New-Latin'
+        326  'plural'
+        263  'Greek'
+        249  'Medieval-Latin'
+        195  'indeclinable'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+        458  'a roman cognomen —'
+         66  'a tribe of india'
+         56  'a celtic tribe of'
+         51  'the name of a'
+         33  'a tribe of gallia'
+         32  'an arabian tribe mentioned'
+         31  'the name of several'
+         30  'a cognomen used by'
+         26  'a masculine cognomen —'
+         25  'the chief town of'
+         24  'an alpine tribe mentioned'
+         22  'a roman cognomen'
+         22  'a tribe of sarmatia'
+         20  'the name of various'
+         20  'the chief city of'
+
+========================================================================
+LANG non  (script Latn)   name senses: 425   name lexemes: 393
+========================================================================
+  FORM_OF             0 (0.00%)
+  GIVEN             157 (36.94%)
+      'Ari': a male given name
+      'Ása': a female given name
+      'Inga': a female given name
+      'Ella': a male given name
+      'Arni': a male given name
+      'Birgir': a male given name
+      'Kári': a male given name
+      'Rúni': a male given name
+  SURNAME             0 (0.00%)
+  PATRONYMIC          0 (0.00%)
+  PLACE              27 (6.35%)
+      'Írland': Ireland (a country in northwestern Europe)
+      'Finnland': Finland (a country in Northern Europe)
+      'Svíþjóð': a region of the Swedes around the Mälar valley in modern-day eastern Swe
+      'Vefsn': a river in Norway
+      'Ísland': Iceland (an island and country in the North Atlantic Ocean in Europe)
+      'Uppsalir': Uppsala (a city in eastern central Sweden)
+      'Jórvík': York (a city in modern North Yorkshire, England)
+      'Bjǫrgvin': Bergen (a city in Norway)
+  OTHER             241 (56.71%)
+      'Reykjavík': Reykjavík (bay between Seltjarnarnes and the mouth of the Elliðaár and t
+      'Vinland': Vinland
+      'Loki': Loki (Norse god)
+      'Ásgarðr': Asgard, the realm of the Æsir gods in Norse mythology
+      'Álfheimr': the home of the Ljósálfar (light elves, álfar, divine beings), located u
+      'Álfheimr': Elfland
+      'Álfheimr': possibly heaven
+      'Frakkland': land of the Franks; Francia
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 157 (36.94%)
+  distinct lexemes ............... 157
+  distinct normalized lemmas ..... 157
+  gender m/f/u ................... 125 / 32 / 0
+
+--- top raw `categories` values on name senses (shape discovery) ---
+        400  "{'name': 'Old Norse entries with incorrect language header',"
+        389  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+        295  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        157  "{'name': 'Old Norse given names', 'kind': 'other', 'parents'"
+        141  "{'name': 'Norse mythology', 'kind': 'other', 'parents': [], "
+        123  "{'name': 'Old Norse male given names', 'kind': 'other', 'par"
+         71  "{'name': 'Dwarves', 'kind': 'other', 'parents': [], 'source'"
+         58  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+         34  "{'name': 'Old Norse female given names', 'kind': 'other', 'p"
+         27  "{'name': 'Pages with 3 entries', 'kind': 'other', 'parents':"
+         22  "{'name': 'Old Norse names for Odin', 'kind': 'other', 'paren"
+         16  "{'name': 'Old Norse pluralia tantum', 'kind': 'other', 'pare"
+--- top raw_tags on name senses ---
+        292  'masculine'
+        138  'Norse'
+         62  'feminine'
+         37  'neuter'
+         17  'plural'
+          5  'poetic'
+          2  'reconstruction'
+          1  'in-plural'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          2  'a heiti for odin'
+          2  'an ancient area in'
+          1  'the home of the'
+          1  'the speeches of all-wise'
+          1  'the one with flaming'
+          1  'the one who lacks'
+          1  'the one that is'
+          1  'the constant roarer (a'
+          1  'an archipelago and self-governing'
+          1  'the "light elves", the'
+          1  'the "dark elves" who'
+          1  'the underground home and'
+          1  'a dragon who eats'
+          1  'the hebrides, sodor'
+          1  'the orkney islands'
+
+========================================================================
+LANG pl  (script Latn)   name senses: 30682   name lexemes: 28594
+========================================================================
+  FORM_OF            22 (0.07%)
+      'Iraklion': alternative form of Heraklion:
+      'Iraklion': alternative form of Heraklion:
+      'Hiroshima': alternative spelling of Hiroszima:
+      'Hiroshima': alternative spelling of Hiroszima:
+      'Hirosima': alternative spelling of Hiroszima:
+      'Hirosima': alternative spelling of Hiroszima:
+      'Málaga': alternative spelling of Malaga:
+      'Málaga': alternative spelling of Malaga:
+  GIVEN             873 (2.85%)
+      'Fabian': a male given name, equivalent to English Fabian
+      'Edward': a male given name, equivalent to English Edward
+      'Achilles': a male given name from Latin [in turn from Ancient Greek], equivalent to
+      'Alberta': a female given name, equivalent to English Alberta
+      'Leon': a male given name from Latin [in turn from Ancient Greek], equivalent to
+      'Asia': a diminutive of the female given name Joanna
+      'Laura': a female given name, equivalent to English Laura
+      'Albert': a male given name, equivalent to English Albert
+  SURNAME         24580 (80.11%)
+      'Czech': a male surname
+      'Czech': a female surname
+      'Daniel': a male surname from Latin
+      'Daniel': a female surname from Latin
+      'Paul': a male surname
+      'Paul': a female surname
+      'Robert': a male surname
+      'Robert': a female surname
+  PATRONYMIC          0 (0.00%)
+  PLACE            2753 (8.97%)
+      'Estonia': Estonia (a country in northeastern Europe, on the southeastern coast of 
+      'Austria': Austria (a country in Central Europe)
+      'Albania': Albania (a country in Southeastern Europe)
+      'Armenia': Armenia (a country in the South Caucasus region of Asia, sometimes consi
+      'Angola': Angola (a country in Southern Africa)
+      'Burundi': Burundi (a country in East Africa)
+      'Bhutan': Bhutan (a country in South Asia, in the Himalayas)
+      'Botswana': Botswana (a country in Southern Africa)
+  OTHER            2454 (8.00%)
+      'KGB': KGB (the former Soviet State Security Committee)
+      'KGB': KGB (the current Belarusian security service)
+      'NASA': NASA
+      'NATO': NATO
+      'Belize': Belize (an English-speaking country in Central America, formerly called 
+      'Belize': Belize City (the largest city in Belize)
+      'Haiti': Hispaniola
+      'Liechtenstein': Liechtenstein (a microstate in Central Europe)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 25453 (82.96%)
+  distinct lexemes ............... 25304
+  distinct normalized lemmas ..... 14043
+  gender m/f/u ................... 13214 / 12202 / 37
+  flag diminutive             244
+  flag multiword              1
+
+--- top raw `categories` values on name senses (shape discovery) ---
+      26617  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+      24893  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+      24579  "{'name': 'Polish entries with incorrect language header', 'k"
+      23647  "{'name': 'Polish links with manual fragments', 'kind': 'othe"
+      22787  "{'name': 'Polish surnames', 'kind': 'other', 'parents': [], "
+      11592  "{'name': 'Polish female surnames', 'kind': 'other', 'parents"
+      11261  "{'name': 'Polish male surnames', 'kind': 'other', 'parents':"
+       4131  "{'name': 'Polish links with redundant alt parameters', 'kind"
+       3361  "{'name': 'Pages using etymon with no ID', 'kind': 'other', '"
+       3082  "{'name': 'Polish links with redundant wikilinks', 'kind': 'o"
+       2467  "{'name': 'Pages with etymon', 'kind': 'other', 'parents': []"
+       2079  "{'name': 'Pages with etymology trees', 'kind': 'other', 'par"
+--- top raw_tags on name senses ---
+      15453  'masculine'
+      14004  'feminine'
+      13589  'person'
+       9925  'indeclinable'
+       1754  'inanimate'
+        751  'neuter'
+        484  'plural'
+        468  'nonvirile'
+        262  'historical'
+        100  'Greek'
+         78  'animal-not-person'
+         75  'animate'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          6  'a book of the'
+          4  'a polish toponym:'
+          3  'a diminutive of the'
+          3  'the north pole (the'
+          2  "the south pole (earth's"
+          2  'the region around sandomierz.'
+          1  'the ipa (international phonetic'
+          1  'the centre agreement (christian'
+          1  'a medieval kingdom in'
+          1  'the bible (christian holy'
+          1  'the whole polish parliament,'
+          1  'the hewlett-packard company'
+          1  'the virgin, in particular'
+          1  'the attack on pearl'
+          1  'the internet'
+
+========================================================================
+LANG ru  (script Cyrl)   name senses: 5686   name lexemes: 4740
+========================================================================
+  FORM_OF             9 (0.16%)
+      'Владимир': Transliteration of Volodymyr (a city, the administrative center of Volod
+      'Нидерландія': Pre-1918 spelling of Нидерла́ндия (Niderlándija).
+      'Сѣверо-Американскіе Соединенные Штаты': Pre-1918 spelling of Се́веро-Америка́нские Соединённые Шта́ты (Sévero-Am
+      'Гомсъ': Pre-1918 spelling of Гомс (Goms).
+      'Дербендъ': Pre-1918 spelling of Дербе́нд (Derbénd).
+      'Дмитрии': prepositional singular/nominative plural of Дми́трий (Dmítrij)
+      'Димы': genitive singular/nominative plural of Ди́ма (Díma)
+      'Анатолии': prepositional singular/nominative plural of Анатолий (Anatolij)
+  GIVEN             686 (12.06%)
+      'Израиль': a male given name, Izrail, from Hebrew, equivalent to English Israel
+      'Венера': a female given name, Venera, from Latin
+      'Аврам': a male given name
+      'Афина': a female given name, Afina, from Ancient Greek, equivalent to English At
+      'София': Sofia (a female given name from Ancient Greek, equivalent to English Sop
+      'Рамазан': a male given name, Ramazan, from Arabic, of Muslim usage
+      'Дон': a transliteration of the English male given name Don
+      'Кирилл': a male given name, Kirill, equivalent to English Cyril
+  SURNAME          1262 (22.19%)
+      'По': Poe (surname, especially of Edgar Allan Poe, American writer)
+      'Вашингтон': a transliteration of the English surname Washington
+      'Лондон': a transliteration of the English surname London
+      'Адамов': a surname, Adamov, equivalent to English Adams
+      'Ленин': a surname, Lenin (the famous alias of Russian revolutionary leader and p
+      'Сталин': a surname, Stalin; usually referring to the Russian revolutionary and So
+      'Джугашвили': a transliteration of the Georgian surname ჯუღაშვილი (ǯuɣašvili)
+      'Джугашвили': a surname, Jughashvili or Dzhugashvili, from Georgian
+  PATRONYMIC         27 (0.47%)
+      'Иванович': a male patronymic, Ivanovich or Ivanovitch
+      'Ивановна': a female patronymic, Ivanovna
+      'Борисович': a male patronymic, Borisovich
+      'Борисовна': a female patronymic, Borisovna
+      'Ильич': a male patronymic, Ilyich
+      'Ильинична': a female patronymic, Ilyinichna
+      'Павлович': a male patronymic, Pavlovich
+      'Павловна': a female patronymic, Pavlovna
+  PLACE            1337 (23.51%)
+      'Израиль': Israel (a country in Western Asia in the Middle East, at the eastern sho
+      'По': Po (a river in Italy)
+      'Смолян': Smolyan (a town and ski resort in southern Bulgaria)
+      'Ирак': Iraq (a country in West Asia in the Middle East)
+      'Украина': Ukraine (a country in Eastern Europe, bordering on the north shore of th
+      'Луизиана': Louisiana (a state in the Deep South and South Central regions of the Un
+      'Москва': Moskva (a river in Russia)
+      'Канада': Canada (a country in North America)
+  OTHER            2365 (41.59%)
+      'Россия': Russia (a transcontinental country in Eastern Europe and North Asia; off
+      'Христос': Christ
+      'Юпитер': Jupiter
+      'Юпитер': Jupiter
+      'СССР': USSR (a former transcontinental country in Europe and Asia (1922–1991), 
+      'Союз Советских Социалистических Республик': Union of Soviet Socialist Republics (a former transcontinental country i
+      'Рейн': Rhine
+      'Москва': Moscow (a federal city, the capital of Russia)
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 1948 (34.26%)
+  distinct lexemes ............... 1749
+  distinct normalized lemmas ..... 1737
+  gender m/f/u ................... 499 / 291 / 1152
+  flag diminutive             101
+  flag multiword              4
+  flag given+surname          2
+  romanization present ........... 1746 (99.83% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+       4794  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+       4717  "{'name': 'Russian entries with incorrect language header', '"
+       3921  "{'name': 'Russian links with redundant alt parameters', 'kin"
+       3731  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       3528  "{'name': 'Russian links with redundant wikilinks', 'kind': '"
+       2211  "{'name': 'Russian nouns with accent pattern a', 'kind': 'oth"
+        669  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+        610  "{'name': 'Russian given names', 'kind': 'other', 'parents': "
+        520  "{'name': 'Russian possessive surnames', 'kind': 'other', 'pa"
+        315  "{'name': 'Russian surnames', 'kind': 'other', 'parents': [],"
+        257  "{'name': 'Russian female given names', 'kind': 'other', 'par"
+        226  "{'name': 'Pages with 3 entries', 'kind': 'other', 'parents':"
+--- top raw_tags on name senses ---
+        957  'indeclinable'
+        328  'masculine'
+        212  'inanimate'
+        182  'animate'
+        155  'historical'
+        114  'plural'
+        112  'plural-only'
+         93  'feminine'
+         83  'Greek'
+         20  'Roman'
+         20  'colloquial'
+         19  'slang'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          9  'the name of a'
+          5  'a diminutive, slava, of'
+          3  'the name of numerous'
+          2  'a diminutive of the'
+          2  'the name of the'
+          2  'the name of two'
+          2  'the white house (the'
+          2  'the house of the'
+          2  'a diminutive, ronya, of'
+          1  'the government of the'
+          1  'the former soviet "state'
+          1  'the soviet–afghan war.'
+          1  'the sun, sol, old'
+          1  'the moon (the only'
+          1  'the giraffe, camelopardalis (a'
+
+========================================================================
+LANG sa  (script Deva)   name senses: 1217   name lexemes: 764
+========================================================================
+  FORM_OF             2 (0.16%)
+      'जनको': sandhi form of nominative singular of जनक (janaka, “Janaka”)
+      'अनल': name of the letter र
+  GIVEN              46 (3.78%)
+      'सूर्य': a male given name, Surya
+      'अक्षर': a male given name, Akshar or Axar
+      'उमा': a female given name
+      'माया': a female given name, equivalent to English Maya (famously held by the mo
+      'अर्जुन': a male given name, Arjuna
+      'पार्वती': a female given name, Parvati
+      'पुण्डरीक': a male given name, Pundarika
+      'राम': a male given name, Ram or Rāma
+  SURNAME             3 (0.25%)
+      'पुरी': a surname, Puri
+      'भारद्वाज': a surname, Bharadvaja
+      'चट्टोपाध्याय': a surname, Chattopadhyay
+  PATRONYMIC          6 (0.49%)
+      'भर्ग': name of a man with patronymic प्रागाथ (prāgātha)
+      'ब्राह्म': patronymic of Narada
+      'ब्राह्म': patronymic of Kavi
+      'ब्राह्म': patronymic of Urdhva-nabhan and Rakshohan
+      'राधेय': matronymic of Karna (MBh., R., Rājat.)
+      'माथव': the patronymic of Videgha Māthava, the founder and the first king of the
+  PLACE              51 (4.19%)
+      'महाराष्ट्र': Maharashtra (a state in western India)
+      'कर्णाटक': Karnataka (a state in southern India)
+      'अजर्बैजान': Azerbaijan (a country in the South Caucasus in Asia and Europe)
+      'नेपाल': Nepal (a country in South Asia, located between China and India)
+      'माया': a city
+      'जापान': Japan (a country in East Asia)
+      'हरि': a name of a mountain
+      'गङ्गा': Ganga (a river in India)
+  OTHER            1109 (91.13%)
+      'बुद्ध': Buddha, the enlightened one
+      'हिन्दी': Hindi
+      'संधि': name of a goddess presiding over a junction or union
+      'स्वस्तिक': name of a serpent-demon
+      'स्वस्तिक': name of one of Skanda's attendants
+      'स्वस्तिक': name of a Danava
+      'स्वस्तिक': name of a poet
+      'स्वस्तिक': name of another man
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 49 (4.03%)
+  distinct lexemes ............... 46
+  distinct normalized lemmas ..... 46
+  gender m/f/u ................... 32 / 13 / 4
+  romanization present ........... 46 (100.00% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+        631  "{'name': 'Sanskrit entries with incorrect language header', "
+        609  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+        475  "{'name': 'Sanskrit links with redundant alt parameters', 'ki"
+        412  "{'name': 'Sanskrit terms with redundant transliterations', '"
+        403  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        187  "{'name': 'Hinduism', 'kind': 'other', 'parents': [], 'source"
+        149  "{'name': 'Sanskrit adjectives in Devanagari script', 'kind':"
+        132  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+        116  "{'name': 'Sanskrit terms with non-redundant manual translite"
+         51  "{'name': 'Pages with etymon', 'kind': 'other', 'parents': []"
+         48  "{'name': 'Pages with 3 entries', 'kind': 'other', 'parents':"
+         43  "{'name': 'Sanskrit given names', 'kind': 'other', 'parents':"
+--- top raw_tags on name senses ---
+        235  'Hinduism'
+         47  'Vedic'
+         32  'masculine'
+         25  'in-plural'
+         20  'New-Sanskrit'
+         14  'Classical-Sanskrit'
+         12  'feminine'
+         12  'historical'
+         10  'literary'
+          8  'Jainism'
+          4  'neuter'
+          2  'name'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+         12  'the name of a'
+         11  'an epithet of shiva'
+         10  'a name of a'
+          6  'a name of shiva'
+          4  'a name of various'
+          4  'an epithet of various'
+          3  'the planet mars'
+          3  'the name of the'
+          3  'an epithet of rama'
+          3  'an epithet of parvati'
+          3  'the ancient capital of'
+          3  'an epithet of krishna'
+          3  'a name; literally “the'
+          3  'an epithet of indra'
+          3  'an epithet of vishnu'
+
+========================================================================
+LANG sw  (script Latn)   name senses: 712   name lexemes: 671
+========================================================================
+  FORM_OF             0 (0.00%)
+  GIVEN              56 (7.87%)
+      'Ali': a male given name from Arabic
+      'Ibrahim': a male given name from Arabic, equivalent to English Abraham
+      'Fatima': a female given name from Arabic
+      'Khadija': a female given name from Arabic
+      'Paulo': a male given name from Latin, equivalent to English Paul
+      'Kijana': a unisex given name
+      'Baraka': a male given name from Arabic
+      'Musa': a male given name, Musa, from Arabic, equivalent to English Moses
+  SURNAME             3 (0.42%)
+      'Obama': a surname from Luo
+      'Odinga': a surname from Luo
+      'Kadzo': a Kenyan surname
+  PATRONYMIC          0 (0.00%)
+  PLACE             163 (22.89%)
+      'Estonia': Estonia (a country in northeastern Europe, on the southeastern coast of 
+      'Algeria': Algeria (a country in North Africa)
+      'Tunisia': Tunisia (a country in North Africa)
+      'Libya': Libya (a country in North Africa)
+      'Austria': Austria (a country in Central Europe)
+      'Malaysia': Malaysia (a country in Southeast Asia)
+      'Angola': Angola (a country in Southern Africa)
+      'Argentina': Argentina (a country in South America)
+  OTHER             490 (68.82%)
+      'Bahrain': Bahrain (an archipelago, island, and country in West Asia in the Persian
+      'Djibouti': Djibouti (the capital city of Djibouti)
+      'Swaziland': Swaziland (former name of Eswatini: a country in Southern Africa; used u
+      'Australia': Australia (a continent consisting of the land on the Australian tectonic
+      'Mayotte': Mayotte (an archipelago, overseas department, and administrative region 
+      'DNA': DNA
+      'Korea': Korea (a geographic region in East Asia, consisting of two countries, co
+      'Korea': Korea (a peninsula in East Asia, containing the countries of North Korea
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 59 (8.29%)
+  distinct lexemes ............... 57
+  distinct normalized lemmas ..... 57
+  gender m/f/u ................... 25 / 25 / 3
+
+--- top raw `categories` values on name senses (shape discovery) ---
+        651  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+        579  "{'name': 'Swahili entries with incorrect language header', '"
+        437  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+        110  "{'name': 'Pages with etymon', 'kind': 'other', 'parents': []"
+         98  "{'name': 'Pages using etymon with no ID', 'kind': 'other', '"
+         97  "{'name': 'Constellations in the zodiac', 'kind': 'other', 'p"
+         93  "{'name': 'Swahili entries with etymology texts', 'kind': 'ot"
+         78  "{'name': 'Countries in Africa', 'kind': 'place', 'parents': "
+         59  "{'name': 'Swahili entries referencing missing etymons', 'kin"
+         58  "{'name': 'Bible', 'kind': 'other', 'parents': [], 'source': "
+         57  "{'name': 'Books of the Bible', 'kind': 'other', 'parents': ["
+         53  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+--- top raw_tags on name senses ---
+         15  'class-vii'
+         14  'historical'
+          9  'Kenya'
+          8  'uncommon'
+          3  'dated'
+          2  'archaic'
+          2  'rare'
+          2  'class-iii'
+          1  'nonstandard'
+          1  'colloquial'
+          1  'proscribed'
+          1  'informal'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+          2  'the international federation of'
+          1  'the southern part of'
+          1  'the first wife of'
+          1  'a title, equivalent to'
+          1  'a name for god.'
+          1  'the indian ocean'
+          1  'the main island of'
+          1  'a nickname for nairobi.'
+          1  'the national anthem of'
+          1  'a feminine kikuyu name'
+          1  'an ordinary citizen (of'
+          1  'the industrial revolution'
+          1  "the lord's prayer; our"
+          1  'the baltic (balticum)'
+          1  'the middle east'
+
+========================================================================
+LANG zh  (script Hani)   name senses: 23098   name lexemes: 18459
+========================================================================
+  FORM_OF            85 (0.37%)
+      'homo': alternative form of 鴻蒙 /鸿蒙 (hóngméng, “HarmonyOS, Huawei's operating sys
+      '龍馬': Alternative name for 房 (Fáng, “Room (constellation)”).
+      '馬爾他語': alternative form of 馬耳他語 /马耳他语 (Mǎ'ěrtāyǔ, “Maltese”)
+      '古定': alternative form of 古錠 /古锭 (Gǔdìng, “Guding garrison”)
+      '臺窩灣': transliteration of "Tayowan", a historical name for Tainan (a city in Ta
+      '丁丁': Alternative name for Ding Lingwei.
+      '太白': Alternative name for 李白 (“Li Bai”).
+      '大橋': alternative form of 大喬 /大乔 (“Daqiao, the elder of the beautiful Qiao sis
+  GIVEN             610 (2.64%)
+      '麥可': a transliteration of the English male given name Michael
+      '約翰': a transliteration of the English male given name and surname John
+      '約翰': a transliteration of the German male given name Johann
+      '悉尼': a transliteration of the English surname and unisex given name Sydney or
+      '大衛': a transliteration of the English male given name David
+      '斯文': a transliteration of the Swedish male given name Sven
+      '喬丹': a transliteration of the English unisex given name and surname Jordan
+      '莎拉': a transliteration of the English female given name Sarah or Sara
+  SURNAME          1116 (4.83%)
+      '大和': an orthographic borrowing of the Japanese surname 大和, Yamato
+      '大阪': an orthographic borrowing of the Japanese surname 大阪・大坂, Ōsaka; or of 大阪
+      '巴哈': a transliteration of the German surname Bach (in particular Johann Sebas
+      '巴赫': Bach a transliteration of the German surname Bach (in particular Johann 
+      '倫敦': a transliteration of the English surname London
+      '卯月': an orthographic borrowing of the Japanese surname 卯月, Uzuki
+      '上官': a Chinese compound surname
+      '公子': a surname
+  PATRONYMIC          3 (0.01%)
+      '伊萬諾夫娜': a transliteration of the Russian patronymic Ива́новна (Ivánovna, “daught
+      '伊萬諾維奇': a transliteration of the Russian patronymic Ива́нович (Ivánovič, “son of
+      '伊本': a transliteration of the Arabic patronymic اِبْن (ibn), ibn
+  PLACE            9311 (40.31%)
+      '安全': Anquan (a village in Wulipu, Shayang, Jingmen, Hubei, China)
+      '安全': Anquan (a village in Xinying, Lingao, Hainan, China)
+      '花園': Huayuan (a town in Xiaochang, Xiaogan, Hubei, China)
+      '花園': Huayuan (a village in Wenquan, Yingshan, Huanggang, Hubei, China)
+      '東京': Tokyo (a prefecture, the capital city of Japan)
+      '京都': Kyoto (a city in Kyoto Prefecture, Japan)
+      '京都': Kyoto (a prefecture of Japan)
+      '中國': China (a country in Asia; capital: Beijing)
+  OTHER           11973 (51.84%)
+      'wiki': Wikipedia
+      '東京': Old name for 洛陽／洛阳 (Luòyáng). (especially as the Eastern Han capital, co
+      '東京': Old name for 開封／开封 (Kāifēng). (especially from the Later Jin through the
+      '東京': Old name for 慶州／庆州 (Qìngzhōu). (as Donggyeong, one of the Three Capitals
+      '東京': Old name for 遼陽／辽阳 (Liáoyáng). (as the eastern capital of the Liao and J
+      '東京': Old name for 河內／河内 (Hénèi). (Hanoi)
+      '東京': Tonkin
+      '中國': the Chūgoku region of Japan
+
+--- SHIPPING SET (GIVEN + SURNAME) ---
+  senses ......................... 1726 (7.47%)
+  distinct lexemes ............... 1472
+  distinct normalized lemmas ..... 1466
+  gender m/f/u ................... 456 / 130 / 1125
+  flag given+surname          164
+  flag diminutive             18
+  romanization present ........... 1457 (98.98% of kept lexemes)
+
+--- top raw `categories` values on name senses (shape discovery) ---
+      18715  "{'name': 'Chinese entries with incorrect language header', '"
+      17230  "{'name': 'Pages with entries', 'kind': 'other', 'parents': ["
+      16039  "{'name': 'Pages with 1 entry', 'kind': 'other', 'parents': ["
+       6977  "{'name': 'Places in China', 'kind': 'place', 'parents': ['Pl"
+       1834  "{'name': 'Places in Hubei, China', 'kind': 'place', 'parents"
+       1583  "{'name': 'Pages with 2 entries', 'kind': 'other', 'parents':"
+       1103  "{'name': 'English links with redundant wikilinks', 'kind': '"
+        853  "{'name': 'Towns in China', 'kind': 'place', 'parents': ['Tow"
+        816  "{'name': 'English links with redundant alt parameters', 'kin"
+        771  "{'name': 'Mandarin terms with multiple pronunciations', 'kin"
+        757  "{'name': 'Cities in Japan', 'kind': 'place', 'parents': ['Ci"
+        650  "{'name': 'Places in Japan', 'kind': 'place', 'parents': ['Pl"
+--- top raw_tags on name senses ---
+       1342  'historical'
+        561  'Mainland-China'
+        504  'Taiwan'
+        431  'Hong-Kong'
+        241  'archaic'
+        174  'obsolete'
+        161  'Chinese'
+        143  'Cantonese'
+        142  'dated'
+         99  'literary'
+         86  'Internet'
+         84  'informal'
+--- top OTHER 'a/an/the ...' prefixes (predicate refinement feed) ---
+         15  'a temple name used'
+          8  'the qing dynasty (1644-1911)'
+          8  'the imperial chinese ministry'
+          6  'the xia dynasty (2070'
+          6  'the meaning of this'
+          6  'the tianqi era (a'
+          5  'a geographical area to'
+          5  'the name of a'
+          5  'the datong era (a'
+          4  'the tenth month of'
+          4  'the big dipper; the'
+          4  'the holy spirit'
+          4  'the first day of'
+          4  'the day marking the'
+          4  'the state of wu'
+

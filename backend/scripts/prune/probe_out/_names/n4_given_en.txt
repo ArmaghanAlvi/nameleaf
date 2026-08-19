@@ -1,0 +1,232 @@
+Loading all name-POS senses (one pass, all languages)...
+Loaded 122626 GIVEN+SURNAME senses (indices built for both types, all languages).
+
+========================================================================
+VARIANT GRAPH   type=GIVEN   langs=en
+========================================================================
+  source senses scanned .......... 11041
+  candidate edges seen ............ 2619
+  edges resolved (same type) ...... 2134
+  edges resolved (CROSS type) ..... 67
+  edges unresolved ................ 418
+
+--- resolved edges by relation (same-type only) ---
+  EQUIV_EN             137
+      en:Jan -> en:John
+      en:Jorge -> en:George
+      en:Mercedes -> en:Mercy
+      en:Sophie -> en:Sophia
+      en:Francisco -> en:Francis
+      en:Jose -> en:Joseph
+      en:Ian -> en:John
+      en:Karl -> en:Charles
+      en:Maurice -> en:Morris
+      en:Juan -> en:John
+      en:Jacques -> en:Jacob
+      en:Friedrich -> en:Frederick
+      en:Wilhelm -> en:William
+      en:Carlos -> en:Charles
+      en:Carlos -> en:Carl
+  VARIANT_OF           851
+      en:Hobart -> en:Hubert
+      en:Nicolas -> en:Nicholas
+      en:Sofia -> en:Sophia
+      en:Bern -> en:Bernie
+      en:Bern -> en:Bernie
+      en:Devon -> en:Devin
+      en:Hally -> en:Hallie
+      en:Dannie -> en:Danny
+      en:Cory -> en:Corey
+      en:Cory -> en:Cori
+      en:Scot -> en:Scott
+      en:Rodger -> en:Roger
+      en:Steven -> en:Stephen
+      en:Meryl -> en:Muriel
+      en:Maximillian -> en:Maximilian
+  DIMINUTIVE_OF       1085
+      en:Fanny -> en:Frances
+      en:Dutch -> en:German
+      en:Chad -> en:Charles
+      en:Chad -> en:Chadwick
+      en:Delphi -> en:Delphine
+      en:Jim -> en:James
+      en:Nessie -> en:Agnes
+      en:Jacky -> en:Jacques
+      en:Jacky -> en:John
+      en:Jacky -> en:Jacqueline
+      en:Jackie -> en:Jack
+      en:Jackie -> en:Jacques
+      en:Jackie -> en:John
+      en:Jackie -> en:Jacqueline
+      en:Hally -> en:Harriet
+  FEM_EQUIV             15
+      en:Abdullah -> en:Amatullah
+      en:Sami -> en:Samiyah
+      en:Jacques -> en:Jacqueline
+      en:Dino -> en:Dina
+      en:Solomon -> en:Salome
+      en:Laurence -> en:Lauren
+      en:Kamal -> en:Kamala
+      en:Shlomo -> en:Shulamith
+      en:Constant -> en:Constance
+      en:Latif -> en:Latifa
+      en:Vasant -> en:Vasanti
+      en:Fawzi -> en:Fawzia
+      en:Fawzi -> en:Fauzia
+      en:Fawzi -> en:Faouzia
+      en:Melanippus -> en:Melanippe
+  MASC_EQUIV            46
+      en:Alberta -> en:Albert
+      en:Claudia -> en:Claudius
+      en:Cory -> en:Corey
+      en:Frances -> en:Francis
+      en:Briana -> en:Brian
+      en:Danielle -> en:Daniel
+      en:Roberta -> en:Robert
+      en:Wilhelmina -> en:Wilhelm
+      en:Salome -> en:Solomon
+      en:Edwina -> en:Edwin
+      en:Amina -> en:Amin
+      en:Martine -> en:Martin
+      en:Karla -> en:Karl
+      en:Ernestine -> en:Ernest
+      en:Felicia -> en:Felix
+
+--- CROSS-TYPE candidate edges (NOT unioned; for your decision) ---
+  EQUIV_EN               2
+  VARIANT_OF            14
+  DIMINUTIVE_OF         47
+  MASC_EQUIV             4
+      [DIMINUTIVE_OF] en:Dutch (GIVEN) -> en:to (SURNAME)
+      [DIMINUTIVE_OF] en:Jimmy (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Dickie (GIVEN) -> en:short (SURNAME)
+      [DIMINUTIVE_OF] en:Bri (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Bri (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Nate (GIVEN) -> en:given (SURNAME)
+      [EQUIV_EN] en:Carlos (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Blue (GIVEN) -> en:person (SURNAME)
+      [DIMINUTIVE_OF] en:Brad (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Brad (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Jay (GIVEN) -> en:given (SURNAME)
+      [VARIANT_OF] en:Jewel (GIVEN) -> en:or (SURNAME)
+      [VARIANT_OF] en:Mai (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Randy (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Ray (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Ray (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Ray (GIVEN) -> en:more (SURNAME)
+      [DIMINUTIVE_OF] en:Ari (GIVEN) -> en:given (SURNAME)
+      [VARIANT_OF] en:Sydwell (GIVEN) -> en:Sidwell (SURNAME)
+      [DIMINUTIVE_OF] en:Eden (GIVEN) -> en:Old (SURNAME)
+      [DIMINUTIVE_OF] en:Kathy (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Minnie (GIVEN) -> en:Minerva (SURNAME)
+      [VARIANT_OF] en:Jenkin (GIVEN) -> en:Jenkins (SURNAME)
+      [DIMINUTIVE_OF] en:Hank (GIVEN) -> en:Hankin (SURNAME)
+      [DIMINUTIVE_OF] en:Aly (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Bert (GIVEN) -> en:such (SURNAME)
+      [DIMINUTIVE_OF] en:Milly (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Millie (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Alfie (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Nellie (GIVEN) -> en:given (SURNAME)
+      [MASC_EQUIV] en:Maura (GIVEN) -> en:Mauro (SURNAME)
+      [VARIANT_OF] en:Jadon (GIVEN) -> en:more (SURNAME)
+      [DIMINUTIVE_OF] en:Chrissie (GIVEN) -> en:given (SURNAME)
+      [MASC_EQUIV] en:Raaya (GIVEN) -> en:Rai (SURNAME)
+      [VARIANT_OF] en:Gaynor (GIVEN) -> en:Welsh (SURNAME)
+      [MASC_EQUIV] en:Valentina (GIVEN) -> en:or (SURNAME)
+      [VARIANT_OF] en:Gena (GIVEN) -> en:short (SURNAME)
+      [DIMINUTIVE_OF] en:Marty (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Thad (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Jeri (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Jerri (GIVEN) -> en:given (SURNAME)
+      [VARIANT_OF] en:Scarlet (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Vanya (GIVEN) -> en:Russian (SURNAME)
+      [DIMINUTIVE_OF] en:Ricki (GIVEN) -> en:more (SURNAME)
+      [DIMINUTIVE_OF] en:Frankie (GIVEN) -> en:Frankenstein (SURNAME)
+
+--- top unresolved target strings (pattern-tuning feed) ---
+       66  'from'
+       39  'also'
+       28  'variant'
+       21  'of'
+       19  'equivalent'
+       13  'form'
+       11  'diminutive'
+        8  'related'
+        7  'sometimes'
+        5  'used'
+        5  'popular'
+        5  'Æthelred'
+        4  'any'
+        4  'in'
+        4  'Ukrainian'
+        4  'notably'
+        3  'particularly'
+        3  'rare'
+        3  'and'
+        3  'someone'
+
+--- COMPONENT SIZE HISTOGRAM ---
+  nodes involved in >=1 edge ...... 2614
+  components (size>1) ............. 655
+      size   54:     1 component(s)
+      size   42:     1 component(s)
+      size   39:     1 component(s)
+      size   36:     1 component(s)
+      size   35:     1 component(s)
+      size   30:     1 component(s)
+      size   27:     1 component(s)
+      size   26:     1 component(s)
+      size   22:     1 component(s)
+      size   21:     1 component(s)
+      size   20:     1 component(s)
+      size   19:     1 component(s)
+      size   18:     1 component(s)
+      size   17:     1 component(s)
+      size   16:     3 component(s)
+      size   15:     2 component(s)
+      size   14:     1 component(s)
+      size   13:     2 component(s)
+      size   12:     4 component(s)
+      size   11:     5 component(s)
+      size   10:     6 component(s)
+      size    9:    12 component(s)
+      size    8:    15 component(s)
+      size    7:    20 component(s)
+      size    6:    14 component(s)
+      size    5:    36 component(s)
+      size    4:    65 component(s)
+      size    3:   123 component(s)
+      size    2:   333 component(s)
+
+--- LARGEST COMPONENTS ---
+  size=54    langs=1 ['en']
+      ['en:caitlin', 'en:caitlind', 'en:caity', 'en:cate', 'en:cath', 'en:catharine', 'en:catherine', 'en:catheryn', 'en:cathi', 'en:cathryn', 'en:cathy', 'en:catrina', 'en:caty', 'en:chris', 'en:chrissie', 'en:christie', 'en:christina', 'en:christine', 'en:christopher', 'en:christophor', 'en:christy', 'en:christyn', 'en:cristina', 'en:kate', 'en:katelyn', 'en:katey', 'en:katherine', 'en:katheryn', 'en:kathi', 'en:kathleen', 'en:kathryn', 'en:kathrynne', 'en:kathy', 'en:kati', 'en:katia', 'en:katie', 'en:katrina', 'en:katryna', 'en:katty', 'en:katy']  ... +14 more
+  size=42    langs=1 ['en']
+      ['en:bess', 'en:bessie', 'en:bessy', 'en:bethie', 'en:bethy', 'en:betsey', 'en:betsi', 'en:betsie', 'en:betsy', 'en:bette', 'en:bettie', 'en:betty', 'en:buffy', 'en:elisabetha', 'en:elizabeth', 'en:elizabetha', 'en:elspeth', 'en:elspie', 'en:elysabeth', 'en:ike', 'en:ikey', 'en:isa', 'en:isaac', 'en:isabel', 'en:isabelle', 'en:isobel', 'en:isobelle', 'en:israel', 'en:itzhak', 'en:iz', 'en:izz', 'en:izzy', 'en:libby', 'en:liz', 'en:lizbeth', 'en:lizzie', 'en:lizzy', 'en:tetty', 'en:tibbie', 'en:tibby']  ... +2 more
+  size=39    langs=1 ['en']
+      ['en:bea', 'en:beatrice', 'en:beatrix', 'en:beatriz', 'en:bee', 'en:maddie', 'en:maddison', 'en:maddy', 'en:madeleine', 'en:madeline', 'en:madelyn', 'en:madi', 'en:madison', 'en:marta', 'en:martha', 'en:marthe', 'en:marty', 'en:matilda', 'en:mattie', 'en:pat', 'en:patricia', 'en:patrick', 'en:patsie', 'en:patsy', 'en:patti', 'en:pattie', 'en:patty', 'en:tilda', 'en:tillie', 'en:tilly', 'en:tricia', 'en:tris', 'en:trish', 'en:trisha', 'en:tristan', 'en:tristram', 'en:trix', 'en:trixie', 'en:trixy']
+  size=36    langs=1 ['en']
+      ['en:bilal', 'en:bill', 'en:billie', 'en:billy', 'en:eleanor', 'en:eleanora', 'en:elinor', 'en:elle', 'en:hobart', 'en:hubert', 'en:huey', 'en:hugh', 'en:hughie', 'en:huw', 'en:lenora', 'en:lenore', 'en:other', 'en:roisin', 'en:roosevelt', 'en:rosa', 'en:rose', 'en:rosemarie', 'en:rosemary', 'en:rosey', 'en:rosie', 'en:rosy', 'en:shug', 'en:wil', 'en:wilcock', 'en:wilhelm', 'en:wilhelmina', 'en:will', 'en:william', 'en:willie', 'en:wills', 'en:willy']
+  size=35    langs=1 ['en']
+      ['en:djon', 'en:evan', 'en:hann', 'en:iain', 'en:ian', 'en:jack', 'en:jackey', 'en:jacki', 'en:jackie', 'en:jacky', 'en:jacob', 'en:jacqueline', 'en:jacques', 'en:jacqui', 'en:jacquie', 'en:jakob', 'en:jan', 'en:jaq', 'en:jaqueline', 'en:jay', 'en:johannes', 'en:john', 'en:johnathan', 'en:johnnie', 'en:johnno', 'en:johnny', 'en:jon', 'en:jonathan', 'en:jonathon', 'en:jonny', 'en:jonty', 'en:juan', 'en:yaacov', 'en:yan', 'en:yohan']
+  size=30    langs=1 ['en']
+      ['en:cheryl', 'en:makayla', 'en:mckayla', 'en:micaella', 'en:mich', 'en:michael', 'en:michaela', 'en:michaella', 'en:michel', 'en:michelle', 'en:mick', 'en:mickey', 'en:miho', 'en:mikaela', 'en:mikayla', 'en:mike', 'en:mikel', 'en:mikey', 'en:mish', 'en:mookie', 'en:myke', 'en:rochelle', 'en:shel', 'en:sheldon', 'en:shell', 'en:shelley', 'en:shelly', 'en:sheryl', 'en:shirl', 'en:shirley']
+  size=27    langs=1 ['en']
+      ['en:alandra', 'en:alec', 'en:aleck', 'en:alejandra', 'en:alejandro', 'en:alek', 'en:alessandra', 'en:alessandro', 'en:alexander', 'en:alexandra', 'en:alexandre', 'en:askander', 'en:elsie', 'en:eskinder', 'en:iskandar', 'en:iskander', 'en:lex', 'en:oleksander', 'en:sander', 'en:sawney', 'en:scandar', 'en:sikandar', 'en:xan', 'en:xander', 'en:xandra', 'en:xandria', 'en:zander']
+  size=26    langs=1 ['en']
+      ['en:chanequa', 'en:chaniqua', 'en:chenequa', 'en:cheniqua', 'en:chinequa', 'en:chiniqua', 'en:shanecqua', 'en:shaneequa', 'en:shaneiqua', 'en:shanekqua', 'en:shanekwa', 'en:shanequa', 'en:shanicqua', 'en:shaniequa', 'en:shanikqua', 'en:shanikwa', 'en:shaniqua', 'en:shaniquah', 'en:shaniqwa', 'en:shannequa', 'en:shauniqua', 'en:shenequa', 'en:shenikwa', 'en:sheniqua', 'en:shiniqua', 'en:shoniqua']
+  size=22    langs=1 ['en']
+      ['en:james', 'en:janet', 'en:janette', 'en:jas', 'en:jasmina', 'en:jasmine', 'en:jasper', 'en:jassy', 'en:jaz', 'en:jazmin', 'en:jazmine', 'en:jazz', 'en:jeames', 'en:jemmy', 'en:jessamine', 'en:jim', 'en:jimbo', 'en:jimi', 'en:jimmi', 'en:jimmie', 'en:jimmy', 'en:seumas']
+  size=21    langs=1 ['en']
+      ['en:gretchen', 'en:madge', 'en:madonna', 'en:maegan', 'en:maggie', 'en:maggy', 'en:mags', 'en:maisie', 'en:maisy', 'en:margaret', 'en:margareta', 'en:margie', 'en:margret', 'en:maygan', 'en:megan', 'en:meggie', 'en:meggy', 'en:meghann', 'en:megyn', 'en:midge', 'en:peggy']
+  size=20    langs=1 ['en']
+      ['en:jesica', 'en:jesika', 'en:jess', 'en:jesse', 'en:jessica', 'en:jessicah', 'en:jessicka', 'en:jessickah', 'en:jessie', 'en:jessika', 'en:jessikah', 'en:jessiqa', 'en:jessyca', 'en:jessyka', 'en:jesyca', 'en:jesyka', 'en:jezica', 'en:jezika', 'en:jezyca', 'en:jezyka']
+  size=19    langs=1 ['en']
+      ['en:babby', 'en:babs', 'en:bar', 'en:barack', 'en:barb', 'en:barbara', 'en:barbie', 'en:barbs', 'en:barry', 'en:bart', 'en:bartholomew', 'en:bartlett', 'en:barty', 'en:basil', 'en:bate', 'en:batt', 'en:baz', 'en:bazza', 'en:tolly']
+  size=18    langs=1 ['en']
+      ['en:dick', 'en:dickboy', 'en:dickey', 'en:dickie', 'en:dickon', 'en:dicky', 'en:hick', 'en:ricardo', 'en:rich', 'en:richard', 'en:richie', 'en:richy', 'en:rick', 'en:rickey', 'en:ricki', 'en:rickie', 'en:ricky', 'en:ritchie']
+  size=17    langs=1 ['en']
+      ['en:carl', 'en:carlo', 'en:carlos', 'en:cha', 'en:chad', 'en:chaddy', 'en:chadwick', 'en:charles', 'en:charlotte', 'en:chas', 'en:chaz', 'en:chazza', 'en:chic', 'en:karl', 'en:karla', 'en:lottie', 'en:tottie']
+  size=16    langs=1 ['en']
+      ['en:abbee', 'en:abbey', 'en:abbi', 'en:abbs', 'en:abby', 'en:abi', 'en:abigail', 'en:abigaille', 'en:abs', 'en:albert', 'en:alberta', 'en:alberto', 'en:albie', 'en:avigail', 'en:gail', 'en:nabby']
+

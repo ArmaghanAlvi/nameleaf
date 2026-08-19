@@ -1,0 +1,193 @@
+Loading all name-POS senses (one pass, all languages)...
+Loaded 122626 GIVEN+SURNAME senses (indices built for both types, all languages).
+
+========================================================================
+VARIANT GRAPH   type=GIVEN   langs=ALL
+========================================================================
+  source senses scanned .......... 31356
+  candidate edges seen ............ 6742
+  edges resolved (same type) ...... 5586
+  edges resolved (CROSS type) ..... 130
+  edges unresolved ................ 1026
+
+--- resolved edges by relation (same-type only) ---
+  EQUIV_EN            2413
+      en:Jan -> en:John
+      en:Jorge -> en:George
+      en:Mercedes -> en:Mercy
+      en:Sophie -> en:Sophia
+      en:Francisco -> en:Francis
+      en:Jose -> en:Joseph
+      en:Ian -> en:John
+      en:Karl -> en:Charles
+      en:Maurice -> en:Morris
+      en:Juan -> en:John
+  VARIANT_OF          1191
+      en:Hobart -> en:Hubert
+      en:Nicolas -> en:Nicholas
+      en:Sofia -> en:Sophia
+      en:Bern -> en:Bernie
+      en:Bern -> en:Bernie
+      en:Devon -> en:Devin
+      en:Hally -> en:Hallie
+      en:Dannie -> en:Danny
+      en:Cory -> en:Corey
+      en:Cory -> en:Cori
+  DIMINUTIVE_OF       1738
+      en:Fanny -> en:Frances
+      en:Dutch -> en:German
+      en:Chad -> en:Charles
+      en:Chad -> en:Chadwick
+      en:Delphi -> en:Delphine
+      en:Jim -> en:James
+      en:Nessie -> en:Agnes
+      en:Jacky -> en:Jacques
+      en:Jacky -> en:John
+      en:Jacky -> en:Jacqueline
+  FEM_EQUIV             92
+      en:Abdullah -> en:Amatullah
+      en:Sami -> en:Samiyah
+      en:Jacques -> en:Jacqueline
+      en:Dino -> en:Dina
+      en:Solomon -> en:Salome
+      en:Laurence -> en:Lauren
+      en:Kamal -> en:Kamala
+      en:Shlomo -> en:Shulamith
+      en:Constant -> en:Constance
+      en:Latif -> en:Latifa
+  MASC_EQUIV           152
+      en:Alberta -> en:Albert
+      en:Claudia -> en:Claudius
+      en:Cory -> en:Corey
+      en:Frances -> en:Francis
+      en:Briana -> en:Brian
+      en:Danielle -> en:Daniel
+      en:Roberta -> en:Robert
+      en:Wilhelmina -> en:Wilhelm
+      en:Salome -> en:Solomon
+      en:Edwina -> en:Edwin
+
+--- CROSS-TYPE candidate edges (NOT unioned; for your decision) ---
+  EQUIV_EN              64
+  VARIANT_OF            15
+  DIMINUTIVE_OF         47
+  MASC_EQUIV             4
+      [DIMINUTIVE_OF] en:Dutch (GIVEN) -> en:to (SURNAME)
+      [DIMINUTIVE_OF] en:Jimmy (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Dickie (GIVEN) -> en:short (SURNAME)
+      [DIMINUTIVE_OF] en:Bri (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Bri (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Nate (GIVEN) -> en:given (SURNAME)
+      [EQUIV_EN] en:Carlos (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Blue (GIVEN) -> en:person (SURNAME)
+      [DIMINUTIVE_OF] en:Brad (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Brad (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Jay (GIVEN) -> en:given (SURNAME)
+      [VARIANT_OF] en:Jewel (GIVEN) -> en:or (SURNAME)
+      [VARIANT_OF] en:Mai (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Randy (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Ray (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Ray (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Ray (GIVEN) -> en:more (SURNAME)
+      [DIMINUTIVE_OF] en:Ari (GIVEN) -> en:given (SURNAME)
+      [VARIANT_OF] en:Sydwell (GIVEN) -> en:Sidwell (SURNAME)
+      [DIMINUTIVE_OF] en:Eden (GIVEN) -> en:Old (SURNAME)
+      [DIMINUTIVE_OF] en:Kathy (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Minnie (GIVEN) -> en:Minerva (SURNAME)
+      [VARIANT_OF] en:Jenkin (GIVEN) -> en:Jenkins (SURNAME)
+      [DIMINUTIVE_OF] en:Hank (GIVEN) -> en:Hankin (SURNAME)
+      [DIMINUTIVE_OF] en:Aly (GIVEN) -> en:or (SURNAME)
+      [DIMINUTIVE_OF] en:Bert (GIVEN) -> en:such (SURNAME)
+      [DIMINUTIVE_OF] en:Milly (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Millie (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Alfie (GIVEN) -> en:given (SURNAME)
+      [DIMINUTIVE_OF] en:Nellie (GIVEN) -> en:given (SURNAME)
+
+--- top unresolved target strings (pattern-tuning feed) ---
+      159  'equivalent'
+       89  'from'
+       43  'also'
+       28  'variant'
+       22  'of'
+       16  'form'
+       11  'diminutive'
+       11  'or'
+       10  'popular'
+       10  'notably'
+        9  'sometimes'
+        8  'related'
+        8  'Bob'
+        7  'used'
+        7  'forms'
+        6  'name'
+        6  'particularly'
+        6  'Ukrainian'
+        5  'someone'
+        5  'Æthelred'
+
+--- COMPONENT SIZE HISTOGRAM ---
+  nodes involved in >=1 edge ...... 6374
+  components (size>1) ............. 1243
+      size  270:     1 component(s)
+      size  108:     1 component(s)
+      size   95:     1 component(s)
+      size   88:     1 component(s)
+      size   77:     1 component(s)
+      size   76:     1 component(s)
+      size   70:     1 component(s)
+      size   63:     1 component(s)
+      size   53:     1 component(s)
+      size   47:     2 component(s)
+      size   44:     2 component(s)
+      size   41:     1 component(s)
+      size   40:     1 component(s)
+      size   35:     1 component(s)
+      size   33:     2 component(s)
+      size   32:     1 component(s)
+      size   31:     1 component(s)
+      size   30:     2 component(s)
+      size   28:     4 component(s)
+      size   27:     5 component(s)
+      size   26:     2 component(s)
+      size   25:     2 component(s)
+      size   24:     2 component(s)
+      size   23:     3 component(s)
+      size   22:     5 component(s)
+      size   21:     3 component(s)
+      size   20:     2 component(s)
+      size   19:     4 component(s)
+      size   18:     1 component(s)
+      size   17:     5 component(s)
+
+--- LARGEST COMPONENTS ---
+  size=270   langs=15 ['ar', 'cy', 'de', 'el', 'en', 'es', 'fa', 'ga', 'he', 'hi', 'is', 'la', 'pl', 'ru', 'sw']
+      ['ar:جون', 'ar:جيمس', 'ar:حنا', 'ar:نانسي', 'ar:ياسمين', 'ar:يعقوب', 'ar:يوحنا', 'cy:ania', 'cy:iago', 'cy:ieuan', 'cy:ifan', 'cy:ioan', 'cy:iwan', 'cy:jac', 'cy:nansi', 'cy:siani', 'cy:sioned', 'cy:siwan', 'cy:siâms', 'cy:siân', 'cy:siôn', 'de:anika', 'de:anke', 'de:anna', 'de:anne', 'de:anneli', 'de:annelie', 'de:annika', 'de:antje', 'de:eugen', 'de:eugenie', 'de:genoveva', 'de:hanna', 'de:hannah', 'de:hanne', 'de:hannes', 'de:jacob', 'de:jan', 'de:janik', 'de:jannick']  ... +230 more
+  size=108   langs=11 ['ar', 'cy', 'de', 'el', 'en', 'es', 'ga', 'is', 'la', 'pl', 'ru']
+      ['ar:كريستوفر', 'cy:catrin', 'de:catarina', 'de:catharina', 'de:cathrin', 'de:catrin', 'de:christel', 'de:christian', 'de:christiane', 'de:christina', 'de:christine', 'de:christof', 'de:christoph', 'de:kai', 'de:katarina', 'de:katharina', 'de:kathrin', 'de:katja', 'de:katrin', 'de:kay', 'de:kristina', 'de:käte', 'de:käthe', 'el:αικατερίνη', 'el:χριστίνα', 'el:χριστινάκι', 'el:χριστινούλα', 'en:caitlin', 'en:caitlind', 'en:caity', 'en:cate', 'en:cath', 'en:catharine', 'en:catherine', 'en:catheryn', 'en:cathi', 'en:cathryn', 'en:cathy', 'en:catrina', 'en:caty']  ... +68 more
+  size=95    langs=12 ['ar', 'de', 'el', 'en', 'es', 'fa', 'ga', 'he', 'hi', 'is', 'pl', 'ru']
+      ['ar:ألكسندروس', 'ar:إسكندر', 'de:alex', 'de:alexander', 'de:alexandra', 'de:natascha', 'de:sandra', 'de:sandro', 'de:sascha', 'el:αλέκοσ', 'el:αλέξανδροσ', 'en:alandra', 'en:alec', 'en:aleck', 'en:alejandra', 'en:alejandro', 'en:alek', 'en:aleksandra', 'en:alessandra', 'en:alessandro', 'en:alessia', 'en:alex', 'en:alexa', 'en:alexander', 'en:alexandra', 'en:alexandre', 'en:alexis', 'en:allex', 'en:askander', 'en:elsie', 'en:eskinder', 'en:iskandar', 'en:iskander', 'en:lesia', 'en:lex', 'en:nachaly', 'en:natalia', 'en:natalie', 'en:nataly', 'en:natalya']  ... +55 more
+  size=88    langs=11 ['ar', 'cy', 'de', 'el', 'en', 'es', 'ga', 'is', 'la', 'pl', 'ru']
+      ['ar:وليم', 'cy:gwilym', 'de:eleonora', 'de:eleonore', 'de:helmina', 'de:helmine', 'de:hubert', 'de:hugo', 'de:leonore', 'de:minna', 'de:rosa', 'de:rose', 'de:rosemarie', 'de:wilhelm', 'de:wilhelmina', 'de:wilhelmine', 'de:wilma', 'el:γουλιέλμοσ', 'el:ουίλλιαμ', 'en:bilal', 'en:bill', 'en:billie', 'en:billy', 'en:eleanor', 'en:eleanora', 'en:elinor', 'en:elle', 'en:hobart', 'en:hubert', 'en:huey', 'en:hugh', 'en:hughie', 'en:hugo', 'en:huw', 'en:lenora', 'en:lenore', 'en:liam', 'en:other', 'en:roisin', 'en:roosevelt']  ... +48 more
+  size=77    langs=10 ['cy', 'de', 'en', 'es', 'fa', 'ga', 'is', 'la', 'pl', 'ru']
+      ['cy:padrig', 'de:beatrice', 'de:beatrix', 'de:marta', 'de:mathilde', 'de:mechthild', 'de:patricia', 'de:patrick', 'de:patrik', 'de:patrizia', 'de:tristan', 'en:bea', 'en:beatrice', 'en:beatrix', 'en:beatriz', 'en:bee', 'en:maddie', 'en:maddison', 'en:maddy', 'en:madeleine', 'en:madeline', 'en:madelyn', 'en:madi', 'en:madison', 'en:marta', 'en:martha', 'en:marthe', 'en:marty', 'en:matilda', 'en:mattie', 'en:pat', 'en:patricia', 'en:patrick', 'en:patsie', 'en:patsy', 'en:patti', 'en:pattie', 'en:patty', 'en:tilda', 'en:tillie']  ... +37 more
+  size=76    langs=12 ['ang', 'ar', 'el', 'en', 'es', 'fa', 'ga', 'he', 'hi', 'is', 'pl', 'ru']
+      ['ang:elizabeþ', 'ar:إسحاق', 'ar:عيسى', 'el:ελισάβετ', 'en:bess', 'en:bessie', 'en:bessy', 'en:bethie', 'en:bethy', 'en:betsey', 'en:betsi', 'en:betsie', 'en:betsy', 'en:bette', 'en:bettie', 'en:betty', 'en:buffy', 'en:elisabetha', 'en:eliza', 'en:elizabeth', 'en:elizabetha', 'en:elspeth', 'en:elspie', 'en:elysabeth', 'en:ike', 'en:ikey', 'en:isa', 'en:isaac', 'en:isabel', 'en:isabelle', 'en:isobel', 'en:isobelle', 'en:israel', 'en:itzhak', 'en:iz', 'en:izz', 'en:izzy', 'en:libby', 'en:liz', 'en:lizbeth']  ... +36 more
+  size=70    langs=13 ['ar', 'cy', 'de', 'el', 'en', 'es', 'fa', 'ga', 'hi', 'is', 'pl', 'ru', 'sw']
+      ['ar:مريم', 'cy:mair', 'cy:mari', 'de:maike', 'de:maja', 'de:mareike', 'de:maria', 'de:marina', 'de:maya', 'de:meike', 'de:mitzi', 'de:mizzi', 'el:μαρία', 'en:mamie', 'en:maria', 'en:mariah', 'en:marietta', 'en:marilla', 'en:marina', 'en:mary', 'en:marye', 'en:masha', 'en:maura', 'en:mavis', 'en:mayme', 'en:mim', 'en:mims', 'en:minnie', 'en:miriam', 'en:molly', 'en:myriam', 'en:poll', 'en:rilla', 'es:choco', 'es:chucho', 'es:chus', 'es:chuy', 'es:coco', 'es:jesús', 'es:maite']  ... +30 more
+  size=63    langs=11 ['ar', 'cy', 'de', 'el', 'en', 'es', 'ga', 'is', 'la', 'pl', 'ru']
+      ['ar:فرنسيس', 'cy:ffransis', 'de:fanny', 'de:franz', 'de:franziska', 'de:franziskus', 'de:friederich', 'de:friederike', 'de:friedrich', 'de:fritz', 'el:φραγκίσκοσ', 'en:chico', 'en:faith', 'en:fannie', 'en:fanny', 'en:fay', 'en:faye', 'en:fran', 'en:frances', 'en:francis', 'en:francisco', 'en:franco', 'en:frank', 'en:fransisco', 'en:franz', 'en:françois', 'en:freddie', 'en:freddy', 'en:frederic', 'en:frederica', 'en:frederick', 'en:friedrich', 'en:fritz', 'es:curro', 'es:fede', 'es:federico', 'es:fran', 'es:francisco', 'es:francisquito', 'es:franco']  ... +23 more
+  size=53    langs=8 ['ar', 'el', 'en', 'es', 'ga', 'he', 'pl', 'ru']
+      ['ar:مايك', 'ar:مايكل', 'ar:ميخائيل', 'ar:ميكائيل', 'el:μάικ', 'el:μιχαήλ', 'en:cheryl', 'en:makayla', 'en:mckayla', 'en:micaella', 'en:mich', 'en:michael', 'en:michaela', 'en:michaella', 'en:michel', 'en:michelle', 'en:mick', 'en:mickey', 'en:miho', 'en:mikaela', 'en:mikayla', 'en:mike', 'en:mikel', 'en:mikey', 'en:mish', 'en:mookie', 'en:myke', 'en:rochelle', 'en:shel', 'en:sheldon', 'en:shell', 'en:shelley', 'en:shelly', 'en:sheryl', 'en:shirl', 'en:shirley', 'es:micaela', 'es:migo', 'es:migue', 'es:miguel']  ... +13 more
+  size=47    langs=8 ['de', 'el', 'en', 'es', 'ga', 'is', 'pl', 'ru']
+      ['de:gretchen', 'de:grete', 'de:gretel', 'de:grethe', 'de:marga', 'de:margarete', 'de:margarethe', 'de:margret', 'de:margrit', 'de:meta', 'el:ρίτα', 'en:gretchen', 'en:madge', 'en:madonna', 'en:maegan', 'en:maggie', 'en:maggy', 'en:mags', 'en:maisie', 'en:maisy', 'en:margaret', 'en:margareta', 'en:margarita', 'en:margie', 'en:margret', 'en:maygan', 'en:megan', 'en:meggie', 'en:meggy', 'en:meghann', 'en:megyn', 'en:midge', 'en:peggy', 'en:reeta', 'en:rita', 'es:margarita', 'ga:máiréad', 'ga:peige', 'is:margrét', 'pl:gosia']  ... +7 more
+  size=47    langs=13 ['ar', 'de', 'en', 'es', 'fa', 'ga', 'he', 'hi', 'is', 'la', 'pl', 'ru', 'sw']
+      ['ar:يوسف', 'de:joscha', 'de:josef', 'de:josefine', 'en:joby', 'en:joey', 'en:joie', 'en:jos', 'en:jose', 'en:josef', 'en:joseph', 'en:josephine', 'en:josie', 'en:josy', 'en:josé', 'en:jozy', 'en:zeffie', 'es:chema', 'es:chepa', 'es:fina', 'es:josefa', 'es:josefina', 'es:joselito', 'es:josemari', 'es:josé', 'es:pepa', 'es:pepe', 'es:pepita', 'es:pepito', 'es:pina', 'fa:یوسف', 'ga:seosaimhín', 'ga:seosamh', 'he:יוסי', 'he:יוסף', 'hi:यूसुफ़', 'is:jósef', 'la:iosepha', 'la:iosephus', 'pl:józef']  ... +7 more
+  size=44    langs=10 ['ang', 'ar', 'de', 'el', 'en', 'es', 'ga', 'he', 'pl', 'ru']
+      ['ang:barþolomeus', 'ar:باسيليوس', 'ar:بربارة', 'de:babsi', 'de:barbara', 'de:bartholomäus', 'el:βαρβάρα', 'el:βαρθολομαίοσ', 'el:βασίλειοσ', 'el:βασίλησ', 'el:βασιλάκησ', 'en:babby', 'en:babs', 'en:bar', 'en:barack', 'en:barb', 'en:barbara', 'en:barbie', 'en:barbs', 'en:barry', 'en:bart', 'en:bartholomew', 'en:bartlett', 'en:barty', 'en:basil', 'en:bate', 'en:batt', 'en:baz', 'en:bazza', 'en:tolly', 'es:bartolomé', 'es:basilio', 'es:bárbara', 'ga:bairbre', 'ga:parthalán', 'he:ברתולומאוס', 'pl:barbara', 'pl:bartłomiej', 'pl:basia', 'pl:bazyli']  ... +4 more
+  size=44    langs=8 ['ar', 'de', 'el', 'en', 'es', 'is', 'pl', 'ru']
+      ['ar:هيلانة', 'de:elena', 'de:helena', 'de:helene', 'de:helga', 'de:helge', 'de:hella', 'de:ilona', 'de:lena', 'de:madleen', 'de:madlen', 'de:madlene', 'de:magda', 'de:magdalena', 'de:magdalene', 'el:ελένη', 'el:ελενίτσα', 'el:λενιώ', 'en:chanel', 'en:ellen', 'en:hel', 'en:helen', 'en:lena', 'en:magdalen', 'en:magdalena', 'en:magdalene', 'en:nel', 'en:nellie', 'en:nelson', 'en:olena', 'es:elena', 'es:magdalena', 'is:elín', 'pl:hela', 'pl:helena', 'pl:helenka', 'pl:lena', 'pl:madzia', 'pl:magda', 'pl:magdalena']  ... +4 more
+  size=41    langs=10 ['ar', 'cy', 'de', 'el', 'en', 'es', 'ga', 'la', 'pl', 'ru']
+      ['ar:استفانوس', 'ar:ستيفن', 'cy:steffan', 'de:stefan', 'de:stefanie', 'de:steffen', 'de:stephan', 'de:stephanie', 'el:στέφανοσ', 'en:steenie', 'en:stef', 'en:stefan', 'en:stefany', 'en:steff', 'en:steffi', 'en:steffie', 'en:steffy', 'en:steph', 'en:stephan', 'en:stephanie', 'en:stephen', 'en:stephenie', 'en:stephie', 'en:steve', 'en:steven', 'en:stevie', 'es:esteban', 'es:estefany', 'es:estefanía', 'es:fani', 'ga:stiabhna', 'ga:stiofán', 'la:stephana', 'la:stephanus', 'pl:stefan', 'pl:stefanek', 'pl:stefania', 'pl:szczepan', 'ru:степан', 'ru:стефан']  ... +1 more
+  size=40    langs=10 ['ang', 'cy', 'el', 'en', 'es', 'ga', 'is', 'la', 'pl', 'ru']
+      ['ang:carl', 'cy:siarl', 'el:κάρολοσ', 'en:carl', 'en:carlo', 'en:carlos', 'en:carroll', 'en:cha', 'en:chad', 'en:chaddy', 'en:chadwick', 'en:charles', 'en:charli', 'en:charlie', 'en:charlotte', 'en:chas', 'en:chaz', 'en:chazza', 'en:chic', 'en:karl', 'en:karla', 'en:lottie', 'en:tottie', 'es:carla', 'es:carlito', 'es:carlitos', 'es:carlos', 'es:carlota', 'ga:cathal', 'ga:cearbhall', 'ga:séarlas', 'is:kalli', 'is:karl', 'is:karlotta', 'la:carolus', 'la:karolus', 'pl:karol', 'pl:lolek', 'pl:szarlota', 'ru:шарлотта']
+

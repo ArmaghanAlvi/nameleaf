@@ -1,0 +1,174 @@
+Loading all name-POS senses (one pass, all languages)...
+Loaded 122626 GIVEN+SURNAME senses (indices built for both types, all languages).
+
+========================================================================
+VARIANT GRAPH   type=SURNAME   langs=ALL
+========================================================================
+  source senses scanned .......... 91270
+  candidate edges seen ............ 1024
+  edges resolved (same type) ...... 725
+  edges resolved (CROSS type) ..... 31
+  edges unresolved ................ 268
+
+--- resolved edges by relation (same-type only) ---
+  EQUIV_EN             199
+      en:Feder -> en:Feather
+      en:Montana -> en:Mountain
+      en:Montana -> en:Mount
+      en:Montana -> en:or
+      en:Maurice -> en:Morris
+      en:Olivier -> en:Oliver
+      en:Steen -> en:Stone
+      en:Sten -> en:Stone
+      en:Lin -> en:Forest
+      en:Lin -> en:Woods
+  VARIANT_OF           410
+      en:Welsh -> en:Walsh
+      en:Sydney -> en:Sidney
+      en:Paris -> en:Parris
+      en:Paris -> en:Aparicio
+      en:Maine -> en:Main
+      en:Dane -> en:Dean
+      en:Hannah -> en:Hanna
+      en:Cory -> en:Corey
+      en:Duncan -> en:Donegan
+      en:Spenser -> en:Spencer
+  DIMINUTIVE_OF         84
+      en:Hally -> en:Hall
+      en:Norman -> en:or
+      en:Brownie -> en:Brown
+      en:Day -> en:David
+      en:Gay -> en:lively
+      en:Gray -> en:hair
+      en:Hardy -> en:hardy
+      en:Hardy -> en:hardy
+      en:Lark -> en:Laurence
+      en:Mac -> en:person
+  FEM_EQUIV             15
+      en:Pavlov -> en:Pavlova
+      en:Ivanov -> en:Ivanova
+      en:Petrov -> en:Petrova
+      en:Andreev -> en:Andreeva
+      en:Samkov -> en:Samkova
+      en:Kadyrov -> en:Kadyrova
+      ru:Шульгин -> ru:Шульги́на
+      el:Άγγελος -> el:Αγγέλου
+      el:Γιαννάκης -> el:Γιαννάκη
+      el:Παρασκευόπουλος -> el:Παρασκευοπούλου
+  MASC_EQUIV            17
+      en:Pavlova -> en:Pavlov
+      en:Ivanova -> en:Ivanov
+      en:Samkova -> en:Samkov
+      en:Andreeva -> en:Andreev
+      en:Zelenska -> en:Zelenskyy
+      en:Petrova -> en:Petrov
+      ru:Шульгина -> ru:Шульги́н
+      el:Αθανασάκη -> el:Αθανασάκης
+      el:Ελευθερουδάκη -> el:Ελευθερουδάκης
+      el:Δημητράκη -> el:Δημητράκης
+
+--- CROSS-TYPE candidate edges (NOT unioned; for your decision) ---
+  EQUIV_EN              14
+  VARIANT_OF            12
+  DIMINUTIVE_OF          4
+  MASC_EQUIV             1
+      [VARIANT_OF] en:George (SURNAME) -> en:Georg (GIVEN)
+      [VARIANT_OF] en:Luke (SURNAME) -> en:Luck (GIVEN)
+      [VARIANT_OF] en:Hughes (SURNAME) -> en:Howells (GIVEN)
+      [VARIANT_OF] en:Matt (SURNAME) -> en:Matthews (GIVEN)
+      [EQUIV_EN] en:Steen (SURNAME) -> en:Peters (GIVEN)
+      [EQUIV_EN] en:Sten (SURNAME) -> en:Peters (GIVEN)
+      [VARIANT_OF] en:Evan (SURNAME) -> en:Evans (GIVEN)
+      [VARIANT_OF] en:Julian (SURNAME) -> en:Julien (GIVEN)
+      [MASC_EQUIV] en:Pavlova (SURNAME) -> en:Pavel (GIVEN)
+      [VARIANT_OF] en:Stacy (SURNAME) -> en:Stacey (GIVEN)
+      [DIMINUTIVE_OF] en:Greg (SURNAME) -> en:Gregor (GIVEN)
+      [VARIANT_OF] en:Emory (SURNAME) -> en:Emery (GIVEN)
+      [EQUIV_EN] en:Petrosyan (SURNAME) -> en:Peterson (GIVEN)
+      [DIMINUTIVE_OF] en:Addy (SURNAME) -> en:Adeline (GIVEN)
+      [DIMINUTIVE_OF] en:Addy (SURNAME) -> en:Adrienne (GIVEN)
+      [DIMINUTIVE_OF] en:Richy (SURNAME) -> en:Rich (GIVEN)
+      [EQUIV_EN] en:Magnuson (SURNAME) -> en:Manson (GIVEN)
+      [EQUIV_EN] en:Daoust (SURNAME) -> en:Austin (GIVEN)
+      [VARIANT_OF] en:Iliff (SURNAME) -> en:Iliffe (GIVEN)
+      [EQUIV_EN] en:Hakobyan (SURNAME) -> en:Jacobson (GIVEN)
+      [VARIANT_OF] en:Billups (SURNAME) -> en:Philips (GIVEN)
+      [VARIANT_OF] en:Peirson (SURNAME) -> en:Pierson (GIVEN)
+      [EQUIV_EN] en:Tomasyan (SURNAME) -> en:Thompson (GIVEN)
+      [EQUIV_EN] en:Nikoghosyan (SURNAME) -> en:Nicholson (GIVEN)
+      [VARIANT_OF] en:Ilieve (SURNAME) -> en:Iliffe (GIVEN)
+      [EQUIV_EN] ru:Хиль (SURNAME) -> en:Gil (GIVEN)
+      [EQUIV_EN] hi:प्रभु (SURNAME) -> en:Prabhu (GIVEN)
+      [EQUIV_EN] hi:माधव (SURNAME) -> en:Madhav (GIVEN)
+      [EQUIV_EN] he:פלג (SURNAME) -> en:Peleg (GIVEN)
+      [EQUIV_EN] el:Ορλάνδος (SURNAME) -> en:Orlando (GIVEN)
+
+--- top unresolved target strings (pattern-tuning feed) ---
+       23  'Ní'
+       22  'someone'
+       21  'equivalent'
+       12  'from'
+       10  'Nic'
+        6  'originating'
+        6  'Pugacz'
+        6  'Hebrew'
+        5  'derived'
+        4  '[in'
+        4  'Ó'
+        3  'notably'
+        3  'famously'
+        3  'used'
+        2  'Parys'
+        2  'for'
+        2  'meaning'
+        2  'cheerful'
+        2  'and'
+        2  'had'
+
+--- COMPONENT SIZE HISTOGRAM ---
+  nodes involved in >=1 edge ...... 1103
+  components (size>1) ............. 436
+      size   42:     1 component(s)
+      size   11:     1 component(s)
+      size    9:     2 component(s)
+      size    8:     2 component(s)
+      size    7:     1 component(s)
+      size    6:     5 component(s)
+      size    5:     7 component(s)
+      size    4:    23 component(s)
+      size    3:    58 component(s)
+      size    2:   336 component(s)
+      size    1:     6 component(s)
+
+--- LARGEST COMPONENTS ---
+  size=42    langs=3 ['en', 'es', 'ga']
+      ['en:addie', 'en:brock', 'en:brook', 'en:brooks', 'en:brooksy', 'en:carter', 'en:clark', 'en:clarke', 'en:clarkey', 'en:deforest', 'en:forest', 'en:gowan', 'en:grimm', 'en:grimmy', 'en:jacko', 'en:keats', 'en:lalonde', 'en:lin', 'en:mac', 'en:macarthur', 'en:mcgowan', 'en:mckenzie', 'en:montaigne', 'en:montana', 'en:montano', 'en:mount', 'en:mountain', 'en:nobby', 'en:norman', 'en:or', 'en:person', 'en:prince', 'en:smiggy', 'en:spear', 'en:speare', 'en:speares', 'en:wood', 'en:woods', 'en:woz', 'es:montaño']  ... +2 more
+  size=11    langs=1 ['de']
+      ['de:gotschlich', 'de:gotschlig', 'de:gotschling', 'de:gottschlich', 'de:gottschlicht', 'de:gottschlick', 'de:gottschlig', 'de:gottschligg', 'de:gottschlik', 'de:gottschling', 'de:gottschlink']
+  size=9     langs=1 ['en']
+      ['en:rosecrans', 'en:rosekrans', 'en:rosencrans', 'en:rosencrants', 'en:rosencrantz', 'en:rosencranz', 'en:rosenkrans', 'en:rosenkrantz', 'en:rosenkranz']
+  size=9     langs=1 ['en']
+      ['en:auyang', 'en:auyeung', 'en:auyoung', 'en:awyong', "en:o'yeung", 'en:ouyong', 'en:oyang', 'en:oyong', 'en:oyoung']
+  size=8     langs=3 ['de', 'en', 'ru']
+      ['de:schmidt', 'de:schmied', 'de:schmitt', 'en:smith', 'en:smithy', 'en:smitty', 'en:smudger', 'ru:ковалёв']
+  size=8     langs=1 ['en']
+      ['en:godrich', 'en:godridge', 'en:gooderick', 'en:gooderidge', 'en:goodrich', 'en:goodrick', 'en:goodricke', 'en:goodwright']
+  size=7     langs=1 ['en']
+      ['en:jane', 'en:janes', 'en:jayne', 'en:jaynes', 'en:jeans', 'en:jenn', 'en:john']
+  size=6     langs=2 ['de', 'en']
+      ['de:schäfer', 'en:schaefer', 'en:schafer', 'en:schaffer', 'en:shaffer', 'en:shepherd']
+  size=6     langs=1 ['en']
+      ['en:leadbeater', 'en:leadbeter', 'en:leadbetter', 'en:ledbeater', 'en:ledbeter', 'en:ledbetter']
+  size=6     langs=1 ['en']
+      ['en:troudeau', 'en:troudo', 'en:trudau', 'en:trudaux', 'en:trudeau', 'en:trudeaux']
+  size=6     langs=1 ['en']
+      ['en:aldridge', 'en:aldrige', 'en:allderidge', 'en:alldridge', 'en:elderidge', 'en:oldridge']
+  size=6     langs=3 ['en', 'es', 'ru']
+      ['en:french', 'en:german', 'en:schlossberg', 'en:white', 'es:blanco', 'ru:шлосберг']
+  size=5     langs=2 ['de', 'en']
+      ['de:braun', 'en:brown', 'en:browne', 'en:brownie', 'en:browny']
+  size=5     langs=1 ['en']
+      ['en:lea', 'en:lee', 'en:leigh', 'en:li', 'en:rhee']
+  size=5     langs=2 ['ar', 'en']
+      ['ar:شمعون', 'en:simon', 'en:simonyan', 'en:simpson', 'en:simson']
+
