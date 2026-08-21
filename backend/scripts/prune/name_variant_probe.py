@@ -170,16 +170,60 @@ def load_all_name_records(db):
     return records, index
 
 
+def _component_report(uf: UnionFind, lang_of_node: dict[str, str],
+                      label: str, top_n: int = 10, show: int = 40) -> int:
+    """
+    Print one graph's component structure. Returns the largest component size
+    so the caller can print a side-by-side verdict block.
+
+    Three graphs are reported by run(): ALL (reproduces the pre-1a behaviour,
+    and is the regression check on this edit), SAME-LANGUAGE only, and
+    CROSS-LANGUAGE only. Splitting them is the whole point of 1a: it is the
+    difference between "cross-language equivalence never chains transitively"
+    (a scoping rule) and "fan-out needs a cap" (a different design).
+    """
+    members: dict[str, list[str]] = defaultdict(list)
+    for node in uf.parent:
+        members[uf.find(node)].append(node)
+
+    sizes = sorted((len(v) for v in members.values()), reverse=True)
+    hist: Counter = Counter(sizes)
+    non_trivial = [v for v in members.values() if len(v) > 1]
+    largest = sizes[0] if sizes else 0
+
+    print(f"--- COMPONENTS [{label}] ---")
+    print(f"  nodes involved in >=1 edge ...... {sum(sizes)}")
+    print(f"  components (size>1) ............. {len(non_trivial)}")
+    print(f"  LARGEST COMPONENT ............... {largest}")
+    for size in sorted(set(sizes), reverse=True)[:15]:
+        print(f"      size {size:>4}: {hist[size]:>5} component(s)")
+    for comp in sorted(members.values(), key=len, reverse=True)[:top_n]:
+        if len(comp) <= 1:
+            continue
+        langs_in = sorted({lang_of_node.get(n, "?") for n in comp})
+        shown = sorted(comp)[:show]
+        more = len(comp) - len(shown)
+        print(f"  size={len(comp):<5} langs={len(langs_in)} {langs_in}")
+        print(f"      {shown}" + (f"  ... +{more} more" if more else ""))
+    print()
+    return largest
+
+
 def run(records, index, wanted_type: str, langs: set[str] | None,
-        cap: int) -> None:
+        example_cap: int, fanout_cap: int) -> None:
     ntype = "GIVEN" if wanted_type == "given" else "SURNAME"
     other_ntype = "SURNAME" if ntype == "GIVEN" else "GIVEN"
 
-    uf = UnionFind()
-    edge_counts: Counter = Counter()          # by relation type, resolved
-    cross_type_edges: Counter = Counter()     # (relation) -> count
+    # THREE graphs, unioned independently from the same edge stream.
+    uf_all, uf_same, uf_cross = UnionFind(), UnionFind(), UnionFind()
+
+    same_edges: Counter = Counter()           # by relation, same-language
+    cross_edges: Counter = Counter()          # by relation, cross-language
+    cross_type_edges: Counter = Counter()
     cross_type_samples: list = []
-    unresolved_samples: Counter = Counter()   # first-token -> count
+    unresolved_samples: Counter = Counter()
+    fanout_hist: Counter = Counter()          # candidates extracted per match
+    fanout_by_rel: dict[str, Counter] = {r: Counter() for r in TRIGGERS}
     edges_seen = 0
     edges_resolved = 0
     edges_cross_type = 0
@@ -200,7 +244,11 @@ def run(records, index, wanted_type: str, langs: set[str] | None,
             if not m:
                 continue
             target_lang = "en" if rel == "EQUIV_EN" else code
-            for cand in extract_target_candidates(m.group(1)):
+            cands = extract_target_candidates(m.group(1), cap=fanout_cap)
+            fanout_hist[len(cands)] += 1
+            fanout_by_rel[rel][len(cands)] += 1
+
+            for cand in cands:
                 edges_seen += 1
                 norm_cand = normalize_lemma(cand, target_lang)
 
@@ -209,18 +257,31 @@ def run(records, index, wanted_type: str, langs: set[str] | None,
 
                 if norm_cand in own_idx:
                     edges_resolved += 1
-                    edge_counts[rel] += 1
                     target_node = node_key(target_lang, norm_cand)
                     lang_of_node[target_node] = target_lang
-                    uf.union(source_node, target_node)
-                    if len(resolved_samples[rel]) < cap:
+                    uf_all.union(source_node, target_node)
+
+                    # is_cross_language is decided by the ACTUAL languages,
+                    # not by the relation label. An English source carrying
+                    # EQUIV_EN points at English and is a SAME-language edge
+                    # despite the name -- and Stage 2's schema stores
+                    # is_cross_language per edge, so the probe must define it
+                    # the way production will.
+                    if target_lang == code:
+                        same_edges[rel] += 1
+                        uf_same.union(source_node, target_node)
+                    else:
+                        cross_edges[rel] += 1
+                        uf_cross.union(source_node, target_node)
+
+                    if len(resolved_samples[rel]) < example_cap:
                         resolved_samples[rel].append(
                             (f"{code}:{lemma}", f"{target_lang}:{cand}")
                         )
                 elif norm_cand in other_idx:
                     edges_cross_type += 1
                     cross_type_edges[rel] += 1
-                    if len(cross_type_samples) < cap * 3:
+                    if len(cross_type_samples) < example_cap * 3:
                         cross_type_samples.append(
                             (rel, f"{code}:{lemma} ({ntype})",
                              f"{target_lang}:{cand} ({other_ntype})")
@@ -228,33 +289,40 @@ def run(records, index, wanted_type: str, langs: set[str] | None,
                 else:
                     unresolved_samples[cand] += 1
 
-    # --- component analysis -------------------------------------------
-    members: dict[str, list[str]] = defaultdict(list)
-    for node in uf.parent:
-        members[uf.find(node)].append(node)
-
-    sizes = sorted((len(v) for v in members.values()), reverse=True)
-    size_hist: Counter = Counter(sizes)
-    involved_nodes = sum(sizes)
-    non_trivial = [v for v in members.values() if len(v) > 1]
+    scanned = sum(
+        1 for c, _l, _n, r, _g in records
+        if r == ntype and (not langs or c in langs)
+    )
 
     print("=" * 72)
     print(f"VARIANT GRAPH   type={ntype}   "
-          f"langs={'ALL' if not langs else ','.join(sorted(langs))}")
+          f"langs={'ALL' if not langs else ','.join(sorted(langs))}   "
+          f"fanout_cap={fanout_cap}")
     print("=" * 72)
-    print(f"  source senses scanned .......... "
-          f"{sum(1 for c, l, n, r, g in records if r == ntype and (not langs or c in langs))}")
+    print(f"  source senses scanned ........... {scanned}")
     print(f"  candidate edges seen ............ {edges_seen}")
     print(f"  edges resolved (same type) ...... {edges_resolved}")
     print(f"  edges resolved (CROSS type) ..... {edges_cross_type}")
     print(f"  edges unresolved ................ "
           f"{edges_seen - edges_resolved - edges_cross_type}")
     print()
-    print("--- resolved edges by relation (same-type only) ---")
+    print("--- resolved edges by relation x language scope ---")
+    print(f"  {'relation':<16} {'same-lang':>10} {'cross-lang':>11} {'total':>8}")
     for rel in TRIGGERS:
-        print(f"  {rel:<16} {edge_counts[rel]:>7}")
+        tot = same_edges[rel] + cross_edges[rel]
+        print(f"  {rel:<16} {same_edges[rel]:>10} {cross_edges[rel]:>11} {tot:>8}")
         for src, tgt in resolved_samples[rel]:
             print(f"      {src} -> {tgt}")
+    print()
+    print("--- FAN-OUT: candidates extracted per trigger match ---")
+    for k in sorted(fanout_hist):
+        print(f"  {k} candidate(s): {fanout_hist[k]}")
+    print("  by relation (2+ candidate share is what a cap would remove):")
+    for rel in TRIGGERS:
+        multi = sum(v for k, v in fanout_by_rel[rel].items() if k >= 2)
+        tot = sum(fanout_by_rel[rel].values())
+        share = f"{100 * multi / tot:.1f}%" if tot else "n/a"
+        print(f"      {rel:<16} multi={multi:>6} / {tot:<6} ({share})")
     print()
     print("--- CROSS-TYPE candidate edges (NOT unioned; for your decision) ---")
     for rel in TRIGGERS:
@@ -267,23 +335,17 @@ def run(records, index, wanted_type: str, langs: set[str] | None,
     for cand, k in unresolved_samples.most_common(20):
         print(f"    {k:>5}  {cand!r}")
     print()
-    print("--- COMPONENT SIZE HISTOGRAM ---")
-    print(f"  nodes involved in >=1 edge ...... {involved_nodes}")
-    print(f"  components (size>1) ............. {len(non_trivial)}")
-    for size in sorted(set(sizes), reverse=True)[:30]:
-        print(f"      size {size:>4}: {size_hist[size]:>5} component(s)")
-    print()
-    print("--- LARGEST COMPONENTS ---")
-    biggest = sorted(members.values(), key=len, reverse=True)[:15]
-    for comp in biggest:
-        if len(comp) <= 1:
-            continue
-        langs_in_comp = sorted({lang_of_node.get(n, "?") for n in comp})
-        shown = sorted(comp)[:40]
-        more = len(comp) - len(shown)
-        print(f"  size={len(comp):<5} langs={len(langs_in_comp)} "
-              f"{langs_in_comp}")
-        print(f"      {shown}" + (f"  ... +{more} more" if more else ""))
+
+    largest_all = _component_report(uf_all, lang_of_node, "ALL EDGES")
+    largest_same = _component_report(uf_same, lang_of_node, "SAME-LANGUAGE ONLY")
+    largest_cross = _component_report(uf_cross, lang_of_node, "CROSS-LANGUAGE ONLY")
+
+    print("=" * 72)
+    print(f"1a / 1b VERDICT INPUTS   type={ntype}   fanout_cap={fanout_cap}")
+    print(f"  largest ALL ..................... {largest_all}")
+    print(f"  largest SAME-LANGUAGE only ...... {largest_same}")
+    print(f"  largest CROSS-LANGUAGE only ..... {largest_cross}")
+    print("=" * 72)
     print()
 
 
@@ -291,7 +353,13 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--lang", action="append", default=[])
     ap.add_argument("--all", action="store_true")
-    ap.add_argument("--examples", type=int, default=10)
+    ap.add_argument("--examples", type=int, default=10,
+                    help="sample rows printed per relation. NOT the fan-out "
+                         "cap -- see --fanout-cap.")
+    ap.add_argument("--fanout-cap", type=int, default=3,
+                    help="max target candidates extracted per trigger match. "
+                         "1b re-runs the whole probe with 1 to test whether "
+                         "hub fan-out is what inflates the components.")
     ap.add_argument(
         "--name-type", choices=("given", "surname"), required=True,
         help="Run once per type -- given and surname are never combined "
@@ -309,7 +377,8 @@ def main() -> None:
         records, index = load_all_name_records(db)
         print(f"Loaded {len(records)} GIVEN+SURNAME senses "
               f"(indices built for both types, all languages).\n")
-        run(records, index, args.name_type, langs, args.examples)
+        run(records, index, args.name_type, langs, args.examples,
+            args.fanout_cap)
 
 
 if __name__ == "__main__":

@@ -38,7 +38,9 @@ from app.db.session import SessionLocal              # noqa: E402
 from app.models.generated_name import Language       # noqa: E402
 from app.models.semantic import Lexeme, Sense        # noqa: E402
 from scripts.prune.name_inventory_probe import (     # noqa: E402
+    NAME_TYPE_CHOICES,
     classify_name_type,
+    expand_type_arg,
     shipping_types,
 )
 
@@ -60,6 +62,95 @@ ANY_QUOTED = re.compile(
     r"[\"“«]([^\"”»]{2,80})[\"”»]",
 )
 
+# ---------------------------------------------------------------------------
+# ETYM_QUOTED repair (Stage 1c).
+#
+# The pre-1c extractor took the FIRST quoted span anywhere in etymology_text.
+# Three documented failure modes:
+#   (1) dithematic truncation -- 'from ead ("wealth") + weard ("guardian")'
+#       yielded only "wealth", silently halving every compound name.
+#   (2) unrelated first-quote capture -- a leading 'See "Avon".' or
+#       'Compare the English "Smith".' produced a gloss from a cross-reference
+#       rather than from a derivation.
+#   (3) stem/continuative boilerplate -- ja/zh etymologies are dominated by
+#       morphological notes that are not meanings at all.
+#
+# The repair: first sentence only, require a derivation anchor OUTSIDE the
+# quoted material, concatenate every anchored span, drop boilerplate spans,
+# and gate ja/zh off entirely. Every gate fails CLOSED -- blank over wrong.
+# ---------------------------------------------------------------------------
+
+ETYM_QUOTED_BLOCKED_LANGS = frozenset({"ja", "zh"})
+
+# Narrow quote set, matching ANY_QUOTED's rationale: apostrophes are NOT
+# delimiters, or "don't ... isn't" manufactures a span.
+_ETYM_OPEN = "\"“«"
+_ETYM_CLOSE = "\"”»"
+
+_SENT_SPLIT = re.compile(
+    r"(?<=[.!?])\s+(?=[A-Z\u0370-\u03FF\u0400-\u04FF])"
+)
+_TRAILING_ABBREV = re.compile(
+    r"\b(?:cf|e\.g|i\.e|lit|c|ca|fl|Mr|St)\.$", re.IGNORECASE
+)
+
+# Anchor vocabulary. Deliberately EXCLUDES a bare "of": a draft of this used
+# it and the gate passed on 'defender of men' -- the anchor matched a word
+# INSIDE the gloss it was supposed to be validating, which is why the anchor
+# is tested against the sentence with quotes and parens stripped out.
+_DERIVATION_ANCHOR = re.compile(
+    r"\b(?:from|derived from|borrowed from|inherited from|cognate with|"
+    r"calque of|contraction of|composed of|compound of|equivalent to|via)\b",
+    re.IGNORECASE,
+)
+
+_PAREN_SPAN = re.compile(r"\(([^()]{0,300})\)")
+_QUOTED_SPAN = re.compile(
+    rf"[{_ETYM_OPEN}]([^{_ETYM_CLOSE}]{{1,80}})[{_ETYM_CLOSE}]"
+)
+_STRIP_PAREN = re.compile(r"\([^()]{0,300}\)")
+_STRIP_QUOTED = re.compile(
+    rf"[{_ETYM_OPEN}][^{_ETYM_CLOSE}]{{1,80}}[{_ETYM_CLOSE}]"
+)
+
+_ETYM_BOILERPLATE = re.compile(
+    r"^(?:stem|continuative|attributive|conjunctive|combining|inflect\w*|"
+    r"perfective|imperfective|classical|literary|colloquial|honorific)\b"
+    r"|^(?:a |an |the )?(?:form|variant|spelling|reading|romani[sz]ation|"
+    r"transliteration|transcription|abbreviation|contraction)\b"
+    r"|\bof the (?:verb|noun|adjective|name)\b"
+    r"|^(?:see|cf\.?|compare)\b"
+    r"|^(?:given name|surname|personal name|a name)\b",
+    re.IGNORECASE,
+)
+
+DIAGNOSTIC_CHANNELS = ("ETYM_QUOTED_LEGACY",)
+
+
+def _etym_first_sentence(text: str) -> str:
+    """First sentence, re-joining across common abbreviation false splits."""
+    t = (text or "").strip()
+    if not t:
+        return ""
+    parts = _SENT_SPLIT.split(t)
+    out = parts[0]
+    i = 1
+    while i < len(parts) and _TRAILING_ABBREV.search(out):
+        out = f"{out} {parts[i]}"
+        i += 1
+    return out
+
+
+def _etym_span_ok(span: str) -> str | None:
+    s = span.strip().strip(",;:").strip()
+    if not s or len(s) > 80:
+        return None
+    if _ETYM_BOILERPLATE.search(s):
+        return None
+    if not re.search(r"[A-Za-z]", s):
+        return None
+    return s
+
 CHANNELS = ("GLOSS_MEANING", "GLOSS_EQUIV_EN", "ETYM_MARKER",
             "ETYM_QUOTED", "HOMOGRAPH", "NONE")
 
@@ -79,11 +170,56 @@ def extract_etym_marker(etym: str) -> str | None:
     return m.group(1).strip() if m else None
 
 
-def extract_etym_quoted(etym: str) -> str | None:
-    """First quoted span in the etymology. Loose by construction — the point
-    of separating it from ETYM_MARKER is to price the looseness."""
+def extract_etym_quoted_legacy(etym: str) -> str | None:
+    """
+    PRE-1c behaviour: first quoted span anywhere in the etymology. Retained
+    ONLY so the repair can be priced against it in the same pass. Not a
+    shipping channel.
+    """
     m = ANY_QUOTED.search(etym or "")
     return m.group(1).strip() if m else None
+
+
+def extract_etym_quoted(etym: str, lang_code: str) -> str | None:
+    """
+    Repaired ETYM_QUOTED (Stage 1c): anchored, first-sentence-only,
+    multi-span, boilerplate-filtered, ja/zh gated off.
+
+    Returns spans joined with ' + ' so a dithematic name reads
+    "wealth, fortune + guardian" rather than losing its second element.
+    Capped at 4 spans: beyond that the etymology is a chain, not a compound.
+    """
+    if lang_code in ETYM_QUOTED_BLOCKED_LANGS:
+        return None
+    sent = _etym_first_sentence(etym)
+    if not sent:
+        return None
+
+    # Test the anchor against the sentence with parentheticals and quoted
+    # material removed, so an anchor word appearing inside a gloss cannot
+    # satisfy the gate that is meant to validate that gloss.
+    bare = _STRIP_QUOTED.sub(" ", _STRIP_PAREN.sub(" ", sent))
+    if not _DERIVATION_ANCHOR.search(bare):
+        return None
+
+    spans: list[str] = []
+    seen: set[str] = set()
+
+    def _add(raw: str) -> None:
+        v = _etym_span_ok(raw)
+        if v and v.casefold() not in seen:
+            seen.add(v.casefold())
+            spans.append(v)
+
+    for m in MEANING_MARKER.finditer(sent):
+        _add(m.group(1))
+    for pm in _PAREN_SPAN.finditer(sent):
+        for qm in _QUOTED_SPAN.finditer(pm.group(1)):
+            _add(qm.group(1))
+
+    if not spans:
+        return None
+    return " + ".join(spans[:4])
 
 
 def visible_non_name_lemmas(db, lang_id: int) -> set[str]:
@@ -116,6 +252,13 @@ def run_language(db, lang_id: int, code: str, cap: int, limit: int | None,
     samples: dict[str, list] = {c: [] for c in CHANNELS}
     channels_per_name: Counter = Counter()
     considered = 0
+
+    # 1c: legacy-vs-repaired ETYM_QUOTED, measured in the same pass so the
+    # precision/recall trade is a number rather than an assertion.
+    _DELTA_KEYS = ("both_same", "both_differ", "legacy_only", "repaired_only")
+    etym_delta: Counter = Counter()
+    etym_delta_samples: dict[str, list] = {k: [] for k in _DELTA_KEYS}
+    dithematic = 0
 
     stmt = (
         select(Sense)
@@ -150,9 +293,26 @@ def run_language(db, lang_id: int, code: str, cap: int, limit: int | None,
         v = extract_etym_marker(etym)
         if v:
             hits["ETYM_MARKER"] = v
-        v = extract_etym_quoted(etym)
-        if v:
-            hits["ETYM_QUOTED"] = v
+        repaired = extract_etym_quoted(etym, code)
+        if repaired:
+            hits["ETYM_QUOTED"] = repaired
+            if " + " in repaired:
+                dithematic += 1
+        legacy_v = extract_etym_quoted_legacy(etym)
+        if legacy_v:
+            per_channel["ETYM_QUOTED_LEGACY"] += 1
+        if legacy_v and not repaired:
+            _key = "legacy_only"
+        elif repaired and not legacy_v:
+            _key = "repaired_only"
+        elif repaired and legacy_v:
+            _key = "both_same" if repaired == legacy_v else "both_differ"
+        else:
+            _key = None
+        if _key:
+            etym_delta[_key] += 1
+            sample_add(etym_delta_samples[_key],
+                       (lex.lemma, legacy_v, repaired, (etym or "")[:70]), cap)
         if lex.normalized_lemma in shadow:
             hits["HOMOGRAPH"] = lex.normalized_lemma
 
@@ -193,13 +353,26 @@ def run_language(db, lang_id: int, code: str, cap: int, limit: int | None,
           f"({pct(strict)})")
     print()
     print("--- NON-EXCLUSIVE per-channel totals (overlap visible here) ---")
-    for c in CHANNELS[:-1]:
-        print(f"  {c:<16} {per_channel[c]:>8} ({pct(per_channel[c])})")
+    for c in CHANNELS[:-1] + DIAGNOSTIC_CHANNELS:
+        print(f"  {c:<22} {per_channel[c]:>8} ({pct(per_channel[c])})")
     print("--- channels available per name ---")
     for k in sorted(channels_per_name):
         print(f"  {k} channel(s): {channels_per_name[k]}")
     print()
-
+    print("--- 1c ETYM_QUOTED REPAIR DELTA (legacy vs repaired) ---")
+    print("  both_same    = repair agreed with legacy")
+    print("  both_differ  = repair changed the text (dithematic gain lives here)")
+    print("  legacy_only  = repair REJECTED what legacy accepted (precision gain)")
+    print("  repaired_only= repair found what legacy missed (should be rare)")
+    for k in _DELTA_KEYS:
+        print(f"  {k:<16} {etym_delta[k]:>8} ({pct(etym_delta[k])})")
+        for lemma, lg, rp, e in etym_delta_samples[k]:
+            print(f"      {lemma!r}")
+            print(f"          legacy   = {lg!r}")
+            print(f"          repaired = {rp!r}")
+            print(f"          etym     = {e!r}")
+    print(f"  multi-span (dithematic) repaired hits ... {dithematic}")
+    print()
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
@@ -208,13 +381,13 @@ def main() -> None:
     ap.add_argument("--examples", type=int, default=10)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument(
-        "--name-type", choices=("given", "surname", "all"), default="given",
-        help="'all' runs GIVEN and SURNAME as two fully separate report "
-             "passes per language -- never combined into one count.",
+        "--name-type", choices=NAME_TYPE_CHOICES, default="given",
+        help="'all' runs GIVEN, SURNAME and PATRONYMIC as fully separate "
+             "report passes per language -- never combined into one count.",
     )
     args = ap.parse_args()
 
-    type_args = ("given", "surname") if args.name_type == "all" else (args.name_type,)
+    type_args = expand_type_arg(args.name_type)
 
     with SessionLocal() as db:
         rows = db.execute(

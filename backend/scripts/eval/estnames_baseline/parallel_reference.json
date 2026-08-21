@@ -1,0 +1,5064 @@
+{
+ "roots": {
+  "brave": 72902,
+  "light": 23466,
+  "storm": 7459,
+  "river": 32033,
+  "calm": 74845
+ },
+ "cells": [
+  [
+   3,
+   2
+  ],
+  [
+   1,
+   1
+  ]
+ ],
+ "capture": {
+  "brave": {
+   "w3_d2": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "brave",
+       "bold",
+       "courageous",
+       "fortitudinous",
+       "audacious",
+       "daring",
+       "valorous",
+       "courageously",
+       "mighty",
+       "long-headed"
+      ],
+      "sense_ids": [
+       72902,
+       13773,
+       172541,
+       687186,
+       151208,
+       172537,
+       279400,
+       266198,
+       67705,
+       1211319
+      ]
+     },
+     "ar": {
+      "root_rung": "ili_override",
+      "root_sense_id": 1845228,
+      "pivoted": 0,
+      "words": [
+       "مقدام",
+       "باسل",
+       "متهور",
+       "وقح",
+       "مرير",
+       "مبجل",
+       "طائش",
+       "مهمل",
+       "مستهزئ",
+       "مهين"
+      ],
+      "sense_ids": [
+       1845228,
+       1839586,
+       1847870,
+       1843111,
+       1825185,
+       1846037,
+       1847871,
+       1825503,
+       1845927,
+       1846742
+      ]
+     },
+     "ja": {
+      "root_rung": "ili_override",
+      "root_sense_id": 1882276,
+      "pivoted": 0,
+      "words": [
+       "勇敢",
+       "勇ましい",
+       "健気",
+       "雄々しい",
+       "果敢",
+       "雄壮"
+      ],
+      "sense_ids": [
+       1882276,
+       1887749,
+       1940899,
+       1953238,
+       1922069,
+       1925268
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 1987337,
+      "pivoted": 0,
+      "words": [
+       "смелый",
+       "смело",
+       "храбрость",
+       "умелый",
+       "храбро",
+       "смелость",
+       "мужественный",
+       "отвага",
+       "досужий",
+       "ушлый"
+      ],
+      "sense_ids": [
+       1987337,
+       2002383,
+       1991640,
+       1996821,
+       1995207,
+       1991224,
+       2017961,
+       1996752,
+       2050487,
+       2051039
+      ]
+     },
+     "la": {
+      "root_rung": "primary",
+      "root_sense_id": 2104341,
+      "pivoted": 0,
+      "words": [
+       "animosus",
+       "audax",
+       "fortitudo",
+       "abominosus",
+       "audacia",
+       "hiulcus",
+       "audentia",
+       "feritas",
+       "constantia",
+       "ominosus",
+       "copiosus",
+       "nocuus"
+      ],
+      "sense_ids": [
+       2104341,
+       2081046,
+       2080827,
+       2084276,
+       2079125,
+       2105069,
+       2087247,
+       2098507,
+       2083618,
+       2066285,
+       2097951,
+       2124993
+      ]
+     },
+     "ga": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2157565,
+      "pivoted": 0,
+      "words": [
+       "cróga",
+       "beo",
+       "anamúil",
+       "briosc"
+      ],
+      "sense_ids": [
+       2157565,
+       2140707,
+       2163289,
+       2169307
+      ]
+     },
+     "hi": {
+      "root_rung": "primary",
+      "root_sense_id": 2179129,
+      "pivoted": 0,
+      "words": [
+       "बहादुर",
+       "नायक",
+       "बीर",
+       "पराक्रमी",
+       "विक्रम",
+       "बाहुबल",
+       "शूर",
+       "पौरुष"
+      ],
+      "sense_ids": [
+       2179129,
+       2178542,
+       2183373,
+       2194575,
+       2181515,
+       2185658,
+       2189017,
+       2191719
+      ]
+     },
+     "sa": {
+      "root_rung": "primary",
+      "root_sense_id": 2212382,
+      "pivoted": 0,
+      "words": [
+       "वीर",
+       "श्रेष्ठ",
+       "भृङ्गार",
+       "जीर्ण",
+       "उपरित्य",
+       "परिशुद्ध",
+       "प्रुष्वा",
+       "पुण्यभू",
+       "शृङ्गिन्",
+       "वयोऽधिक"
+      ],
+      "sense_ids": [
+       2212382,
+       2220118,
+       2229666,
+       2221855,
+       2232407,
+       2228848,
+       2228545,
+       2231584,
+       2228216,
+       2232155
+      ]
+     },
+     "he": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2247131,
+      "pivoted": 0,
+      "words": [
+       "אמיץ",
+       "אומץ"
+      ],
+      "sense_ids": [
+       2247131,
+       2243844
+      ]
+     },
+     "fa": {
+      "root_rung": "primary",
+      "root_sense_id": 2259904,
+      "pivoted": 0,
+      "words": [
+       "شجاع",
+       "بهادر",
+       "دلیر",
+       "جسور",
+       "شیرفش",
+       "دلاور",
+       "چیره"
+      ],
+      "sense_ids": [
+       2259904,
+       2260829,
+       2268758,
+       2264788,
+       2269074,
+       2269521,
+       2272677
+      ]
+     },
+     "de": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2287037,
+      "pivoted": 0,
+      "words": [
+       "tapfer",
+       "heldenhaft",
+       "mutig",
+       "heroisch",
+       "mannhaft",
+       "kühn",
+       "heldisch"
+      ],
+      "sense_ids": [
+       2287037,
+       2303303,
+       2276070,
+       2303304,
+       2341637,
+       2287947,
+       2340568
+      ]
+     },
+     "pl": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2415173,
+      "pivoted": 0,
+      "words": [
+       "odważny",
+       "dzielny",
+       "nieustraszony",
+       "rozważny",
+       "mężny",
+       "waleczny",
+       "nieostrożny",
+       "niegroźny",
+       "roztropnie",
+       "rozsądny",
+       "uważny"
+      ],
+      "sense_ids": [
+       2415173,
+       2422635,
+       2469766,
+       2469983,
+       2487326,
+       2487327,
+       2469986,
+       2509426,
+       2498437,
+       2416704,
+       2408542
+      ]
+     },
+     "es": {
+      "root_rung": "ili_override",
+      "root_sense_id": 2565003,
+      "pivoted": 0,
+      "words": [
+       "valiente",
+       "valeroso",
+       "impávido",
+       "intrépido",
+       "impertérrito"
+      ],
+      "sense_ids": [
+       2565003,
+       2564998,
+       2599197,
+       2599198,
+       2627986
+      ]
+     },
+     "zh": {
+      "root_rung": "primary",
+      "root_sense_id": 2717067,
+      "pivoted": 0,
+      "words": [
+       "勇敢",
+       "勇猛",
+       "英勇",
+       "神勇"
+      ],
+      "sense_ids": [
+       2717067,
+       2760858,
+       2707230,
+       2838707
+      ]
+     },
+     "ko": {
+      "root_rung": "primary",
+      "root_sense_id": 2901294,
+      "pivoted": 0,
+      "words": [
+       "용감하다",
+       "용맹",
+       "명철하다",
+       "슬기롭다",
+       "용맹하다",
+       "배짱",
+       "강퍅하다",
+       "똑똑하다",
+       "휑하다",
+       "영리하다",
+       "슬기"
+      ],
+      "sense_ids": [
+       2901294,
+       2914882,
+       2915825,
+       2904751,
+       2914883,
+       2921483,
+       2910342,
+       2901290,
+       2923971,
+       2901292,
+       2904744
+      ]
+     },
+     "ang": {
+      "root_rung": "primary",
+      "root_sense_id": 2940793,
+      "pivoted": 1,
+      "words": [
+       "beald",
+       "unforht"
+      ],
+      "sense_ids": [
+       2940793,
+       2937781
+      ]
+     },
+     "el": {
+      "root_rung": "primary",
+      "root_sense_id": 2981044,
+      "pivoted": 0,
+      "words": [
+       "θαρραλέος",
+       "γενναίος",
+       "ανδρειωμένος",
+       "θάρρος",
+       "ανδρεία",
+       "ανδραγαθία",
+       "αντροσύνη",
+       "κουράγιο",
+       "γενναιότητα"
+      ],
+      "sense_ids": [
+       2981044,
+       2966518,
+       2991467,
+       2967381,
+       2980101,
+       2991222,
+       2994302,
+       2972800,
+       2999449
+      ]
+     },
+     "cy": {
+      "root_rung": "primary",
+      "root_sense_id": 3008394,
+      "pivoted": 0,
+      "words": [
+       "glew",
+       "dewr",
+       "gwrol",
+       "glewder",
+       "arswyd",
+       "gwiw",
+       "dewrder",
+       "gwroldeb",
+       "godidowgrwydd"
+      ],
+      "sense_ids": [
+       3008394,
+       3006812,
+       3010721,
+       3018390,
+       3013397,
+       3007722,
+       3018388,
+       3018389,
+       3026735
+      ]
+     },
+     "sw": {
+      "root_rung": "primary",
+      "root_sense_id": 3035375,
+      "pivoted": 0,
+      "words": [
+       "jasiri",
+       "shujaa",
+       "ghazi",
+       "msala"
+      ],
+      "sense_ids": [
+       3035375,
+       3032497,
+       3030336,
+       3035723
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3048596,
+      "pivoted": 0,
+      "words": [
+       "djarfr"
+      ],
+      "sense_ids": [
+       3048596
+      ]
+     },
+     "is": {
+      "root_rung": "primary",
+      "root_sense_id": 3054653,
+      "pivoted": 0,
+      "words": [
+       "hugrakkur",
+       "frækinn",
+       "áræðinn",
+       "kjarkmikill",
+       "djörfung",
+       "djarfur"
+      ],
+      "sense_ids": [
+       3054653,
+       3060848,
+       3066948,
+       3066949,
+       3066945,
+       3066943
+      ]
+     }
+    },
+    "interleaved": [
+     "en:brave",
+     "ar:مقدام",
+     "ja:勇敢",
+     "ru:смелый",
+     "la:animosus",
+     "ga:cróga",
+     "hi:बहादुर",
+     "sa:वीर",
+     "he:אמיץ",
+     "fa:شجاع",
+     "de:tapfer",
+     "pl:odważny",
+     "es:valiente",
+     "zh:勇敢",
+     "ko:용감하다",
+     "ang:beald",
+     "el:θαρραλέος",
+     "cy:glew",
+     "sw:jasiri",
+     "non:djarfr",
+     "is:hugrakkur",
+     "en:bold",
+     "ar:باسل",
+     "ja:勇ましい",
+     "ru:смело",
+     "la:audax",
+     "ga:beo",
+     "hi:नायक",
+     "sa:श्रेष्ठ",
+     "he:אומץ",
+     "fa:بهادر",
+     "de:heldenhaft",
+     "pl:dzielny",
+     "es:valeroso",
+     "zh:勇猛",
+     "ko:용맹",
+     "ang:unforht",
+     "el:γενναίος",
+     "cy:dewr",
+     "sw:shujaa",
+     "is:frækinn",
+     "en:courageous",
+     "ar:متهور",
+     "ja:健気",
+     "ru:храбрость",
+     "la:fortitudo",
+     "ga:anamúil",
+     "hi:बीर",
+     "sa:भृङ्गार",
+     "fa:دلیر",
+     "de:mutig",
+     "pl:nieustraszony",
+     "es:impávido",
+     "zh:英勇",
+     "ko:명철하다",
+     "el:ανδρειωμένος",
+     "cy:gwrol",
+     "sw:ghazi",
+     "is:áræðinn",
+     "en:fortitudinous",
+     "ar:وقح",
+     "ja:雄々しい",
+     "ru:умелый",
+     "la:abominosus",
+     "ga:briosc",
+     "hi:पराक्रमी",
+     "sa:जीर्ण",
+     "fa:جسور",
+     "de:heroisch",
+     "pl:rozważny",
+     "es:intrépido",
+     "zh:神勇",
+     "ko:슬기롭다",
+     "el:θάρρος",
+     "cy:glewder",
+     "sw:msala",
+     "is:kjarkmikill",
+     "en:audacious",
+     "ar:مرير",
+     "ja:果敢",
+     "ru:храбро",
+     "la:audacia",
+     "hi:विक्रम",
+     "sa:उपरित्य",
+     "fa:شیرفش",
+     "de:mannhaft",
+     "pl:mężny",
+     "es:impertérrito",
+     "ko:용맹하다",
+     "el:ανδρεία",
+     "cy:arswyd",
+     "is:djörfung",
+     "en:daring",
+     "ar:مبجل",
+     "ja:雄壮",
+     "ru:смелость",
+     "la:hiulcus",
+     "hi:बाहुबल",
+     "sa:परिशुद्ध",
+     "fa:دلاور",
+     "de:kühn",
+     "pl:waleczny",
+     "ko:배짱",
+     "el:ανδραγαθία",
+     "cy:gwiw",
+     "is:djarfur",
+     "en:valorous",
+     "ar:طائش",
+     "ru:мужественный",
+     "la:audentia",
+     "hi:शूर",
+     "sa:प्रुष्वा",
+     "fa:چیره",
+     "de:heldisch",
+     "pl:nieostrożny",
+     "ko:강퍅하다",
+     "el:αντροσύνη",
+     "cy:dewrder",
+     "en:courageously",
+     "ar:مهمل",
+     "ru:отвага",
+     "la:feritas",
+     "hi:पौरुष",
+     "sa:पुण्यभू",
+     "pl:niegroźny",
+     "ko:똑똑하다",
+     "el:κουράγιο",
+     "cy:gwroldeb",
+     "en:mighty",
+     "ar:مستهزئ",
+     "ru:досужий",
+     "la:constantia",
+     "sa:शृङ्गिन्",
+     "pl:roztropnie",
+     "ko:휑하다",
+     "el:γενναιότητα",
+     "cy:godidowgrwydd",
+     "en:long-headed",
+     "ar:مهين",
+     "ru:ушлый",
+     "la:ominosus",
+     "sa:वयोऽधिक",
+     "pl:rozsądny",
+     "ko:영리하다",
+     "la:copiosus",
+     "pl:uważny",
+     "ko:슬기",
+     "la:nocuus"
+    ]
+   },
+   "w1_d1": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "brave",
+       "bold"
+      ],
+      "sense_ids": [
+       72902,
+       13773
+      ]
+     },
+     "ar": {
+      "root_rung": "ili_override",
+      "root_sense_id": 1845228,
+      "pivoted": 0,
+      "words": [
+       "مقدام",
+       "باسل"
+      ],
+      "sense_ids": [
+       1845228,
+       1839586
+      ]
+     },
+     "ja": {
+      "root_rung": "ili_override",
+      "root_sense_id": 1882276,
+      "pivoted": 0,
+      "words": [
+       "勇敢",
+       "勇ましい"
+      ],
+      "sense_ids": [
+       1882276,
+       1887749
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 1987337,
+      "pivoted": 0,
+      "words": [
+       "смелый",
+       "смело"
+      ],
+      "sense_ids": [
+       1987337,
+       2002383
+      ]
+     },
+     "la": {
+      "root_rung": "primary",
+      "root_sense_id": 2104341,
+      "pivoted": 0,
+      "words": [
+       "animosus",
+       "audax"
+      ],
+      "sense_ids": [
+       2104341,
+       2081046
+      ]
+     },
+     "ga": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2157565,
+      "pivoted": 0,
+      "words": [
+       "cróga",
+       "beo"
+      ],
+      "sense_ids": [
+       2157565,
+       2140707
+      ]
+     },
+     "hi": {
+      "root_rung": "primary",
+      "root_sense_id": 2179129,
+      "pivoted": 0,
+      "words": [
+       "बहादुर",
+       "नायक"
+      ],
+      "sense_ids": [
+       2179129,
+       2178542
+      ]
+     },
+     "sa": {
+      "root_rung": "primary",
+      "root_sense_id": 2212382,
+      "pivoted": 0,
+      "words": [
+       "वीर",
+       "श्रेष्ठ"
+      ],
+      "sense_ids": [
+       2212382,
+       2220118
+      ]
+     },
+     "he": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2247131,
+      "pivoted": 0,
+      "words": [
+       "אמיץ",
+       "אומץ"
+      ],
+      "sense_ids": [
+       2247131,
+       2243844
+      ]
+     },
+     "fa": {
+      "root_rung": "primary",
+      "root_sense_id": 2259904,
+      "pivoted": 0,
+      "words": [
+       "شجاع",
+       "بهادر"
+      ],
+      "sense_ids": [
+       2259904,
+       2260829
+      ]
+     },
+     "de": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2287037,
+      "pivoted": 0,
+      "words": [
+       "tapfer",
+       "heldenhaft"
+      ],
+      "sense_ids": [
+       2287037,
+       2303303
+      ]
+     },
+     "pl": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2415173,
+      "pivoted": 0,
+      "words": [
+       "odważny",
+       "dzielny"
+      ],
+      "sense_ids": [
+       2415173,
+       2422635
+      ]
+     },
+     "es": {
+      "root_rung": "ili_override",
+      "root_sense_id": 2565003,
+      "pivoted": 0,
+      "words": [
+       "valiente",
+       "valeroso"
+      ],
+      "sense_ids": [
+       2565003,
+       2564998
+      ]
+     },
+     "zh": {
+      "root_rung": "primary",
+      "root_sense_id": 2717067,
+      "pivoted": 0,
+      "words": [
+       "勇敢",
+       "勇猛"
+      ],
+      "sense_ids": [
+       2717067,
+       2760858
+      ]
+     },
+     "ko": {
+      "root_rung": "primary",
+      "root_sense_id": 2901294,
+      "pivoted": 0,
+      "words": [
+       "용감하다",
+       "용맹"
+      ],
+      "sense_ids": [
+       2901294,
+       2914882
+      ]
+     },
+     "ang": {
+      "root_rung": "primary",
+      "root_sense_id": 2940793,
+      "pivoted": 0,
+      "words": [
+       "beald"
+      ],
+      "sense_ids": [
+       2940793
+      ]
+     },
+     "el": {
+      "root_rung": "primary",
+      "root_sense_id": 2981044,
+      "pivoted": 0,
+      "words": [
+       "θαρραλέος",
+       "γενναίος"
+      ],
+      "sense_ids": [
+       2981044,
+       2966518
+      ]
+     },
+     "cy": {
+      "root_rung": "primary",
+      "root_sense_id": 3008394,
+      "pivoted": 0,
+      "words": [
+       "glew",
+       "dewr"
+      ],
+      "sense_ids": [
+       3008394,
+       3006812
+      ]
+     },
+     "sw": {
+      "root_rung": "primary",
+      "root_sense_id": 3035375,
+      "pivoted": 0,
+      "words": [
+       "jasiri",
+       "shujaa"
+      ],
+      "sense_ids": [
+       3035375,
+       3032497
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3048596,
+      "pivoted": 0,
+      "words": [
+       "djarfr"
+      ],
+      "sense_ids": [
+       3048596
+      ]
+     },
+     "is": {
+      "root_rung": "primary",
+      "root_sense_id": 3054653,
+      "pivoted": 0,
+      "words": [
+       "hugrakkur",
+       "frækinn"
+      ],
+      "sense_ids": [
+       3054653,
+       3060848
+      ]
+     }
+    },
+    "interleaved": [
+     "en:brave",
+     "ar:مقدام",
+     "ja:勇敢",
+     "ru:смелый",
+     "la:animosus",
+     "ga:cróga",
+     "hi:बहादुर",
+     "sa:वीर",
+     "he:אמיץ",
+     "fa:شجاع",
+     "de:tapfer",
+     "pl:odważny",
+     "es:valiente",
+     "zh:勇敢",
+     "ko:용감하다",
+     "ang:beald",
+     "el:θαρραλέος",
+     "cy:glew",
+     "sw:jasiri",
+     "non:djarfr",
+     "is:hugrakkur",
+     "en:bold",
+     "ar:باسل",
+     "ja:勇ましい",
+     "ru:смело",
+     "la:audax",
+     "ga:beo",
+     "hi:नायक",
+     "sa:श्रेष्ठ",
+     "he:אומץ",
+     "fa:بهادر",
+     "de:heldenhaft",
+     "pl:dzielny",
+     "es:valeroso",
+     "zh:勇猛",
+     "ko:용맹",
+     "el:γενναίος",
+     "cy:dewr",
+     "sw:shujaa",
+     "is:frækinn"
+    ]
+   }
+  },
+  "light": {
+   "w3_d2": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "light",
+       "luminance",
+       "luminosity",
+       "illumination",
+       "luminousness",
+       "brightness",
+       "radiance",
+       "lumination",
+       "lighting",
+       "elucidation"
+      ],
+      "sense_ids": [
+       23466,
+       89052,
+       215175,
+       102926,
+       609100,
+       89055,
+       217234,
+       717540,
+       193973,
+       101356
+      ]
+     },
+     "ar": {
+      "root_rung": "primary",
+      "root_sense_id": 1807765,
+      "pivoted": 0,
+      "words": [
+       "نور",
+       "نير",
+       "ضياء",
+       "سراب",
+       "أسفر",
+       "نقاء",
+       "مرير",
+       "إبراق",
+       "إشراق",
+       "وجيه",
+       "محرقة",
+       "ارتسم",
+       "دهر"
+      ],
+      "sense_ids": [
+       1807765,
+       1810362,
+       1847833,
+       1809013,
+       1830877,
+       1826666,
+       1825185,
+       1819122,
+       1849554,
+       1824701,
+       1842215,
+       1849553,
+       1832545
+      ]
+     },
+     "ja": {
+      "root_rung": "primary",
+      "root_sense_id": 1873722,
+      "pivoted": 0,
+      "words": [
+       "光源",
+       "明かり",
+       "光",
+       "燭",
+       "灯",
+       "電気",
+       "洋灯"
+      ],
+      "sense_ids": [
+       1873722,
+       1861096,
+       1851989,
+       1855433,
+       1855347,
+       1862580,
+       1942758
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 2014173,
+      "pivoted": 0,
+      "words": [
+       "освещение",
+       "осветитель",
+       "светильник",
+       "освещённость",
+       "болгарка",
+       "светотехника",
+       "подражатель",
+       "светоч",
+       "коптилка",
+       "лава-лампа",
+       "апостильб",
+       "выпуклость",
+       "уместность"
+      ],
+      "sense_ids": [
+       2014173,
+       2041641,
+       2015240,
+       2009716,
+       1998957,
+       2023067,
+       2054489,
+       2020804,
+       2022775,
+       2062528,
+       2006536,
+       2007602,
+       2006769
+      ]
+     },
+     "la": {
+      "root_rung": "primary",
+      "root_sense_id": 2065320,
+      "pivoted": 0,
+      "words": [
+       "lumen",
+       "lux",
+       "levo",
+       "levigo",
+       "lucidus",
+       "luceo",
+       "allevio",
+       "edo",
+       "commitigo",
+       "mitigo"
+      ],
+      "sense_ids": [
+       2065320,
+       2065328,
+       2073734,
+       2081991,
+       2091667,
+       2087179,
+       2079421,
+       2065519,
+       2133322,
+       2079719
+      ]
+     },
+     "ga": {
+      "root_rung": "primary",
+      "root_sense_id": 2142407,
+      "pivoted": 0,
+      "words": [
+       "solas",
+       "lampa",
+       "féinleas",
+       "soilsiú",
+       "lóchrann",
+       "sanas",
+       "féinspéis",
+       "féinmharú",
+       "leithleach",
+       "sólás",
+       "eolas"
+      ],
+      "sense_ids": [
+       2142407,
+       2140352,
+       2147546,
+       2169579,
+       2172541,
+       2142626,
+       2147299,
+       2147296,
+       2171672,
+       2165437,
+       2144917
+      ]
+     },
+     "hi": {
+      "root_rung": "primary",
+      "root_sense_id": 2185479,
+      "pivoted": 0,
+      "words": [
+       "उजाला",
+       "रोशनी",
+       "प्रकाश",
+       "उज्ज्वल",
+       "ज्योति",
+       "अंशुल",
+       "तेजस्वी",
+       "दमकना"
+      ],
+      "sense_ids": [
+       2185479,
+       2177147,
+       2177137,
+       2180408,
+       2184715,
+       2174149,
+       2208733,
+       2207210
+      ]
+     },
+     "sa": {
+      "root_rung": "llm",
+      "root_sense_id": 2220439,
+      "pivoted": 0,
+      "words": [
+       "प्रभा",
+       "भाम",
+       "अर्चिस्",
+       "प्रुष्वा",
+       "भास्",
+       "रश्मन्",
+       "वस्मन्",
+       "शोभा",
+       "भर्गस्",
+       "अशनि",
+       "रश्मि",
+       "ईरण",
+       "ईर"
+      ],
+      "sense_ids": [
+       2220439,
+       2221370,
+       2224862,
+       2228545,
+       2220728,
+       2224965,
+       2222166,
+       2212089,
+       2228052,
+       2224719,
+       2222142,
+       2229579,
+       2229568
+      ]
+     },
+     "he": {
+      "root_rung": "primary",
+      "root_sense_id": 2234161,
+      "pivoted": 0,
+      "words": [
+       "אור",
+       "אורה",
+       "אווירה",
+       "נור"
+      ],
+      "sense_ids": [
+       2234161,
+       2237116,
+       2241336,
+       2237930
+      ]
+     },
+     "fa": {
+      "root_rung": "llm",
+      "root_sense_id": 2251493,
+      "pivoted": 0,
+      "words": [
+       "چراغ",
+       "لامپ"
+      ],
+      "sense_ids": [
+       2251493,
+       2254360
+      ]
+     },
+     "de": {
+      "root_rung": "primary",
+      "root_sense_id": 2277257,
+      "pivoted": 0,
+      "words": [
+       "Licht",
+       "Beleuchtung",
+       "Belichtung",
+       "Helligkeit",
+       "illuminieren",
+       "Leuchterscheinung",
+       "hell"
+      ],
+      "sense_ids": [
+       2277257,
+       2300234,
+       2323402,
+       2293187,
+       2393879,
+       2330653,
+       2275714
+      ]
+     },
+     "pl": {
+      "root_rung": "primary",
+      "root_sense_id": 2408035,
+      "pivoted": 0,
+      "words": [
+       "światło",
+       "oświetlenie",
+       "elektryczność",
+       "prąd",
+       "iluminować",
+       "wiązka",
+       "życie"
+      ],
+      "sense_ids": [
+       2408035,
+       2473924,
+       2411338,
+       2416216,
+       2501502,
+       2433845,
+       2407314
+      ]
+     },
+     "es": {
+      "root_rung": "primary",
+      "root_sense_id": 2550853,
+      "pivoted": 0,
+      "words": [
+       "luz",
+       "iluminación",
+       "luminosidad",
+       "luminancia",
+       "claridad",
+       "iluminado"
+      ],
+      "sense_ids": [
+       2550853,
+       2561750,
+       2624889,
+       2648631,
+       2589006,
+       2592103
+      ]
+     },
+     "zh": {
+      "root_rung": "primary",
+      "root_sense_id": 2706680,
+      "pivoted": 0,
+      "words": [
+       "光源",
+       "採光",
+       "光譜",
+       "流明",
+       "亮光",
+       "放光",
+       "發亮",
+       "射線",
+       "線段",
+       "實線",
+       "馬告",
+       "羊栖菜",
+       "英尋"
+      ],
+      "sense_ids": [
+       2706680,
+       2760639,
+       2722744,
+       2715862,
+       2737053,
+       2723683,
+       2745291,
+       2748569,
+       2833618,
+       2806443,
+       2880451,
+       2827192,
+       2777229
+      ]
+     },
+     "ko": {
+      "root_rung": "primary",
+      "root_sense_id": 2886927,
+      "pivoted": 0,
+      "words": [
+       "불",
+       "화재",
+       "염화",
+       "폭죽"
+      ],
+      "sense_ids": [
+       2886927,
+       2901879,
+       2923727,
+       2922060
+      ]
+     },
+     "ang": {
+      "root_rung": "primary",
+      "root_sense_id": 2936576,
+      "pivoted": 2,
+      "words": [
+       "leoht",
+       "heofonleoma",
+       "heofonleoht",
+       "heofonwuldor",
+       "swegelwuldor",
+       "leoma",
+       "beorht"
+      ],
+      "sense_ids": [
+       2936576,
+       2958894,
+       2958893,
+       2943602,
+       2943603,
+       2935930,
+       2935620
+      ]
+     },
+     "el": {
+      "root_rung": "primary",
+      "root_sense_id": 2962132,
+      "pivoted": 1,
+      "words": [
+       "φως",
+       "δοκός",
+       "δόξα",
+       "αντί",
+       "ψιχάλα",
+       "αντιφέγγισμα"
+      ],
+      "sense_ids": [
+       2962132,
+       2979536,
+       2962714,
+       2981963,
+       3002409,
+       2993880
+      ]
+     },
+     "cy": {
+      "root_rung": "primary",
+      "root_sense_id": 3012893,
+      "pivoted": 0,
+      "words": [
+       "lleu",
+       "gwawl",
+       "llwydwyn",
+       "goleulas",
+       "gloywder",
+       "disglair",
+       "gwamal",
+       "blawr",
+       "gloywi",
+       "gwynlas",
+       "glaswyn",
+       "gwelwlas"
+      ],
+      "sense_ids": [
+       3012893,
+       3012449,
+       3017605,
+       3028587,
+       3018387,
+       3012093,
+       3025340,
+       3020507,
+       3025723,
+       3018288,
+       3023493,
+       3028877
+      ]
+     },
+     "sw": {
+      "root_rung": "primary",
+      "root_sense_id": 3032001,
+      "pivoted": 0,
+      "words": [
+       "mwanga",
+       "nuru",
+       "kuvu",
+       "mwaranda",
+       "nchi",
+       "gugu",
+       "kwekwe",
+       "kinyo",
+       "karanga"
+      ],
+      "sense_ids": [
+       3032001,
+       3031249,
+       3037304,
+       3040395,
+       3033641,
+       3033342,
+       3032755,
+       3041710,
+       3034838
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3043618,
+      "pivoted": 0,
+      "words": [
+       "ljós"
+      ],
+      "sense_ids": [
+       3043618
+      ]
+     },
+     "is": {
+      "root_rung": "primary",
+      "root_sense_id": 3051138,
+      "pivoted": 0,
+      "words": [
+       "ljós",
+       "ljósleitur",
+       "greindur",
+       "glæta",
+       "meðbyr",
+       "meðvindur",
+       "klár",
+       "næmur",
+       "skilningur",
+       "ljóstýra",
+       "skíma",
+       "glóra"
+      ],
+      "sense_ids": [
+       3051138,
+       3070398,
+       3058366,
+       3065359,
+       3071180,
+       3071181,
+       3051025,
+       3064129,
+       3065589,
+       3065360,
+       3065355,
+       3065357
+      ]
+     }
+    },
+    "interleaved": [
+     "en:light",
+     "ar:نور",
+     "ja:光源",
+     "ru:освещение",
+     "la:lumen",
+     "ga:solas",
+     "hi:उजाला",
+     "sa:प्रभा",
+     "he:אור",
+     "fa:چراغ",
+     "de:Licht",
+     "pl:światło",
+     "es:luz",
+     "zh:光源",
+     "ko:불",
+     "ang:leoht",
+     "el:φως",
+     "cy:lleu",
+     "sw:mwanga",
+     "non:ljós",
+     "is:ljós",
+     "en:luminance",
+     "ar:نير",
+     "ja:明かり",
+     "ru:осветитель",
+     "la:lux",
+     "ga:lampa",
+     "hi:रोशनी",
+     "sa:भाम",
+     "he:אורה",
+     "fa:لامپ",
+     "de:Beleuchtung",
+     "pl:oświetlenie",
+     "es:iluminación",
+     "zh:採光",
+     "ko:화재",
+     "ang:heofonleoma",
+     "el:δοκός",
+     "cy:gwawl",
+     "sw:nuru",
+     "is:ljósleitur",
+     "en:luminosity",
+     "ar:ضياء",
+     "ja:光",
+     "ru:светильник",
+     "la:levo",
+     "ga:féinleas",
+     "hi:प्रकाश",
+     "sa:अर्चिस्",
+     "he:אווירה",
+     "de:Belichtung",
+     "pl:elektryczność",
+     "es:luminosidad",
+     "zh:光譜",
+     "ko:염화",
+     "ang:heofonleoht",
+     "el:δόξα",
+     "cy:llwydwyn",
+     "sw:kuvu",
+     "is:greindur",
+     "en:illumination",
+     "ar:سراب",
+     "ja:燭",
+     "ru:освещённость",
+     "la:levigo",
+     "ga:soilsiú",
+     "hi:उज्ज्वल",
+     "sa:प्रुष्वा",
+     "he:נור",
+     "de:Helligkeit",
+     "pl:prąd",
+     "es:luminancia",
+     "zh:流明",
+     "ko:폭죽",
+     "ang:heofonwuldor",
+     "el:αντί",
+     "cy:goleulas",
+     "sw:mwaranda",
+     "is:glæta",
+     "en:luminousness",
+     "ar:أسفر",
+     "ja:灯",
+     "ru:болгарка",
+     "la:lucidus",
+     "ga:lóchrann",
+     "hi:ज्योति",
+     "sa:भास्",
+     "de:illuminieren",
+     "pl:iluminować",
+     "es:claridad",
+     "zh:亮光",
+     "ang:swegelwuldor",
+     "el:ψιχάλα",
+     "cy:gloywder",
+     "sw:nchi",
+     "is:meðbyr",
+     "en:brightness",
+     "ar:نقاء",
+     "ja:電気",
+     "ru:светотехника",
+     "la:luceo",
+     "ga:sanas",
+     "hi:अंशुल",
+     "sa:रश्मन्",
+     "de:Leuchterscheinung",
+     "pl:wiązka",
+     "es:iluminado",
+     "zh:放光",
+     "ang:leoma",
+     "el:αντιφέγγισμα",
+     "cy:disglair",
+     "sw:gugu",
+     "is:meðvindur",
+     "en:radiance",
+     "ar:مرير",
+     "ja:洋灯",
+     "ru:подражатель",
+     "la:allevio",
+     "ga:féinspéis",
+     "hi:तेजस्वी",
+     "sa:वस्मन्",
+     "de:hell",
+     "pl:życie",
+     "zh:發亮",
+     "ang:beorht",
+     "cy:gwamal",
+     "sw:kwekwe",
+     "is:klár",
+     "en:lumination",
+     "ar:إبراق",
+     "ru:светоч",
+     "la:edo",
+     "ga:féinmharú",
+     "hi:दमकना",
+     "sa:शोभा",
+     "zh:射線",
+     "cy:blawr",
+     "sw:kinyo",
+     "is:næmur",
+     "en:lighting",
+     "ar:إشراق",
+     "ru:коптилка",
+     "la:commitigo",
+     "ga:leithleach",
+     "sa:भर्गस्",
+     "zh:線段",
+     "cy:gloywi",
+     "sw:karanga",
+     "is:skilningur",
+     "en:elucidation",
+     "ar:وجيه",
+     "ru:лава-лампа",
+     "la:mitigo",
+     "ga:sólás",
+     "sa:अशनि",
+     "zh:實線",
+     "cy:gwynlas",
+     "is:ljóstýra",
+     "ar:محرقة",
+     "ru:апостильб",
+     "ga:eolas",
+     "sa:रश्मि",
+     "zh:馬告",
+     "cy:glaswyn",
+     "is:skíma",
+     "ar:ارتسم",
+     "ru:выпуклость",
+     "sa:ईरण",
+     "zh:羊栖菜",
+     "cy:gwelwlas",
+     "is:glóra",
+     "ar:دهر",
+     "ru:уместность",
+     "sa:ईर",
+     "zh:英尋"
+    ]
+   },
+   "w1_d1": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "light",
+       "luminance"
+      ],
+      "sense_ids": [
+       23466,
+       89052
+      ]
+     },
+     "ar": {
+      "root_rung": "primary",
+      "root_sense_id": 1807765,
+      "pivoted": 0,
+      "words": [
+       "نور",
+       "نير"
+      ],
+      "sense_ids": [
+       1807765,
+       1810362
+      ]
+     },
+     "ja": {
+      "root_rung": "primary",
+      "root_sense_id": 1873722,
+      "pivoted": 0,
+      "words": [
+       "光源",
+       "明かり"
+      ],
+      "sense_ids": [
+       1873722,
+       1861096
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 2014173,
+      "pivoted": 0,
+      "words": [
+       "освещение",
+       "осветитель"
+      ],
+      "sense_ids": [
+       2014173,
+       2041641
+      ]
+     },
+     "la": {
+      "root_rung": "primary",
+      "root_sense_id": 2065320,
+      "pivoted": 0,
+      "words": [
+       "lumen",
+       "lux"
+      ],
+      "sense_ids": [
+       2065320,
+       2065328
+      ]
+     },
+     "ga": {
+      "root_rung": "primary",
+      "root_sense_id": 2142407,
+      "pivoted": 0,
+      "words": [
+       "solas",
+       "lampa"
+      ],
+      "sense_ids": [
+       2142407,
+       2140352
+      ]
+     },
+     "hi": {
+      "root_rung": "primary",
+      "root_sense_id": 2185479,
+      "pivoted": 0,
+      "words": [
+       "उजाला",
+       "रोशनी"
+      ],
+      "sense_ids": [
+       2185479,
+       2177147
+      ]
+     },
+     "sa": {
+      "root_rung": "llm",
+      "root_sense_id": 2220439,
+      "pivoted": 0,
+      "words": [
+       "प्रभा",
+       "भाम"
+      ],
+      "sense_ids": [
+       2220439,
+       2221370
+      ]
+     },
+     "he": {
+      "root_rung": "primary",
+      "root_sense_id": 2234161,
+      "pivoted": 0,
+      "words": [
+       "אור",
+       "אורה"
+      ],
+      "sense_ids": [
+       2234161,
+       2237116
+      ]
+     },
+     "fa": {
+      "root_rung": "llm",
+      "root_sense_id": 2251493,
+      "pivoted": 0,
+      "words": [
+       "چراغ",
+       "لامپ"
+      ],
+      "sense_ids": [
+       2251493,
+       2254360
+      ]
+     },
+     "de": {
+      "root_rung": "primary",
+      "root_sense_id": 2277257,
+      "pivoted": 0,
+      "words": [
+       "Licht",
+       "Beleuchtung"
+      ],
+      "sense_ids": [
+       2277257,
+       2300234
+      ]
+     },
+     "pl": {
+      "root_rung": "primary",
+      "root_sense_id": 2408035,
+      "pivoted": 0,
+      "words": [
+       "światło",
+       "oświetlenie"
+      ],
+      "sense_ids": [
+       2408035,
+       2473924
+      ]
+     },
+     "es": {
+      "root_rung": "primary",
+      "root_sense_id": 2550853,
+      "pivoted": 0,
+      "words": [
+       "luz",
+       "iluminación"
+      ],
+      "sense_ids": [
+       2550853,
+       2561750
+      ]
+     },
+     "zh": {
+      "root_rung": "primary",
+      "root_sense_id": 2706680,
+      "pivoted": 0,
+      "words": [
+       "光源",
+       "採光"
+      ],
+      "sense_ids": [
+       2706680,
+       2760639
+      ]
+     },
+     "ko": {
+      "root_rung": "primary",
+      "root_sense_id": 2886927,
+      "pivoted": 0,
+      "words": [
+       "불",
+       "화재"
+      ],
+      "sense_ids": [
+       2886927,
+       2901879
+      ]
+     },
+     "ang": {
+      "root_rung": "primary",
+      "root_sense_id": 2936576,
+      "pivoted": 0,
+      "words": [
+       "leoht",
+       "heofonleoma"
+      ],
+      "sense_ids": [
+       2936576,
+       2958894
+      ]
+     },
+     "el": {
+      "root_rung": "primary",
+      "root_sense_id": 2962132,
+      "pivoted": 0,
+      "words": [
+       "φως",
+       "δοκός"
+      ],
+      "sense_ids": [
+       2962132,
+       2979536
+      ]
+     },
+     "cy": {
+      "root_rung": "primary",
+      "root_sense_id": 3012893,
+      "pivoted": 0,
+      "words": [
+       "lleu",
+       "gwawl"
+      ],
+      "sense_ids": [
+       3012893,
+       3012449
+      ]
+     },
+     "sw": {
+      "root_rung": "primary",
+      "root_sense_id": 3032001,
+      "pivoted": 0,
+      "words": [
+       "mwanga",
+       "nuru"
+      ],
+      "sense_ids": [
+       3032001,
+       3031249
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3043618,
+      "pivoted": 0,
+      "words": [
+       "ljós"
+      ],
+      "sense_ids": [
+       3043618
+      ]
+     },
+     "is": {
+      "root_rung": "primary",
+      "root_sense_id": 3051138,
+      "pivoted": 0,
+      "words": [
+       "ljós",
+       "ljósleitur"
+      ],
+      "sense_ids": [
+       3051138,
+       3070398
+      ]
+     }
+    },
+    "interleaved": [
+     "en:light",
+     "ar:نور",
+     "ja:光源",
+     "ru:освещение",
+     "la:lumen",
+     "ga:solas",
+     "hi:उजाला",
+     "sa:प्रभा",
+     "he:אור",
+     "fa:چراغ",
+     "de:Licht",
+     "pl:światło",
+     "es:luz",
+     "zh:光源",
+     "ko:불",
+     "ang:leoht",
+     "el:φως",
+     "cy:lleu",
+     "sw:mwanga",
+     "non:ljós",
+     "is:ljós",
+     "en:luminance",
+     "ar:نير",
+     "ja:明かり",
+     "ru:осветитель",
+     "la:lux",
+     "ga:lampa",
+     "hi:रोशनी",
+     "sa:भाम",
+     "he:אורה",
+     "fa:لامپ",
+     "de:Beleuchtung",
+     "pl:oświetlenie",
+     "es:iluminación",
+     "zh:採光",
+     "ko:화재",
+     "ang:heofonleoma",
+     "el:δοκός",
+     "cy:gwawl",
+     "sw:nuru",
+     "is:ljósleitur"
+    ]
+   }
+  },
+  "storm": {
+   "w3_d2": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "storm",
+       "tempest",
+       "cyclone",
+       "tough",
+       "tempest-tossed",
+       "col",
+       "clime",
+       "inclement",
+       "hard"
+      ],
+      "sense_ids": [
+       7459,
+       74230,
+       56596,
+       139567,
+       823871,
+       87311,
+       202274,
+       279926,
+       19746
+      ]
+     },
+     "ar": {
+      "root_rung": "ili",
+      "root_sense_id": 1817817,
+      "pivoted": 0,
+      "words": [
+       "عاصفة",
+       "طوفان",
+       "رعد",
+       "عاصف",
+       "هطول",
+       "صاعقة",
+       "برق",
+       "أرعد",
+       "إعصار",
+       "غائم",
+       "هبوب"
+      ],
+      "sense_ids": [
+       1817817,
+       1807677,
+       1810385,
+       1838148,
+       1850039,
+       1842834,
+       1808433,
+       1817083,
+       1808916,
+       1808721,
+       1809900
+      ]
+     },
+     "ja": {
+      "root_rung": "ili",
+      "root_sense_id": 1853393,
+      "pivoted": 0,
+      "words": [
+       "嵐",
+       "暴風",
+       "ストーム",
+       "竜巻",
+       "疾風",
+       "トルネード",
+       "旋風"
+      ],
+      "sense_ids": [
+       1853393,
+       1919017,
+       1970730,
+       1911778,
+       1911792,
+       1946265,
+       1881725
+      ]
+     },
+     "ru": {
+      "root_rung": "llm",
+      "root_sense_id": 1980449,
+      "pivoted": 0,
+      "words": [
+       "буря",
+       "шторм",
+       "буран",
+       "мор",
+       "торнадо",
+       "пурга",
+       "метель",
+       "падёж",
+       "смердеть"
+      ],
+      "sense_ids": [
+       1980449,
+       1987738,
+       1993817,
+       1989963,
+       1998419,
+       2005938,
+       2005937,
+       1982000,
+       2038997
+      ]
+     },
+     "la": {
+      "root_rung": "llm",
+      "root_sense_id": 2066835,
+      "pivoted": 0,
+      "words": [
+       "tempestas",
+       "procella",
+       "calamitas",
+       "casus",
+       "tumultus",
+       "turbo",
+       "limbus",
+       "infortunium",
+       "miseria",
+       "malum",
+       "detrimentum"
+      ],
+      "sense_ids": [
+       2066835,
+       2076273,
+       2071021,
+       2068577,
+       2083236,
+       2072104,
+       2079159,
+       2107745,
+       2076627,
+       2071500,
+       2087079
+      ]
+     },
+     "ga": {
+      "root_rung": "ili",
+      "root_sense_id": 2154311,
+      "pivoted": 0,
+      "words": [
+       "stoirm",
+       "anfa",
+       "doineann",
+       "spéirling",
+       "anbhá",
+       "gealtachas",
+       "síon",
+       "deabhaidh",
+       "bualadh"
+      ],
+      "sense_ids": [
+       2154311,
+       2157332,
+       2143387,
+       2163204,
+       2164607,
+       2148525,
+       2152944,
+       2168483,
+       2147345
+      ]
+     },
+     "hi": {
+      "root_rung": "llm",
+      "root_sense_id": 2174961,
+      "pivoted": 0,
+      "words": [
+       "तूफ़ान",
+       "आंधी",
+       "आँधी",
+       "बाढ़",
+       "तपन",
+       "अंधड़",
+       "झींसी",
+       "छाया",
+       "जलप्रवाह",
+       "धारा",
+       "क़तरा"
+      ],
+      "sense_ids": [
+       2174961,
+       2180863,
+       2180904,
+       2175014,
+       2185097,
+       2191328,
+       2186360,
+       2178985,
+       2208531,
+       2187763,
+       2189567
+      ]
+     },
+     "sa": {
+      "root_rung": "pivoted_root",
+      "root_sense_id": 2210278,
+      "pivoted": 0,
+      "words": [
+       "चक्रवात"
+      ],
+      "sense_ids": [
+       2210278
+      ]
+     },
+     "he": {
+      "root_rung": "ili",
+      "root_sense_id": 2236343,
+      "pivoted": 1,
+      "words": [
+       "סערה",
+       "שביט",
+       "זר",
+       "זרע",
+       "חליל",
+       "פלסטר",
+       "אבן",
+       "אגוז",
+       "ציקלון"
+      ],
+      "sense_ids": [
+       2236343,
+       2242691,
+       2239885,
+       2234252,
+       2237899,
+       2241660,
+       2234755,
+       2244946,
+       2239782
+      ]
+     },
+     "fa": {
+      "root_rung": "llm",
+      "root_sense_id": 2253989,
+      "pivoted": 0,
+      "words": [
+       "طوفان",
+       "بوراب",
+       "هجا",
+       "ضرب"
+      ],
+      "sense_ids": [
+       2253989,
+       2258318,
+       2261511,
+       2258243
+      ]
+     },
+     "de": {
+      "root_rung": "ili",
+      "root_sense_id": 2286337,
+      "pivoted": 0,
+      "words": [
+       "Sturm",
+       "Attacke",
+       "Angriff",
+       "Übergriff",
+       "Zugriff",
+       "Eingriff"
+      ],
+      "sense_ids": [
+       2286337,
+       2298357,
+       2291187,
+       2307429,
+       2295076,
+       2299466
+      ]
+     },
+     "pl": {
+      "root_rung": "ili",
+      "root_sense_id": 2403238,
+      "pivoted": 0,
+      "words": [
+       "burza",
+       "wicher",
+       "płomień",
+       "pożar",
+       "wichura",
+       "ogień",
+       "namiętność"
+      ],
+      "sense_ids": [
+       2403238,
+       2429247,
+       2418308,
+       2405899,
+       2429249,
+       2403948,
+       2412987
+      ]
+     },
+     "es": {
+      "root_rung": "ili",
+      "root_sense_id": 2561099,
+      "pivoted": 0,
+      "words": [
+       "tormenta",
+       "tronada",
+       "tempestad",
+       "borrasca",
+       "tramontana",
+       "ventisca",
+       "turbión",
+       "chubasco"
+      ],
+      "sense_ids": [
+       2561099,
+       2619438,
+       2588520,
+       2581109,
+       2588217,
+       2589188,
+       2629165,
+       2568201
+      ]
+     },
+     "zh": {
+      "root_rung": "fallback",
+      "root_sense_id": 2722523,
+      "pivoted": 0,
+      "words": [
+       "豪雨",
+       "暴雨",
+       "兇狂雨",
+       "大陣雨",
+       "青狂雨",
+       "大雨",
+       "大水"
+      ],
+      "sense_ids": [
+       2722523,
+       2712237,
+       2805404,
+       2804273,
+       2790479,
+       2700036,
+       2743086
+      ]
+     },
+     "ko": {
+      "root_rung": "llm",
+      "root_sense_id": 2900243,
+      "pivoted": 0,
+      "words": [
+       "폭풍",
+       "토우",
+       "쇼크",
+       "폭우",
+       "지우개똥",
+       "히트",
+       "리액션",
+       "호우",
+       "큰물",
+       "장대비"
+      ],
+      "sense_ids": [
+       2900243,
+       2910431,
+       2906437,
+       2909151,
+       2931830,
+       2920260,
+       2930224,
+       2920449,
+       2903814,
+       2914990
+      ]
+     },
+     "ang": {
+      "root_rung": "llm",
+      "root_sense_id": 2933026,
+      "pivoted": 0,
+      "words": [
+       "storm",
+       "yst",
+       "ystan",
+       "hlyd",
+       "cræsta"
+      ],
+      "sense_ids": [
+       2933026,
+       2939093,
+       2947928,
+       2946244,
+       2949682
+      ]
+     },
+     "el": {
+      "root_rung": "ili",
+      "root_sense_id": 2972229,
+      "pivoted": 0,
+      "words": [
+       "θύελλα",
+       "καταιγίδα",
+       "σίφουνας",
+       "ανεμοζάλη",
+       "μπαράζ",
+       "ανεμοστρόβιλος",
+       "αμμοσίφουνας",
+       "αναμπουμπούλα",
+       "ανεμοθύελλα",
+       "ανεμόβροχο"
+      ],
+      "sense_ids": [
+       2972229,
+       2969224,
+       2985570,
+       2991416,
+       2989388,
+       2965004,
+       2987656,
+       2989896,
+       2991420,
+       2991388
+      ]
+     },
+     "cy": {
+      "root_rung": "llm",
+      "root_sense_id": 3004399,
+      "pivoted": 0,
+      "words": [
+       "storm",
+       "tymestl",
+       "brochell",
+       "sobr",
+       "rhyferthwy",
+       "cythrwfl",
+       "arswyd",
+       "echryd",
+       "poethwg",
+       "difrifol",
+       "syber",
+       "sad"
+      ],
+      "sense_ids": [
+       3004399,
+       3023591,
+       3019502,
+       3026598,
+       3025920,
+       3028777,
+       3013397,
+       3013449,
+       3019320,
+       3012260,
+       3027274,
+       3004870
+      ]
+     },
+     "sw": {
+      "root_rung": "llm",
+      "root_sense_id": 3031773,
+      "pivoted": 0,
+      "words": [
+       "dhoruba",
+       "tufani",
+       "muhibu",
+       "mahabubu",
+       "vuguvugu",
+       "habibu",
+       "mpenzi"
+      ],
+      "sense_ids": [
+       3031773,
+       3035672,
+       3039061,
+       3039060,
+       3034974,
+       3040989,
+       3032501
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3044411,
+      "pivoted": 0,
+      "words": [
+       "veðr"
+      ],
+      "sense_ids": [
+       3044411
+      ]
+     },
+     "is": {
+      "root_rung": "llm",
+      "root_sense_id": 3071264,
+      "pivoted": 0,
+      "words": [
+       "óveður",
+       "aftakaveður",
+       "vonskuveður",
+       "illviðri"
+      ],
+      "sense_ids": [
+       3071264,
+       3071268,
+       3071263,
+       3071982
+      ]
+     }
+    },
+    "interleaved": [
+     "en:storm",
+     "ar:عاصفة",
+     "ja:嵐",
+     "ru:буря",
+     "la:tempestas",
+     "ga:stoirm",
+     "hi:तूफ़ान",
+     "sa:चक्रवात",
+     "he:סערה",
+     "fa:طوفان",
+     "de:Sturm",
+     "pl:burza",
+     "es:tormenta",
+     "zh:豪雨",
+     "ko:폭풍",
+     "ang:storm",
+     "el:θύελλα",
+     "cy:storm",
+     "sw:dhoruba",
+     "non:veðr",
+     "is:óveður",
+     "en:tempest",
+     "ar:طوفان",
+     "ja:暴風",
+     "ru:шторм",
+     "la:procella",
+     "ga:anfa",
+     "hi:आंधी",
+     "he:שביט",
+     "fa:بوراب",
+     "de:Attacke",
+     "pl:wicher",
+     "es:tronada",
+     "zh:暴雨",
+     "ko:토우",
+     "ang:yst",
+     "el:καταιγίδα",
+     "cy:tymestl",
+     "sw:tufani",
+     "is:aftakaveður",
+     "en:cyclone",
+     "ar:رعد",
+     "ja:ストーム",
+     "ru:буран",
+     "la:calamitas",
+     "ga:doineann",
+     "hi:आँधी",
+     "he:זר",
+     "fa:هجا",
+     "de:Angriff",
+     "pl:płomień",
+     "es:tempestad",
+     "zh:兇狂雨",
+     "ko:쇼크",
+     "ang:ystan",
+     "el:σίφουνας",
+     "cy:brochell",
+     "sw:muhibu",
+     "is:vonskuveður",
+     "en:tough",
+     "ar:عاصف",
+     "ja:竜巻",
+     "ru:мор",
+     "la:casus",
+     "ga:spéirling",
+     "hi:बाढ़",
+     "he:זרע",
+     "fa:ضرب",
+     "de:Übergriff",
+     "pl:pożar",
+     "es:borrasca",
+     "zh:大陣雨",
+     "ko:폭우",
+     "ang:hlyd",
+     "el:ανεμοζάλη",
+     "cy:sobr",
+     "sw:mahabubu",
+     "is:illviðri",
+     "en:tempest-tossed",
+     "ar:هطول",
+     "ja:疾風",
+     "ru:торнадо",
+     "la:tumultus",
+     "ga:anbhá",
+     "hi:तपन",
+     "he:חליל",
+     "de:Zugriff",
+     "pl:wichura",
+     "es:tramontana",
+     "zh:青狂雨",
+     "ko:지우개똥",
+     "ang:cræsta",
+     "el:μπαράζ",
+     "cy:rhyferthwy",
+     "sw:vuguvugu",
+     "en:col",
+     "ar:صاعقة",
+     "ja:トルネード",
+     "ru:пурга",
+     "la:turbo",
+     "ga:gealtachas",
+     "hi:अंधड़",
+     "he:פלסטר",
+     "de:Eingriff",
+     "pl:ogień",
+     "es:ventisca",
+     "zh:大雨",
+     "ko:히트",
+     "el:ανεμοστρόβιλος",
+     "cy:cythrwfl",
+     "sw:habibu",
+     "en:clime",
+     "ar:برق",
+     "ja:旋風",
+     "ru:метель",
+     "la:limbus",
+     "ga:síon",
+     "hi:झींसी",
+     "he:אבן",
+     "pl:namiętność",
+     "es:turbión",
+     "zh:大水",
+     "ko:리액션",
+     "el:αμμοσίφουνας",
+     "cy:arswyd",
+     "sw:mpenzi",
+     "en:inclement",
+     "ar:أرعد",
+     "ru:падёж",
+     "la:infortunium",
+     "ga:deabhaidh",
+     "hi:छाया",
+     "he:אגוז",
+     "es:chubasco",
+     "ko:호우",
+     "el:αναμπουμπούλα",
+     "cy:echryd",
+     "en:hard",
+     "ar:إعصار",
+     "ru:смердеть",
+     "la:miseria",
+     "ga:bualadh",
+     "hi:जलप्रवाह",
+     "he:ציקלון",
+     "ko:큰물",
+     "el:ανεμοθύελλα",
+     "cy:poethwg",
+     "ar:غائم",
+     "la:malum",
+     "hi:धारा",
+     "ko:장대비",
+     "el:ανεμόβροχο",
+     "cy:difrifol",
+     "ar:هبوب",
+     "la:detrimentum",
+     "hi:क़तरा",
+     "cy:syber",
+     "cy:sad"
+    ]
+   },
+   "w1_d1": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "storm",
+       "tempest"
+      ],
+      "sense_ids": [
+       7459,
+       74230
+      ]
+     },
+     "ar": {
+      "root_rung": "ili",
+      "root_sense_id": 1817817,
+      "pivoted": 0,
+      "words": [
+       "عاصفة",
+       "طوفان"
+      ],
+      "sense_ids": [
+       1817817,
+       1807677
+      ]
+     },
+     "ja": {
+      "root_rung": "ili",
+      "root_sense_id": 1853393,
+      "pivoted": 0,
+      "words": [
+       "嵐",
+       "暴風"
+      ],
+      "sense_ids": [
+       1853393,
+       1919017
+      ]
+     },
+     "ru": {
+      "root_rung": "llm",
+      "root_sense_id": 1980449,
+      "pivoted": 0,
+      "words": [
+       "буря",
+       "шторм"
+      ],
+      "sense_ids": [
+       1980449,
+       1987738
+      ]
+     },
+     "la": {
+      "root_rung": "llm",
+      "root_sense_id": 2066835,
+      "pivoted": 0,
+      "words": [
+       "tempestas",
+       "procella"
+      ],
+      "sense_ids": [
+       2066835,
+       2076273
+      ]
+     },
+     "ga": {
+      "root_rung": "ili",
+      "root_sense_id": 2154311,
+      "pivoted": 0,
+      "words": [
+       "stoirm",
+       "anfa"
+      ],
+      "sense_ids": [
+       2154311,
+       2157332
+      ]
+     },
+     "hi": {
+      "root_rung": "llm",
+      "root_sense_id": 2174961,
+      "pivoted": 0,
+      "words": [
+       "तूफ़ान",
+       "आँधी"
+      ],
+      "sense_ids": [
+       2174961,
+       2180904
+      ]
+     },
+     "sa": {
+      "root_rung": "pivoted_root",
+      "root_sense_id": 2210278,
+      "pivoted": 0,
+      "words": [
+       "चक्रवात"
+      ],
+      "sense_ids": [
+       2210278
+      ]
+     },
+     "he": {
+      "root_rung": "ili",
+      "root_sense_id": 2236343,
+      "pivoted": 0,
+      "words": [
+       "סערה",
+       "שביט"
+      ],
+      "sense_ids": [
+       2236343,
+       2242691
+      ]
+     },
+     "fa": {
+      "root_rung": "llm",
+      "root_sense_id": 2253989,
+      "pivoted": 0,
+      "words": [
+       "طوفان",
+       "بوراب"
+      ],
+      "sense_ids": [
+       2253989,
+       2258318
+      ]
+     },
+     "de": {
+      "root_rung": "ili",
+      "root_sense_id": 2286337,
+      "pivoted": 0,
+      "words": [
+       "Sturm",
+       "Attacke"
+      ],
+      "sense_ids": [
+       2286337,
+       2298357
+      ]
+     },
+     "pl": {
+      "root_rung": "ili",
+      "root_sense_id": 2403238,
+      "pivoted": 0,
+      "words": [
+       "burza",
+       "wicher"
+      ],
+      "sense_ids": [
+       2403238,
+       2429247
+      ]
+     },
+     "es": {
+      "root_rung": "ili",
+      "root_sense_id": 2561099,
+      "pivoted": 0,
+      "words": [
+       "tormenta",
+       "tronada"
+      ],
+      "sense_ids": [
+       2561099,
+       2619438
+      ]
+     },
+     "zh": {
+      "root_rung": "fallback",
+      "root_sense_id": 2722523,
+      "pivoted": 0,
+      "words": [
+       "豪雨",
+       "暴雨"
+      ],
+      "sense_ids": [
+       2722523,
+       2712237
+      ]
+     },
+     "ko": {
+      "root_rung": "llm",
+      "root_sense_id": 2900243,
+      "pivoted": 0,
+      "words": [
+       "폭풍",
+       "토우"
+      ],
+      "sense_ids": [
+       2900243,
+       2910431
+      ]
+     },
+     "ang": {
+      "root_rung": "llm",
+      "root_sense_id": 2933026,
+      "pivoted": 0,
+      "words": [
+       "storm",
+       "yst"
+      ],
+      "sense_ids": [
+       2933026,
+       2939093
+      ]
+     },
+     "el": {
+      "root_rung": "ili",
+      "root_sense_id": 2972229,
+      "pivoted": 0,
+      "words": [
+       "θύελλα",
+       "καταιγίδα"
+      ],
+      "sense_ids": [
+       2972229,
+       2969224
+      ]
+     },
+     "cy": {
+      "root_rung": "llm",
+      "root_sense_id": 3004399,
+      "pivoted": 0,
+      "words": [
+       "storm",
+       "tymestl"
+      ],
+      "sense_ids": [
+       3004399,
+       3023591
+      ]
+     },
+     "sw": {
+      "root_rung": "llm",
+      "root_sense_id": 3031773,
+      "pivoted": 0,
+      "words": [
+       "dhoruba",
+       "tufani"
+      ],
+      "sense_ids": [
+       3031773,
+       3035672
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3044411,
+      "pivoted": 0,
+      "words": [
+       "veðr"
+      ],
+      "sense_ids": [
+       3044411
+      ]
+     },
+     "is": {
+      "root_rung": "llm",
+      "root_sense_id": 3071264,
+      "pivoted": 0,
+      "words": [
+       "óveður",
+       "aftakaveður"
+      ],
+      "sense_ids": [
+       3071264,
+       3071268
+      ]
+     }
+    },
+    "interleaved": [
+     "en:storm",
+     "ar:عاصفة",
+     "ja:嵐",
+     "ru:буря",
+     "la:tempestas",
+     "ga:stoirm",
+     "hi:तूफ़ान",
+     "sa:चक्रवात",
+     "he:סערה",
+     "fa:طوفان",
+     "de:Sturm",
+     "pl:burza",
+     "es:tormenta",
+     "zh:豪雨",
+     "ko:폭풍",
+     "ang:storm",
+     "el:θύελλα",
+     "cy:storm",
+     "sw:dhoruba",
+     "non:veðr",
+     "is:óveður",
+     "en:tempest",
+     "ar:طوفان",
+     "ja:暴風",
+     "ru:шторм",
+     "la:procella",
+     "ga:anfa",
+     "hi:आँधी",
+     "he:שביט",
+     "fa:بوراب",
+     "de:Attacke",
+     "pl:wicher",
+     "es:tronada",
+     "zh:暴雨",
+     "ko:토우",
+     "ang:yst",
+     "el:καταιγίδα",
+     "cy:tymestl",
+     "sw:tufani",
+     "is:aftakaveður"
+    ]
+   }
+  },
+  "river": {
+   "w3_d2": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "river",
+       "streamlet",
+       "runnel",
+       "rill",
+       "rivulet"
+      ],
+      "sense_ids": [
+       32033,
+       278449,
+       235326,
+       97814,
+       126399
+      ]
+     },
+     "ar": {
+      "root_rung": "corroborated",
+      "root_sense_id": 1811825,
+      "pivoted": 0,
+      "words": [
+       "نهر",
+       "خليج",
+       "ممطر",
+       "ورد",
+       "نبق",
+       "رند",
+       "نوتي",
+       "ماطر",
+       "مطر",
+       "عاصفة",
+       "نضح",
+       "هويس",
+       "رشاش"
+      ],
+      "sense_ids": [
+       1811825,
+       1823978,
+       1808753,
+       1816455,
+       1827907,
+       1815916,
+       1835639,
+       1808751,
+       1809171,
+       1817817,
+       1833215,
+       1842821,
+       1813107
+      ]
+     },
+     "ja": {
+      "root_rung": "corroborated",
+      "root_sense_id": 1853412,
+      "pivoted": 0,
+      "words": [
+       "川",
+       "大河",
+       "滝川",
+       "谷川"
+      ],
+      "sense_ids": [
+       1853412,
+       1890247,
+       1872634,
+       1872713
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 1979955,
+      "pivoted": 1,
+      "words": [
+       "река",
+       "ручей",
+       "родник",
+       "рокада",
+       "студенец",
+       "источник",
+       "скачок",
+       "ручеёк"
+      ],
+      "sense_ids": [
+       1979955,
+       1983636,
+       1986566,
+       2023211,
+       2017347,
+       1986564,
+       2015318,
+       2015192
+      ]
+     },
+     "la": {
+      "root_rung": "primary",
+      "root_sense_id": 2077278,
+      "pivoted": 0,
+      "words": [
+       "fluvius",
+       "rivus",
+       "fluo",
+       "amnis",
+       "flumen",
+       "defluo",
+       "influo",
+       "praefluo"
+      ],
+      "sense_ids": [
+       2077278,
+       2085282,
+       2077279,
+       2084853,
+       2077366,
+       2089154,
+       2089071,
+       2089177
+      ]
+     },
+     "ga": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2142983,
+      "pivoted": 0,
+      "words": [
+       "abhainn",
+       "srúill",
+       "fo-abhainn",
+       "sileadh",
+       "sruth",
+       "eas",
+       "focharráiste",
+       "abarach",
+       "cáfraith",
+       "sreabh",
+       "snigh",
+       "teitheadh"
+      ],
+      "sense_ids": [
+       2142983,
+       2167257,
+       2147583,
+       2169058,
+       2144903,
+       2143585,
+       2147718,
+       2161549,
+       2171477,
+       2155233,
+       2159033,
+       2173243
+      ]
+     },
+     "hi": {
+      "root_rung": "primary",
+      "root_sense_id": 2174655,
+      "pivoted": 0,
+      "words": [
+       "नदी",
+       "सरिता",
+       "तटिनी",
+       "दरिया",
+       "नीरधि",
+       "जलनिधि",
+       "जलराशि"
+      ],
+      "sense_ids": [
+       2174655,
+       2208525,
+       2208527,
+       2176487,
+       2201485,
+       2201483,
+       2201484
+      ]
+     },
+     "sa": {
+      "root_rung": "primary",
+      "root_sense_id": 2209943,
+      "pivoted": 0,
+      "words": [
+       "नदी",
+       "सरित्",
+       "रेतस्",
+       "निम्नगा",
+       "क्षरति",
+       "प्रवाह",
+       "स्रोतस्",
+       "आपगा"
+      ],
+      "sense_ids": [
+       2209943,
+       2228046,
+       2233274,
+       2232557,
+       2222889,
+       2220528,
+       2222654,
+       2232429
+      ]
+     },
+     "he": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2234734,
+      "pivoted": 0,
+      "words": [
+       "נהר",
+       "נחל",
+       "אפיק",
+       "זרם",
+       "פלג",
+       "מהיר"
+      ],
+      "sense_ids": [
+       2234734,
+       2236119,
+       2246718,
+       2236122,
+       2236111,
+       2238902
+      ]
+     },
+     "fa": {
+      "root_rung": "primary",
+      "root_sense_id": 2252923,
+      "pivoted": 0,
+      "words": [
+       "رود",
+       "رودخانه",
+       "دریا",
+       "ریگستان",
+       "زراه",
+       "اقیانوس",
+       "جهاز",
+       "ریستن",
+       "سوغات",
+       "ریچار"
+      ],
+      "sense_ids": [
+       2252923,
+       2257768,
+       2253038,
+       2258286,
+       2270854,
+       2255428,
+       2251674,
+       2267743,
+       2269531,
+       2271896
+      ]
+     },
+     "de": {
+      "root_rung": "primary",
+      "root_sense_id": 2281596,
+      "pivoted": 0,
+      "words": [
+       "Strom",
+       "Fluss",
+       "Wasserlauf",
+       "Strömung",
+       "strömen",
+       "Initiative"
+      ],
+      "sense_ids": [
+       2281596,
+       2284697,
+       2357594,
+       2323367,
+       2319388,
+       2293249
+      ]
+     },
+     "pl": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2407830,
+      "pivoted": 0,
+      "words": [
+       "rzeka",
+       "deszcz",
+       "katarakta",
+       "basen",
+       "zeżreć",
+       "ciężki",
+       "gorąco",
+       "zaćma",
+       "zagrzechotać",
+       "zakatarzenie",
+       "zlewisko",
+       "zlewnia",
+       "pływalnia"
+      ],
+      "sense_ids": [
+       2407830,
+       2402865,
+       2419601,
+       2402240,
+       2520421,
+       2406516,
+       2424294,
+       2465848,
+       2493239,
+       2542993,
+       2439149,
+       2473441,
+       2502602
+      ]
+     },
+     "es": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2555246,
+      "pivoted": 0,
+      "words": [
+       "río",
+       "torrente",
+       "ría",
+       "rápido",
+       "aguacero",
+       "turbión",
+       "chubasco",
+       "desembocadura",
+       "estuario",
+       "rada",
+       "rabión",
+       "presto",
+       "expreso"
+      ],
+      "sense_ids": [
+       2555246,
+       2580421,
+       2559518,
+       2563649,
+       2562163,
+       2629165,
+       2568201,
+       2598731,
+       2589673,
+       2575339,
+       2674340,
+       2552684,
+       2573322
+      ]
+     },
+     "zh": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2750983,
+      "pivoted": 0,
+      "words": [
+       "水流",
+       "汊流",
+       "幹流",
+       "河口",
+       "分叉流",
+       "分叉水",
+       "支流",
+       "主流",
+       "流派",
+       "幹道",
+       "江口",
+       "河脣",
+       "江岸"
+      ],
+      "sense_ids": [
+       2750983,
+       2855479,
+       2751549,
+       2713199,
+       2879302,
+       2879303,
+       2726548,
+       2717416,
+       2709861,
+       2740932,
+       2722008,
+       2849923,
+       2794032
+      ]
+     },
+     "ko": {
+      "root_rung": "primary",
+      "root_sense_id": 2888286,
+      "pivoted": 0,
+      "words": [
+       "강",
+       "가람",
+       "내",
+       "강풍",
+       "기슭",
+       "줄",
+       "꼬박",
+       "옥",
+       "센바람",
+       "큰물",
+       "장대비"
+      ],
+      "sense_ids": [
+       2888286,
+       2903400,
+       2886167,
+       2914863,
+       2901105,
+       2887424,
+       2921300,
+       2905274,
+       2930284,
+       2903814,
+       2914990
+      ]
+     },
+     "ang": {
+      "root_rung": "primary",
+      "root_sense_id": 2933401,
+      "pivoted": 0,
+      "words": [
+       "ea"
+      ],
+      "sense_ids": [
+       2933401
+      ]
+     },
+     "el": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2974219,
+      "pivoted": 0,
+      "words": [
+       "ποτάμι",
+       "ρυάκι",
+       "πηγάδι",
+       "τσουνάμι",
+       "λακκούβα",
+       "ανεμοδείκτης",
+       "μπουμπουνητό",
+       "φρέαρ",
+       "ρεύμα",
+       "σιντριβάνι",
+       "σκουπιδοτενεκές"
+      ],
+      "sense_ids": [
+       2974219,
+       2974221,
+       2963589,
+       2965430,
+       2976856,
+       2971616,
+       3001587,
+       2979183,
+       2969684,
+       2980296,
+       2972607
+      ]
+     },
+     "cy": {
+      "root_rung": "primary",
+      "root_sense_id": 3005258,
+      "pivoted": 0,
+      "words": [
+       "afon",
+       "afonig",
+       "nant",
+       "ffrwd",
+       "clais"
+      ],
+      "sense_ids": [
+       3005258,
+       3017987,
+       3007944,
+       3010742,
+       3008623
+      ]
+     },
+     "sw": {
+      "root_rung": "primary",
+      "root_sense_id": 3032115,
+      "pivoted": 0,
+      "words": [
+       "mto"
+      ],
+      "sense_ids": [
+       3032115
+      ]
+     },
+     "non": {
+      "root_rung": "primary",
+      "root_sense_id": 3046553,
+      "pivoted": 0,
+      "words": [
+       "elfr",
+       "linr",
+       "langfeðgar",
+       "fróðr",
+       "mjúkr",
+       "friggjardagr",
+       "freyjudagr",
+       "hávaði",
+       "sviðr",
+       "vitr",
+       "skírr"
+      ],
+      "sense_ids": [
+       3046553,
+       3049509,
+       3049095,
+       3049038,
+       3043151,
+       3048491,
+       3048490,
+       3043992,
+       3049074,
+       3048250,
+       3048220
+      ]
+     },
+     "is": {
+      "root_rung": "primary",
+      "root_sense_id": 3060614,
+      "pivoted": 0,
+      "words": [
+       "elfur",
+       "fljót",
+       "elfa",
+       "ærinn",
+       "flís",
+       "vatnsfall",
+       "áræðinn",
+       "feikn",
+       "nógur"
+      ],
+      "sense_ids": [
+       3060614,
+       3052492,
+       3061244,
+       3060532,
+       3056948,
+       3066677,
+       3066948,
+       3065643,
+       3053659
+      ]
+     }
+    },
+    "interleaved": [
+     "en:river",
+     "ar:نهر",
+     "ja:川",
+     "ru:река",
+     "la:fluvius",
+     "ga:abhainn",
+     "hi:नदी",
+     "sa:नदी",
+     "he:נהר",
+     "fa:رود",
+     "de:Strom",
+     "pl:rzeka",
+     "es:río",
+     "zh:水流",
+     "ko:강",
+     "ang:ea",
+     "el:ποτάμι",
+     "cy:afon",
+     "sw:mto",
+     "non:elfr",
+     "is:elfur",
+     "en:streamlet",
+     "ar:خليج",
+     "ja:大河",
+     "ru:ручей",
+     "la:rivus",
+     "ga:srúill",
+     "hi:सरिता",
+     "sa:सरित्",
+     "he:נחל",
+     "fa:رودخانه",
+     "de:Fluss",
+     "pl:deszcz",
+     "es:torrente",
+     "zh:汊流",
+     "ko:가람",
+     "el:ρυάκι",
+     "cy:afonig",
+     "non:linr",
+     "is:fljót",
+     "en:runnel",
+     "ar:ممطر",
+     "ja:滝川",
+     "ru:родник",
+     "la:fluo",
+     "ga:fo-abhainn",
+     "hi:तटिनी",
+     "sa:रेतस्",
+     "he:אפיק",
+     "fa:دریا",
+     "de:Wasserlauf",
+     "pl:katarakta",
+     "es:ría",
+     "zh:幹流",
+     "ko:내",
+     "el:πηγάδι",
+     "cy:nant",
+     "non:langfeðgar",
+     "is:elfa",
+     "en:rill",
+     "ar:ورد",
+     "ja:谷川",
+     "ru:рокада",
+     "la:amnis",
+     "ga:sileadh",
+     "hi:दरिया",
+     "sa:निम्नगा",
+     "he:זרם",
+     "fa:ریگستان",
+     "de:Strömung",
+     "pl:basen",
+     "es:rápido",
+     "zh:河口",
+     "ko:강풍",
+     "el:τσουνάμι",
+     "cy:ffrwd",
+     "non:fróðr",
+     "is:ærinn",
+     "en:rivulet",
+     "ar:نبق",
+     "ru:студенец",
+     "la:flumen",
+     "ga:sruth",
+     "hi:नीरधि",
+     "sa:क्षरति",
+     "he:פלג",
+     "fa:زراه",
+     "de:strömen",
+     "pl:zeżreć",
+     "es:aguacero",
+     "zh:分叉流",
+     "ko:기슭",
+     "el:λακκούβα",
+     "cy:clais",
+     "non:mjúkr",
+     "is:flís",
+     "ar:رند",
+     "ru:источник",
+     "la:defluo",
+     "ga:eas",
+     "hi:जलनिधि",
+     "sa:प्रवाह",
+     "he:מהיר",
+     "fa:اقیانوس",
+     "de:Initiative",
+     "pl:ciężki",
+     "es:turbión",
+     "zh:分叉水",
+     "ko:줄",
+     "el:ανεμοδείκτης",
+     "non:friggjardagr",
+     "is:vatnsfall",
+     "ar:نوتي",
+     "ru:скачок",
+     "la:influo",
+     "ga:focharráiste",
+     "hi:जलराशि",
+     "sa:स्रोतस्",
+     "fa:جهاز",
+     "pl:gorąco",
+     "es:chubasco",
+     "zh:支流",
+     "ko:꼬박",
+     "el:μπουμπουνητό",
+     "non:freyjudagr",
+     "is:áræðinn",
+     "ar:ماطر",
+     "ru:ручеёк",
+     "la:praefluo",
+     "ga:abarach",
+     "sa:आपगा",
+     "fa:ریستن",
+     "pl:zaćma",
+     "es:desembocadura",
+     "zh:主流",
+     "ko:옥",
+     "el:φρέαρ",
+     "non:hávaði",
+     "is:feikn",
+     "ar:مطر",
+     "ga:cáfraith",
+     "fa:سوغات",
+     "pl:zagrzechotać",
+     "es:estuario",
+     "zh:流派",
+     "ko:센바람",
+     "el:ρεύμα",
+     "non:sviðr",
+     "is:nógur",
+     "ar:عاصفة",
+     "ga:sreabh",
+     "fa:ریچار",
+     "pl:zakatarzenie",
+     "es:rada",
+     "zh:幹道",
+     "ko:큰물",
+     "el:σιντριβάνι",
+     "non:vitr",
+     "ar:نضح",
+     "ga:snigh",
+     "pl:zlewisko",
+     "es:rabión",
+     "zh:江口",
+     "ko:장대비",
+     "el:σκουπιδοτενεκές",
+     "non:skírr",
+     "ar:هويس",
+     "ga:teitheadh",
+     "pl:zlewnia",
+     "es:presto",
+     "zh:河脣",
+     "ar:رشاش",
+     "pl:pływalnia",
+     "es:expreso",
+     "zh:江岸"
+    ]
+   },
+   "w1_d1": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "river",
+       "streamlet"
+      ],
+      "sense_ids": [
+       32033,
+       278449
+      ]
+     },
+     "ar": {
+      "root_rung": "corroborated",
+      "root_sense_id": 1811825,
+      "pivoted": 0,
+      "words": [
+       "نهر",
+       "خليج"
+      ],
+      "sense_ids": [
+       1811825,
+       1823978
+      ]
+     },
+     "ja": {
+      "root_rung": "corroborated",
+      "root_sense_id": 1853412,
+      "pivoted": 0,
+      "words": [
+       "川",
+       "大河"
+      ],
+      "sense_ids": [
+       1853412,
+       1890247
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 1979955,
+      "pivoted": 0,
+      "words": [
+       "река",
+       "родник"
+      ],
+      "sense_ids": [
+       1979955,
+       1986566
+      ]
+     },
+     "la": {
+      "root_rung": "primary",
+      "root_sense_id": 2077278,
+      "pivoted": 0,
+      "words": [
+       "fluvius",
+       "rivus"
+      ],
+      "sense_ids": [
+       2077278,
+       2085282
+      ]
+     },
+     "ga": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2142983,
+      "pivoted": 0,
+      "words": [
+       "abhainn",
+       "srúill"
+      ],
+      "sense_ids": [
+       2142983,
+       2167257
+      ]
+     },
+     "hi": {
+      "root_rung": "primary",
+      "root_sense_id": 2174655,
+      "pivoted": 0,
+      "words": [
+       "नदी",
+       "सरिता"
+      ],
+      "sense_ids": [
+       2174655,
+       2208525
+      ]
+     },
+     "sa": {
+      "root_rung": "primary",
+      "root_sense_id": 2209943,
+      "pivoted": 0,
+      "words": [
+       "नदी",
+       "सरित्"
+      ],
+      "sense_ids": [
+       2209943,
+       2228046
+      ]
+     },
+     "he": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2234734,
+      "pivoted": 0,
+      "words": [
+       "נהר",
+       "נחל"
+      ],
+      "sense_ids": [
+       2234734,
+       2236119
+      ]
+     },
+     "fa": {
+      "root_rung": "primary",
+      "root_sense_id": 2252923,
+      "pivoted": 0,
+      "words": [
+       "رود",
+       "رودخانه"
+      ],
+      "sense_ids": [
+       2252923,
+       2257768
+      ]
+     },
+     "de": {
+      "root_rung": "primary",
+      "root_sense_id": 2281596,
+      "pivoted": 0,
+      "words": [
+       "Strom",
+       "Fluss"
+      ],
+      "sense_ids": [
+       2281596,
+       2284697
+      ]
+     },
+     "pl": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2407830,
+      "pivoted": 0,
+      "words": [
+       "rzeka",
+       "deszcz"
+      ],
+      "sense_ids": [
+       2407830,
+       2402865
+      ]
+     },
+     "es": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2555246,
+      "pivoted": 0,
+      "words": [
+       "río",
+       "torrente"
+      ],
+      "sense_ids": [
+       2555246,
+       2580421
+      ]
+     },
+     "zh": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2750983,
+      "pivoted": 0,
+      "words": [
+       "水流",
+       "汊流"
+      ],
+      "sense_ids": [
+       2750983,
+       2855479
+      ]
+     },
+     "ko": {
+      "root_rung": "primary",
+      "root_sense_id": 2888286,
+      "pivoted": 0,
+      "words": [
+       "강",
+       "가람"
+      ],
+      "sense_ids": [
+       2888286,
+       2903400
+      ]
+     },
+     "ang": {
+      "root_rung": "primary",
+      "root_sense_id": 2933401,
+      "pivoted": 0,
+      "words": [
+       "ea"
+      ],
+      "sense_ids": [
+       2933401
+      ]
+     },
+     "el": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2974219,
+      "pivoted": 0,
+      "words": [
+       "ποτάμι",
+       "ρυάκι"
+      ],
+      "sense_ids": [
+       2974219,
+       2974221
+      ]
+     },
+     "cy": {
+      "root_rung": "primary",
+      "root_sense_id": 3005258,
+      "pivoted": 0,
+      "words": [
+       "afon",
+       "afonig"
+      ],
+      "sense_ids": [
+       3005258,
+       3017987
+      ]
+     },
+     "sw": {
+      "root_rung": "primary",
+      "root_sense_id": 3032115,
+      "pivoted": 0,
+      "words": [
+       "mto"
+      ],
+      "sense_ids": [
+       3032115
+      ]
+     },
+     "non": {
+      "root_rung": "primary",
+      "root_sense_id": 3046553,
+      "pivoted": 0,
+      "words": [
+       "elfr",
+       "linr"
+      ],
+      "sense_ids": [
+       3046553,
+       3049509
+      ]
+     },
+     "is": {
+      "root_rung": "primary",
+      "root_sense_id": 3060614,
+      "pivoted": 0,
+      "words": [
+       "elfur",
+       "fljót"
+      ],
+      "sense_ids": [
+       3060614,
+       3052492
+      ]
+     }
+    },
+    "interleaved": [
+     "en:river",
+     "ar:نهر",
+     "ja:川",
+     "ru:река",
+     "la:fluvius",
+     "ga:abhainn",
+     "hi:नदी",
+     "sa:नदी",
+     "he:נהר",
+     "fa:رود",
+     "de:Strom",
+     "pl:rzeka",
+     "es:río",
+     "zh:水流",
+     "ko:강",
+     "ang:ea",
+     "el:ποτάμι",
+     "cy:afon",
+     "sw:mto",
+     "non:elfr",
+     "is:elfur",
+     "en:streamlet",
+     "ar:خليج",
+     "ja:大河",
+     "ru:родник",
+     "la:rivus",
+     "ga:srúill",
+     "hi:सरिता",
+     "sa:सरित्",
+     "he:נחל",
+     "fa:رودخانه",
+     "de:Fluss",
+     "pl:deszcz",
+     "es:torrente",
+     "zh:汊流",
+     "ko:가람",
+     "el:ρυάκι",
+     "cy:afonig",
+     "non:linr",
+     "is:fljót"
+    ]
+   }
+  },
+  "calm": {
+   "w3_d2": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "calm",
+       "calmness",
+       "equanimity",
+       "composure",
+       "tranquillity",
+       "equanimous",
+       "even-mindedness",
+       "compresence"
+      ],
+      "sense_ids": [
+       74845,
+       226994,
+       47447,
+       81507,
+       205583,
+       248386,
+       660593,
+       220829
+      ]
+     },
+     "ar": {
+      "root_rung": "ili",
+      "root_sense_id": 1806056,
+      "pivoted": 0,
+      "words": [
+       "هدوء",
+       "هدأ",
+       "سكون",
+       "سكينة",
+       "ضبط",
+       "وبخ",
+       "دعم",
+       "عطالة",
+       "مسكون",
+       "أناة"
+      ],
+      "sense_ids": [
+       1806056,
+       1845921,
+       1819752,
+       1828861,
+       1829522,
+       1838935,
+       1820594,
+       1846674,
+       1845250,
+       1835318
+      ]
+     },
+     "ja": {
+      "root_rung": "corroborated",
+      "root_sense_id": 1863007,
+      "pivoted": 0,
+      "words": [
+       "平静",
+       "静謐",
+       "静穏",
+       "平和",
+       "安穏",
+       "平穏",
+       "平和的"
+      ],
+      "sense_ids": [
+       1863007,
+       1924158,
+       1954765,
+       1863271,
+       1874456,
+       1899501,
+       1968407
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 2005236,
+      "pivoted": 1,
+      "words": [
+       "спокойствие",
+       "байховый",
+       "жидкость",
+       "раскачать",
+       "распрощаться",
+       "разбудить",
+       "спиртное",
+       "текучесть",
+       "флюид",
+       "безмятежность"
+      ],
+      "sense_ids": [
+       2005236,
+       2051698,
+       1992940,
+       2027240,
+       2017669,
+       2001120,
+       2021864,
+       2009235,
+       2015808,
+       1994291
+      ]
+     },
+     "la": {
+      "root_rung": "llm",
+      "root_sense_id": 2085309,
+      "pivoted": 0,
+      "words": [
+       "tranquillitas",
+       "serenitas",
+       "tranquillum",
+       "silentium",
+       "feritas",
+       "alacritas",
+       "otium",
+       "pax",
+       "sileo"
+      ],
+      "sense_ids": [
+       2085309,
+       2091699,
+       2085312,
+       2087733,
+       2098507,
+       2085395,
+       2074022,
+       2066563,
+       2087061
+      ]
+     },
+     "ga": {
+      "root_rung": "ili",
+      "root_sense_id": 2141069,
+      "pivoted": 0,
+      "words": [
+       "ciúnas",
+       "ciúine",
+       "sochmaíocht",
+       "suaimhneas",
+       "féithchiúin",
+       "síocháin",
+       "compord",
+       "suan"
+      ],
+      "sense_ids": [
+       2141069,
+       2149234,
+       2152354,
+       2149183,
+       2151381,
+       2150215,
+       2162410,
+       2143317
+      ]
+     },
+     "hi": {
+      "root_rung": "llm",
+      "root_sense_id": 2173883,
+      "pivoted": 0,
+      "words": [
+       "शांति",
+       "सुकून",
+       "अमन",
+       "चैन",
+       "क़रार",
+       "चंगा"
+      ],
+      "sense_ids": [
+       2173883,
+       2185057,
+       2192835,
+       2180852,
+       2188248,
+       2179927
+      ]
+     },
+     "sa": {
+      "root_rung": "llm",
+      "root_sense_id": 2217222,
+      "pivoted": 0,
+      "words": [
+       "शान्ति",
+       "निरामय",
+       "नीरोग",
+       "मार्दव",
+       "यक्ष्म",
+       "अरोग",
+       "कोमल",
+       "कठिनत्व",
+       "मातृक"
+      ],
+      "sense_ids": [
+       2217222,
+       2230283,
+       2232963,
+       2231572,
+       2227087,
+       2230548,
+       2216884,
+       2226199,
+       2231565
+      ]
+     },
+     "he": {
+      "root_rung": "primary",
+      "root_sense_id": 2242671,
+      "pivoted": 0,
+      "words": [
+       "רוגע",
+       "דממה",
+       "רגיעה",
+       "פגיע",
+       "שממה",
+       "התמהמה",
+       "זולת",
+       "עצבון",
+       "פחד",
+       "הפציר"
+      ],
+      "sense_ids": [
+       2242671,
+       2242669,
+       2251406,
+       2243434,
+       2247138,
+       2241623,
+       2242954,
+       2234875,
+       2235672,
+       2243667
+      ]
+     },
+     "fa": {
+      "root_rung": "llm",
+      "root_sense_id": 2253745,
+      "pivoted": 0,
+      "words": [
+       "آرامش",
+       "راحتی",
+       "آسایش",
+       "آرام",
+       "استراحت"
+      ],
+      "sense_ids": [
+       2253745,
+       2272823,
+       2270005,
+       2253713,
+       2259188
+      ]
+     },
+     "de": {
+      "root_rung": "ili",
+      "root_sense_id": 2329086,
+      "pivoted": 0,
+      "words": [
+       "Gelassenheit",
+       "Besonnenheit",
+       "Selbstbeherrschung",
+       "Beherrschung",
+       "Beherrschtheit",
+       "Contenance"
+      ],
+      "sense_ids": [
+       2329086,
+       2335442,
+       2358724,
+       2317188,
+       2389778,
+       2305419
+      ]
+     },
+     "pl": {
+      "root_rung": "primary",
+      "root_sense_id": 2411501,
+      "pivoted": 0,
+      "words": [
+       "spokój",
+       "spokojny",
+       "cisza",
+       "pokój",
+       "pamiętać",
+       "opanowany",
+       "cichość",
+       "pokutować",
+       "powykolać"
+      ],
+      "sense_ids": [
+       2411501,
+       2420165,
+       2415401,
+       2406164,
+       2412713,
+       2490030,
+       2548667,
+       2485545,
+       2540545
+      ]
+     },
+     "es": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2559860,
+      "pivoted": 0,
+      "words": [
+       "calma",
+       "serenidad",
+       "tranquilidad",
+       "placidez",
+       "paz",
+       "sosiego",
+       "relajación",
+       "alivio",
+       "apacible"
+      ],
+      "sense_ids": [
+       2559860,
+       2595705,
+       2581909,
+       2611034,
+       2554989,
+       2583477,
+       2585230,
+       2570804,
+       2591553
+      ]
+     },
+     "zh": {
+      "root_rung": "fallback",
+      "root_sense_id": 2696502,
+      "pivoted": 0,
+      "words": [
+       "和平",
+       "靜寂",
+       "平靜",
+       "安靖",
+       "靜寂寂",
+       "寂靜",
+       "沉寂",
+       "清靜",
+       "恬靜",
+       "安恬"
+      ],
+      "sense_ids": [
+       2696502,
+       2749240,
+       2696499,
+       2770385,
+       2807237,
+       2730245,
+       2779677,
+       2754468,
+       2763421,
+       2844448
+      ]
+     },
+     "ko": {
+      "root_rung": "llm",
+      "root_sense_id": 2894630,
+      "pivoted": 0,
+      "words": [
+       "안정",
+       "내리",
+       "가만히",
+       "영속",
+       "날래",
+       "오래",
+       "동",
+       "가만",
+       "상기",
+       "상그",
+       "영구",
+       "상구",
+       "연신"
+      ],
+      "sense_ids": [
+       2894630,
+       2917584,
+       2894798,
+       2917411,
+       2913985,
+       2890589,
+       2887394,
+       2895349,
+       2918125,
+       2919441,
+       2899386,
+       2914395,
+       2918698
+      ]
+     },
+     "ang": {
+      "root_rung": null,
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [],
+      "sense_ids": []
+     },
+     "el": {
+      "root_rung": "primary",
+      "root_sense_id": 2965203,
+      "pivoted": 0,
+      "words": [
+       "ηρεμία",
+       "νηνεμία",
+       "ήρεμος",
+       "αχείμαστος",
+       "άπνοια",
+       "κάλμα",
+       "μπουνάτσα",
+       "γαλήνια",
+       "αξεθύμαστος",
+       "αξέγνοιαστος",
+       "ακαλαφάτιστος"
+      ],
+      "sense_ids": [
+       2965203,
+       2994742,
+       2962614,
+       3003245,
+       2994740,
+       2990785,
+       2997988,
+       2974274,
+       2994332,
+       2994122,
+       2985759
+      ]
+     },
+     "cy": {
+      "root_rung": "llm",
+      "root_sense_id": 3007437,
+      "pivoted": 0,
+      "words": [
+       "llonyddwch",
+       "harddwch",
+       "tanbeidrwydd",
+       "syberwyd",
+       "gwybod"
+      ],
+      "sense_ids": [
+       3007437,
+       3016774,
+       3014000,
+       3026738,
+       3009401
+      ]
+     },
+     "sw": {
+      "root_rung": "llm",
+      "root_sense_id": 3036635,
+      "pivoted": 0,
+      "words": [
+       "shwari",
+       "msala",
+       "kuvu",
+       "rukwama",
+       "nywila",
+       "mkinga",
+       "kinga",
+       "gugu",
+       "kwekwe",
+       "mwanga",
+       "mkokoteni",
+       "mpikaji",
+       "mpishi"
+      ],
+      "sense_ids": [
+       3036635,
+       3035723,
+       3037304,
+       3032398,
+       3032158,
+       3034713,
+       3034711,
+       3033342,
+       3032755,
+       3032001,
+       3032397,
+       3035541,
+       3031570
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3044362,
+      "pivoted": 0,
+      "words": [
+       "friðr",
+       "friðgerð",
+       "sótt",
+       "friggjardagr",
+       "sjúknaðr"
+      ],
+      "sense_ids": [
+       3044362,
+       3049522,
+       3044002,
+       3048491,
+       3047108
+      ]
+     },
+     "is": {
+      "root_rung": "llm",
+      "root_sense_id": 3050045,
+      "pivoted": 0,
+      "words": [
+       "ró",
+       "kyrrlæti",
+       "næði",
+       "órólegur",
+       "hægð",
+       "kyrrð",
+       "kvíðinn",
+       "pollrólegur",
+       "ringulreið"
+      ],
+      "sense_ids": [
+       3050045,
+       3065391,
+       3059866,
+       3065992,
+       3063331,
+       3055504,
+       3064422,
+       3070848,
+       3066123
+      ]
+     }
+    },
+    "interleaved": [
+     "en:calm",
+     "ar:هدوء",
+     "ja:平静",
+     "ru:спокойствие",
+     "la:tranquillitas",
+     "ga:ciúnas",
+     "hi:शांति",
+     "sa:शान्ति",
+     "he:רוגע",
+     "fa:آرامش",
+     "de:Gelassenheit",
+     "pl:spokój",
+     "es:calma",
+     "zh:和平",
+     "ko:안정",
+     "el:ηρεμία",
+     "cy:llonyddwch",
+     "sw:shwari",
+     "non:friðr",
+     "is:ró",
+     "en:calmness",
+     "ar:هدأ",
+     "ja:静謐",
+     "ru:байховый",
+     "la:serenitas",
+     "ga:ciúine",
+     "hi:सुकून",
+     "sa:निरामय",
+     "he:דממה",
+     "fa:راحتی",
+     "de:Besonnenheit",
+     "pl:spokojny",
+     "es:serenidad",
+     "zh:靜寂",
+     "ko:내리",
+     "el:νηνεμία",
+     "cy:harddwch",
+     "sw:msala",
+     "non:friðgerð",
+     "is:kyrrlæti",
+     "en:equanimity",
+     "ar:سكون",
+     "ja:静穏",
+     "ru:жидкость",
+     "la:tranquillum",
+     "ga:sochmaíocht",
+     "hi:अमन",
+     "sa:नीरोग",
+     "he:רגיעה",
+     "fa:آسایش",
+     "de:Selbstbeherrschung",
+     "pl:cisza",
+     "es:tranquilidad",
+     "zh:平靜",
+     "ko:가만히",
+     "el:ήρεμος",
+     "cy:tanbeidrwydd",
+     "sw:kuvu",
+     "non:sótt",
+     "is:næði",
+     "en:composure",
+     "ar:سكينة",
+     "ja:平和",
+     "ru:раскачать",
+     "la:silentium",
+     "ga:suaimhneas",
+     "hi:चैन",
+     "sa:मार्दव",
+     "he:פגיע",
+     "fa:آرام",
+     "de:Beherrschung",
+     "pl:pokój",
+     "es:placidez",
+     "zh:安靖",
+     "ko:영속",
+     "el:αχείμαστος",
+     "cy:syberwyd",
+     "sw:rukwama",
+     "non:friggjardagr",
+     "is:órólegur",
+     "en:tranquillity",
+     "ar:ضبط",
+     "ja:安穏",
+     "ru:распрощаться",
+     "la:feritas",
+     "ga:féithchiúin",
+     "hi:क़रार",
+     "sa:यक्ष्म",
+     "he:שממה",
+     "fa:استراحت",
+     "de:Beherrschtheit",
+     "pl:pamiętać",
+     "es:paz",
+     "zh:靜寂寂",
+     "ko:날래",
+     "el:άπνοια",
+     "cy:gwybod",
+     "sw:nywila",
+     "non:sjúknaðr",
+     "is:hægð",
+     "en:equanimous",
+     "ar:وبخ",
+     "ja:平穏",
+     "ru:разбудить",
+     "la:alacritas",
+     "ga:síocháin",
+     "hi:चंगा",
+     "sa:अरोग",
+     "he:התמהמה",
+     "de:Contenance",
+     "pl:opanowany",
+     "es:sosiego",
+     "zh:寂靜",
+     "ko:오래",
+     "el:κάλμα",
+     "sw:mkinga",
+     "is:kyrrð",
+     "en:even-mindedness",
+     "ar:دعم",
+     "ja:平和的",
+     "ru:спиртное",
+     "la:otium",
+     "ga:compord",
+     "sa:कोमल",
+     "he:זולת",
+     "pl:cichość",
+     "es:relajación",
+     "zh:沉寂",
+     "ko:동",
+     "el:μπουνάτσα",
+     "sw:kinga",
+     "is:kvíðinn",
+     "en:compresence",
+     "ar:عطالة",
+     "ru:текучесть",
+     "la:pax",
+     "ga:suan",
+     "sa:कठिनत्व",
+     "he:עצבון",
+     "pl:pokutować",
+     "es:alivio",
+     "zh:清靜",
+     "ko:가만",
+     "el:γαλήνια",
+     "sw:gugu",
+     "is:pollrólegur",
+     "ar:مسكون",
+     "ru:флюид",
+     "la:sileo",
+     "sa:मातृक",
+     "he:פחד",
+     "pl:powykolać",
+     "es:apacible",
+     "zh:恬靜",
+     "ko:상기",
+     "el:αξεθύμαστος",
+     "sw:kwekwe",
+     "is:ringulreið",
+     "ar:أناة",
+     "ru:безмятежность",
+     "he:הפציר",
+     "zh:安恬",
+     "ko:상그",
+     "el:αξέγνοιαστος",
+     "sw:mwanga",
+     "ko:영구",
+     "el:ακαλαφάτιστος",
+     "sw:mkokoteni",
+     "ko:상구",
+     "sw:mpikaji",
+     "ko:연신",
+     "sw:mpishi"
+    ]
+   },
+   "w1_d1": {
+    "trees": {
+     "en": {
+      "root_rung": "selected",
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [
+       "calm",
+       "calmness"
+      ],
+      "sense_ids": [
+       74845,
+       226994
+      ]
+     },
+     "ar": {
+      "root_rung": "ili",
+      "root_sense_id": 1806056,
+      "pivoted": 0,
+      "words": [
+       "هدوء",
+       "سكون"
+      ],
+      "sense_ids": [
+       1806056,
+       1819752
+      ]
+     },
+     "ja": {
+      "root_rung": "corroborated",
+      "root_sense_id": 1863007,
+      "pivoted": 0,
+      "words": [
+       "平静",
+       "静謐"
+      ],
+      "sense_ids": [
+       1863007,
+       1924158
+      ]
+     },
+     "ru": {
+      "root_rung": "primary",
+      "root_sense_id": 2005236,
+      "pivoted": 0,
+      "words": [
+       "спокойствие",
+       "байховый"
+      ],
+      "sense_ids": [
+       2005236,
+       2051698
+      ]
+     },
+     "la": {
+      "root_rung": "llm",
+      "root_sense_id": 2085309,
+      "pivoted": 0,
+      "words": [
+       "tranquillitas",
+       "serenitas"
+      ],
+      "sense_ids": [
+       2085309,
+       2091699
+      ]
+     },
+     "ga": {
+      "root_rung": "ili",
+      "root_sense_id": 2141069,
+      "pivoted": 0,
+      "words": [
+       "ciúnas",
+       "ciúine"
+      ],
+      "sense_ids": [
+       2141069,
+       2149234
+      ]
+     },
+     "hi": {
+      "root_rung": "llm",
+      "root_sense_id": 2173883,
+      "pivoted": 0,
+      "words": [
+       "शांति",
+       "सुकून"
+      ],
+      "sense_ids": [
+       2173883,
+       2185057
+      ]
+     },
+     "sa": {
+      "root_rung": "llm",
+      "root_sense_id": 2217222,
+      "pivoted": 0,
+      "words": [
+       "शान्ति",
+       "निरामय"
+      ],
+      "sense_ids": [
+       2217222,
+       2230283
+      ]
+     },
+     "he": {
+      "root_rung": "primary",
+      "root_sense_id": 2242671,
+      "pivoted": 0,
+      "words": [
+       "רוגע",
+       "דממה"
+      ],
+      "sense_ids": [
+       2242671,
+       2242669
+      ]
+     },
+     "fa": {
+      "root_rung": "llm",
+      "root_sense_id": 2253745,
+      "pivoted": 0,
+      "words": [
+       "آرامش",
+       "راحتی"
+      ],
+      "sense_ids": [
+       2253745,
+       2272823
+      ]
+     },
+     "de": {
+      "root_rung": "ili",
+      "root_sense_id": 2329086,
+      "pivoted": 0,
+      "words": [
+       "Gelassenheit",
+       "Besonnenheit"
+      ],
+      "sense_ids": [
+       2329086,
+       2335442
+      ]
+     },
+     "pl": {
+      "root_rung": "primary",
+      "root_sense_id": 2411501,
+      "pivoted": 0,
+      "words": [
+       "spokój",
+       "spokojny"
+      ],
+      "sense_ids": [
+       2411501,
+       2420165
+      ]
+     },
+     "es": {
+      "root_rung": "corroborated",
+      "root_sense_id": 2559860,
+      "pivoted": 0,
+      "words": [
+       "calma",
+       "serenidad"
+      ],
+      "sense_ids": [
+       2559860,
+       2595705
+      ]
+     },
+     "zh": {
+      "root_rung": "fallback",
+      "root_sense_id": 2696502,
+      "pivoted": 0,
+      "words": [
+       "和平",
+       "靜寂"
+      ],
+      "sense_ids": [
+       2696502,
+       2749240
+      ]
+     },
+     "ko": {
+      "root_rung": "llm",
+      "root_sense_id": 2894630,
+      "pivoted": 0,
+      "words": [
+       "안정",
+       "내리"
+      ],
+      "sense_ids": [
+       2894630,
+       2917584
+      ]
+     },
+     "ang": {
+      "root_rung": null,
+      "root_sense_id": null,
+      "pivoted": 0,
+      "words": [],
+      "sense_ids": []
+     },
+     "el": {
+      "root_rung": "primary",
+      "root_sense_id": 2965203,
+      "pivoted": 0,
+      "words": [
+       "ηρεμία",
+       "νηνεμία"
+      ],
+      "sense_ids": [
+       2965203,
+       2994742
+      ]
+     },
+     "cy": {
+      "root_rung": "llm",
+      "root_sense_id": 3007437,
+      "pivoted": 0,
+      "words": [
+       "llonyddwch",
+       "harddwch"
+      ],
+      "sense_ids": [
+       3007437,
+       3016774
+      ]
+     },
+     "sw": {
+      "root_rung": "llm",
+      "root_sense_id": 3036635,
+      "pivoted": 0,
+      "words": [
+       "shwari",
+       "msala"
+      ],
+      "sense_ids": [
+       3036635,
+       3035723
+      ]
+     },
+     "non": {
+      "root_rung": "llm",
+      "root_sense_id": 3044362,
+      "pivoted": 0,
+      "words": [
+       "friðr",
+       "friðgerð"
+      ],
+      "sense_ids": [
+       3044362,
+       3049522
+      ]
+     },
+     "is": {
+      "root_rung": "llm",
+      "root_sense_id": 3050045,
+      "pivoted": 0,
+      "words": [
+       "ró",
+       "kyrrlæti"
+      ],
+      "sense_ids": [
+       3050045,
+       3065391
+      ]
+     }
+    },
+    "interleaved": [
+     "en:calm",
+     "ar:هدوء",
+     "ja:平静",
+     "ru:спокойствие",
+     "la:tranquillitas",
+     "ga:ciúnas",
+     "hi:शांति",
+     "sa:शान्ति",
+     "he:רוגע",
+     "fa:آرامش",
+     "de:Gelassenheit",
+     "pl:spokój",
+     "es:calma",
+     "zh:和平",
+     "ko:안정",
+     "el:ηρεμία",
+     "cy:llonyddwch",
+     "sw:shwari",
+     "non:friðr",
+     "is:ró",
+     "en:calmness",
+     "ar:سكون",
+     "ja:静謐",
+     "ru:байховый",
+     "la:serenitas",
+     "ga:ciúine",
+     "hi:सुकून",
+     "sa:निरामय",
+     "he:דממה",
+     "fa:راحتی",
+     "de:Besonnenheit",
+     "pl:spokojny",
+     "es:serenidad",
+     "zh:靜寂",
+     "ko:내리",
+     "el:νηνεμία",
+     "cy:harddwch",
+     "sw:msala",
+     "non:friðgerð",
+     "is:kyrrlæti"
+    ]
+   }
+  }
+ }
+}

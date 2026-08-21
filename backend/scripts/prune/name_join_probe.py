@@ -42,7 +42,9 @@ from app.models.generated_name import Language       # noqa: E402
 from app.models.semantic import Lexeme, Sense        # noqa: E402
 from app.utils.text import normalize_lemma           # noqa: E402
 from scripts.prune.name_inventory_probe import (     # noqa: E402
+    NAME_TYPE_CHOICES,
     classify_name_type,
+    expand_type_arg,
     shipping_types,
 )
 from scripts.prune.name_meaning_probe import (       # noqa: E402
@@ -77,8 +79,12 @@ def content_tokens(text: str) -> list[str]:
     ]
 
 
-def best_meaning(gloss: str, etym: str) -> tuple[str | None, str]:
-    """N2's waterfall, minus the homograph channel (which carries no text)."""
+def best_meaning(gloss: str, etym: str, lang_code: str) -> tuple[str | None, str]:
+    """
+    N2's waterfall, minus the homograph channel (which carries no text).
+    lang_code is required as of Stage 1c: the repaired ETYM_QUOTED gates
+    ja/zh off, so the channel is language-dependent.
+    """
     v = extract_gloss_meaning(gloss)
     if v:
         return v, "GLOSS_MEANING"
@@ -88,7 +94,7 @@ def best_meaning(gloss: str, etym: str) -> tuple[str | None, str]:
     v = extract_etym_marker(etym)
     if v:
         return v, "ETYM_MARKER"
-    v = extract_etym_quoted(etym)
+    v = extract_etym_quoted(etym, lang_code)
     if v:
         return v, "ETYM_QUOTED"
     return None, "NONE"
@@ -150,7 +156,7 @@ def run_language(db, lang_id: int, code: str, en_lemmas: set[str],
         if lex.normalized_lemma in shadow:
             shadow_hits[lex.lemma] += 1
 
-        meaning, _channel = best_meaning(gloss, sense.etymology_text or "")
+        meaning, _channel = best_meaning(gloss, sense.etymology_text or "", code)
         if meaning is None:
             tok_hist[0] += 1
             continue
@@ -212,13 +218,13 @@ def main() -> None:
     ap.add_argument("--examples", type=int, default=10)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument(
-        "--name-type", choices=("given", "surname", "all"), default="given",
-        help="'all' runs GIVEN and SURNAME as two fully separate report "
-             "passes, each with its own cross-language overlap section.",
+        "--name-type", choices=NAME_TYPE_CHOICES, default="given",
+        help="'all' runs GIVEN, SURNAME and PATRONYMIC as fully separate "
+             "report passes per language -- never combined into one count.",
     )
     args = ap.parse_args()
 
-    type_args = ("given", "surname") if args.name_type == "all" else (args.name_type,)
+    type_args = expand_type_arg(args.name_type)
 
     with SessionLocal() as db:
         en_lemmas = english_lemma_set(db)

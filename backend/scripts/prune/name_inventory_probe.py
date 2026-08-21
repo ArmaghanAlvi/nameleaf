@@ -161,22 +161,49 @@ def both_given_and_surname(gloss: str) -> bool:
     return bool(_RX["given"].search(g)) and bool(_RX["surname"].search(g))
 
 
+SHIPPING_BUCKETS: tuple[str, ...] = ("GIVEN", "SURNAME", "PATRONYMIC")
+
+_TYPE_ARG_TO_BUCKET: dict[str, tuple[str, ...]] = {
+    "given": ("GIVEN",),
+    "surname": ("SURNAME",),
+    "patronymic": ("PATRONYMIC",),
+}
+
+# CLI choices every type-aware probe should use, so a new type is added in
+# exactly one place.
+NAME_TYPE_CHOICES: tuple[str, ...] = ("given", "surname", "patronymic", "all")
+
+
 def shipping_types(name_type_arg: str) -> tuple[str, ...]:
     """
     Resolve a --name-type CLI value to the classify_name_type() bucket(s) it
-    selects. 'all' is NOT 'GIVEN+SURNAME combined' here — callers that accept
-    'all' are expected to loop over ('GIVEN',) and ('SURNAME',) SEPARATELY,
-    never union them, so the two populations are never blended in one report.
-    This helper exists so every probe resolves the flag identically.
+    selects. 'all' is NOT accepted here and never means "combined": callers
+    that accept 'all' must loop over expand_type_arg() and keep the reports
+    SEPARATE, so the populations are never blended in one count.
+
+    PATRONYMIC added in Stage 1d. Every probe before that silently excluded
+    is (71), la (27) and ru (27) -- real populations that no census had seen.
     """
-    if name_type_arg == "given":
-        return ("GIVEN",)
-    if name_type_arg == "surname":
-        return ("SURNAME",)
-    raise ValueError(
-        f"shipping_types() takes 'given' or 'surname' only, got {name_type_arg!r}. "
-        "For 'all', call this once per type and keep the reports separate."
-    )
+    try:
+        return _TYPE_ARG_TO_BUCKET[name_type_arg]
+    except KeyError:
+        raise ValueError(
+            f"shipping_types() takes one of "
+            f"{sorted(_TYPE_ARG_TO_BUCKET)}, got {name_type_arg!r}. "
+            "For 'all', call expand_type_arg() and keep the reports separate."
+        ) from None
+
+
+def expand_type_arg(name_type_arg: str) -> tuple[str, ...]:
+    """
+    Expand a --name-type CLI value into the SEQUENCE of single-type args a
+    caller should loop over. 'all' now includes patronymic; that is a
+    deliberate behaviour change, since 'all' previously meant
+    'given + surname' and quietly dropped a third real population.
+    """
+    if name_type_arg == "all":
+        return ("given", "surname", "patronymic")
+    return (name_type_arg,)
 
 
 # ---------------------------------------------------------------------------
@@ -193,15 +220,18 @@ def run_language(db, lang_id: int, code: str, cap: int, limit: int | None):
 
     buckets: Counter = Counter()
     samples: dict[str, list] = {b: [] for b in BUCKETS}
-    gender: Counter = Counter()
-    flags: Counter = Counter()
     cat_shapes: Counter = Counter()
     tag_shapes: Counter = Counter()
     unmatched_prefixes: Counter = Counter()
 
-    keep_lexemes: set[int] = set()      # GIVEN + SURNAME lexeme ids
-    keep_lemmas: set[str] = set()
-    romanized: set[int] = set()
+    # Per-bucket, never blended: GIVEN, SURNAME and PATRONYMIC have different
+    # gender profiles by construction, and one averaged triple over all three
+    # would be uninterpretable.
+    gender: dict[str, Counter] = {b: Counter() for b in SHIPPING_BUCKETS}
+    flags: dict[str, Counter] = {b: Counter() for b in SHIPPING_BUCKETS}
+    keep_lexemes: dict[str, set[int]] = {b: set() for b in SHIPPING_BUCKETS}
+    keep_lemmas: dict[str, set[str]] = {b: set() for b in SHIPPING_BUCKETS}
+    romanized: dict[str, set[int]] = {b: set() for b in SHIPPING_BUCKETS}
     seen_lexemes: set[int] = set()
 
     stmt = (
@@ -236,18 +266,18 @@ def run_language(db, lang_id: int, code: str, cap: int, limit: int | None):
         for t in tags[:6]:
             tag_shapes[str(t)[:40]] += 1
 
-        if b in ("GIVEN", "SURNAME"):
-            keep_lexemes.add(lex.id)
-            keep_lemmas.add(lex.normalized_lemma)
-            gender[gender_of(gloss, tags)] += 1
+        if b in SHIPPING_BUCKETS:
+            keep_lexemes[b].add(lex.id)
+            keep_lemmas[b].add(lex.normalized_lemma)
+            gender[b][gender_of(gloss, tags)] += 1
             if is_diminutive(gloss):
-                flags["diminutive"] += 1
+                flags[b]["diminutive"] += 1
             if both_given_and_surname(gloss):
-                flags["given+surname"] += 1
+                flags[b]["given+surname"] += 1
             if " " in (lex.lemma or ""):
-                flags["multiword"] += 1
+                flags[b]["multiword"] += 1
             if getattr(lex, "romanization", None):
-                romanized.add(lex.id)
+                romanized[b].add(lex.id)
         elif b == "OTHER":
             low = gloss.lower()
             if low.startswith(("a ", "an ", "the ")):
@@ -267,18 +297,24 @@ def run_language(db, lang_id: int, code: str, cap: int, limit: int | None):
         for lemma, g in samples[b]:
             print(f"      {lemma!r}: {g}")
     print()
-    keep_senses = buckets["GIVEN"] + buckets["SURNAME"]
-    print(f"--- SHIPPING SET (GIVEN + SURNAME) ---")
-    print(f"  senses ......................... {keep_senses} ({pct(keep_senses)})")
-    print(f"  distinct lexemes ............... {len(keep_lexemes)}")
-    print(f"  distinct normalized lemmas ..... {len(keep_lemmas)}")
-    print(f"  gender m/f/u ................... "
-          f"{gender['m']} / {gender['f']} / {gender['u']}")
-    for k, v in flags.most_common():
-        print(f"  flag {k:<22} {v}")
-    if non_latin:
-        print(f"  romanization present ........... {len(romanized)} "
-              f"({pct(len(romanized), len(keep_lexemes))} of kept lexemes)")
+    for b in SHIPPING_BUCKETS:
+        if not buckets[b]:
+            print(f"--- SHIPPING SET [{b}] --- (none)")
+            continue
+        print(f"--- SHIPPING SET [{b}] ---")
+        print(f"  senses ......................... {buckets[b]} "
+              f"({pct(buckets[b])})")
+        print(f"  distinct lexemes ............... {len(keep_lexemes[b])}")
+        print(f"  distinct normalized lemmas ..... {len(keep_lemmas[b])}")
+        print(f"  gender m/f/x/u ................. "
+              f"{gender[b]['m']} / {gender[b]['f']} / "
+              f"{gender[b]['x']} / {gender[b]['u']}")
+        for k, v in flags[b].most_common():
+            print(f"  flag {k:<22} {v}")
+        if non_latin:
+            print(f"  romanization present ........... {len(romanized[b])} "
+                  f"({pct(len(romanized[b]), len(keep_lexemes[b]))} "
+                  f"of kept lexemes)")
     print()
     print("--- top raw `categories` values on name senses (shape discovery) ---")
     for c, k in cat_shapes.most_common(12):
