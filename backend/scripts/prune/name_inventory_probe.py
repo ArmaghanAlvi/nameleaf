@@ -32,178 +32,22 @@ from app.models.semantic import Lexeme, Sense        # noqa: E402
 from app.utils.languages import LANGUAGE_SCRIPTS     # noqa: E402
 
 # ---------------------------------------------------------------------------
-# Category-level predicates. Deliberately reuse the vocabulary already proven
-# in name_gloss_probe.py so the two censuses stay comparable.
+# MOVED to app/services/established_names.py (Breakdown B, Step 5). The rules
+# below are re-exported, not reimplemented: the shipped classifier and this
+# census must be the SAME code or the published N1 numbers stop describing
+# what shipped. Behaviour is unchanged -- this was a cut-and-paste move.
 # ---------------------------------------------------------------------------
-
-_PLACE_WORDS = (
-    "city|town|village|hamlet|river|mountain|lake|island|state|province|"
-    "country|county|region|district|commune|municipality|borough|suburb|"
-    "neighborhood|neighbourhood|census-designated place|unincorporated|"
-    "placename|place name|place-name|locality|locale|civil parish|parish|"
-    "prefecture|ward|settlement|community|ghost town|local government area"
+from app.services.established_names import (           # noqa: E402,F401
+    BUCKETS,
+    NAME_TYPE_CHOICES,
+    SHIPPING_BUCKETS,
+    both_given_and_surname,
+    classify_name_type,
+    expand_type_arg,
+    gender_of,
+    is_diminutive,
+    shipping_types,
 )
-
-_RX = {
-    "form_of": re.compile(
-        r"^(?:nominative|genitive|dative|accusative|ablative|vocative|"
-        r"locative|instrumental|oblique)\b.{0,40}\bof\b"
-        r"|^(?:alternative|variant|obsolete|archaic) (?:form|spelling) of\b"
-        r"|\b(?:singular|plural|definite|indefinite) of\b"
-        r"|^(?:inflection|romanization|transliteration) of\b",
-        re.IGNORECASE,
-    ),
-    "given": re.compile(
-        r"\bgiven name\b|\bfirst name\b|\bforename\b"
-        r"|^an? (?:male|female|unisex|masculine|feminine) name\b",
-        re.IGNORECASE,
-    ),
-    "surname": re.compile(
-        r"\bsurname\b|\bfamily name\b|\blast name\b", re.IGNORECASE,
-    ),
-    "patronymic": re.compile(r"\b(?:patronymic|matronymic)\b", re.IGNORECASE),
-    "place": re.compile(
-        rf"^an? (?:[a-z-]+ ){{0,3}}(?:{_PLACE_WORDS})\b"
-        rf"|^an? place (?:in|of)\b"
-        rf"|^a number of places\b"
-        rf"|^the capital (?:city )?of\b"
-        rf"|\((?:a|an|the) (?:{_PLACE_WORDS})\b",
-        re.IGNORECASE,
-    ),
-    "diminutive": re.compile(
-        r"\b(?:diminutive|pet form|short form|hypocorism|hypocoristic"
-        r"|nickname)\b",
-        re.IGNORECASE,
-    ),
-    # Gender is read from the HEAD PHRASE only. A loose \bfemale\b scan is
-    # wrong on the systematic de/es shape "a male given name, feminine
-    # equivalent Daniela" — both words are present and the loose reading
-    # collapses it to unknown.
-    "female_head": re.compile(
-        r"\b(?:female|feminine)\s+(?:\w+\s+){0,2}?(?:given\s+)?name\b",
-        re.IGNORECASE,
-    ),
-    "male_head": re.compile(
-        r"\b(?:male|masculine)\s+(?:\w+\s+){0,2}?(?:given\s+)?name\b",
-        re.IGNORECASE,
-    ),
-    "unisex_head": re.compile(
-        r"\b(?:unisex|epicene)\s+(?:\w+\s+){0,2}?(?:given\s+)?name\b",
-        re.IGNORECASE,
-    ),
-}
-
-BUCKETS = ("FORM_OF", "GIVEN", "SURNAME", "PATRONYMIC", "PLACE", "OTHER")
-
-
-def classify_name_type(gloss: str, tags: list[str] | None = None) -> str:
-    """
-    Bucket ONE name sense. Priority order is deliberate:
-
-      FORM_OF first  — an inflected/variant citation is not a name row at all,
-                       regardless of what it inflects.
-      GIVEN, SURNAME — the two shipping buckets; GIVEN wins a tie because
-                       "a surname, also a given name" should surface as a
-                       given name with the surname flag, not the reverse.
-      PATRONYMIC     — only when neither of the above fired, so
-                       "a surname, patronymic of X" stays SURNAME.
-      PLACE          — toponyms; measured so they can be excluded knowingly.
-      OTHER          — deities, organisations, brands, taxonomy, everything
-                       else. Expected to be large; that is the point.
-    """
-    g = (gloss or "").strip()
-    tagset = {str(t).strip().lower() for t in (tags or [])}
-    if not g:
-        return "OTHER"
-    if tagset & {"form-of", "alt-of", "alternative"} or _RX["form_of"].search(g):
-        return "FORM_OF"
-    if _RX["given"].search(g):
-        return "GIVEN"
-    if _RX["surname"].search(g):
-        return "SURNAME"
-    if _RX["patronymic"].search(g):
-        return "PATRONYMIC"
-    if _RX["place"].search(g):
-        return "PLACE"
-    return "OTHER"
-
-
-def gender_of(gloss: str, tags: list[str] | None = None) -> str:
-    """
-    m / f / x (unisex) / u (unknown). Read from the head phrase, and from the
-    FIRST such phrase only — "a male given name, feminine equivalent Daniela"
-    is a male name, not an ambiguous one.
-    """
-    tagset = {str(t).strip().lower() for t in (tags or [])}
-    if "feminine" in tagset or "female" in tagset:
-        return "f"
-    if "masculine" in tagset or "male" in tagset:
-        return "m"
-    g = gloss or ""
-    hits = []
-    for label, key in (("f", "female_head"), ("m", "male_head"),
-                       ("x", "unisex_head")):
-        mt = _RX[key].search(g)
-        if mt:
-            hits.append((mt.start(), label))
-    if not hits:
-        return "u"
-    hits.sort()
-    return hits[0][1]
-
-
-def is_diminutive(gloss: str) -> bool:
-    return bool(_RX["diminutive"].search(gloss or ""))
-
-
-def both_given_and_surname(gloss: str) -> bool:
-    g = gloss or ""
-    return bool(_RX["given"].search(g)) and bool(_RX["surname"].search(g))
-
-
-SHIPPING_BUCKETS: tuple[str, ...] = ("GIVEN", "SURNAME", "PATRONYMIC")
-
-_TYPE_ARG_TO_BUCKET: dict[str, tuple[str, ...]] = {
-    "given": ("GIVEN",),
-    "surname": ("SURNAME",),
-    "patronymic": ("PATRONYMIC",),
-}
-
-# CLI choices every type-aware probe should use, so a new type is added in
-# exactly one place.
-NAME_TYPE_CHOICES: tuple[str, ...] = ("given", "surname", "patronymic", "all")
-
-
-def shipping_types(name_type_arg: str) -> tuple[str, ...]:
-    """
-    Resolve a --name-type CLI value to the classify_name_type() bucket(s) it
-    selects. 'all' is NOT accepted here and never means "combined": callers
-    that accept 'all' must loop over expand_type_arg() and keep the reports
-    SEPARATE, so the populations are never blended in one count.
-
-    PATRONYMIC added in Stage 1d. Every probe before that silently excluded
-    is (71), la (27) and ru (27) -- real populations that no census had seen.
-    """
-    try:
-        return _TYPE_ARG_TO_BUCKET[name_type_arg]
-    except KeyError:
-        raise ValueError(
-            f"shipping_types() takes one of "
-            f"{sorted(_TYPE_ARG_TO_BUCKET)}, got {name_type_arg!r}. "
-            "For 'all', call expand_type_arg() and keep the reports separate."
-        ) from None
-
-
-def expand_type_arg(name_type_arg: str) -> tuple[str, ...]:
-    """
-    Expand a --name-type CLI value into the SEQUENCE of single-type args a
-    caller should loop over. 'all' now includes patronymic; that is a
-    deliberate behaviour change, since 'all' previously meant
-    'given + surname' and quietly dropped a third real population.
-    """
-    if name_type_arg == "all":
-        return ("given", "surname", "patronymic")
-    return (name_type_arg,)
 
 
 # ---------------------------------------------------------------------------

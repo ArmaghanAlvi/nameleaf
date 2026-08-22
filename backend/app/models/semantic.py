@@ -77,10 +77,6 @@ class Source(Base):
         back_populates="source",
     )
 
-    established_names: Mapped[list["EstablishedName"]] = relationship(
-        back_populates="source",
-    )
-
     concept_relationships: Mapped[list["ConceptRelationship"]] = relationship(
         back_populates="source",
     )
@@ -210,10 +206,6 @@ class Concept(Base):
     )
 
     word_senses: Mapped[list["WordSense"]] = relationship(
-        back_populates="concept",
-    )
-
-    name_meanings: Mapped[list["NameMeaning"]] = relationship(
         back_populates="concept",
     )
 
@@ -1408,106 +1400,310 @@ class RootLlmAttempt(Base):
     )
 
 
-# Green-card models
+# ---------------------------------------------------------------------------
+# Green cards -- established (attested) names.
+#
+# These four tables REPLACE the dead curated EstablishedName/NameMeaning/
+# NameRelationship trio (original DDL 847e777b2da9). That pipeline hung off
+# `Concept` and required per-item review; this one hangs off the live
+# Lexeme/Sense world and is derived entirely from category-level predicates,
+# so it satisfies the zero-review constraint.
+#
+# EVERY ROW HERE IS DERIVED. There is no user or curator data in these
+# tables, which is what makes the delete-and-rebuild population strategy in
+# scripts/populate_established_names.py safe.
+# ---------------------------------------------------------------------------
+
+NAME_TYPES: tuple[str, ...] = ("given", "surname", "patronymic")
+NAME_GENDERS: tuple[str, ...] = ("m", "f", "x", "u")
+
+# Stage 3 writes only the first three. HOMOGRAPH and EQUIV_PROPAGATED are
+# Stage 6's inheritance channels; they are admitted by the CHECK now so
+# Stage 6 needs no second migration.
+MEANING_CHANNELS: tuple[str, ...] = (
+    "GLOSS_MEANING", "ETYM_MARKER", "ETYM_QUOTED",
+    "HOMOGRAPH", "EQUIV_PROPAGATED",
+)
+
+NAME_EDGE_RELATIONS: tuple[str, ...] = (
+    "VARIANT_OF", "DIMINUTIVE_OF", "FEM_EQUIV", "MASC_EQUIV", "EQUIV_EN",
+)
+
+
+def _sql_in(column: str, values: tuple[str, ...]) -> str:
+    joined = ", ".join(f"'{v}'" for v in values)
+    return f"{column} IN ({joined})"
+
+
 class EstablishedName(Base):
+    """
+    One attested name, at the grain (language, normalized_lemma, name_type).
+
+    NOT one row per sense. A lemma routinely carries several name senses in
+    one language ("a male given name" / "a male given name, variant of X"),
+    and shipping one card per sense would show the user the same name three
+    times. `source_sense_id` points at the sense that WON the meaning
+    waterfall, so provenance stays exact even though the grain is collapsed.
+
+    Classification is per SENSE, so a lemma with a given-name sense AND a
+    separate surname sense produces TWO rows, one per type -- which is what
+    Stage 5e's "two graphs, never unioned" requires, and what makes the row
+    count directly comparable to N1's per-bucket distinct-lemma figures.
+    `is_also_surname` records the WITHIN-sense overlap only ("a surname,
+    also a given name", 1,374 senses in en), where type selection is
+    exclusive and GIVEN wins.
+    """
+
     __tablename__ = "established_names"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
     language_id: Mapped[int] = mapped_column(
-        ForeignKey("languages.id"),
-        nullable=False,
+        ForeignKey("languages.id"), nullable=False
     )
 
-    name: Mapped[str] = mapped_column(String(200), nullable=False)
-    native_script: Mapped[str | None] = mapped_column(String(200))
-    transliteration: Mapped[str | None] = mapped_column(String(200))
-    notes: Mapped[str | None] = mapped_column(Text)
-    source_id: Mapped[int | None] = mapped_column(ForeignKey("sources.id"))
+    lemma: Mapped[str] = mapped_column(String(300), nullable=False)
+    normalized_lemma: Mapped[str] = mapped_column(String(300), nullable=False)
 
-    language: Mapped["Language"] = relationship(
-        back_populates="established_names",
+    # Copied from Lexeme.romanization (Phase D), NOT re-derived. Copying is
+    # what guarantees the green card and the yellow card show the SAME
+    # romanization for the same lemma -- which the Stage 7c gradient merge
+    # renders side by side.
+    romanization: Mapped[str | None] = mapped_column(String(400), nullable=True)
+
+    name_type: Mapped[str] = mapped_column(String(12), nullable=False)
+    gender: Mapped[str] = mapped_column(String(1), nullable=False, default="u")
+    is_also_surname: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False
     )
 
-    source: Mapped["Source | None"] = relationship(
-        back_populates="established_names",
+    source_lexeme_id: Mapped[int] = mapped_column(
+        ForeignKey("lexemes.id", ondelete="CASCADE"), nullable=False
+    )
+    source_sense_id: Mapped[int] = mapped_column(
+        ForeignKey("senses.id", ondelete="CASCADE"), nullable=False
     )
 
-    meanings: Mapped[list["NameMeaning"]] = relationship(
-        back_populates="established_name",
+    meaning_text: Mapped[str | None] = mapped_column(Text, nullable=True)
+    meaning_channel: Mapped[str | None] = mapped_column(
+        String(20), nullable=True
+    )
+
+    # GLOSS_EQUIV_EN is an EQUIVALENCE, not a meaning, so it gets its own
+    # column and never occupies meaning_text. Kept ORTHOGONAL to the
+    # waterfall rather than sitting inside it: a name whose gloss says
+    # "equivalent to English John" AND whose etymology carries a real quoted
+    # gloss should keep both facts, not lose the gloss to the higher-priority
+    # equivalence. Stage 5a reads this to build EQUIV_EN edges; Stage 6b
+    # reads it to propagate a meaning in.
+    equiv_en_target: Mapped[str | None] = mapped_column(
+        String(120), nullable=True
+    )
+
+    # Mechanism 2, in one column: the same-language non-name lexeme this name
+    # is spelled identically to. A real FK, deliberately -- it is what lets
+    # the card inherit that word's sense, embedding and expansion behaviour
+    # instead of copying a string.
+    homograph_lexeme_id: Mapped[int | None] = mapped_column(
+        ForeignKey("lexemes.id", ondelete="SET NULL"), nullable=True
+    )
+
+    cluster_id: Mapped[int | None] = mapped_column(
+        ForeignKey("established_name_clusters.id", ondelete="SET NULL"),
+        nullable=True,
+    )
+
+    popularity_rank: Mapped[int | None] = mapped_column(Integer, nullable=True)
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+    language: Mapped["Language"] = relationship()
+    source_lexeme: Mapped["Lexeme"] = relationship(
+        foreign_keys=[source_lexeme_id]
+    )
+    source_sense: Mapped["Sense"] = relationship()
+    homograph_lexeme: Mapped["Lexeme | None"] = relationship(
+        foreign_keys=[homograph_lexeme_id]
+    )
+    cluster: Mapped["EstablishedNameCluster | None"] = relationship(
+        foreign_keys=[cluster_id]
+    )
+
+    tokens: Mapped[list["EstablishedNameToken"]] = relationship(
+        back_populates="name",
         cascade="all, delete-orphan",
+        passive_deletes=True,
     )
 
-    outgoing_relationships: Mapped[list["NameRelationship"]] = relationship(
-        foreign_keys="NameRelationship.source_name_id",
-        back_populates="source_name",
-        cascade="all, delete-orphan",
+    __table_args__ = (
+        # Also serves Stage 7c's (language_id, normalized_lemma) lookup:
+        # a btree index on (a, b, c) answers a prefix query on (a, b), so no
+        # second index is created for it.
+        UniqueConstraint(
+            "language_id", "normalized_lemma", "name_type",
+            name="uq_established_names_key",
+        ),
+        Index("ix_established_names_homograph", "homograph_lexeme_id"),
+        Index("ix_established_names_cluster", "cluster_id"),
+        Index("ix_established_names_source_lexeme", "source_lexeme_id"),
+        CheckConstraint(
+            _sql_in("name_type", NAME_TYPES),
+            name="ck_established_names_name_type",
+        ),
+        CheckConstraint(
+            _sql_in("gender", NAME_GENDERS),
+            name="ck_established_names_gender",
+        ),
+        CheckConstraint(
+            f"meaning_channel IS NULL OR "
+            f"{_sql_in('meaning_channel', MEANING_CHANNELS)}",
+            name="ck_established_names_meaning_channel",
+        ),
+        # Blank-over-wrong, enforced in the schema: a meaning without a
+        # recorded provenance channel cannot be labelled honestly in Stage
+        # 6c, and a channel without text is a claim with nothing behind it.
+        CheckConstraint(
+            "(meaning_text IS NULL AND meaning_channel IS NULL) OR "
+            "(meaning_text IS NOT NULL AND meaning_channel IS NOT NULL)",
+            name="ck_established_names_meaning_pair",
+        ),
     )
 
-    incoming_relationships: Mapped[list["NameRelationship"]] = relationship(
-        foreign_keys="NameRelationship.target_name_id",
-        back_populates="target_name",
-    )
 
+class EstablishedNameToken(Base):
+    """
+    Materialized mechanism-1 join surface: one row per content token of a
+    name's meaning_text.
 
-class NameMeaning(Base):
-    __tablename__ = "name_meanings"
+    `token` is the JOIN KEY and is stored as normalize_lemma(tok, "en") --
+    the same canonical key Lexeme.normalized_lemma uses -- because Stage 7b
+    joins yellow-card English lemmas against it directly.
+
+    `token_lexeme_id` is a RESOLVABILITY witness, not the join key. It is
+    deliberately not load-bearing: a token like "light" is a noun, a verb and
+    an adjective lexeme in English, and a yellow card may surface any of
+    them, so pinning one lexeme id would silently drop the other two.
+    """
+
+    __tablename__ = "established_name_tokens"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
     established_name_id: Mapped[int] = mapped_column(
-        ForeignKey("established_names.id", ondelete="CASCADE"),
-        nullable=False,
+        ForeignKey("established_names.id", ondelete="CASCADE"), nullable=False
+    )
+    token: Mapped[str] = mapped_column(String(80), nullable=False)
+    token_lexeme_id: Mapped[int | None] = mapped_column(
+        ForeignKey("lexemes.id", ondelete="SET NULL"), nullable=True
     )
 
-    concept_id: Mapped[int] = mapped_column(
-        ForeignKey("concepts.id", ondelete="CASCADE"),
-        nullable=False,
-    )
+    name: Mapped["EstablishedName"] = relationship(back_populates="tokens")
 
-    explanation: Mapped[str] = mapped_column(Text, nullable=False)
-    native_form: Mapped[str | None] = mapped_column(String(200))
-    is_primary: Mapped[bool] = mapped_column(default=True, nullable=False)
-
-    established_name: Mapped["EstablishedName"] = relationship(
-        back_populates="meanings",
-    )
-
-    concept: Mapped["Concept"] = relationship(
-        back_populates="name_meanings",
+    __table_args__ = (
+        UniqueConstraint(
+            "established_name_id", "token",
+            name="uq_established_name_tokens_pair",
+        ),
+        Index("ix_established_name_tokens_token", "token"),
+        Index("ix_established_name_tokens_lexeme", "token_lexeme_id"),
     )
 
 
-class NameRelationship(Base):
-    __tablename__ = "name_relationships"
+class EstablishedNameEdge(Base):
+    """
+    Variant / equivalence edge between two names. Populated in Stage 5a;
+    created here so the whole green-card skeleton lands in one migration.
+
+    Relation types stay DISTINCT and are never collapsed: Stage 5b's chosen
+    containment fix treats cross-language EQUIV_EN as a non-transitive leaf
+    while DIMINUTIVE_OF chains freely, which is only expressible if the
+    relation survives to the row.
+    """
+
+    __tablename__ = "established_name_edges"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
     source_name_id: Mapped[int] = mapped_column(
-        ForeignKey("established_names.id", ondelete="CASCADE"),
-        nullable=False,
+        ForeignKey("established_names.id", ondelete="CASCADE"), nullable=False
     )
-
     target_name_id: Mapped[int] = mapped_column(
-        ForeignKey("established_names.id", ondelete="CASCADE"),
-        nullable=False,
+        ForeignKey("established_names.id", ondelete="CASCADE"), nullable=False
     )
-
-    relationship_type: Mapped[str] = mapped_column(
-        String(50),
-        nullable=False,
-    )
-
-    notes: Mapped[str | None] = mapped_column(Text)
+    relation_type: Mapped[str] = mapped_column(String(20), nullable=False)
+    is_cross_language: Mapped[bool] = mapped_column(Boolean, nullable=False)
 
     source_name: Mapped["EstablishedName"] = relationship(
-        foreign_keys=[source_name_id],
-        back_populates="outgoing_relationships",
+        foreign_keys=[source_name_id]
+    )
+    target_name: Mapped["EstablishedName"] = relationship(
+        foreign_keys=[target_name_id]
     )
 
-    target_name: Mapped["EstablishedName"] = relationship(
-        foreign_keys=[target_name_id],
-        back_populates="incoming_relationships",
+    __table_args__ = (
+        UniqueConstraint(
+            "source_name_id", "target_name_id", "relation_type",
+            name="uq_established_name_edges_edge",
+        ),
+        Index("ix_established_name_edges_target", "target_name_id"),
+        Index("ix_established_name_edges_relation", "relation_type"),
+        CheckConstraint(
+            _sql_in("relation_type", NAME_EDGE_RELATIONS),
+            name="ck_established_name_edges_relation_type",
+        ),
+        CheckConstraint(
+            "source_name_id <> target_name_id",
+            name="ck_established_name_edges_no_self_loop",
+        ),
+    )
+
+
+class EstablishedNameCluster(Base):
+    """
+    Materialized connected component over established_name_edges. Populated
+    in Stage 5c; empty until then.
+
+    `name_type` is on the cluster, not just on its members, because Stage 5e
+    keeps the given-name and surname graphs as two graphs that are never
+    unioned -- and Stage 10c's component-size ceiling (55-65 nodes) has to be
+    checkable per type.
+
+    `head_name_id` carries use_alter=True: established_names.cluster_id points
+    here and this points back, so one of the two FKs must be added after both
+    tables exist.
+    """
+
+    __tablename__ = "established_name_clusters"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    name_type: Mapped[str] = mapped_column(String(12), nullable=False)
+    head_name_id: Mapped[int | None] = mapped_column(
+        ForeignKey(
+            "established_names.id",
+            ondelete="SET NULL",
+            use_alter=True,
+            name="fk_established_name_clusters_head",
+        ),
+        nullable=True,
+    )
+    size: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    is_cross_language_merged: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False
+    )
+
+    head_name: Mapped["EstablishedName | None"] = relationship(
+        foreign_keys=[head_name_id]
+    )
+
+    __table_args__ = (
+        Index("ix_established_name_clusters_type", "name_type"),
+        CheckConstraint(
+            _sql_in("name_type", NAME_TYPES),
+            name="ck_established_name_clusters_name_type",
+        ),
     )
 
 

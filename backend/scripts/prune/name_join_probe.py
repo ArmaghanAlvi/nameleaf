@@ -55,28 +55,15 @@ from scripts.prune.name_meaning_probe import (       # noqa: E402
     visible_non_name_lemmas,
 )
 
-# Function words plus the boilerplate vocabulary of name glosses/etymologies.
-# Not a linguistic stoplist: these are the tokens that, if left in, join to
-# everything and make the flood report unreadable.
-STOP = frozenset("""
-a an the of and or to in from for with by on at as is are was were be been
-this that these those it its his her their our your my he she they we you i
-also see used use using such more most very not no
-name names given surname surnames family first last male female masculine
-feminine unisex form forms variant variants spelling diminutive short pet
-equivalent english meaning literally lit means derived derivative cognate
-son daughter child born place city town river god goddess mythology saint
-one two three ancient modern old new common word words letter
-""".split())
-
-TOKEN_RX = re.compile(r"[^\W\d_]+", re.UNICODE)
-
-
-def content_tokens(text: str) -> list[str]:
-    return [
-        t for t in (m.group(0).lower() for m in TOKEN_RX.finditer(text or ""))
-        if len(t) > 2 and t not in STOP
-    ]
+# ---------------------------------------------------------------------------
+# MOVED to app/services/established_names.py (Breakdown B, Step 5). Re-export
+# only -- see the note in name_inventory_probe.py for why.
+# ---------------------------------------------------------------------------
+from app.services.established_names import (           # noqa: E402,F401
+    STOP,
+    TOKEN_RX,
+    content_tokens,
+)
 
 
 def best_meaning(gloss: str, etym: str, lang_code: str) -> tuple[str | None, str]:

@@ -44,182 +44,24 @@ from scripts.prune.name_inventory_probe import (     # noqa: E402
     shipping_types,
 )
 
-_OPEN = "\"“'‘«"
-_CLOSE = "\"”'’»"
-
-MEANING_MARKER = re.compile(
-    rf"(?:meaning|literally|lit\.)\s*[{_OPEN}]([^{_CLOSE}]{{1,80}})[{_CLOSE}]",
-    re.IGNORECASE,
-)
-
-EQUIV_EN = re.compile(
-    r"\bequivalent to English\s+([A-Z][\w''\u2019-]*)",
-)
-
-# Apostrophes are deliberately NOT delimiters here: "don't ... isn't" would
-# otherwise manufacture a quoted span ("t ... isn"). Only real quote marks.
-ANY_QUOTED = re.compile(
-    r"[\"“«]([^\"”»]{2,80})[\"”»]",
-)
 
 # ---------------------------------------------------------------------------
-# ETYM_QUOTED repair (Stage 1c).
-#
-# The pre-1c extractor took the FIRST quoted span anywhere in etymology_text.
-# Three documented failure modes:
-#   (1) dithematic truncation -- 'from ead ("wealth") + weard ("guardian")'
-#       yielded only "wealth", silently halving every compound name.
-#   (2) unrelated first-quote capture -- a leading 'See "Avon".' or
-#       'Compare the English "Smith".' produced a gloss from a cross-reference
-#       rather than from a derivation.
-#   (3) stem/continuative boilerplate -- ja/zh etymologies are dominated by
-#       morphological notes that are not meanings at all.
-#
-# The repair: first sentence only, require a derivation anchor OUTSIDE the
-# quoted material, concatenate every anchored span, drop boilerplate spans,
-# and gate ja/zh off entirely. Every gate fails CLOSED -- blank over wrong.
+# MOVED to app/services/established_names.py (Breakdown B, Step 5). Re-export
+# only -- see the note in name_inventory_probe.py for why.
 # ---------------------------------------------------------------------------
-
-ETYM_QUOTED_BLOCKED_LANGS = frozenset({"ja", "zh"})
-
-# Narrow quote set, matching ANY_QUOTED's rationale: apostrophes are NOT
-# delimiters, or "don't ... isn't" manufactures a span.
-_ETYM_OPEN = "\"“«"
-_ETYM_CLOSE = "\"”»"
-
-_SENT_SPLIT = re.compile(
-    r"(?<=[.!?])\s+(?=[A-Z\u0370-\u03FF\u0400-\u04FF])"
+from app.services.established_names import (           # noqa: E402,F401
+    ANY_QUOTED,
+    CHANNELS,
+    DIAGNOSTIC_CHANNELS,
+    EQUIV_EN,
+    ETYM_QUOTED_BLOCKED_LANGS,
+    MEANING_MARKER,
+    extract_equiv_en,
+    extract_etym_marker,
+    extract_etym_quoted,
+    extract_etym_quoted_legacy,
+    extract_gloss_meaning,
 )
-_TRAILING_ABBREV = re.compile(
-    r"\b(?:cf|e\.g|i\.e|lit|c|ca|fl|Mr|St)\.$", re.IGNORECASE
-)
-
-# Anchor vocabulary. Deliberately EXCLUDES a bare "of": a draft of this used
-# it and the gate passed on 'defender of men' -- the anchor matched a word
-# INSIDE the gloss it was supposed to be validating, which is why the anchor
-# is tested against the sentence with quotes and parens stripped out.
-_DERIVATION_ANCHOR = re.compile(
-    r"\b(?:from|derived from|borrowed from|inherited from|cognate with|"
-    r"calque of|contraction of|composed of|compound of|equivalent to|via)\b",
-    re.IGNORECASE,
-)
-
-_PAREN_SPAN = re.compile(r"\(([^()]{0,300})\)")
-_QUOTED_SPAN = re.compile(
-    rf"[{_ETYM_OPEN}]([^{_ETYM_CLOSE}]{{1,80}})[{_ETYM_CLOSE}]"
-)
-_STRIP_PAREN = re.compile(r"\([^()]{0,300}\)")
-_STRIP_QUOTED = re.compile(
-    rf"[{_ETYM_OPEN}][^{_ETYM_CLOSE}]{{1,80}}[{_ETYM_CLOSE}]"
-)
-
-_ETYM_BOILERPLATE = re.compile(
-    r"^(?:stem|continuative|attributive|conjunctive|combining|inflect\w*|"
-    r"perfective|imperfective|classical|literary|colloquial|honorific)\b"
-    r"|^(?:a |an |the )?(?:form|variant|spelling|reading|romani[sz]ation|"
-    r"transliteration|transcription|abbreviation|contraction)\b"
-    r"|\bof the (?:verb|noun|adjective|name)\b"
-    r"|^(?:see|cf\.?|compare)\b"
-    r"|^(?:given name|surname|personal name|a name)\b",
-    re.IGNORECASE,
-)
-
-DIAGNOSTIC_CHANNELS = ("ETYM_QUOTED_LEGACY",)
-
-
-def _etym_first_sentence(text: str) -> str:
-    """First sentence, re-joining across common abbreviation false splits."""
-    t = (text or "").strip()
-    if not t:
-        return ""
-    parts = _SENT_SPLIT.split(t)
-    out = parts[0]
-    i = 1
-    while i < len(parts) and _TRAILING_ABBREV.search(out):
-        out = f"{out} {parts[i]}"
-        i += 1
-    return out
-
-
-def _etym_span_ok(span: str) -> str | None:
-    s = span.strip().strip(",;:").strip()
-    if not s or len(s) > 80:
-        return None
-    if _ETYM_BOILERPLATE.search(s):
-        return None
-    if not re.search(r"[A-Za-z]", s):
-        return None
-    return s
-
-CHANNELS = ("GLOSS_MEANING", "GLOSS_EQUIV_EN", "ETYM_MARKER",
-            "ETYM_QUOTED", "HOMOGRAPH", "NONE")
-
-
-def extract_gloss_meaning(gloss: str) -> str | None:
-    m = MEANING_MARKER.search(gloss or "")
-    return m.group(1).strip() if m else None
-
-
-def extract_equiv_en(gloss: str) -> str | None:
-    m = EQUIV_EN.search(gloss or "")
-    return m.group(1).strip() if m else None
-
-
-def extract_etym_marker(etym: str) -> str | None:
-    m = MEANING_MARKER.search(etym or "")
-    return m.group(1).strip() if m else None
-
-
-def extract_etym_quoted_legacy(etym: str) -> str | None:
-    """
-    PRE-1c behaviour: first quoted span anywhere in the etymology. Retained
-    ONLY so the repair can be priced against it in the same pass. Not a
-    shipping channel.
-    """
-    m = ANY_QUOTED.search(etym or "")
-    return m.group(1).strip() if m else None
-
-
-def extract_etym_quoted(etym: str, lang_code: str) -> str | None:
-    """
-    Repaired ETYM_QUOTED (Stage 1c): anchored, first-sentence-only,
-    multi-span, boilerplate-filtered, ja/zh gated off.
-
-    Returns spans joined with ' + ' so a dithematic name reads
-    "wealth, fortune + guardian" rather than losing its second element.
-    Capped at 4 spans: beyond that the etymology is a chain, not a compound.
-    """
-    if lang_code in ETYM_QUOTED_BLOCKED_LANGS:
-        return None
-    sent = _etym_first_sentence(etym)
-    if not sent:
-        return None
-
-    # Test the anchor against the sentence with parentheticals and quoted
-    # material removed, so an anchor word appearing inside a gloss cannot
-    # satisfy the gate that is meant to validate that gloss.
-    bare = _STRIP_QUOTED.sub(" ", _STRIP_PAREN.sub(" ", sent))
-    if not _DERIVATION_ANCHOR.search(bare):
-        return None
-
-    spans: list[str] = []
-    seen: set[str] = set()
-
-    def _add(raw: str) -> None:
-        v = _etym_span_ok(raw)
-        if v and v.casefold() not in seen:
-            seen.add(v.casefold())
-            spans.append(v)
-
-    for m in MEANING_MARKER.finditer(sent):
-        _add(m.group(1))
-    for pm in _PAREN_SPAN.finditer(sent):
-        for qm in _QUOTED_SPAN.finditer(pm.group(1)):
-            _add(qm.group(1))
-
-    if not spans:
-        return None
-    return " + ".join(spans[:4])
 
 
 def visible_non_name_lemmas(db, lang_id: int) -> set[str]:

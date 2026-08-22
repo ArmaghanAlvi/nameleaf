@@ -12,8 +12,6 @@ from app.models.semantic import (
     Concept,
     ConceptAlias,
     ConceptRelationship,
-    EstablishedName,
-    NameMeaning,
     Source,
     Word,
     WordSense,
@@ -254,68 +252,6 @@ def get_or_create_word_sense(
 # -------------------------------------------------------------------
 # Green-card helpers
 # -------------------------------------------------------------------
-
-
-def get_or_create_established_name(
-    db: Session,
-    *,
-    language: Language,
-    name: str,
-    native_script: str | None,
-    transliteration: str | None,
-    notes: str | None,
-    source: Source,
-) -> EstablishedName:
-    established_name = db.scalar(
-        select(EstablishedName).where(
-            EstablishedName.language_id == language.id,
-            EstablishedName.name == name,
-        )
-    )
-
-    if established_name is None:
-        established_name = EstablishedName(
-            language=language,
-            name=name,
-            native_script=native_script,
-            transliteration=transliteration,
-            notes=notes,
-            source=source,
-        )
-        db.add(established_name)
-        db.flush()
-
-    return established_name
-
-
-def get_or_create_name_meaning(
-    db: Session,
-    *,
-    established_name: EstablishedName,
-    concept: Concept,
-    explanation: str,
-    native_form: str | None = None,
-    is_primary: bool = True,
-) -> NameMeaning:
-    meaning = db.scalar(
-        select(NameMeaning).where(
-            NameMeaning.established_name_id == established_name.id,
-            NameMeaning.concept_id == concept.id,
-        )
-    )
-
-    if meaning is None:
-        meaning = NameMeaning(
-            established_name=established_name,
-            concept=concept,
-            explanation=explanation,
-            native_form=native_form,
-            is_primary=is_primary,
-        )
-        db.add(meaning)
-        db.flush()
-
-    return meaning
 
 
 # -------------------------------------------------------------------
@@ -627,71 +563,7 @@ def seed_database() -> None:
                 gloss=row["gloss"],
             )
 
-        print("Seeding green-card established names...")
-
-        established_name_rows = [
-            {
-                "language": latin,
-                "name": "Lucia",
-                "native_script": None,
-                "transliteration": None,
-                "concept": illumination,
-                "explanation": (
-                    "Development seed entry associated with imagery "
-                    "of light."
-                ),
-            },
-            {
-                "language": arabic,
-                "name": "Noor",
-                "native_script": "نور",
-                "transliteration": "nūr",
-                "concept": illumination,
-                "explanation": (
-                    "Development seed entry associated with light."
-                ),
-            },
-            {
-                "language": latin,
-                "name": "Clara",
-                "native_script": None,
-                "transliteration": None,
-                "concept": clarity,
-                "explanation": (
-                    "Development seed entry associated with clarity."
-                ),
-            },
-            {
-                "language": latin,
-                "name": "Aurora",
-                "native_script": None,
-                "transliteration": None,
-                "concept": dawn,
-                "explanation": (
-                    "Development seed entry associated with dawn."
-                ),
-            },
-        ]
-
-        for row in established_name_rows:
-            established_name = get_or_create_established_name(
-                db,
-                language=row["language"],
-                name=row["name"],
-                native_script=row["native_script"],
-                transliteration=row["transliteration"],
-                notes="Development seed entry.",
-                source=seed_source,
-            )
-
-            get_or_create_name_meaning(
-                db,
-                established_name=established_name,
-                concept=row["concept"],
-                explanation=row["explanation"],
-                native_form=row["native_script"],
-            )
-
+       
         print("Seeding blue-card generated names...")
 
         auravel = get_or_create_generated_name(
