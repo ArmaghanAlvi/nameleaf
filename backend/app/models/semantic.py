@@ -1508,6 +1508,22 @@ class EstablishedName(Base):
         ForeignKey("lexemes.id", ondelete="SET NULL"), nullable=True
     )
 
+    # Stage 6b. WHICH row a propagated meaning came from. `equiv_en_target`
+    # is the raw extracted string; this is the row it actually resolved to,
+    # which is what Stage 10's precision sample and Stage 8's label need.
+    meaning_source_name_id: Mapped[int | None] = mapped_column(
+        ForeignKey("established_names.id", ondelete="SET NULL"), nullable=True
+    )
+
+    # Stage 6a. 'corroborated' when the name's own etymology names the
+    # homograph's lemma; 'spelling_only' when all we know is that the
+    # spellings match. IMPORT_PREP_FINDINGS.md 5.1: `Lucius` shares a key
+    # with `lucius` ("a fish, probably the pike") but descends from *lux*.
+    # Sharing a key is not sharing a meaning, and 12,598 rows carry a link.
+    homograph_confidence: Mapped[str | None] = mapped_column(
+        String(16), nullable=True
+    )
+
     cluster_id: Mapped[int | None] = mapped_column(
         ForeignKey("established_name_clusters.id", ondelete="SET NULL"),
         nullable=True,
@@ -1526,6 +1542,9 @@ class EstablishedName(Base):
     source_sense: Mapped["Sense"] = relationship()
     homograph_lexeme: Mapped["Lexeme | None"] = relationship(
         foreign_keys=[homograph_lexeme_id]
+    )
+    meaning_source_name: Mapped["EstablishedName | None"] = relationship(
+        foreign_keys=[meaning_source_name_id], remote_side=[id]
     )
     cluster: Mapped["EstablishedNameCluster | None"] = relationship(
         foreign_keys=[cluster_id]
@@ -1547,6 +1566,24 @@ class EstablishedName(Base):
         ),
         Index("ix_established_names_homograph", "homograph_lexeme_id"),
         Index("ix_established_names_cluster", "cluster_id"),
+        Index("ix_established_names_meaning_source", "meaning_source_name_id"),
+        CheckConstraint(
+            "homograph_confidence IS NULL OR homograph_confidence IN "
+            "('corroborated', 'spelling_only')",
+            name="ck_established_names_homograph_confidence",
+        ),
+        # A source row without the matching channel is a provenance claim
+        # with nothing behind it -- the same blank-over-wrong reasoning that
+        # produced ck_established_names_meaning_pair.
+        CheckConstraint(
+            "meaning_source_name_id IS NULL OR "
+            "meaning_channel = 'EQUIV_PROPAGATED'",
+            name="ck_established_names_meaning_source_channel",
+        ),
+        CheckConstraint(
+            "meaning_source_name_id IS NULL OR meaning_source_name_id <> id",
+            name="ck_established_names_no_self_propagation",
+        ),
         Index("ix_established_names_source_lexeme", "source_lexeme_id"),
         CheckConstraint(
             _sql_in("name_type", NAME_TYPES),

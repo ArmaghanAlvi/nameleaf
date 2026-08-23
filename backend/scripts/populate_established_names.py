@@ -48,7 +48,7 @@ from collections import Counter
 
 sys.path.insert(0, os.getcwd())
 
-from sqlalchemy import select, text                            # noqa: E402
+from sqlalchemy import bindparam, select, text                            # noqa: E402
 from sqlalchemy.orm import Session, selectinload                # noqa: E402
 
 from app.db.session import SessionLocal                         # noqa: E402
@@ -56,6 +56,7 @@ from app.models.generated_name import Language                  # noqa: E402
 from app.models.semantic import Lexeme, Sense                   # noqa: E402
 from app.services.established_names import (                    # noqa: E402
     MEANING_CHANNEL_RANK,
+    TOKENIZED_CHANNELS,
     classify_sense,
     extract_equivalence,
     extract_meaning,
@@ -295,11 +296,18 @@ def english_lexeme_map(db: Session) -> dict[str, int]:
 def build_tokens(db: Session, lang, en_map: dict[str, int],
                  dry_run: bool) -> dict[str, int]:
     stats: Counter = Counter()
-    rows = db.execute(text("""
-        SELECT id, meaning_text FROM established_names
-        WHERE language_id = :lid AND meaning_text IS NOT NULL
-        ORDER BY id
-    """), {"lid": lang.id}).mappings().all()
+    # Not every meaning belongs on the mechanism-1 join surface. HOMOGRAPH
+    # glosses are real dictionary prose at spelling_only precision and would
+    # multiply this table several-fold; TOKENIZED_CHANNELS is where that
+    # policy lives, set by the Step-7 measurement.
+    rows = db.execute(
+        text("SELECT id, meaning_text FROM established_names "
+             "WHERE language_id = :lid AND meaning_text IS NOT NULL "
+             "AND meaning_channel IN :chans ORDER BY id").bindparams(
+            bindparam("chans", expanding=True)
+        ),
+        {"lid": lang.id, "chans": sorted(TOKENIZED_CHANNELS)},
+    ).mappings().all()
 
     payload = []
     for row in rows:

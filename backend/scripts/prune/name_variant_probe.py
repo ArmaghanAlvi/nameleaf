@@ -55,76 +55,18 @@ from scripts.prune.name_inventory_probe import (     # noqa: E402
 # Trigger patterns -> raw remainder text following the trigger phrase.
 # ---------------------------------------------------------------------------
 
-TRIGGERS = {
-    "EQUIV_EN": re.compile(r"\bequivalent to English\s+(.+)", re.IGNORECASE),
-    "VARIANT_OF": re.compile(r"\bvariant of\s+(.+)", re.IGNORECASE),
-    "DIMINUTIVE_OF": re.compile(
-        r"\b(?:diminutive|pet form|short form|hypocorism|hypocoristic"
-        r"|nickname)(?:\s+of|\s+for)?\s+(.+)",
-        re.IGNORECASE,
-    ),
-    "FEM_EQUIV": re.compile(
-        r"\bfeminine equivalents?\s+(.+)", re.IGNORECASE,
-    ),
-    "MASC_EQUIV": re.compile(
-        r"\bmasculine equivalents?\s+(.+)", re.IGNORECASE,
-    ),
-}
-
-_LEADING_STRIP = re.compile(
-    r"^(?:the|a|an)\s+|^(?:male|female|unisex|masculine|feminine)\s+"
-    r"|^(?:given name|surname)\s+",
-    re.IGNORECASE,
+# ---------------------------------------------------------------------------
+# MOVED to app/services/name_variants.py (Breakdown C, Step 3). Re-export
+# only -- the probe and the shipping edge builder MUST share one extractor
+# or the component sizes this probe reports stop describing the graph that
+# actually ships. Same pattern as the Breakdown-B probe shims.
+# ---------------------------------------------------------------------------
+from app.services.name_variants import (              # noqa: E402,F401
+    FANOUT_CAP,
+    TRIGGERS,
+    UnionFind,
+    extract_target_candidates,
 )
-_PAREN = re.compile(r"\([^)]*\)")
-_SPLIT_SEP = re.compile(r"\s*,\s*|\s+or\s+|\s+and\s+", re.IGNORECASE)
-
-
-def extract_target_candidates(remainder: str, cap: int = 3) -> list[str]:
-    """
-    Turn 'the male given name Dafydd' or 'Alexandra or Sandra, equivalent
-    to...' into a short list of single-token candidate name strings. The
-    boilerplate strip loops until stable since prefixes nest up to three
-    layers deep ('the' + 'male' + 'given name' all before the actual name).
-    """
-    remainder = re.split(r"[.;]", remainder, maxsplit=1)[0]
-    out = []
-    for part in _SPLIT_SEP.split(remainder):
-        part = _PAREN.sub("", part).strip()
-        for _ in range(4):
-            stripped = _LEADING_STRIP.sub("", part).strip()
-            if stripped == part:
-                break
-            part = stripped
-        if not part:
-            continue
-        first_tok = part.split()[0].strip(".,;:—-\u2019'\"")
-        if first_tok:
-            out.append(first_tok)
-        if len(out) >= cap:
-            break
-    return out
-
-
-class UnionFind:
-    def __init__(self):
-        self.parent: dict[str, str] = {}
-
-    def find(self, x: str) -> str:
-        self.parent.setdefault(x, x)
-        root = x
-        while self.parent[root] != root:
-            root = self.parent[root]
-        while self.parent[x] != root:
-            self.parent[x], x = root, self.parent[x]
-        return root
-
-    def union(self, a: str, b: str) -> None:
-        ra, rb = self.find(a), self.find(b)
-        if ra != rb:
-            self.parent[ra] = rb
-
-
 def node_key(lang_code: str, normalized_lemma: str) -> str:
     return f"{lang_code}:{normalized_lemma}"
 
@@ -215,7 +157,9 @@ def run(records, index, wanted_type: str, langs: set[str] | None,
     other_ntype = "SURNAME" if ntype == "GIVEN" else "GIVEN"
 
     # THREE graphs, unioned independently from the same edge stream.
-    uf_all, uf_same, uf_cross = UnionFind(), UnionFind(), UnionFind()
+    uf_all: UnionFind[str] = UnionFind()
+    uf_same: UnionFind[str] = UnionFind()
+    uf_cross: UnionFind[str] = UnionFind()
 
     same_edges: Counter = Counter()           # by relation, same-language
     cross_edges: Counter = Counter()          # by relation, cross-language
@@ -244,7 +188,8 @@ def run(records, index, wanted_type: str, langs: set[str] | None,
             if not m:
                 continue
             target_lang = "en" if rel == "EQUIV_EN" else code
-            cands = extract_target_candidates(m.group(1), cap=fanout_cap)
+            cap = FANOUT_CAP[rel] if fanout_cap == 0 else fanout_cap
+            cands = extract_target_candidates(m.group(1), cap=cap)
             fanout_hist[len(cands)] += 1
             fanout_by_rel[rel][len(cands)] += 1
 
@@ -357,6 +302,7 @@ def main() -> None:
                     help="sample rows printed per relation. NOT the fan-out "
                          "cap -- see --fanout-cap.")
     ap.add_argument("--fanout-cap", type=int, default=3,
+                    # 0 == production: per-relation caps from FANOUT_CAP.
                     help="max target candidates extracted per trigger match. "
                          "1b re-runs the whole probe with 1 to test whether "
                          "hub fan-out is what inflates the components.")

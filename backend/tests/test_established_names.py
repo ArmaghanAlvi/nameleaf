@@ -15,11 +15,14 @@ from app.services.established_names import (
     category_names,
     classify_from_categories,
     classify_sense,
+    etymology_mentions,
     extract_equivalence,
     extract_meaning,
     gender_from_head,
+    homograph_confidence,
     meaning_tokens,
     parse_name_category,
+    provenance_label,
     reduce_gender,
 )
 
@@ -356,3 +359,72 @@ def test_category_connector_without_a_recognized_tail_fails_closed():
     assert parse_name_category(
         "English renderings of the Cyrillic alphabet", "English"
     ) is None
+
+
+# --- Stage 6: homograph honesty -------------------------------------------
+
+def test_etymology_mention_latin():
+    assert etymology_mentions('From Latin aur\u014dra ("dawn").', "aurora", "la")
+
+
+def test_etymology_mention_devanagari_survives_the_matra():
+    # TOKEN_RX would return आक + श here; the separator splitter must not.
+    assert etymology_mentions(
+        'From \u0906\u0915\u093e\u0936 (\u0101k\u0101\u015b, "sky").',
+        "\u0906\u0915\u093e\u0936",
+        "hi",
+    )
+
+
+def test_etymology_mention_arabic_survives_the_harakat():
+    assert etymology_mentions(
+        'From Arabic \u0646\u064f\u0648\u0631 (n\u016br, "light").',
+        "\u0646\u0648\u0631",
+        "ar",
+    )
+
+
+def test_lucius_the_pike_is_not_corroborated():
+    # IMPORT_PREP_FINDINGS.md 5.1's worked counter-example.
+    assert not etymology_mentions('From lux, lucis ("light").', "lucius", "la")
+
+
+def test_homograph_confidence_levels():
+    assert homograph_confidence(
+        'From Latin aur\u014dra ("dawn").', "aurora", "la"
+    ) == "corroborated"
+    assert homograph_confidence(None, "lucius", "la") == "spelling_only"
+
+
+def test_label_hedges_an_uncorroborated_homograph():
+    label = provenance_label(
+        meaning_channel="HOMOGRAPH",
+        language_name="Latin",
+        homograph_lemma="lucius",
+        homograph_confidence_level="spelling_only",
+    )
+    assert "Spelled identically" in label
+    assert "means" not in label
+
+
+def test_label_asserts_a_corroborated_homograph():
+    assert "own etymology" in provenance_label(
+        meaning_channel="HOMOGRAPH",
+        language_name="Latin",
+        homograph_lemma="aurora",
+        homograph_confidence_level="corroborated",
+    )
+
+
+def test_label_for_propagated_equivalence():
+    assert "John" in provenance_label(
+        meaning_channel="EQUIV_PROPAGATED",
+        language_name="Russian",
+        equiv_en_target="John",
+    )
+
+
+def test_label_for_true_residue():
+    assert provenance_label(
+        meaning_channel=None, language_name="Icelandic"
+    ) == "Meaning not recorded"

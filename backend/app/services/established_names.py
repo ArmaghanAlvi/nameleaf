@@ -842,3 +842,121 @@ def meaning_tokens(meaning_text: str | None) -> list[str]:
         if len(out) >= MAX_TOKENS_PER_NAME:
             break
     return out
+
+
+
+# ===========================================================================
+# PART C -- Stage 6: propagation, homograph honesty, provenance labels.
+# ===========================================================================
+
+DERIVED_CHANNELS: frozenset[str] = frozenset(
+    {"GLOSS_MEANING", "ETYM_MARKER", "ETYM_QUOTED"}
+)
+INHERITED_CHANNELS: frozenset[str] = frozenset(
+    {"HOMOGRAPH", "EQUIV_PROPAGATED"}
+)
+
+# A SEPARATOR splitter, not TOKEN_RX. `[^\W\d_]+` excludes Mn/Mc combining
+# marks, so it shreds exactly the scripts mechanism 2 lives in: आकाश comes
+# back as आक + श and نُور as ن + ور, and every non-Latin corroboration check
+# would silently return False. Part A's content_tokens keeps TOKEN_RX --
+# it only ever sees English meaning text, and its output is the published
+# N2/N3 census.
+_ETYM_SPLIT_RX = re.compile(
+    r"[\s,;:()\[\]{}\"\u201c\u201d'\u2018\u2019\u00ab\u00bb/+*=\u2026"
+    r"\u2014\u2013.!?|-]+"
+)
+
+
+def etymology_mentions(
+    etymology: str | None, lemma: str | None, lang_code: str
+) -> bool:
+    """Does this etymology name that lemma, on the canonical join key?"""
+    if not etymology or not lemma:
+        return False
+    target = normalize_lemma(lemma, lang_code)
+    if not target:
+        return False
+    return any(
+        normalize_lemma(tok, lang_code) == target
+        for tok in _ETYM_SPLIT_RX.split(etymology)
+        if tok
+    )
+
+
+def homograph_confidence(
+    etymology: str | None, homograph_lemma: str | None, lang_code: str
+) -> str:
+    """
+    'corroborated' | 'spelling_only'.
+
+    Roadmap 6a assumed the name IS the word, so inheriting the gloss "isn't
+    a guess." IMPORT_PREP_FINDINGS.md 5.1 disproves that with a worked
+    example from this corpus: `Lucius` shares its key with `lucius` ("a
+    fish, probably the pike") but descends from *lux*. The one derivable
+    discriminator available at build time is whether the NAME's own
+    etymology names the word -- if Wiktionary states the connection, it is
+    attested; if not, all that is known is that the spellings match.
+
+    Deliberately NOT a similarity score. The name sense's gloss is
+    boilerplate ("a male given name"), so a cosine against the word's sense
+    would measure nothing.
+    """
+    if etymology_mentions(etymology, homograph_lemma, lang_code):
+        return "corroborated"
+    return "spelling_only"
+
+
+def provenance_label(
+    *,
+    meaning_channel: str | None,
+    language_name: str,
+    homograph_lemma: str | None = None,
+    homograph_confidence_level: str | None = None,
+    equiv_en_target: str | None = None,
+    source_language_name: str | None = None,
+) -> str:
+    """
+    6c. The one-line attribution under a green card.
+
+    Generated at READ time from stored provenance, not persisted: it is
+    English display copy, it will be rewritten during Stage 9's card design,
+    and storing it would mean a full repopulate every time the wording
+    changes. Stage 8 calls this.
+
+    Note the asymmetry in the HOMOGRAPH branch: `corroborated` asserts,
+    `spelling_only` reports a coincidence and never uses the word "means".
+    That distinction is the whole reason homograph_confidence exists.
+    """
+    if meaning_channel == "GLOSS_MEANING":
+        return "Meaning given in the dictionary entry"
+    if meaning_channel in ("ETYM_MARKER", "ETYM_QUOTED"):
+        return "Meaning from the entry's etymology"
+    if meaning_channel == "HOMOGRAPH":
+        word = homograph_lemma or "the same word"
+        if homograph_confidence_level == "corroborated":
+            return (
+                f"From the {language_name} word \u201c{word}\u201d, named in "
+                f"this name's own etymology"
+            )
+        return (
+            f"Spelled identically to the {language_name} word "
+            f"\u201c{word}\u201d; the connection is not stated in the entry"
+        )
+    if meaning_channel == "EQUIV_PROPAGATED":
+        target = equiv_en_target or "an English name"
+        src = source_language_name or "English"
+        return (
+            f"Meaning of the {src} name \u201c{target}\u201d, of which this "
+            f"is the equivalent"
+        )
+    return "Meaning not recorded"
+
+
+# Which channels feed established_name_tokens. HOMOGRAPH is held OUT pending
+# the Step-7 measurement: those glosses are real dictionary prose (long,
+# multi-sense), so tokenizing 12,598 of them could multiply the 23,780-row
+# join surface several-fold at spelling_only precision, and Stage 7e's
+# ordering has not been designed to absorb that. EQUIV_PROPAGATED is in:
+# it is a real name meaning one attested hop away.
+TOKENIZED_CHANNELS: frozenset[str] = DERIVED_CHANNELS | {"EQUIV_PROPAGATED"}
