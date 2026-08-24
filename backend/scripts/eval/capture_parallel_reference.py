@@ -49,12 +49,32 @@ PROBE_WORDS = ["brave", "light", "storm", "river", "calm"]
 # (1,1) exercises the root band and the interleave with a single hop.
 CELLS = [(3, 2), (1, 1)]
 
+# Language scopes. `None` is the pre-existing all-languages capture and lands
+# under "capture", byte-comparable against the FROZEN estnames_baseline copy.
+#
+# The two explicit non-English scopes are new and land under "scoped". They
+# exist because this harness could not see Stage 7a at all: every call above
+# passes language_codes=None, which always includes English, so the forced
+# English pass -- the branch that only runs when "en" is ABSENT -- was never
+# executed by the gate meant to protect it. ru_only is the maximum relative
+# cost (one visible tree, one hidden one); nonlatin is where mechanism 2
+# concentrates (findings 7.7).
+SCOPES: list[tuple[str, list[str] | None]] = [
+    ("ru_only", ["ru"]),
+    ("nonlatin", ["ja", "hi", "ar"]),
+]
 
-def capture_cell(db, sid: int, width: int, depth: int) -> dict:
+
+def capture_cell(db, sid: int, width: int, depth: int,
+                 codes: list[str] | None = None) -> dict:
     with open(os.devnull, "w") as dn, contextlib.redirect_stdout(dn):
         px = parallel_expand(
-            db, english_sense_id=sid, language_codes=None,
+            db, english_sense_id=sid, language_codes=codes,
             width=width, depth=depth, min_length=0, max_length=30,
+            # Only the scoped (non-English) cells exercise the new branch;
+            # for language_codes=None the pass is a no-op alias of the
+            # already-built English tree.
+            include_english_pass=codes is not None,
         )
     return {
         "trees": {
@@ -72,12 +92,20 @@ def capture_cell(db, sid: int, width: int, depth: int) -> dict:
             f"{n.sense.lexeme.language.code}:{n.sense.lexeme.lemma}"
             for n in px.interleaved
         ],
+        "english_pass": [n.sense.lexeme.lemma for n in px.english_pass],
     }
 
 
 def capture(out_path: str, reuse_from: str | None) -> None:
     with SessionLocal() as db:
         db.execute(text("SET lock_timeout = '30s'"))
+        # Idle-in-transaction guard: embed_query can block on a slow/
+        # unauthenticated HF Hub round-trip mid-transaction, and this
+        # script's transaction spans many such calls across 5 words x
+        # (2 cells + 2 scopes x 2 cells) = 25 parallel_expand calls. The
+        # server default has been observed to kill the session before that
+        # finishes. Scoped to this session only.
+        db.execute(text("SET idle_in_transaction_session_timeout = '300s'"))
         if reuse_from:
             with open(reuse_from) as fh:
                 roots = json.load(fh)["roots"]
@@ -91,6 +119,7 @@ def capture(out_path: str, reuse_from: str | None) -> None:
             print(f"resolved roots: {roots}")
 
         out: dict[str, dict] = {}
+        scoped: dict[str, dict] = {}
         for word, sid in roots.items():
             out[word] = {}
             for width, depth in CELLS:
@@ -98,9 +127,21 @@ def capture(out_path: str, reuse_from: str | None) -> None:
                 out[word][key] = capture_cell(db, sid, width, depth)
                 n = len(out[word][key]["interleaved"])
                 print(f"  {word:8s} {key}  interleaved={n}")
+            scoped[word] = {}
+            for name, codes in SCOPES:
+                scoped[word][name] = {}
+                for width, depth in CELLS:
+                    key = f"w{width}_d{depth}"
+                    cell = capture_cell(db, sid, width, depth, codes)
+                    scoped[word][name][key] = cell
+                    print(f"  {word:8s} {name:9s} {key}  "
+                          f"interleaved={len(cell['interleaved'])}  "
+                          f"english_pass={len(cell.get('english_pass', []))}")
 
     with open(out_path, "w") as fh:
-        json.dump({"roots": roots, "cells": CELLS, "capture": out},
+        json.dump({"roots": roots, "cells": CELLS,
+                   "scopes": [n for n, _ in SCOPES],
+                   "capture": out, "scoped": scoped},
                   fh, ensure_ascii=False, indent=1)
     print(f"wrote {out_path}")
 
@@ -116,35 +157,52 @@ def diff(before_path: str, after_path: str) -> None:
               "--reuse-from the 'before' file. Diff is meaningless.")
         return
 
-    total_trees = changed_trees = 0
-    total_cells = changed_cells = 0
+    totals = [0, 0, 0, 0]   # trees, changed trees, cells, changed cells
+
+    def compare(label: str, cell_b: dict, cell_a: dict) -> None:
+        totals[2] += 1
+        changed = False
+        if cell_b.get("interleaved") != cell_a.get("interleaved"):
+            changed = True
+            print(f"{label}: INTERLEAVE differs "
+                  f"({len(cell_b['interleaved'])} -> "
+                  f"{len(cell_a.get('interleaved', []))})")
+        for code, tree_b in cell_b["trees"].items():
+            totals[0] += 1
+            tree_a = cell_a.get("trees", {}).get(code)
+            if tree_a != tree_b:
+                totals[1] += 1
+                changed = True
+                print(f"{label} [{code}]:")
+                print(f"    rung  {tree_b['root_rung']} -> "
+                      f"{(tree_a or {}).get('root_rung')}")
+                print(f"    words {tree_b['words'][:6]}")
+                print(f"       -> {(tree_a or {}).get('words', [])[:6]}")
+        # english_pass is compared ONLY when both sides carry it. The Step-2
+        # baseline predates the field, and a key that exists on one side only
+        # is a harness-version difference, not an engine regression.
+        if "english_pass" in cell_b and "english_pass" in cell_a:
+            if cell_b["english_pass"] != cell_a["english_pass"]:
+                changed = True
+                print(f"{label}: ENGLISH PASS differs")
+        if changed:
+            totals[3] += 1
+
     for word, cells_b in before["capture"].items():
         cells_a = after["capture"].get(word, {})
         for key, cell_b in cells_b.items():
-            total_cells += 1
-            cell_a = cells_a.get(key, {})
-            cell_changed = False
-            if cell_b.get("interleaved") != cell_a.get("interleaved"):
-                cell_changed = True
-                print(f"{word} {key}: INTERLEAVE differs "
-                      f"({len(cell_b['interleaved'])} -> "
-                      f"{len(cell_a.get('interleaved', []))})")
-            for code, tree_b in cell_b["trees"].items():
-                total_trees += 1
-                tree_a = cell_a.get("trees", {}).get(code)
-                if tree_a != tree_b:
-                    changed_trees += 1
-                    cell_changed = True
-                    print(f"{word} {key} [{code}]:")
-                    print(f"    rung  {tree_b['root_rung']} -> "
-                          f"{(tree_a or {}).get('root_rung')}")
-                    print(f"    words {tree_b['words'][:6]}")
-                    print(f"       -> {(tree_a or {}).get('words', [])[:6]}")
-            if cell_changed:
-                changed_cells += 1
+            compare(f"{word} {key}", cell_b, cells_a.get(key, {}))
 
-    print(f"\n{changed_trees}/{total_trees} trees changed")
-    print(f"{changed_cells}/{total_cells} cells changed")
+    for word, scopes_b in before.get("scoped", {}).items():
+        scopes_a = after.get("scoped", {}).get(word, {})
+        for name, cells_b in scopes_b.items():
+            cells_a = scopes_a.get(name, {})
+            for key, cell_b in cells_b.items():
+                compare(f"{word} [{name}] {key}", cell_b,
+                        cells_a.get(key, {}))
+
+    print(f"\n{totals[1]}/{totals[0]} trees changed")
+    print(f"{totals[3]}/{totals[2]} cells changed")
 
 
 def main() -> None:

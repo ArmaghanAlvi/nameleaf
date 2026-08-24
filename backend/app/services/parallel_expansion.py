@@ -143,6 +143,13 @@ class LanguageTree:
 class ParallelExpansion:
     trees: dict[str, LanguageTree]
     interleaved: list[HopNode]      # root band, then round-robin
+    # Stage 7a. The English tree, whether or not English is DISPLAYED.
+    # Consumed by green-card retrieval (mechanism 1) and by nothing else:
+    # every green-card meaning is English, so the join surface needs an
+    # English expansion even for a search that shows no English at all.
+    # Defaulted, so the three existing construction sites -- all keyword --
+    # are unchanged.
+    english_pass: tuple[HopNode, ...] = ()
 
 
 def _pivot_top_up(
@@ -293,6 +300,7 @@ def parallel_expand(
     db: Session, *, english_sense_id: int,
     language_codes: list[str] | None = None,
     width: int, depth: int, min_length: int = 0, max_length: int = 30,
+    include_english_pass: bool = False,
 ) -> ParallelExpansion:
     order = _language_order(db)
     requested = language_codes if language_codes is not None else order
@@ -394,4 +402,26 @@ def parallel_expand(
             idx[code] += 1
             remaining -= 1
 
-    return ParallelExpansion(trees=trees, interleaved=interleaved)
+    # ---- Stage 7a: the forced English pass -------------------------------
+    # LAST, after the interleave, so nothing the byte-identity harness reads
+    # is computed downstream of a new branch. When English is requested this
+    # costs ZERO extra queries: the visible tree IS the pass.
+    #
+    # SAME width/depth as the visible trees, deliberately. A cheaper hidden
+    # configuration would make the green-card set depend on whether the user
+    # happened to have English switched on -- the same query returning
+    # different names under a display toggle. The invariant is worth the
+    # cost, and Step 7 measures the cost.
+    english_pass: tuple[HopNode, ...] = ()
+    if include_english_pass:
+        en_tree = trees.get("en")
+        if en_tree is not None:
+            english_pass = tuple(en_tree.nodes)
+        else:
+            english_pass = tuple(multi_hop_expand(
+                db, root_sense_id=english_sense_id, width=width, depth=depth,
+                min_length=min_length, max_length=max_length,
+            ))
+
+    return ParallelExpansion(trees=trees, interleaved=interleaved,
+                             english_pass=english_pass)
