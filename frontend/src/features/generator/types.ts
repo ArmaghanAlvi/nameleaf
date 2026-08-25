@@ -68,6 +68,10 @@ export interface GreenCardPayload {
   provenanceLabel: string;
   meaningChannel?: string | null;
   homographConfidence?: string | null;
+  /** Stage 11d. The NAME's meaning. On a gradient card this is NOT
+   *  `NameResult.meaning` -- that is the WORD's definition, from the yellow
+   *  row this card merged onto. Mirrors GreenCardPayload.nameMeaning. */
+  nameMeaning?: string | null;
 
   mechanisms: string[];
   matchedTokens: string[];

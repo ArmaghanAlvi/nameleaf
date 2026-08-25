@@ -92,6 +92,10 @@ def _green_payload(view: GreenCardView) -> GreenCardPayload:
         provenanceLabel=view.provenance,
         meaningChannel=name.meaning_channel,
         homographConfidence=name.homograph_confidence,
+        # Off the VIEW, not off `name` directly: build_views is the single
+        # place that resolves a card's display meaning, and reading the model
+        # here would fork that responsibility across two modules.
+        nameMeaning=view.meaning_text,
         mechanisms=sorted(card.mechanisms),
         matchedTokens=list(card.matched_tokens),
         matchTier=card.tier,

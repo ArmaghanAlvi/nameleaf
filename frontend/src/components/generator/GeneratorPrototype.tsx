@@ -49,9 +49,22 @@ const categoryOptions: { value: CategoryFilter; label: string }[] = [
 // (see ResultDetails.tsx's mirror warning).
 const categoryStyles: Record<ResultCategory, string> = {
   established: "border-emerald-300 bg-emerald-50",
-  // Gradient: green fading into yellow, because the card IS both.
+  // Half yellow (the WORD), half green (the NAME), with a narrow blend band
+  // at the midpoint. Three deliberate choices, each fixing a specific
+  // failure of the pre-Breakdown-F string:
+  //   * `-r`, not `-br`: the tag row below reads left-to-right as
+  //     word-tag-then-name-tag, and the background has to agree with it. A
+  //     diagonal ramp agrees with neither axis.
+  //   * amber FIRST: the word is the dominant half.
+  //   * NO `via-`: a midpoint colour stop is what pinned the old gradient
+  //     solid green across the entire first half, which is why the card
+  //     never looked 50/50.
+  // `from-40% / to-60%` sets the blend band width -- widen to 30/70 for a
+  // softer transition, narrow to 45/55 for a harder split.
+  // Border is neutral rather than emerald: a green ring around a half-amber
+  // card re-asserts "this is a name" and fights the split it sits on.
   "word-established":
-    "border-emerald-300 bg-gradient-to-br from-emerald-50 via-emerald-50 to-amber-50",
+    "border-slate-300 bg-gradient-to-r from-amber-50 from-40% to-emerald-50 to-60%",
   related: "border-yellow-200 bg-yellow-50",
   translation: "border-yellow-200 bg-yellow-50",
   generated: "border-blue-200 bg-blue-50",
@@ -117,11 +130,42 @@ function isStandaloneGreen(result: NameResult): boolean {
   return Boolean(result.green) && result.category === "established";
 }
 
-function sectionRank(result: NameResult): number {
-  if (isGreenish(result)) return 0;
-  if (result.category === "generated") return 2;
-  return 1;
-}
+/**
+ * 11e. The card-type sections, expressed as MEMBERSHIP PREDICATES rather
+ * than a rank function.
+ *
+ * A gradient card is genuinely both an established name and a word, so it
+ * belongs in both of the first two sections. A rank function returns one
+ * number and structurally cannot say that -- which is why `word-established`
+ * only ever appeared under "Established names".
+ *
+ * Array order IS display order. `isGreenish` is retained above and used
+ * here; the old `sectionRank` had no other caller.
+ */
+const cardTypeSections: {
+  code: string;
+  label: string;
+  belongs: (result: NameResult) => boolean;
+}[] = [
+  {
+    code: "cardtype-green",
+    label: "Established names",
+    belongs: isGreenish,
+  },
+  {
+    code: "cardtype-yellow",
+    label: "Words and translations",
+    belongs: (result) =>
+      result.category === "translation" ||
+      result.category === "related" ||
+      result.category === "word-established",
+  },
+  {
+    code: "cardtype-blue",
+    label: "Generated names",
+    belongs: (result) => result.category === "generated",
+  },
+];
 
 /**
  * 9e's anchoring rule, which the roadmap states as one behaviour but which
@@ -245,10 +289,14 @@ function sortResults(
   }
 
   if (sort === "cardtype") {
-    // Stable, so within each section the server's tree order survives.
-    return [...results].sort(
-      (first, second) => sectionRank(first) - sectionRank(second)
-    );
+    // Deliberately a PASS-THROUGH as of 11e. Grouping is done by per-section
+    // predicates in `resultGroups`, each of which filters `visibleResults`
+    // itself, so pre-sorting into bands buys nothing -- and it costs
+    // something: banding would hoist every gradient card to the TOP of the
+    // "Words and translations" section rather than leaving it in tree
+    // position. The server's interleave order now survives inside each
+    // section, matching what the `language` grouped sort already does.
+    return [...results];
   }
 
   // Alphabetical and length: green cards MIX IN, per 9e. No anchoring --
@@ -287,17 +335,19 @@ function languageSectionId(code: string | null) {
 const RTL_FALLBACK_CODES = ["ar", "he", "fa"];
 
 function hopBadgeLabel(result: NameResult, searchedWord: string): string {
-  // Green cards first: the yellow branches below would call a tier-0 Hindi
-  // name a "Semantic equivalent", which it isn't -- it's a name whose
-  // recorded meaning contains the searched word.
-  const green = result.green;
-  if (green) {
-    if (green.matchedTokens.length > 0) {
-      return `Meaning includes \u201c${green.matchedTokens[0]}\u201d`;
-    }
-    return `Shares a spelling with \u201c${green.triggerWord}\u201d`;
-  }
-
+  // Only ever called for a card whose category is NOT "established" -- see
+  // the `result.category !== "established"` guard at both call sites below.
+  //
+  // A STANDALONE green card carries no badge at all: the four labels here
+  // describe how the hop-EXPANSION engine matched the query, and a
+  // standalone green card was never touched by that engine -- it was found
+  // by established_name_tokens or a homograph key. "Searched meaning" would
+  // claim a mechanism that didn't run.
+  //
+  // A WORD-ESTABLISHED (gradient) card DOES reach here, correctly, with no
+  // special-casing needed: _attach_green_cards mutates the existing yellow
+  // row rather than emitting a second one, so its matchType, path and depth
+  // are the WORD's and are real -- the logic below already describes it.
   if (result.matchType === "exact") {
     // Roots: the en root IS the searched meaning; every other tree's root
     // is its cross-language semantic equivalent (roadmap 7a label set).
@@ -312,6 +362,33 @@ function hopBadgeLabel(result: NameResult, searchedWord: string): string {
   }
   // depth 1 (path = [root, this]) or single-hop expanded (empty path)
   return `Related to ${path[0]?.word ?? searchedWord}`;
+}
+
+/**
+ * 11d. Should a word-name card print a separate "As a name" line?
+ *
+ * On a gradient card `result.meaning` is the WORD's definition, so the
+ * NAME's meaning is a genuinely different fact and belongs under its own
+ * label -- except in the two cases where printing it is noise:
+ *
+ *   * meaningChannel === "HOMOGRAPH". The name's meaning IS the word's
+ *     gloss, copied verbatim by inherit_homographs(). Printing the same
+ *     string twice under two labels invents a distinction the data does not
+ *     have. Per findings 19.2 this is currently the DOMINANT case among
+ *     gradient-eligible rows, so expect this branch to fire often.
+ *   * The strings match anyway. Catches the same thing structurally, in case
+ *     a future channel arrives at an identical string by another route.
+ *
+ * Returns null rather than "" so the caller's falsiness check is unambiguous.
+ */
+function nameMeaningToShow(result: NameResult): string | null {
+  const green = result.green;
+  if (!green) return null;
+  if (green.meaningChannel === "HOMOGRAPH") return null;
+  const value = green.nameMeaning?.trim() ?? "";
+  if (!value) return null;
+  if (value === result.meaning.trim()) return null;
+  return value;
 }
 
 // Human labels for root provenance (the 5-rung ladder + orchestration,
@@ -450,20 +527,21 @@ export function GeneratorPrototype() {
     if (sort === "cardtype") {
       // Section keys are deliberately NOT language codes: collapsedLanguages
       // is keyed by group.code and would otherwise collide across a sort
-      // switch. visibleResults is already ordered by sectionRank, so
-      // filtering preserves within-section order.
-      const sections = [
-        { code: "cardtype-green", label: "Established names" },
-        { code: "cardtype-yellow", label: "Words and translations" },
-        { code: "cardtype-blue", label: "Generated names" },
-      ];
-      return sections
-        .map((section, index) => ({
+      // switch.
+      //
+      // A gradient card matches two predicates and is therefore rendered
+      // TWICE, once per section. That is 11e's intent, not a bug. React keys
+      // are safe because the two copies live in different sibling arrays, so
+      // `key={result.id}` is still unique within each list.
+      //
+      // The header count is unaffected: it reads visibleResults.length,
+      // which stays the flat truth. Only the per-section badges double-count,
+      // which is correct -- the card really is in both sections.
+      return cardTypeSections
+        .map((section) => ({
           code: section.code as string | null,
           label: section.label as string | null,
-          items: visibleResults.filter(
-            (result) => sectionRank(result) === index
-          ),
+          items: visibleResults.filter(section.belongs),
         }))
         .filter((group) => group.items.length > 0);
     }
@@ -571,6 +649,9 @@ export function GeneratorPrototype() {
   // Extracted so per-language sections can render cards without duplicating
   // the article markup. Body is unchanged from the inline version.
   function renderResultCard(result: NameResult) {
+    // Computed once: the JSX below tests it and then renders it.
+    const asName = nameMeaningToShow(result);
+
     return (
       <article
         key={result.id}
@@ -601,10 +682,28 @@ export function GeneratorPrototype() {
                   {result.romanization}
                 </p>
               )}
+          </div>
 
-            {result.matchType && (
+          <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-slate-700">
+            {result.language}
+          </span>
+        </div>
+
+        {/* ONE tag row, in reading order: the WORD's relationship to the
+            search first, the NAME's classification second. Placed below the
+            header rather than inside its left column so it can wrap across
+            the full card width, and so its left-to-right order matches the
+            left-yellow / right-green split behind it.
+
+            `Also a word here` is gone: the two-tone background is now the
+            statement, and the tag only ever rendered on cards that already
+            have that background. `Also a surname` stays -- nothing else on
+            the card carries that fact. */}
+        {(result.matchType || result.green) && (
+          <div className="mt-3 flex flex-wrap items-center gap-1.5">
+            {result.matchType && result.category !== "established" && (
               <span
-                className={`mt-3 inline-flex rounded-full px-3 py-1 text-xs font-semibold shadow-sm ${
+                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold shadow-sm ${
                   result.matchType === "exact"
                     ? "bg-white/80 text-slate-700"
                     : "bg-amber-100 text-amber-800"
@@ -613,27 +712,17 @@ export function GeneratorPrototype() {
                 <span dir="auto">{hopBadgeLabel(result, activeSearch)}</span>
               </span>
             )}
-          </div>
 
-          <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-slate-700">
-            {result.language}
-          </span>
-        </div>
-
-        {result.green && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-900">
-              {nameTypeLabels[result.green.nameType]}
-              {genderLabels[result.green.gender]
-                ? ` \u00b7 ${genderLabels[result.green.gender]}`
-                : ""}
-            </span>
-            {result.green.isGradient && (
-              <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-semibold text-amber-900">
-                Also a word here
+            {result.green && (
+              <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-900">
+                {nameTypeLabels[result.green.nameType]}
+                {genderLabels[result.green.gender]
+                  ? ` \u00b7 ${genderLabels[result.green.gender]}`
+                  : ""}
               </span>
             )}
-            {result.green.isAlsoSurname && (
+
+            {result.green?.isAlsoSurname && (
               <span className="rounded-full bg-white/80 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">
                 Also a surname
               </span>
@@ -651,7 +740,13 @@ export function GeneratorPrototype() {
         {result.meaning.trim().length > 0 ? (
           <>
             <p className="mt-1 font-semibold">{result.meaning}</p>
-            {result.green && (
+            {/* 11d. provenanceLabel describes where the NAME's meaning came
+                from. On a gradient card the line above it is the WORD's
+                definition, so this caption was attaching name provenance to
+                word text -- circular on HOMOGRAPH rows, plainly wrong on any
+                other channel. Standalone green cards keep it: there the two
+                really do describe the same string. */}
+            {result.green && result.category !== "word-established" && (
               <p className="mt-1 text-xs italic text-slate-500">
                 {result.green.provenanceLabel}
               </p>
@@ -661,6 +756,26 @@ export function GeneratorPrototype() {
           <p className="mt-1 text-sm italic text-slate-500">
             {result.green?.provenanceLabel ?? "Meaning not recorded"}
           </p>
+        )}
+
+        {/* The NAME half of a word-name card, deliberately subordinate to the
+            word above it: smaller heading, smaller type, and the green
+            provenance label finally sitting under the text it actually
+            describes. This is what makes "the word part is dominant" a
+            structural property of the card rather than a side effect of the
+            merge keeping the yellow row's `meaning` field. */}
+        {result.category === "word-established" && asName && (
+          <>
+            <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-emerald-700">
+              As a name
+            </p>
+            <p className="mt-1 text-sm text-slate-700">{asName}</p>
+            {result.green && (
+              <p className="mt-1 text-xs italic text-slate-500">
+                {result.green.provenanceLabel}
+              </p>
+            )}
+          </>
         )}
 
         {result.green && <VariantDropdown green={result.green} />}
@@ -803,7 +918,7 @@ export function GeneratorPrototype() {
               )}
           </span>
 
-          {result.matchType && (
+          {result.matchType && result.category !== "established" && (
             <span
               className="hidden shrink-0 text-xs font-semibold text-slate-500 sm:inline"
               dir="auto"
@@ -852,6 +967,22 @@ export function GeneratorPrototype() {
                 {result.green?.provenanceLabel ?? "Meaning not recorded"}
               </p>
             )}
+
+            {/* Parity with the card view: same suppression rule, same copy.
+                B3's reason for extracting ResultDetails applies here too --
+                two views that disagree about what a card contains is worse
+                than either view being slightly wrong. */}
+            {result.category === "word-established" &&
+              nameMeaningToShow(result) && (
+                <>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-emerald-700">
+                    As a name
+                  </p>
+                  <p className="mt-1 text-sm text-slate-700">
+                    {nameMeaningToShow(result)}
+                  </p>
+                </>
+              )}
 
             {result.green && <VariantDropdown green={result.green} />}
 

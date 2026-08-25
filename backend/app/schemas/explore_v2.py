@@ -58,6 +58,14 @@ class GreenCardPayload(BaseModel):
     provenanceLabel: str
     meaningChannel: str | None = None
     homographConfidence: str | None = None
+    # Stage 11d. The NAME's own meaning_text, which on a GRADIENT card is not
+    # `ExploreV2Result.meaning` -- that field belongs to the yellow row the
+    # card merged onto and carries the WORD's definition. Without this the UI
+    # cannot render the name half of a word-name card at all.
+    # Nullable because 6d's residue policy ships names with no derived
+    # meaning; on a standalone green card it duplicates `result.meaning` by
+    # construction, and the UI is responsible for not printing it twice.
+    nameMeaning: str | None = None
 
     mechanisms: list[str]
     matchedTokens: list[str] = Field(default_factory=list)

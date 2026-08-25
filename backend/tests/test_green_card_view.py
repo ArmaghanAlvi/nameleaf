@@ -280,3 +280,35 @@ def test_hidden_trigger_card_is_top_level(db):
     assert row.green.triggerVisible is False
     assert row.green.triggerWord == "sky"
     assert "not shown in these results" in row.explanation
+
+
+def test_payload_carries_the_names_own_meaning(db):
+    """11d. A gradient card's `meaning` is the WORD's; the name's own
+    meaning has to travel separately or the UI cannot show both."""
+    src, en, de, hi = seed(db)
+    lx, s = add_lex(db, src, en, "sky", "sky")
+    nlx, ns = add_lex(db, src, hi, "n", "n", pos="name")
+    add_name(db, hi, "आकाश", "आकाश", nlx, ns, tokens=["sky"],
+             meaning="sky, the heavens", channel="GLOSS_MEANING")
+    views = build_views(db, retrieve_green_cards(
+        db, english_nodes=[FakeNode(s, 0)], visible_nodes=[],
+        language_codes=["hi"]))
+    row = _green_to_result(views[0])
+    assert row.green is not None
+    assert row.green.nameMeaning == "sky, the heavens"
+
+
+def test_payload_name_meaning_is_none_for_residue(db):
+    """6d residue: a name with no derived meaning still ships. The field
+    must be None, not an empty string -- the UI branches on falsiness and a
+    '' would be indistinguishable from a real blank meaning."""
+    src, en, de, hi = seed(db)
+    lx, s = add_lex(db, src, en, "sky", "sky")
+    nlx, ns = add_lex(db, src, hi, "n", "n", pos="name")
+    add_name(db, hi, "आकाश", "आकाश", nlx, ns, tokens=["sky"])
+    views = build_views(db, retrieve_green_cards(
+        db, english_nodes=[FakeNode(s, 0)], visible_nodes=[],
+        language_codes=["hi"]))
+    row = _green_to_result(views[0])
+    assert row.green is not None
+    assert row.green.nameMeaning is None
