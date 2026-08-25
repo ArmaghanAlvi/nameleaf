@@ -31,6 +31,20 @@ export const rootRungLabels: Record<string, string> = {
 };
 
 /**
+ * ⚠️ HAND-MAINTAINED MIRROR of MEANING_CHANNELS in
+ * backend/app/models/semantic.py (five values as of Stage 6). Same hazard as
+ * rootRungLabels above: nothing enforces the correspondence, so a channel
+ * added upstream renders as a bare SCREAMING_SNAKE string here.
+ */
+export const meaningChannelLabels: Record<string, string> = {
+  GLOSS_MEANING: "dictionary gloss",
+  ETYM_MARKER: "etymology",
+  ETYM_QUOTED: "quoted etymology",
+  HOMOGRAPH: "identical word",
+  EQUIV_PROPAGATED: "inherited from an equivalent name",
+};
+
+/**
  * Everything relocated off the card face by B3. Shared by the card view's
  * disclosure and the collapsed view's expansion row, so the two cannot drift.
  *
@@ -41,11 +55,32 @@ export const rootRungLabels: Record<string, string> = {
  * place that difference is legible. One click deep is fine; absent is not.
  */
 export function ResultDetails({ result }: { result: NameResult }) {
+  const green = result.green;
   const showRung = Boolean(result.rootRung) && result.languageCode !== "en";
   const showPivot = result.provenance === "pivoted";
 
   return (
     <div className="text-sm text-slate-600">
+      {green && (
+        <div className="mb-3 flex flex-wrap gap-2">
+          <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900 shadow-sm">
+            {green.homographConfidence === "spelling_only"
+              ? "same spelling only"
+              : green.meaningChannel
+                ? `meaning: ${
+                    meaningChannelLabels[green.meaningChannel] ??
+                    green.meaningChannel
+                  }`
+                : "meaning not recorded"}
+          </span>
+          {green.matchTier === 0 && (
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-600 shadow-sm">
+              direct match
+            </span>
+          )}
+        </div>
+      )}
+
       {(showRung || showPivot) && (
         <div className="mb-3 flex flex-wrap gap-2">
           {showRung && (
@@ -63,6 +98,17 @@ export function ResultDetails({ result }: { result: NameResult }) {
       )}
 
       <p className="leading-6">{result.explanation}</p>
+
+      {/* Amendment 7 made visible. A card found through the hidden English
+          pass has a REAL trigger that is not on screen; saying so is the
+          honest alternative to silently attributing it to some displayed
+          word. */}
+      {green && !green.triggerVisible && (
+        <p className="mt-2 text-xs italic text-slate-500">
+          Found through the English word \u201c{green.triggerWord}\u201d, which
+          is not among the displayed languages.
+        </p>
+      )}
     </div>
   );
 }

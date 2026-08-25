@@ -1,4 +1,8 @@
-import type { HopPathStep, NameResult } from "@/features/generator/types";
+import type {
+  GreenCardPayload,
+  HopPathStep,
+  NameResult,
+} from "@/features/generator/types";
 
 export interface SenseOption {
   senseId: number;
@@ -66,14 +70,21 @@ export interface ExploreSelectedSensesRequest {
 export interface ExploreV2Result {
   id: string;
   name: string;
-  category: "established" | "related" | "translation" | "generated";
+    category:
+    | "established"
+    | "word-established"
+    | "related"
+    | "translation"
+    | "generated";
   meaning: string;
   language: string;
   explanation: string;
   matchType: "exact" | "expanded";
   matchedSenseId: number;
   relationshipType: string;
-  relationshipWeight: number;
+  // Nullable as of Stage 8: a lexical green-card match carries no similarity
+  // score, and 0.0 would be a fabricated number.
+  relationshipWeight: number | null;
   partOfSpeech: string;
   depth: number;
   parentSenseId: number | null;
@@ -82,6 +93,7 @@ export interface ExploreV2Result {
   languageCode: string | null;
   rootRung: string | null;
   romanization: string | null;
+  green: GreenCardPayload | null;
 }
 
 export interface ExploreSelectedSensesResponse {
@@ -136,6 +148,7 @@ export function toNameResult(r: ExploreV2Result): NameResult {
     languageCode: r.languageCode,
     rootRung: r.rootRung,
     romanization: r.romanization,
+    green: r.green,
   };
 }
 

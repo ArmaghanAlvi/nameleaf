@@ -100,6 +100,13 @@ class GreenCard:
     # "top level, under the query". Substituting some visible node instead
     # would attribute the card to a word that did not produce it.
     anchor_sense_id: int | None
+    # Stage 8. The VISIBLE same-language node this card merges onto in the
+    # gradient case -- which is NOT `anchor_sense_id`. When English is
+    # displayed, a mechanism-1 trigger can be shallower than the homograph
+    # trigger and win `_better_trigger`, leaving `anchor_sense_id` pointing
+    # at an English word while the merge target is the Hindi one. Stage 7
+    # never needed to tell them apart because it emitted nothing.
+    homograph_anchor_sense_id: int | None
     trigger_count: int
     is_gradient: bool
 
@@ -220,6 +227,12 @@ def match_by_homograph(db, vis_index, language_ids):
     return out
 
 
+def _homograph_anchor_sense_id(name, vis_index) -> int | None:
+    """The visible same-language node sharing this name's key, if any."""
+    ref = vis_index.get((name.language_id, name.normalized_lemma))
+    return ref.sense_id if ref is not None else None
+
+
 def _is_gradient(name, vis_index) -> bool:
     """A PROPERTY of the card, not a branch inside mechanism 2.
 
@@ -258,7 +271,10 @@ def fold(matches, vis_index, codes_by_id):
                 language_code=codes_by_id.get(name.language_id, ""),
                 mechanisms=frozenset({mechanism}),
                 matched_tokens=(token,) if token else (),
-                trigger=trigger, anchor_sense_id=None, trigger_count=1,
+                trigger=trigger, anchor_sense_id=None,
+                homograph_anchor_sense_id=_homograph_anchor_sense_id(
+                    name, vis_index),
+                trigger_count=1,
                 is_gradient=_is_gradient(name, vis_index),
             )
             continue

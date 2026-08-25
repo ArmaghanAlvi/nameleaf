@@ -28,11 +28,63 @@ class HopPathStep(BaseModel):
     depth: int
 
 
+class GreenVariant(BaseModel):
+    """One entry in a green card's variant or cognate dropdown (9c).
+
+    Mirrors the frontend's already-present `RelatedName` (name /
+    relationshipType / notes) plus the two fields that interface never had:
+    a language, because the cognate grouping is cross-language by
+    definition, and a romanization, because half the cognate list is in a
+    script the reader cannot pronounce.
+    """
+    name: str
+    romanization: str | None = None
+    relationshipType: str
+    languageCode: str | None = None
+    language: str
+    isCrossLanguage: bool
+    isDirect: bool
+
+
+class GreenCardPayload(BaseModel):
+    """Everything green about a result. Nested rather than flattened onto
+    ExploreV2Result so 8c's additive contract is one optional field, not
+    eighteen -- and so `result.green` is a single null check in the UI."""
+    nameId: int
+    nameType: Literal["given", "surname", "patronymic"]
+    gender: Literal["m", "f", "x", "u"]
+    isAlsoSurname: bool
+
+    provenanceLabel: str
+    meaningChannel: str | None = None
+    homographConfidence: str | None = None
+
+    mechanisms: list[str]
+    matchedTokens: list[str] = Field(default_factory=list)
+    matchTier: int
+    isGradient: bool
+
+    triggerWord: str
+    triggerLanguageCode: str
+    triggerVisible: bool
+
+    clusterId: int | None = None
+    variants: list[GreenVariant] = Field(default_factory=list)
+    variantTotal: int = 0
+    cognates: list[GreenVariant] = Field(default_factory=list)
+    cognateTotal: int = 0
+
+
 class ExploreV2Result(BaseModel):
     id: str
     name: str
     category: Literal[
         "established",
+        # Stage 2c's reserved gradient value: the word and the name are the
+        # SAME object in the same language, so they ship as one card wearing
+        # both tags. A distinct value rather than reusing "established"
+        # keeps the category filter coherent (IMPORT_PREP_FINDINGS 5.5).
+        "word-established",
         "related",
         "translation",
         "generated",
@@ -43,7 +95,14 @@ class ExploreV2Result(BaseModel):
     matchType: Literal["exact", "expanded"]
     matchedSenseId: int
     relationshipType: str
-    relationshipWeight: float
+    # NULLABLE as of Stage 8. A lexical green-card match carries no
+    # similarity score (roadmap 7e says so explicitly), and 0.0 would be a
+    # fabricated number that sorts as "worst". Yellow cards still always
+    # populate it; the frontend's NameResult already types it nullable.
+    # NOTE: capture_api_current.py does round(r.relationshipWeight, 4) and
+    # would raise on None -- which it never sees, because green cards ship
+    # only on the parallel path and that script uses the legacy one.
+    relationshipWeight: float | None
     partOfSpeech: str
     # Multi-hop metadata. Optional so single-hop results (depth=1) omit them.
     depth: int = 0
@@ -57,6 +116,8 @@ class ExploreV2Result(BaseModel):
     # Phase D. Latin-script rendering of `name`, or None where no trustworthy
     # value exists. None MUST render as nothing -- never as a guess.
     romanization: str | None = None
+    # Stage 8. Present on green and gradient cards, absent on yellow ones.
+    green: GreenCardPayload | None = None
 
 
 class ExpandedSenseResponse(BaseModel):

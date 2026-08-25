@@ -11,6 +11,7 @@ import {
 } from "@/lib/api/explore";
 import { InfoTip } from "@/components/generator/InfoTip";
 import { ResultDetails } from "@/components/generator/ResultDetails";
+import { VariantDropdown } from "@/components/generator/VariantDropdown";
 import {
   languageLabel,
   sortLanguages,
@@ -29,7 +30,11 @@ type SortOption =
   | "shortest"
   | "longest"
   | "relevance"
-  | "language";
+  | "language"
+  // 9d. A SORT, not a filter: CategoryFilter already exists and removes;
+  // this groups. Green first, then words, with the third section reserved
+  // for generated names.
+  | "cardtype";
 
 const categoryOptions: { value: CategoryFilter; label: string }[] = [
   { value: "all", label: "All result types" },
@@ -38,11 +43,39 @@ const categoryOptions: { value: CategoryFilter; label: string }[] = [
   { value: "generated", label: "Generated names" },
 ];
 
+// The Record<ResultCategory, string> type is load-bearing: adding a category
+// without a style here is a compile error, which is exactly what should have
+// happened when `ili_override` was added to the rung labels and wasn't
+// (see ResultDetails.tsx's mirror warning).
 const categoryStyles: Record<ResultCategory, string> = {
-  established: "border-green-200 bg-green-50",
+  established: "border-emerald-300 bg-emerald-50",
+  // Gradient: green fading into yellow, because the card IS both.
+  "word-established":
+    "border-emerald-300 bg-gradient-to-br from-emerald-50 via-emerald-50 to-amber-50",
   related: "border-yellow-200 bg-yellow-50",
   translation: "border-yellow-200 bg-yellow-50",
   generated: "border-blue-200 bg-blue-50",
+};
+
+const nameTypeLabels: Record <
+  NonNullable<NameResult["green"]>["nameType"],
+  string
+> = {
+  given: "Given name",
+  surname: "Surname",
+  patronymic: "Patronymic",
+};
+
+// "u" (unknown) renders as nothing rather than "unknown" -- blank over wrong,
+// the same rule the backend applies to meanings.
+const genderLabels: Record <
+  NonNullable<NameResult["green"]>["gender"],
+  string
+> = {
+  m: "masculine",
+  f: "feminine",
+  x: "unisex",
+  u: "",
 };
 
 const partKindLabels: Record<NamePartKind, string> = {
@@ -68,6 +101,103 @@ const flavorOptions: {
 const MIN_LENGTH = 0;
 const MAX_LENGTH = 30;
 
+function isGreenish(result: NameResult): boolean {
+  return (
+    result.category === "established" ||
+    result.category === "word-established"
+  );
+}
+
+/**
+ * A GRADIENT card is a yellow row wearing a green tag -- it IS the word's
+ * node, with the word's children hanging off it -- so it must never be
+ * moved. Only standalone green cards get anchored.
+ */
+function isStandaloneGreen(result: NameResult): boolean {
+  return Boolean(result.green) && result.category === "established";
+}
+
+function sectionRank(result: NameResult): number {
+  if (isGreenish(result)) return 0;
+  if (result.category === "generated") return 2;
+  return 1;
+}
+
+/**
+ * 9e's anchoring rule, which the roadmap states as one behaviour but which
+ * is really two.
+ *
+ * `tree`: green cards follow their triggering yellow card, unconditionally.
+ * Cards whose trigger came from the HIDDEN English pass (parentSenseId
+ * null) sit at top level, immediately after the root band -- they matched
+ * the query itself, not any displayed word.
+ *
+ * `language`: a green card belongs in ITS OWN language group; that is what
+ * the sort means. But its trigger is frequently English and sits in a
+ * different group entirely, so "follow the trigger" is only well-defined
+ * for same-language triggers -- i.e. mechanism-2 and gradient cards.
+ * Everything else keeps the position the language sort already gave it,
+ * which is at the end of its own group.
+ */
+function anchorGreenCards(
+  rows: NameResult[],
+  mode: "tree" | "language"
+): NameResult[] {
+  if (!rows.some(isStandaloneGreen)) return rows;
+
+  const anchors = new Map<number, NameResult>();
+  for (const row of rows) {
+    if (row.matchedSenseId === undefined) continue;
+    if (!anchors.has(row.matchedSenseId)) anchors.set(row.matchedSenseId, row);
+  }
+
+  function canAnchor(green: NameResult): boolean {
+    if (green.parentSenseId === null || green.parentSenseId === undefined) {
+      return false;
+    }
+    const anchor = anchors.get(green.parentSenseId);
+    if (!anchor || isStandaloneGreen(anchor)) return false;
+    return mode === "tree" || anchor.languageCode === green.languageCode;
+  }
+
+  const byAnchor = new Map<number, NameResult[]>();
+  const floating: NameResult[] = [];
+  const base: NameResult[] = [];
+
+  for (const row of rows) {
+    if (!isStandaloneGreen(row)) {
+      base.push(row);
+      continue;
+    }
+    if (canAnchor(row)) {
+      const parent = row.parentSenseId as number;
+      const list = byAnchor.get(parent) ?? [];
+      list.push(row);
+      byAnchor.set(parent, list);
+      continue;
+    }
+    if (mode === "language") base.push(row);
+    else floating.push(row);
+  }
+
+  const out: NameResult[] = [];
+  let placed = floating.length === 0;
+  for (const row of base) {
+    if (!placed && (row.depth ?? 0) > 0) {
+      out.push(...floating);
+      placed = true;
+    }
+    out.push(row);
+    const children =
+      row.matchedSenseId === undefined
+        ? undefined
+        : byAnchor.get(row.matchedSenseId);
+    if (children) out.push(...children);
+  }
+  if (!placed) out.push(...floating);
+  return out;
+}
+
 function sortResults(
   results: NameResult[],
   sort: SortOption,
@@ -82,7 +212,7 @@ function sortResults(
     // the SAME language keep their original relative order, so the server's
     // parent-grouping within that language's tree is untouched -- only the
     // interleave order across different languages changes.
-    return [...results].sort((first, second) => {
+    const ordered = [...results].sort((first, second) => {
       const depthDelta = (first.depth ?? 0) - (second.depth ?? 0);
       if (depthDelta !== 0) return depthDelta;
 
@@ -92,6 +222,7 @@ function sortResults(
         languageOrder.get(second.languageCode ?? "") ?? Number.MAX_SAFE_INTEGER;
       return firstIndex - secondIndex;
     });
+    return anchorGreenCards(ordered, "tree");
   }
 
   if (sort === "language") {
@@ -103,15 +234,25 @@ function sortResults(
     //
     // What this actually does is un-interleave the parallel expansion back
     // into per-tree groups.
-    return [...results].sort((first, second) => {
+    const ordered = [...results].sort((first, second) => {
       const firstIndex =
         languageOrder.get(first.languageCode ?? "") ?? Number.MAX_SAFE_INTEGER;
       const secondIndex =
         languageOrder.get(second.languageCode ?? "") ?? Number.MAX_SAFE_INTEGER;
       return firstIndex - secondIndex;
     });
+    return anchorGreenCards(ordered, "language");
   }
 
+  if (sort === "cardtype") {
+    // Stable, so within each section the server's tree order survives.
+    return [...results].sort(
+      (first, second) => sectionRank(first) - sectionRank(second)
+    );
+  }
+
+  // Alphabetical and length: green cards MIX IN, per 9e. No anchoring --
+  // "under its trigger" is meaningless in an A-Z list.
   return [...results].sort((first, second) => {
     if (sort === "za") {
       return second.name.localeCompare(first.name);
@@ -146,6 +287,17 @@ function languageSectionId(code: string | null) {
 const RTL_FALLBACK_CODES = ["ar", "he", "fa"];
 
 function hopBadgeLabel(result: NameResult, searchedWord: string): string {
+  // Green cards first: the yellow branches below would call a tier-0 Hindi
+  // name a "Semantic equivalent", which it isn't -- it's a name whose
+  // recorded meaning contains the searched word.
+  const green = result.green;
+  if (green) {
+    if (green.matchedTokens.length > 0) {
+      return `Meaning includes \u201c${green.matchedTokens[0]}\u201d`;
+    }
+    return `Shares a spelling with \u201c${green.triggerWord}\u201d`;
+  }
+
   if (result.matchType === "exact") {
     // Roots: the en root IS the searched meaning; every other tree's root
     // is its cross-language semantic equivalent (roadmap 7a label set).
@@ -244,8 +396,14 @@ export function GeneratorPrototype() {
 
   const visibleResults = useMemo(() => {
     const filteredResults = results.filter((result) => {
+      // A gradient card IS an established name, so the "Established names"
+      // filter must keep it. 9d's card-type SORT is what separates the two;
+      // CategoryFilter removes, and removing a name because it also happens
+      // to be a word would be wrong.
       const matchesCategory =
-        category === "all" || result.category === category;
+        category === "all" ||
+        result.category === category ||
+        (category === "established" && result.category === "word-established");
 
       const matchesLanguage =
         !result.languageCode || enabledCodes.includes(result.languageCode);
@@ -289,6 +447,27 @@ export function GeneratorPrototype() {
   // treeSummaries.nodeCount -- that is the unfiltered server count and would
   // disagree with what the sidebar filters are actually showing.
   const resultGroups = useMemo(() => {
+    if (sort === "cardtype") {
+      // Section keys are deliberately NOT language codes: collapsedLanguages
+      // is keyed by group.code and would otherwise collide across a sort
+      // switch. visibleResults is already ordered by sectionRank, so
+      // filtering preserves within-section order.
+      const sections = [
+        { code: "cardtype-green", label: "Established names" },
+        { code: "cardtype-yellow", label: "Words and translations" },
+        { code: "cardtype-blue", label: "Generated names" },
+      ];
+      return sections
+        .map((section, index) => ({
+          code: section.code as string | null,
+          label: section.label as string | null,
+          items: visibleResults.filter(
+            (result) => sectionRank(result) === index
+          ),
+        }))
+        .filter((group) => group.items.length > 0);
+    }
+
     if (sort !== "language") {
       return [
         {
@@ -441,11 +620,50 @@ export function GeneratorPrototype() {
           </span>
         </div>
 
+        {result.green && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-900">
+              {nameTypeLabels[result.green.nameType]}
+              {genderLabels[result.green.gender]
+                ? ` \u00b7 ${genderLabels[result.green.gender]}`
+                : ""}
+            </span>
+            {result.green.isGradient && (
+              <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-semibold text-amber-900">
+                Also a word here
+              </span>
+            )}
+            {result.green.isAlsoSurname && (
+              <span className="rounded-full bg-white/80 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">
+                Also a surname
+              </span>
+            )}
+          </div>
+        )}
+
         <p className="mt-5 text-sm font-semibold uppercase tracking-wide text-slate-500">
           Meaning
         </p>
 
-        <p className="mt-1 font-semibold">{result.meaning}</p>
+        {/* 6d's residue policy on screen: a name with no derived meaning
+            still ships, and shows its provenance label instead of a blank.
+            A blank card looks broken; a labelled one is informative. */}
+        {result.meaning.trim().length > 0 ? (
+          <>
+            <p className="mt-1 font-semibold">{result.meaning}</p>
+            {result.green && (
+              <p className="mt-1 text-xs italic text-slate-500">
+                {result.green.provenanceLabel}
+              </p>
+            )}
+          </>
+        ) : (
+          <p className="mt-1 text-sm italic text-slate-500">
+            {result.green?.provenanceLabel ?? "Meaning not recorded"}
+          </p>
+        )}
+
+        {result.green && <VariantDropdown green={result.green} />}
 
         <div className="mt-4 flex items-center justify-between gap-3">
           <button
@@ -594,6 +812,12 @@ export function GeneratorPrototype() {
             </span>
           )}
 
+          {result.green && (
+            <span className="hidden shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-900 sm:inline">
+              {nameTypeLabels[result.green.nameType]}
+            </span>
+          )}
+
           {result.rootRung === "llm" && result.languageCode !== "en" && (
             <span className="shrink-0 rounded-full bg-sky-100 px-2 py-0.5 text-[10px] font-semibold text-sky-800">
               LLM
@@ -619,9 +843,17 @@ export function GeneratorPrototype() {
             <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
               Meaning
             </p>
-            <p className="mt-1 font-semibold text-slate-800">
-              {result.meaning}
-            </p>
+            {result.meaning.trim().length > 0 ? (
+              <p className="mt-1 font-semibold text-slate-800">
+                {result.meaning}
+              </p>
+            ) : (
+              <p className="mt-1 text-sm italic text-slate-500">
+                {result.green?.provenanceLabel ?? "Meaning not recorded"}
+              </p>
+            )}
+
+            {result.green && <VariantDropdown green={result.green} />}
 
             <div className="mt-3">
               <ResultDetails result={result} />
@@ -1218,6 +1450,7 @@ export function GeneratorPrototype() {
                 >
                   <option value="relevance">Hop order (tree)</option>
                   <option value="language">Language (grouped)</option>
+                  <option value="cardtype">Card type (grouped)</option>
                   <option value="az">First Letter: A–Z</option>
                   <option value="za">First Letter: Z–A</option>
                   <option value="shortest">Shortest first</option>

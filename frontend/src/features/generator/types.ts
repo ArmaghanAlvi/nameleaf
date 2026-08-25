@@ -1,5 +1,10 @@
 export type ResultCategory =
   | "established"
+  // Stage 2c's gradient value: the word and the name are the same object in
+  // the same language, so they ship as ONE card wearing both tags. A
+  // distinct value rather than reusing "established" keeps the category
+  // filter coherent (IMPORT_PREP_FINDINGS.md 5.5).
+  | "word-established"
   | "related"
   | "translation"
   | "generated";
@@ -37,6 +42,49 @@ export interface RelatedName {
   name: string;
   relationshipType: string;
   notes?: string | null;
+}
+
+/**
+ * 9a: `RelatedName` was clearly designed for this, so it is extended rather
+ * than replaced -- plus the two fields it never had. A language, because the
+ * cognate grouping is cross-language by definition; a romanization, because
+ * half of that list is in a script the reader cannot pronounce.
+ */
+export interface GreenVariant extends RelatedName {
+  romanization?: string | null;
+  languageCode?: string | null;
+  language: string;
+  isCrossLanguage: boolean;
+  isDirect: boolean;
+}
+
+/** Everything green about a result. Mirrors backend GreenCardPayload. */
+export interface GreenCardPayload {
+  nameId: number;
+  nameType: "given" | "surname" | "patronymic";
+  gender: "m" | "f" | "x" | "u";
+  isAlsoSurname: boolean;
+
+  provenanceLabel: string;
+  meaningChannel?: string | null;
+  homographConfidence?: string | null;
+
+  mechanisms: string[];
+  matchedTokens: string[];
+  matchTier: number;
+  isGradient: boolean;
+
+  triggerWord: string;
+  triggerLanguageCode: string;
+  /** false = the trigger came from the HIDDEN English pass and is not on
+   *  screen. The card is real; the word that found it just isn't displayed. */
+  triggerVisible: boolean;
+
+  clusterId?: number | null;
+  variants: GreenVariant[];
+  variantTotal: number;
+  cognates: GreenVariant[];
+  cognateTotal: number;
 }
 
 export interface HopPathStep {
@@ -88,6 +136,9 @@ export interface NameResult {
   // nothing -- the backend sends null wherever no trustworthy value exists,
   // and a guess is worse than a blank.
   romanization?: string | null;
+
+  // Stage 8. Present on green and gradient cards, absent on yellow ones.
+  green?: GreenCardPayload | null;
 }
 
 export interface SelectedSense {
