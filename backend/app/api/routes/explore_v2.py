@@ -92,6 +92,8 @@ def _green_payload(view: GreenCardView) -> GreenCardPayload:
         provenanceLabel=view.provenance,
         meaningChannel=name.meaning_channel,
         homographConfidence=name.homograph_confidence,
+        originLanguage=name.origin_language_name,
+        originShape=name.origin_shape,
         # Off the VIEW, not off `name` directly: build_views is the single
         # place that resolves a card's display meaning, and reading the model
         # here would fork that responsibility across two modules.
@@ -148,6 +150,42 @@ def _green_to_result(view: GreenCardView) -> ExploreV2Result:
     )
 
 
+def _folds_into_twin(
+    view: GreenCardView, host: ExploreV2Result | None
+) -> bool:
+    """Should this green card disappear into a twin that already merged?
+
+    A TWIN is a row sharing (language_id, normalized_lemma) but differing in
+    name_type -- `Hope` the given name and `Hope` the surname, two rows at
+    the established_names grain. Findings 19.3 measured this as the COMMON
+    case for English homographs, not an edge case, so after Stage 13b the
+    twin would ship as a second card printing the identical string next to
+    its own merged copy.
+
+    THREE CONDITIONS, all fail-closed:
+
+      1. Only a SURNAME folds. `is_also_surname` is the only vocabulary the
+         card has for "this is also the other type", and it points one way.
+         A given-name twin arriving after a merged surname would need "also
+         a given name", which does not exist -- so it ships standalone and
+         we record how often that happens rather than inventing a label.
+      2. The host must not itself be a surname, for the same reason.
+      3. The twin must add no meaning the host is not already showing.
+         `green.nameMeaning` (Stage 11d) is the NAME's meaning, which is the
+         correct comparison -- `host.meaning` on a gradient row is the
+         WORD's definition and comparing against it would fold on the wrong
+         evidence. A twin with its own distinct meaning keeps its card.
+    """
+    if host is None or host.green is None:
+        return False
+    if view.card.name.name_type != "surname":
+        return False
+    if host.green.nameType == "surname":
+        return False
+    twin_meaning = view.meaning_text
+    return twin_meaning is None or twin_meaning == host.green.nameMeaning
+
+
 def _attach_green_cards(
     results: list[ExploreV2Result], views: list[GreenCardView]
 ) -> list[ExploreV2Result]:
@@ -167,26 +205,52 @@ def _attach_green_cards(
     At most ONE gradient payload per yellow row: `Martin` the given name and
     `Martin` the surname are two rows at the established_names grain and both
     are gradient-eligible against the same word. The better-ranked one merges
-    (views arrive in 7e rank order); the other ships standalone.
+    (views arrive in 7e rank order).
+
+    Stage 13c: the LOSER of that contest no longer ships standalone by
+    default. Findings 19.3 measured the given/surname twin as the common
+    English shape, so after 13b's gate flip a standalone twin would print
+    the same string twice on screen. `_folds_into_twin` decides -- a
+    surname twin carrying no meaning of its own folds into the merged card
+    as `isAlsoSurname`; anything else still ships its own card.
     """
     index: dict[int, int] = {}
     for position, result in enumerate(results):
         index.setdefault(result.matchedSenseId, position)
 
     merged: set[int] = set()
+    # (language_id, normalized_lemma) -> the row its twin merged onto. This
+    # is what makes the fold possible at all: the second row of a twin pair
+    # has no anchor of its own to merge to, because the first one took it.
+    merged_keys: dict[tuple[int, str], int] = {}
     appended: list[ExploreV2Result] = []
     for view in views:
+        name = view.card.name
+        key = (name.language_id, name.normalized_lemma)
         anchor = view.card.homograph_anchor_sense_id
         position = index.get(anchor) if (view.card.is_gradient
                                          and anchor is not None) else None
         if position is not None and position not in merged:
             merged.add(position)
+            merged_keys[key] = position
             results[position] = results[position].model_copy(update={
                 "category": "word-established",
                 "green": _green_payload(view),
             })
-        else:
-            appended.append(_green_to_result(view))
+            continue
+
+        twin_at = merged_keys.get(key)
+        host = results[twin_at] if twin_at is not None else None
+        if _folds_into_twin(view, host):
+            assert twin_at is not None and host is not None
+            assert host.green is not None
+            results[twin_at] = host.model_copy(update={
+                "green": host.green.model_copy(
+                    update={"isAlsoSurname": True}),
+            })
+            continue
+
+        appended.append(_green_to_result(view))
     return results + appended
 
 

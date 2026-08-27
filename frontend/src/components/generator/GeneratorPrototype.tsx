@@ -91,6 +91,19 @@ const genderLabels: Record <
   u: "",
 };
 
+// 14e. Two shapes, two sentences. "from Sanskrit" says borrowed;
+// "Ukrainian rendering" says this spelling is an English way of writing a
+// Ukrainian name. Collapsing them into one string would make the chip
+// assert something the categories did not.
+function originChipLabel(
+  green: NonNullable<NameResult["green"]>
+): string | null {
+  if (!green.originLanguage) return null;
+  return green.originShape === "rendering"
+    ? `${green.originLanguage} rendering`
+    : `from ${green.originLanguage}`;
+}
+
 const partKindLabels: Record<NamePartKind, string> = {
   root: "Verified root",
   word: "Existing word",
@@ -725,6 +738,12 @@ export function GeneratorPrototype() {
             {result.green?.isAlsoSurname && (
               <span className="rounded-full bg-white/80 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">
                 Also a surname
+              </span>
+            )}
+
+            {result.green && originChipLabel(result.green) && (
+              <span className="rounded-full bg-sky-100 px-2.5 py-0.5 text-[11px] font-semibold text-sky-900">
+                {originChipLabel(result.green)}
               </span>
             )}
           </div>

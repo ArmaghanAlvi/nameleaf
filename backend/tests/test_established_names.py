@@ -14,14 +14,17 @@ from app.models.semantic import (
 from app.services.established_names import (
     category_names,
     classify_from_categories,
+    classify_from_categories_origin,
     classify_sense,
     etymology_mentions,
     extract_equivalence,
     extract_meaning,
     gender_from_head,
     homograph_confidence,
+    language_header_warning,
     meaning_tokens,
     parse_name_category,
+    parse_name_category_origin,
     provenance_label,
     reduce_gender,
 )
@@ -94,6 +97,78 @@ def test_category_rejects_other_languages_categories():
 
 def test_category_rejects_non_name_categories():
     assert parse_name_category("Places in England", "English") is None
+
+
+# --- 14c: origin capture ----------------------------------------------------
+
+def test_the_from_tail_is_captured_not_discarded():
+    hit = parse_name_category_origin(
+        "English surnames from Old English", "English")
+    assert hit is not None
+    assert (hit.bucket, hit.gender) == ("SURNAME", "u")
+    assert hit.origin_language == "Old English"
+    assert hit.origin_shape == "from"
+
+
+def test_the_connector_source_language_is_captured():
+    # Findings 19.4: this is the ONLY origin signal that reaches `Nadiya`.
+    hit = parse_name_category_origin(
+        "English renderings of Ukrainian female given names", "English")
+    assert hit is not None
+    assert (hit.bucket, hit.gender) == ("GIVEN", "f")
+    assert hit.origin_language == "Ukrainian"
+    assert hit.origin_shape == "rendering"
+
+
+def test_a_bare_category_states_no_origin():
+    hit = parse_name_category_origin("English given names", "English")
+    assert hit is not None
+    assert hit.origin_language is None and hit.origin_shape is None
+
+
+def test_a_lowercase_tail_is_not_a_language():
+    # "of"/"in" do not denote an origin, and an uncapitalized run is not a
+    # language name. Both fail CLOSED -- no origin rather than a wrong one.
+    hit = parse_name_category_origin(
+        "Russian possessive surnames from patronymics", "Russian")
+    assert hit is not None
+    assert (hit.bucket, hit.gender) == ("SURNAME", "u")
+    assert hit.origin_language is None
+
+
+def test_the_capture_did_not_change_which_categories_resolve():
+    # The 14c invariant, at unit scale: every pre-14c assertion still holds
+    # through the unchanged wrapper. The corpus-scale version is the
+    # dry-run diff in Breakdown G Step 10.
+    assert parse_name_category("English surnames from Old English",
+                               "English") == ("SURNAME", "u")
+    assert parse_name_category("English terms derived from given names",
+                               "English") is None
+    assert parse_name_category("Places in England", "English") is None
+
+
+def test_origin_reduction_prefers_the_connector_shape():
+    cats = [
+        "{'name': 'English given names from Ukrainian', 'kind': 'other'}",
+        "{'name': 'English renderings of Ukrainian female given names', "
+        "'kind': 'other'}",
+    ]
+    bucket, gender, _also, origin, shape = classify_from_categories_origin(
+        cats, "English")
+    assert bucket == "GIVEN"
+    assert (origin, shape) == ("Ukrainian", "rendering")
+
+
+# --- 14c: the maintenance flag ----------------------------------------------
+
+def test_the_language_header_warning_is_an_exact_string_test():
+    yes = ["{'name': 'English entries with incorrect language header', "
+           "'kind': 'other'}"]
+    no = ["{'name': 'English given names', 'kind': 'other'}"]
+    assert language_header_warning(yes, "English") is True
+    assert language_header_warning(no, "English") is False
+    # Language-scoped: a German flag is not an English one.
+    assert language_header_warning(yes, "German") is False
 
 
 # --- classify_from_categories ----------------------------------------------

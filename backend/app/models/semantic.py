@@ -16,6 +16,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     func,
+    text,
 )
 
 from pgvector.sqlalchemy import Vector
@@ -1524,6 +1525,32 @@ class EstablishedName(Base):
         String(16), nullable=True
     )
 
+    # Stage 14. WHERE this name came from, when the source categories say
+    # so. Findings 19.4 (F-2) falsified the assumption that a `from <Lang>`
+    # tail would cover it: three of four sampled English-filed foreign names
+    # carry no such tail. `origin_shape` distinguishes the two shapes that
+    # DO occur, because they are different claims -- "English surnames from
+    # Old French" says borrowed; "English renderings of Ukrainian female
+    # given names" says this spelling is an English way of writing a
+    # Ukrainian name. Collapsing them would make the chip lie about one of
+    # them.
+    origin_language_name: Mapped[str | None] = mapped_column(
+        String(80), nullable=True
+    )
+    origin_shape: Mapped[str | None] = mapped_column(
+        String(12), nullable=True
+    )
+
+    # Wiktionary's OWN flag that the entry is filed under the wrong language
+    # header ("English entries with incorrect language header"). An
+    # editorial backlog marker, not a linguistic classification -- which is
+    # exactly why it is stored and surfaced rather than acted on. It is the
+    # closest thing to derivable evidence available under the zero-review
+    # constraint, and it is not proof.
+    language_header_warning: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False, server_default=text("false")
+    )
+
     cluster_id: Mapped[int | None] = mapped_column(
         ForeignKey("established_name_clusters.id", ondelete="SET NULL"),
         nullable=True,
@@ -1571,6 +1598,15 @@ class EstablishedName(Base):
             "homograph_confidence IS NULL OR homograph_confidence IN "
             "('corroborated', 'spelling_only')",
             name="ck_established_names_homograph_confidence",
+        ),
+        CheckConstraint(
+            "origin_shape IS NULL OR origin_shape IN ('from', 'rendering')",
+            name="ck_established_names_origin_shape",
+        ),
+        CheckConstraint(
+            "(origin_language_name IS NULL AND origin_shape IS NULL) OR "
+            "(origin_language_name IS NOT NULL AND origin_shape IS NOT NULL)",
+            name="ck_established_names_origin_pair",
         ),
         # A source row without the matching channel is a provenance claim
         # with nothing behind it -- the same blank-over-wrong reasoning that

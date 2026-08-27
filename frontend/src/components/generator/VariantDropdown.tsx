@@ -65,11 +65,17 @@ function Group({
     <div className="mt-2 first:mt-0">
       <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
         {title}
+        {total > 0 ? ` \u00b7 ${total}` : ""}
       </p>
-      {/* Scrollable rather than truncated: the backend already capped the
-          list, and `total` is the TRUE pre-cap count, so the line below is
-          honest about what is missing instead of pretending nothing is. */}
-      <ul className="mt-1 max-h-48 overflow-y-auto pr-1">
+      {/* Scrollable rather than truncated, and as of Step 2 the backend caps
+          sit above every census maximum, so `shown` is normally the whole
+          family. The count in the header above is what makes the scroll
+          depth legible BEFORE scrolling -- a 40-row list inside a fixed
+          window otherwise reads as "about six forms". The "not shown" line
+          below stays: it is dead in practice now, and that is exactly why
+          deleting it would be dangerous -- it is the honest fallback if a
+          future census finds a family above the new ceiling. */}
+      <ul className="mt-1 max-h-80 overflow-y-auto pr-1">
         {shown.map((variant) => (
           <VariantRow
             key={`${variant.languageCode}-${variant.name}`}

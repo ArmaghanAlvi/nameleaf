@@ -46,14 +46,37 @@ MECH_HOMOGRAPH = "homograph"
 # smaller and more specialised population than given names.
 TYPE_RANK: dict[str, int] = {"given": 0, "patronymic": 1, "surname": 2}
 
-# 7c honesty gate. A gradient card asserts that the word and the name are
-# ONE object wearing two tags. For `spelling_only` links that is exactly the
-# claim we established we cannot make: IMPORT_PREP_FINDINGS.md 5.1's
-# `Lucius` / `lucius` ("a fish, probably the pike"), and 8,635 of the 12,598
-# links are spelling_only (findings 11.5). Those matches still SHIP -- as
-# standalone green cards carrying Stage 6c's hedged provenance label, which
-# says "spelled identically to" and never "means".
-GRADIENT_REQUIRES_CORROBORATION = True
+# 7c honesty gate -- FLIPPED in Breakdown G Step 5 (findings §20.3).
+#
+# WHAT IT USED TO PROTECT. A gradient card asserted that the word and the
+# name are ONE object wearing two tags, which for `spelling_only` is the
+# claim IMPORT_PREP_FINDINGS.md 5.1 disproves: `Lucius` shares a key with
+# `lucius` ("a fish, probably the pike") but descends from *lux*.
+#
+# WHY THAT PROTECTION IS NO LONGER LOAD-BEARING. Stage 11d changed what the
+# card says. It renders the WORD's definition as the word's, and the name's
+# own meaning separately under "As a name" (suppressed when the two are the
+# same text). The card no longer claims the name MEANS the word's gloss --
+# it claims "this spelling is both a word and an established name in this
+# language," which is true for a spelling_only link BY DEFINITION OF THE
+# LINK. The Lucius card now reads: here is `lucius` the fish, and separately
+# here is `Lucius` the name. Both true.
+#
+# WHY THE FLIP IS SAFE IN SHAPE, not just in wording:
+#   * merging REMOVES a card rather than adding one -- _attach_green_cards
+#     mutates an existing yellow row and only appends on failure -- so
+#     result counts go DOWN. There is no flood vector.
+#   * findings 15.1's pooled mechanism-2 yield was 79 across ten probe
+#     words, so the population that can gradient at all is small.
+#
+# The hedge did not disappear; it moved one click deep, per B3's own rule.
+# `homograph_confidence` still rides on the payload and ResultDetails still
+# renders "same spelling only".
+#
+# The constant is KEPT rather than deleted so the branch stays reachable
+# from a test (test_the_corroboration_gate_still_works_when_enabled) and so
+# the reasoning above has somewhere to live.
+GRADIENT_REQUIRES_CORROBORATION = False
 
 # Set in Breakdown D Step 6 from the Step-5 yield probe (findings 15.x).
 # Measured at --scope all, w3_d2, 10 probe words, uncapped:

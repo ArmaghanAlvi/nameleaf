@@ -37,6 +37,7 @@ import ast
 import re
 
 from collections.abc import Iterable
+from typing import NamedTuple
 from app.utils.text import normalize_lemma
 
 # ===========================================================================
@@ -521,10 +522,16 @@ _TYPE_ALTERNATION = "|".join(
           key=len, reverse=True)
 )
 
+# Stage 14c: the trailing group is now NAMED, not rewritten. Every character
+# that participates in matching is unchanged -- `(?:from|of|in|derived\s+
+# from)` became `(?P<origin_kw>...)` and `.*` became `(?P<origin_tail>.*)`
+# -- so which categories resolve cannot have moved. That is the invariant
+# the Step-10 dry-run diff proves rather than assumes.
 _CATEGORY_TAIL_RX = re.compile(
     r"^(?P<mods>(?:[\w'\u2019-]+\s+)*?)"
     r"(?P<type>" + _TYPE_ALTERNATION + r")"
-    r"(?:\s+(?:from|of|in|derived\s+from)\b.*)?$",
+    r"(?:\s+(?P<origin_kw>from|of|in|derived\s+from)\b"
+    r"(?P<origin_tail>.*))?$",
     re.IGNORECASE,
 )
 
@@ -544,20 +551,62 @@ _CATEGORY_CONNECTORS: tuple[str, ...] = (
     "renderings of ", "diminutives of ", "augmentatives of ",
 )
 
+# Stage 14c: the lazy prefix that used to be "accepted unconditionally and
+# discarded" is now named. It IS the source language of the connector shape
+# ("Chinese renderings of English male given names" -> "English"), which
+# findings 19.4 identified as the only origin signal reaching `Nadiya`.
+# Naming a group changes no match boundary.
 _OPEN_TAIL_RX = re.compile(
-    r"^(?:[\w'\u2019-]+\s+)*?"
+    r"^(?P<origin_run>(?:[\w'\u2019-]+\s+)*?)"
     r"(?:(?P<gender>male|female|unisex|masculine|feminine|epicene)\s+)?"
     r"(?P<type>" + _TYPE_ALTERNATION + r")$",
     re.IGNORECASE,
 )
 
 
-def parse_name_category(
+# A capitalized 1-4 word run. Language names in Wiktionary categories are
+# capitalized ("Ukrainian", "Ancient Greek", "Old Church Slavonic"); the
+# things that are NOT origins are not ("possessive", "patronymics", "the
+# Bible"). That is the whole test -- deliberately NOT a list of languages,
+# for the same reason parse_name_category is a pattern and not a list:
+# language #22 must self-classify with no edit here.
+#
+# Fails CLOSED. A run that does not look like a language name yields no
+# origin rather than a wrong one, and name_origin_census.py reports those
+# runs so the filter is widened against evidence, never in advance.
+_ORIGIN_WORD_RX = re.compile(r"^[A-Z][\w'\u2019-]*$")
+MAX_ORIGIN_WORDS = 4
+
+# Only these two keywords denote an origin. "of" and "in" appear in the same
+# slot ("Places in England" never reaches here, but "surnames of ..." can)
+# and do not name a source language.
+_ORIGIN_KEYWORDS: frozenset[str] = frozenset({"from", "derived from"})
+
+
+def origin_language_run(text: str | None) -> str | None:
+    """A capitalized 1-4 word language-name run, or None."""
+    words = (text or "").split()
+    if not words or len(words) > MAX_ORIGIN_WORDS:
+        return None
+    if not all(_ORIGIN_WORD_RX.match(w) for w in words):
+        return None
+    return " ".join(words)
+
+
+class CategoryHit(NamedTuple):
+    """One resolved category, with the origin the tail states (or None)."""
+    bucket: str
+    gender: str
+    origin_language: str | None
+    origin_shape: str | None      # 'from' | 'rendering' | None
+
+
+def parse_name_category_origin(
     category: str,
     language_name: str,
-) -> tuple[str, str] | None:
+) -> CategoryHit | None:
     """
-    One category string -> (bucket, gender), or None when it is not a name
+    One category string -> CategoryHit, or None when it is not a name
     category for THIS language. gender is "u" when the category states none.
 
     Requiring the string to START with this language's own English name is
@@ -569,10 +618,16 @@ def parse_name_category(
       * a CONNECTOR shape ("renderings of ...", "diminutives of ...") where
         everything between the connector and the trailing [gender] type is
         accepted without word-by-word validation, since it names another
-        language rather than drawing from a fixed vocabulary.
+        language rather than drawing from a fixed vocabulary. Stage 14c
+        CAPTURES that run rather than discarding it -- it is the origin.
       * the plain shape, where every word between the language prefix and
         the trailing [gender] type MUST be a recognized gender word or an
-        evidence-admitted modifier, or the category is rejected.
+        evidence-admitted modifier, or the category is rejected. Its
+        trailing "from <X>" clause, previously matched and thrown away, is
+        now captured too.
+
+    `parse_name_category` below preserves the pre-14c (bucket, gender)
+    contract, so every existing caller and test is untouched.
     """
     text = " ".join((category or "").split())
     lowered = text.casefold()
@@ -593,7 +648,13 @@ def parse_name_category(
             gender = _CATEGORY_GENDER.get(
                 (m.group("gender") or "").casefold(), "u"
             )
-            return _CATEGORY_TYPE_TO_BUCKET[m.group("type").casefold()], gender
+            origin = origin_language_run(m.group("origin_run"))
+            return CategoryHit(
+                _CATEGORY_TYPE_TO_BUCKET[m.group("type").casefold()],
+                gender,
+                origin,
+                "rendering" if origin else None,
+            )
 
     m = _CATEGORY_TAIL_RX.match(rest)
     if not m:
@@ -606,7 +667,32 @@ def parse_name_category(
             gender = _CATEGORY_GENDER[word]
         elif word not in _CATEGORY_MODIFIERS:
             return None
-    return _CATEGORY_TYPE_TO_BUCKET[m.group("type").casefold()], gender
+
+    keyword = " ".join((m.group("origin_kw") or "").split()).casefold()
+    origin = (origin_language_run((m.group("origin_tail") or "").strip())
+              if keyword in _ORIGIN_KEYWORDS else None)
+    return CategoryHit(
+        _CATEGORY_TYPE_TO_BUCKET[m.group("type").casefold()],
+        gender,
+        origin,
+        "from" if origin else None,
+    )
+
+
+def parse_name_category(
+    category: str,
+    language_name: str,
+) -> tuple[str, str] | None:
+    """The pre-14c contract, unchanged: (bucket, gender) or None.
+
+    Kept as a thin wrapper rather than widened in place because
+    classify_from_categories unpacks its result as a 2-tuple, and
+    name_category_census.py and 14 unit tests assert on that shape. Changing
+    the return type to carry origin would have rippled through all of them
+    for no gain -- only populate_established_names needs the extra fields.
+    """
+    hit = parse_name_category_origin(category, language_name)
+    return (hit.bucket, hit.gender) if hit else None
 
 
 # Same priority as classify_name_type: GIVEN beats SURNAME beats PATRONYMIC.
@@ -633,31 +719,61 @@ def reduce_gender(genders) -> str:
     return next(iter(values))
 
 
+def classify_from_categories_origin(
+    categories: Iterable[object] | None,
+    language_name: str,
+) -> tuple[str | None, str, bool, str | None, str | None]:
+    """
+    A sense's categories -> (bucket, gender, is_also_surname,
+    origin_language, origin_shape). bucket is None when nothing resolved --
+    the signal to fall back to the gloss classifier.
+
+    Gender comes only from categories agreeing with the WINNING bucket. A
+    sense in both "English male given names" and "English surnames" is a
+    male given name; letting the genderless surname category vote would drag
+    it to unknown.
+
+    ORIGIN REDUCTION (14c): a stated origin beats none, and on conflict the
+    CONNECTOR shape wins. "English renderings of Ukrainian female given
+    names" is a more specific claim than "English given names from
+    Ukrainian" -- it says how the spelling relates to the source, not just
+    that it came from there. Within one shape, first-seen wins;
+    `category_names` preserves source order, so a rerun is byte-identical.
+    """
+    hits: list[CategoryHit] = []
+    for cat in category_names(categories):
+        parsed = parse_name_category_origin(cat, language_name)
+        if parsed:
+            hits.append(parsed)
+    if not hits:
+        return None, "u", False, None, None
+
+    bucket = min((h.bucket for h in hits), key=lambda b: _BUCKET_PRIORITY[b])
+    genders = {h.gender for h in hits if h.bucket == bucket}
+    also_surname = (bucket != "SURNAME"
+                    and any(h.bucket == "SURNAME" for h in hits))
+
+    origin = shape = None
+    for wanted in ("rendering", "from"):
+        for h in hits:
+            if h.origin_shape == wanted and h.origin_language:
+                origin, shape = h.origin_language, wanted
+                break
+        if origin:
+            break
+
+    return bucket, reduce_gender(genders), also_surname, origin, shape
+
+
 def classify_from_categories(
     categories: Iterable[object] | None,
     language_name: str,
 ) -> tuple[str | None, str, bool]:
-    """
-    A sense's categories -> (bucket, gender, is_also_surname). bucket is None
-    when nothing resolved -- the signal to fall back to the gloss classifier.
-
-    Gender comes only from categories agreeing with the WINNING bucket. A
-    sense in both "English male given names" and "English surnames" is a male
-    given name; letting the genderless surname category vote would drag it to
-    unknown.
-    """
-    hits: list[tuple[str, str]] = []
-    for cat in category_names(categories):
-        parsed = parse_name_category(cat, language_name)
-        if parsed:
-            hits.append(parsed)
-    if not hits:
-        return None, "u", False
-
-    bucket = min((b for b, _ in hits), key=lambda b: _BUCKET_PRIORITY[b])
-    genders = {g for b, g in hits if b == bucket}
-    also_surname = bucket != "SURNAME" and any(b == "SURNAME" for b, _ in hits)
-    return bucket, reduce_gender(genders), also_surname
+    """The pre-14c contract, unchanged. See parse_name_category's note."""
+    bucket, gender, also, _origin, _shape = classify_from_categories_origin(
+        categories, language_name
+    )
+    return bucket, gender, also
 
 
 # --- gender from the gloss head phrase -------------------------------------
@@ -712,14 +828,35 @@ def gender_from_head(gloss: str) -> str:
     return hits[0][1]
 
 
-def classify_sense(
+def language_header_warning(
+    categories: Iterable[object] | None,
+    language_name: str,
+) -> bool:
+    """Does this sense carry Wiktionary's own mis-filing flag?
+
+    A plain exact-string test, deliberately -- no regex. The category is a
+    fixed maintenance string ("<Language> entries with incorrect language
+    header"), it is generated by a template rather than written by hand, and
+    a regex here would be pattern-matching where an equality holds.
+
+    This is an EDITORIAL BACKLOG marker. It records that a Wiktionary editor
+    flagged the entry, not that the entry is wrong -- some flagged entries
+    are legitimately English and simply awaiting cleanup. Stage 14f decides
+    what, if anything, to do with it; this function only reports it.
+    """
+    target = f"{language_name} entries with incorrect language header"
+    return target in category_names(categories)
+
+
+def classify_sense_origin(
     gloss: str,
     tags: list[str] | None,
     categories: Iterable[object] | None,
     language_name: str,
-) -> tuple[str, str, bool]:
+) -> tuple[str, str, bool, str | None, str | None]:
     """
-    ONE name sense -> (bucket, gender, is_also_surname).
+    ONE name sense -> (bucket, gender, is_also_surname, origin_language,
+    origin_shape).
 
     Order, and why:
       1. FORM_OF, from the gloss/tags, ALWAYS first. An inflected citation is
@@ -727,15 +864,20 @@ def classify_sense(
          inherited by form-of senses, so skipping this would import
          "accusative singular of Zmyrna" as a Latin given name (Latin alone
          carries 313 such senses).
-      2. categories, the primary predicate (3a).
+      2. categories, the primary predicate (3a), which as of 14c also
+         carries the origin.
       3. the gloss regexes, as fallback, wherever no category resolved.
+
+    A row that reaches (3) has NO origin: the gloss fallback fires precisely
+    when no category resolved, and the origin only ever lives in a category.
+    That is a fact about where the data is, not a limitation to fix.
     """
     bucket_gloss = classify_name_type(gloss, tags)
     if bucket_gloss == "FORM_OF":
-        return "FORM_OF", "u", False
+        return "FORM_OF", "u", False, None, None
 
-    bucket, gender, also_surname = classify_from_categories(
-        categories, language_name
+    bucket, gender, also_surname, origin, shape = (
+        classify_from_categories_origin(categories, language_name)
     )
     if bucket is None:
         bucket, gender = bucket_gloss, gender_from_head(gloss)
@@ -744,7 +886,24 @@ def classify_sense(
 
     if bucket in ("GIVEN", "PATRONYMIC") and not also_surname:
         also_surname = both_given_and_surname(gloss)
-    return bucket, gender, also_surname
+    return bucket, gender, also_surname, origin, shape
+
+
+def classify_sense(
+    gloss: str,
+    tags: list[str] | None,
+    categories: Iterable[object] | None,
+    language_name: str,
+) -> tuple[str, str, bool]:
+    """The pre-14c contract, unchanged.
+
+    build_name_graph.py and name_category_census.py both unpack this as a
+    3-tuple and neither needs the origin; only the populator does.
+    """
+    bucket, gender, also, _origin, _shape = classify_sense_origin(
+        gloss, tags, categories, language_name
+    )
+    return bucket, gender, also
 
 
 # ---------------------------------------------------------------------------

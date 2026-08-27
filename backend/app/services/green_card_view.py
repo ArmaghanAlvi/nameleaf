@@ -40,21 +40,35 @@ from app.services.green_card_retrieval import (
     GreenCard,
 )
 
-# Set in Breakdown E Step 6 from the Step-5 emission probe (findings 18.x).
+# Set in Breakdown E Step 6 from the Step-5 emission probe (findings 18.x);
+# RAISED in Breakdown G Step 2 (findings §20.2).
+#
 # Global census (section 1, 1625 clusters): size median=2, p90=5, p99=22,
 # max=83. Global census (section 2, 945 names with a cross-language edge):
 # in-degree median=1, p90=5, p99=12, max=24 (worst hub: en:John).
-# NOTE: the per-query pooled sample (10 probe words, scope=all) showed much
-# lower numbers on both axes (variants/card p99=6, cognates/card p99=3)
-# because none of the probe words happen to be name hubs -- the census, not
-# the per-query sample, is what the caps are set from, since undersampling
-# the hub case would defeat the reason for measuring it.
-# VARIANT_CAP sits above the census p90 (5), comfortably below the census
-# max (83), truncating only the ~20/1625 largest same-language families.
-# COGNATE_CAP sits at the census p99 (12), truncating only the handful of
-# genuine hub names (John, George, Andrew, David, Mary) above that line.
-VARIANT_CAP = 15
-COGNATE_CAP = 12
+#
+# WHY THE ORIGINAL VALUES WERE WRONG, and it is a reasoning error rather
+# than a measurement error: the caps were sized against the census
+# DISTRIBUTION, as if the cost of showing a member were per-member layout.
+# It is not. VariantDropdown renders into a scrolling container, so the only
+# resource a cap bounds is response BYTES -- and truncating a 41-member
+# family at 15 to save ~26 small objects buys nothing, while producing a
+# user-visible "and 25 more not shown" on exactly the families a name search
+# is most likely to be about (findings §19.1, F-3).
+#
+# These now sit ABOVE both census maxima with headroom, so no family in the
+# corpus as it stands is ever truncated. Measured in Breakdown G Step 3
+# against scripts/prune/green_payload_size_probe.py, with a 512 KB
+# single-response ceiling agreed before the numbers existed.
+VARIANT_CAP = 120   # true max reached: 82 (man/counsel/elf/defend/father/
+                     # alexander/helper/defender, matching the corpus census
+                     # max of 83 almost exactly). Headroom ~1.5x.
+COGNATE_CAP = 80     # true max reached: 53 (father, house) -- ABOVE the
+                     # per-name census max of 24, because a cluster's
+                     # cognate list pools every member's in-degree, not one
+                     # name's. The per-name census answered the wrong
+                     # question for this cap; this probe is the correct
+                     # measurement. Headroom ~1.5x, same ratio as VARIANT_CAP.
 
 # Display strings for a DIRECT edge, keyed by (relation, card_is_source).
 # Edge direction is meaningful: extract_edges reads the SOURCE's gloss, so

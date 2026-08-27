@@ -219,9 +219,10 @@ def test_gradient_merges_onto_the_yellow_row_without_adding_one(db):
     assert rows[0].green.isGradient is True
 
 
-def test_only_one_gradient_merges_per_yellow_row(db):
-    # `Martin` given + `Martin` surname are two rows at the
-    # established_names grain, both gradient-eligible against one word.
+def test_the_surname_twin_folds_into_the_merged_given_card(db):
+    # Stage 13c. This test previously asserted TWO rows -- the given name
+    # merged, the surname standalone. Findings 19.3 showed that pair is the
+    # common English shape, so shipping both printed the same string twice.
     src, en, de, hi = seed(db)
     lx, s = add_lex(db, src, en, "sky", "sky")
     wlx, ws = add_lex(db, src, hi, "आकाश", "आकाश")
@@ -235,13 +236,61 @@ def test_only_one_gradient_merges_per_yellow_row(db):
         visible_nodes=[FakeNode(ws, 1)], language_codes=["hi"])
     rows = _attach_green_cards([yellow(ws.id, "आकाश", 1)],
                                build_views(db, cards))
-    assert len(rows) == 2
+    assert len(rows) == 1
     assert rows[0].category == "word-established"
     assert rows[0].green is not None
-    assert rows[0].green.nameType == "given"      # better-ranked wins
+    assert rows[0].green.nameType == "given"        # better-ranked wins
+    assert rows[0].green.isAlsoSurname is True      # the twin, folded
+
+
+def test_a_twin_with_its_own_meaning_keeps_its_card(db):
+    # The fold is not unconditional. A surname carrying a meaning the
+    # merged card is not already showing is a second FACT, not a duplicate
+    # string, and discarding it would lose information.
+    src, en, de, hi = seed(db)
+    lx, s = add_lex(db, src, en, "sky", "sky")
+    wlx, ws = add_lex(db, src, hi, "आकाश", "आकाश")
+    nlx, ns = add_lex(db, src, hi, "n", "n", pos="name")
+    add_name(db, hi, "आकाश", "आकाश", nlx, ns, tokens=["sky"],
+             ntype="given", confidence="corroborated",
+             meaning="sky", channel="HOMOGRAPH")
+    add_name(db, hi, "आकाश", "आकाश", nlx, ns, tokens=["sky"],
+             ntype="surname", confidence="corroborated",
+             meaning="a small enclosed valley", channel="GLOSS_MEANING")
+    cards = retrieve_green_cards(
+        db, english_nodes=[FakeNode(s, 0)],
+        visible_nodes=[FakeNode(ws, 1)], language_codes=["hi"])
+    rows = _attach_green_cards([yellow(ws.id, "आकाश", 1)],
+                               build_views(db, cards))
+    assert len(rows) == 2
+    assert rows[0].category == "word-established"
     assert rows[1].category == "established"
     assert rows[1].green is not None
     assert rows[1].green.nameType == "surname"
+
+
+def test_a_given_twin_never_folds_into_a_merged_surname(db):
+    # `is_also_surname` points one way. Folding a given name into a merged
+    # surname would need a label that does not exist, so the given name
+    # ships its own card instead of being described wrongly.
+    src, en, de, hi = seed(db)
+    lx, s = add_lex(db, src, en, "sky", "sky")
+    wlx, ws = add_lex(db, src, hi, "आकाश", "आकाश")
+    nlx, ns = add_lex(db, src, hi, "n", "n", pos="name")
+    sn = add_name(db, hi, "आकाश", "आकाश", nlx, ns, tokens=["sky"],
+                  ntype="surname", confidence="corroborated")
+    gv = add_name(db, hi, "आकाश", "आकाश", nlx, ns, tokens=["sky"],
+                  ntype="given", confidence="corroborated")
+    views = build_views(db, retrieve_green_cards(
+        db, english_nodes=[FakeNode(s, 0)],
+        visible_nodes=[FakeNode(ws, 1)], language_codes=["hi"]))
+    # Force the surname to merge first, which is what a tier-0 surname
+    # against a tier-1 given name produces in the wild.
+    views.sort(key=lambda v: 0 if v.card.name.id == sn.id else 1)
+    rows = _attach_green_cards([yellow(ws.id, "आकाश", 1)], views)
+    assert len(rows) == 2
+    assert rows[0].green is not None and rows[0].green.nameType == "surname"
+    assert rows[1].green is not None and rows[1].green.nameType == "given"
 
 
 def test_standalone_green_card_shape(db):
@@ -312,3 +361,24 @@ def test_payload_name_meaning_is_none_for_residue(db):
     row = _green_to_result(views[0])
     assert row.green is not None
     assert row.green.nameMeaning is None
+
+
+def test_default_caps_do_not_truncate_a_census_scale_family(db):
+    # F-3: Katherine's cluster is 41 members; VARIANT_CAP=15 produced the
+    # user-visible "and 25 more not shown". This asserts the BEHAVIOUR (a
+    # family that size ships whole) rather than the constant, so a future
+    # cap change is only a failure if it actually truncates something.
+    src, en, de, hi = seed(db)
+    lx, s = add_lex(db, src, en, "pure", "pure")
+    elx, es = add_lex(db, src, en, "x", "x", pos="name")
+    c = EstablishedNameCluster(name_type="given", size=41)
+    db.add(c)
+    db.flush()
+    add_name(db, en, "Aaa", "aaa", elx, es, tokens=["pure"], cluster=c.id)
+    for i in range(40):
+        add_name(db, en, f"V{i:02d}", f"v{i:02d}", elx, es, cluster=c.id)
+    views = build_views(db, retrieve_green_cards(
+        db, english_nodes=[FakeNode(s, 0)], visible_nodes=[],
+        language_codes=["en"]))
+    assert views[0].variant_total == 40
+    assert len(views[0].variants) == 40

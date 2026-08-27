@@ -68,6 +68,15 @@ export interface GreenCardPayload {
   provenanceLabel: string;
   meaningChannel?: string | null;
   homographConfidence?: string | null;
+  /** Stage 14e. Null means the source categories stated no origin -- NOT
+   *  that the name is native to this language. `Nadia` carries only bare
+   *  English categories and is indistinguishable here from any native
+   *  English given name; the chip is honest about what Wiktionary says,
+   *  which is less than the whole truth. */
+  originLanguage?: string | null;
+  /** 'from' (borrowed) | 'rendering' (an X-language way of writing a
+   *  Y-language name). Different claims, different chip text. */
+  originShape?: string | null;
   /** Stage 11d. The NAME's meaning. On a gradient card this is NOT
    *  `NameResult.meaning` -- that is the WORD's definition, from the yellow
    *  row this card merged onto. Mirrors GreenCardPayload.nameMeaning. */

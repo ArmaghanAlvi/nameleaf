@@ -57,7 +57,8 @@ from app.models.semantic import Lexeme, Sense                   # noqa: E402
 from app.services.established_names import (                    # noqa: E402
     MEANING_CHANNEL_RANK,
     TOKENIZED_CHANNELS,
-    classify_sense,
+    classify_sense_origin,
+    language_header_warning,
     extract_equivalence,
     extract_meaning,
     meaning_tokens,
@@ -83,7 +84,8 @@ class NameGroup:
     __slots__ = ("lemma", "genders", "also_surname", "best_rank",
                  "best_sense_id", "best_lexeme_id", "meaning_text",
                  "meaning_channel", "equiv_en_target", "equiv_sense_id",
-                 "romanization", "sense_count")
+                 "romanization", "sense_count", "origin_language",
+                 "origin_shape", "header_warning")
 
     def __init__(self) -> None:
         self.lemma = ""
@@ -98,6 +100,9 @@ class NameGroup:
         self.equiv_sense_id = 0
         self.romanization: str | None = None
         self.sense_count = 0
+        self.origin_language: str | None = None
+        self.origin_shape: str | None = None
+        self.header_warning = False
 
 
 def collect_language(db: Session, lang, rederive_romanization: bool):
@@ -121,8 +126,11 @@ def collect_language(db: Session, lang, rederive_romanization: bool):
         lex = sense.lexeme
         gloss = (sense.definition or "").strip()
 
-        bucket, gender, also_surname = classify_sense(
-            gloss, list(sense.raw_tags or []), sense.categories, lang.name
+        bucket, gender, also_surname, origin, origin_shape = (
+            classify_sense_origin(
+                gloss, list(sense.raw_tags or []), sense.categories,
+                lang.name
+            )
         )
         if bucket not in BUCKET_TO_TYPE:
             stats[f"skipped_{bucket}"] += 1
@@ -138,6 +146,25 @@ def collect_language(db: Session, lang, rederive_romanization: bool):
         group.sense_count += 1
         group.genders.add(gender)
         group.also_surname = group.also_surname or also_surname
+
+        # Reduced across the group, not taken from the winning sense: the
+        # meaning waterfall picks source_sense_id on MEANING evidence, and
+        # the origin routinely sits on a sibling sense that lost it. Same
+        # reason build_name_graph reads edges from senses rather than from
+        # source_sense_id. Precedence matches
+        # classify_from_categories_origin: 'rendering' beats 'from', and
+        # within a shape the first sense seen wins (senses are ordered by
+        # id, so a rerun is byte-identical).
+        if origin and (
+            group.origin_language is None
+            or (origin_shape == "rendering"
+                and group.origin_shape == "from")
+        ):
+            group.origin_language = origin
+            group.origin_shape = origin_shape
+        group.header_warning = group.header_warning or language_header_warning(
+            sense.categories, lang.name
+        )
 
         meaning, channel = extract_meaning(
             gloss, sense.etymology_text or "", lang.code
@@ -202,6 +229,9 @@ def write_names(db: Session, lang, groups, dry_run: bool) -> int:
             "meaning_text": g.meaning_text,
             "meaning_channel": g.meaning_channel,
             "equiv_en_target": g.equiv_en_target,
+            "origin_language_name": g.origin_language,
+            "origin_shape": g.origin_shape,
+            "language_header_warning": g.header_warning,
         })
 
     written = 0
@@ -209,12 +239,14 @@ def write_names(db: Session, lang, groups, dry_run: bool) -> int:
         INSERT INTO established_names (
             language_id, lemma, normalized_lemma, romanization, name_type,
             gender, is_also_surname, source_lexeme_id, source_sense_id,
-            meaning_text, meaning_channel, equiv_en_target
+            meaning_text, meaning_channel, equiv_en_target,
+            origin_language_name, origin_shape, language_header_warning
         ) VALUES (
             :language_id, :lemma, :normalized_lemma, :romanization,
             :name_type, :gender, :is_also_surname, :source_lexeme_id,
             :source_sense_id, :meaning_text, :meaning_channel,
-            :equiv_en_target
+            :equiv_en_target, :origin_language_name, :origin_shape,
+            :language_header_warning
         )
     """)
     for start in range(0, len(rows), BATCH):
@@ -359,7 +391,9 @@ def report(db: Session) -> None:
                count(*) FILTER (WHERE en.gender = 'f') AS f,
                count(*) FILTER (WHERE en.gender = 'x') AS x,
                count(*) FILTER (WHERE en.gender = 'u') AS u,
-               count(*) FILTER (WHERE en.is_also_surname) AS also_surname
+               count(*) FILTER (WHERE en.is_also_surname) AS also_surname,
+               count(en.origin_language_name) AS with_origin,
+               count(*) FILTER (WHERE en.language_header_warning) AS hdr_warn
         FROM established_names en
         JOIN languages l ON l.id = en.language_id
         GROUP BY l.code, en.name_type
@@ -368,14 +402,16 @@ def report(db: Session) -> None:
 
     print(f"{'lang':5s} {'type':11s} {'rows':>7s} {'mean':>7s} {'mean%':>6s} "
           f"{'equiv':>6s} {'homo':>7s} {'roman':>7s} "
-          f"{'m':>6s} {'f':>6s} {'x':>5s} {'u':>6s} {'also_sn':>7s}")
+          f"{'m':>6s} {'f':>6s} {'x':>5s} {'u':>6s} {'also_sn':>7s} "
+          f"{'origin':>7s} {'hdrwarn':>7s}")
     for r in rows:
         n = max(r["rows"], 1)
         print(f"{r['code']:5s} {r['name_type']:11s} {r['rows']:7d} "
               f"{r['with_meaning']:7d} {100*r['with_meaning']/n:5.1f}% "
               f"{r['with_equiv']:6d} {r['with_homograph']:7d} "
               f"{r['with_roman']:7d} {r['m']:6d} {r['f']:6d} {r['x']:5d} "
-              f"{r['u']:6d} {r['also_surname']:7d}")
+              f"{r['u']:6d} {r['also_surname']:7d} "
+              f"{r['with_origin']:7d} {r['hdr_warn']:7d}")
 
     chan = db.execute(text("""
         SELECT coalesce(meaning_channel, '<none>') AS ch, count(*) AS n

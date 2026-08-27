@@ -131,8 +131,33 @@ def test_gradient_when_the_word_is_visible(db):
     assert cards[0].anchor_sense_id == hs.id
 
 
-def test_spelling_only_homograph_does_not_merge(db):
-    # The Lucius case: same spelling is not same object.
+def test_spelling_only_homograph_now_merges(db):
+    # Stage 13b. This test previously asserted the opposite, on the grounds
+    # that same spelling is not same object (the Lucius case). That is still
+    # true -- what changed is that the merged card no longer SAYS the name
+    # means the word's gloss (Stage 11d), so a two-tone card claims only
+    # "this spelling is both a word and a name here", which a spelling_only
+    # link establishes by definition.
+    src, en, hi = seed(db)
+    lx, s = add_lex(db, src, en, "light", "light")
+    hlx, hs = add_lex(db, src, hi, "आकाश", "आकाश")
+    add_name(db, hi, "आकाश", "आकाश", tokens=["light"], lex=hlx, sense=hs,
+             confidence="spelling_only")
+    cards = retrieve_green_cards(
+        db, english_nodes=[FakeNode(s, 0)],
+        visible_nodes=[FakeNode(hs, 1)], language_codes=["hi"])
+    assert cards[0].is_gradient is True
+    assert cards[0].anchor_sense_id == hs.id
+    # The hedge survives the merge and is what ResultDetails renders.
+    assert cards[0].name.homograph_confidence == "spelling_only"
+
+
+def test_the_corroboration_gate_still_works_when_enabled(db, monkeypatch):
+    # The constant is kept, not deleted, so the old behaviour stays
+    # reachable and cannot silently bit-rot into something that no longer
+    # runs. If this ever fails, _is_gradient stopped reading the flag.
+    import app.services.green_card_retrieval as gcr
+    monkeypatch.setattr(gcr, "GRADIENT_REQUIRES_CORROBORATION", True)
     src, en, hi = seed(db)
     lx, s = add_lex(db, src, en, "light", "light")
     hlx, hs = add_lex(db, src, hi, "आकाश", "आकाश")
@@ -142,7 +167,21 @@ def test_spelling_only_homograph_does_not_merge(db):
         db, english_nodes=[FakeNode(s, 0)],
         visible_nodes=[FakeNode(hs, 1)], language_codes=["hi"])
     assert cards[0].is_gradient is False
-    assert cards[0].anchor_sense_id == hs.id
+
+
+def test_gradient_still_requires_the_word_to_be_visible(db):
+    # The flip relaxes the CONFIDENCE condition only. A name whose
+    # same-language word is not on screen has nothing to merge onto, and
+    # must still ship standalone.
+    src, en, hi = seed(db)
+    lx, s = add_lex(db, src, en, "light", "light")
+    hlx, hs = add_lex(db, src, hi, "आकाश", "आकाश")
+    add_name(db, hi, "आकाश", "आकाश", tokens=["light"], lex=hlx, sense=hs,
+             confidence="spelling_only")
+    cards = retrieve_green_cards(
+        db, english_nodes=[FakeNode(s, 0)], visible_nodes=[],
+        language_codes=["hi"])
+    assert cards[0].is_gradient is False
 
 
 def test_unrequested_language_is_never_returned(db):

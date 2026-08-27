@@ -67,6 +67,14 @@ class GreenCardPayload(BaseModel):
     # construction, and the UI is responsible for not printing it twice.
     nameMeaning: str | None = None
 
+    # Stage 14e. WHERE this name came from, when the source says so.
+    # `originShape` is not decoration: "from Sanskrit" and "Ukrainian
+    # rendering" are different claims, and one chip cannot carry both.
+    # Both null on the overwhelming majority of rows -- absent means the
+    # categories stated nothing, never that the name is native.
+    originLanguage: str | None = None
+    originShape: str | None = None
+
     mechanisms: list[str]
     matchedTokens: list[str] = Field(default_factory=list)
     matchTier: int
