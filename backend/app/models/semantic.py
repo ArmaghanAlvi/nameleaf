@@ -1386,6 +1386,14 @@ class RootLlmAttempt(Base):
     resolved_lexeme_id: Mapped[int | None] = mapped_column(
         ForeignKey("lexemes.id", ondelete="SET NULL"), nullable=True
     )
+    # Stage 16a. Exception class + message from the LAST failed attempt on
+    # this pair; NULL on every non-error status, so a retry that resolves
+    # CLEARS it rather than leaving a stale cause attached to a good row.
+    # Without this the cause is printed to stderr and lost with the session,
+    # which is how 240 rows became undiagnosable. Batched (Step 3) the same
+    # column also carries the batch-wide transport failure, written
+    # identically to every language in the failed call.
+    error_detail: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
