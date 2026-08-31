@@ -6,9 +6,11 @@ concurrency level, in two panels:
   en-only        comparable to the Option-A ~2.6-2.8/s ceiling
   all languages  the new N-tree load shape (the number that matters now)
 
-PREREQS: uvicorn running exactly as in dev (single worker); server started
-WITHOUT ROOT_LLM_QUERY_TIME=1 so no external LLM call pollutes timing (the
-can_call_now gate bounds it to 1/request anyway, but zero is cleaner); warm
+PREREQS: uvicorn running exactly as in dev (single worker); the SERVER must
+be started with ROOT_LLM_QUERY_TIME=0 -- this script talks to a separate
+process, so fence_query_time_llm() cannot reach it, and after Stage 17d the
+default is ON. Every other harness fences itself; this one cannot, which is
+why it is on the tests/test_llm_fence.py exemption list. Warm
 the MPS model implicitly via the warmup pass below.
 
 USAGE (from backend/): python3 scripts/eval/http_concurrency.py

@@ -4,6 +4,9 @@ from app.db.session import SessionLocal
 from sqlalchemy import select, text
 from app.models.semantic import Lexeme, Sense, SenseEmbedding
 from app.services.parallel_expansion import parallel_expand
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+
+fence_query_time_llm()
 
 with SessionLocal() as db:
     db.execute(text("SET lock_timeout = '30s'"))

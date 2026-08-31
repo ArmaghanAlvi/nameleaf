@@ -65,6 +65,10 @@ from app.services.green_card_retrieval import retrieve_green_cards   # noqa: E40
 from app.services.green_card_view import build_views                 # noqa: E402
 from app.services.parallel_expansion import parallel_expand          # noqa: E402
 from scripts.eval.capture_engine_reference import most_used_sense_id  # noqa: E402
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+
+fence_query_time_llm()
+
 
 PROBE_WORDS = ["brave", "light", "storm", "river", "calm",
                "joy", "shadow", "fierce", "gold", "whisper"]

@@ -34,6 +34,9 @@ from app.db.session import SessionLocal
 from app.models.generated_name import Language
 from app.schemas.explore_v2 import ExploreV2Request
 from app.api.routes.explore_v2 import explore_v2
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+
+fence_query_time_llm()
 
 from scripts.eval.capture_engine_reference import most_used_sense_id
 

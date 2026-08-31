@@ -49,6 +49,8 @@ from app.services.green_card_retrieval import (                       # noqa: E4
     DEFAULT_PER_TOKEN_CAP,
 )
 from app.services.parallel_expansion import parallel_expand           # noqa: E402
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+fence_query_time_llm()
 from scripts.eval.capture_engine_reference import most_used_sense_id  # noqa: E402
 
 PROBE_WORDS = ["brave", "light", "storm", "river", "calm",

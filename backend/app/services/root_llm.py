@@ -13,8 +13,11 @@ Config (env):
   ROOT_LLM_API_KEY      required for live calls
   ROOT_LLM_MODEL        gemini-flash-lite-latest
   ROOT_LLM_RPM          per-process politeness cap, default 8
-  ROOT_LLM_QUERY_TIME   '1' to allow live resolution in the query path
-                        (decision 1d; default OFF -- backfill is primary)
+  ROOT_LLM_QUERY_TIME   '0' to DISABLE live resolution in the query path.
+                        Default is now ON (Stage 17d).
+                        Read via query_time_live(), never as a constant --
+                        see that function. Harnesses call
+                        fence_query_time_llm() to force it off regardless.
 
 CLI smoke (from backend/):
   python3 -m app.services.root_llm --lemma light \
@@ -47,7 +50,50 @@ from app.utils.text import normalize_lemma
 
 ROOT_LLM_MODEL = os.environ.get("ROOT_LLM_MODEL", "gemini-flash-lite-latest")
 ROOT_LLM_RPM = int(os.environ.get("ROOT_LLM_RPM", "8"))
-QUERY_TIME_LIVE = os.environ.get("ROOT_LLM_QUERY_TIME", "0") == "1"
+# Stage 17d. Default flipped 0 -> 1. Decision 1d set it OFF because
+# "backfill is primary"; G-2 falsified that premise (0.037% of thin pairs
+# reachable; ~1 year to completion batched). Leaving the default off kept
+# the mechanism that CAN work disabled while the one that cannot stayed
+# nominally in charge. Harnesses are fenced (17a); a missing API key turns
+# it back off (query_time_live).
+_QUERY_TIME_LIVE = os.environ.get("ROOT_LLM_QUERY_TIME", "1") == "1"
+
+def query_time_live() -> bool:
+    """Read the flag through a FUNCTION, never a module constant.
+
+    parallel_expansion.py used `from app.services.root_llm import
+    QUERY_TIME_LIVE`, which binds the VALUE into that module's namespace at
+    import time. Setting root_llm.QUERY_TIME_LIVE = False afterwards, or
+    setting os.environ after the import, changed nothing there -- a fence
+    built on either would appear to work and would not. A call re-reads the
+    live value.
+
+    The old constant is DELETED rather than kept as an alias, so any importer
+    that has not moved fails loudly at import instead of silently reading a
+    value that no longer tracks the fence.
+    """
+    # The key check is not belt-and-braces. With the flag defaulted ON
+    # (17d), a machine with no key would mark every asked language 'error'
+    # on every search, and 'error' is the one status _THIN_SQL retries --
+    # so a missing key would turn every request into a write storm against
+    # a config that cannot succeed. Fail silent-and-off instead.
+    return _QUERY_TIME_LIVE and bool(os.environ.get("ROOT_LLM_API_KEY"))
+
+
+def fence_query_time_llm() -> None:
+    """Force the query-time trickle OFF for this process, whatever the env
+    says. Every harness, capture and probe that can reach parallel_expand()
+    calls this at import time.
+
+    The regression ritual's value rests on `0/250 trees changed` meaning "no
+    code changed behaviour." One live LLM call mid-capture moves a tree with
+    no commit behind it, and the resulting hunt looks exactly like a real
+    ranking regression. tests/test_llm_fence.py is what stops the next probe
+    script from forgetting this call.
+    """
+    global _QUERY_TIME_LIVE
+    _QUERY_TIME_LIVE = False
+
 
 _PROMPT = """You are a bilingual lexicographer. Give the standard {language} \
 translation(s) of the English word below, in the specific sense given.

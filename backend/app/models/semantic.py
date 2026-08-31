@@ -1439,6 +1439,27 @@ NAME_EDGE_RELATIONS: tuple[str, ...] = (
 )
 
 
+# Stage 18. Provenance of the origin actually DISPLAYED on a green card.
+#   category        parsed from a Wiktionary category (the Stage-14 pair)
+#   llm_native      the model returned this row's own language
+#   llm_foreign     the model returned a different language
+#   llm_twin        as llm_foreign, and a cross-language romanization twin
+#                   corroborated it (Stage 19a). Stored, NOT gated on --
+#                   tightening to a strict bar later is then a display-time
+#                   change over data already held, with no re-run and no
+#                   additional quota.
+#   llm_unknown     the model declined; 'unknown' is licensed and PREFERRED
+#                   over a low-confidence guess
+#   llm_error       transport/parse failure on that row
+#   gradient_exempt homograph row, English by construction, never asked
+NAME_ORIGIN_SOURCES: tuple[str, ...] = (
+    "category", "llm_native", "llm_foreign", "llm_twin",
+    "llm_unknown", "llm_error", "gradient_exempt",
+)
+
+NAME_ORIGIN_STATUSES: tuple[str, ...] = ("resolved", "unknown", "error")
+
+
 def _sql_in(column: str, values: tuple[str, ...]) -> str:
     joined = ", ".join(f"'{v}'" for v in values)
     return f"{column} IN ({joined})"
@@ -1549,6 +1570,27 @@ class EstablishedName(Base):
         String(12), nullable=True
     )
 
+    # Stage 18c. The origin actually RENDERED, and where it came from.
+    # SEPARATE from the Stage-14 pair above, deliberately: an LLM origin has
+    # no shape, so writing it into origin_language_name with a null
+    # origin_shape would violate ck_established_names_origin_pair. Widening
+    # that CHECK would have collapsed a real distinction -- "from Old
+    # French", "Ukrainian rendering" and "a model asserts Arabic" are three
+    # different claims -- and would have moved §20.6's census invariants.
+    # The cost of two columns is one column; the cost of one column is that
+    # derived and asserted origins stop being separable.
+    #
+    # DERIVED CACHE, not source of truth. name_origin_attempts is the
+    # ledger; populate_established_names.py --pass origin rebuilds these two
+    # after every --pass names, exactly as established_name_tokens is
+    # rebuilt from meaning_text.
+    display_origin_language: Mapped[str | None] = mapped_column(
+        String(80), nullable=True
+    )
+    origin_source: Mapped[str | None] = mapped_column(
+        String(24), nullable=True
+    )
+
     # Wiktionary's OWN flag that the entry is filed under the wrong language
     # header ("English entries with incorrect language header"). An
     # editorial backlog marker, not a linguistic classification -- which is
@@ -1615,6 +1657,19 @@ class EstablishedName(Base):
             "(origin_language_name IS NULL AND origin_shape IS NULL) OR "
             "(origin_language_name IS NOT NULL AND origin_shape IS NOT NULL)",
             name="ck_established_names_origin_pair",
+        ),
+        CheckConstraint(
+            f"origin_source IS NULL OR "
+            f"{_sql_in('origin_source', NAME_ORIGIN_SOURCES)}",
+            name="ck_established_names_origin_source",
+        ),
+        # A displayed origin must name its provenance. Blank-over-wrong, in
+        # the schema, same reasoning as ck_established_names_meaning_pair.
+        # NO inverse constraint: gradient_exempt, llm_unknown and llm_error
+        # are exactly the states with a provenance and NO display value.
+        CheckConstraint(
+            "display_origin_language IS NULL OR origin_source IS NOT NULL",
+            name="ck_established_names_display_origin_pair",
         ),
         # A source row without the matching channel is a provenance claim
         # with nothing behind it -- the same blank-over-wrong reasoning that
@@ -1689,6 +1744,148 @@ class EstablishedNameToken(Base):
         ),
         Index("ix_established_name_tokens_token", "token"),
         Index("ix_established_name_tokens_lexeme", "token_lexeme_id"),
+    )
+
+
+class NameOriginAttempt(Base):
+    """
+    Resolve-once ledger for the LLM origin pass (Stages 18-22).
+
+    KEYED ON THE NATURAL GRAIN (language_id, normalized_lemma, name_type),
+    matching uq_established_names_key -- NOT on established_names.id.
+    populate_established_names.py:213 runs
+    `DELETE FROM established_names WHERE language_id = :lid` and re-inserts,
+    so every row gets a NEW id on every rebuild and an id-keyed ledger would
+    be orphaned the first time anyone ran `--pass names`. The natural grain
+    is stable across rebuilds by construction.
+
+    This ledger holds ONLY paid-for verdicts. Gradient exemptions are NOT
+    stored here: they are derivable from homograph_lexeme_id on the same
+    row, so storing them would buy nothing and introduce a staleness class
+    (a rebuild that changes a row's homograph status would leave a wrong
+    ledger row behind). --pass origin re-derives them each time.
+
+    source_sense_id is REQUIRED, not optional. G-5 measured 37.1% of
+    given-name rows as multi-sense; storing which sense was asked about
+    makes the eventual move to sense-grain origin a migration rather than a
+    full re-run at 1.65x quota. ON DELETE SET NULL rather than CASCADE: a
+    re-import that replaces senses must not destroy the verdicts.
+    """
+
+    __tablename__ = "name_origin_attempts"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    language_id: Mapped[int] = mapped_column(
+        ForeignKey("languages.id"), nullable=False
+    )
+    normalized_lemma: Mapped[str] = mapped_column(String(300), nullable=False)
+    name_type: Mapped[str] = mapped_column(String(12), nullable=False)
+
+    status: Mapped[str] = mapped_column(String(12), nullable=False)
+
+    # Both passes' RAW verdict strings, kept whatever they say. Stage 20h's
+    # vocabulary census reads these to close the open->closed decision with
+    # evidence; a column that stored only in-vocabulary values could not.
+    pass_a_raw: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    pass_b_raw: Mapped[str | None] = mapped_column(String(80), nullable=True)
+
+    # Normalized to the closed vocabulary, or 'other'.
+    origin: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    confidence: Mapped[str | None] = mapped_column(String(8), nullable=True)
+    is_coined: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+    in_vocabulary: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+
+    # Which twin language was SENT as evidence (Stage 19a). Recorded on the
+    # ledger and not only in name_origin_twins because this is provenance
+    # about the paid call: what the model was actually shown.
+    twin_language: Mapped[str | None] = mapped_column(
+        String(16), nullable=True
+    )
+
+    source_sense_id: Mapped[int | None] = mapped_column(
+        ForeignKey("senses.id", ondelete="SET NULL"), nullable=True
+    )
+
+    model: Mapped[str] = mapped_column(String(120), nullable=False)
+    error_detail: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(),
+        onupdate=func.now(), nullable=False
+    )
+
+    __table_args__ = (
+        UniqueConstraint(
+            "language_id", "normalized_lemma", "name_type",
+            name="uq_name_origin_attempts_key",
+        ),
+        CheckConstraint(
+            _sql_in("status", NAME_ORIGIN_STATUSES),
+            name="ck_name_origin_attempts_status",
+        ),
+        CheckConstraint(
+            _sql_in("name_type", NAME_TYPES),
+            name="ck_name_origin_attempts_name_type",
+        ),
+    )
+
+
+class NameOriginTwin(Base):
+    """
+    Materialized cross-language romanization lookup (Stage 19a).
+
+    One row per (English name row, twin language): does a same-name_type
+    name exist in another language whose COALESCE(romanization, lemma)
+    normalizes to the same key?
+
+    MATERIALIZED, NOT JOINED LIVE. The lower()/normalize step on the join
+    key defeats every index, and the recorded gotcha about correlated
+    subqueries hanging on large tables applies directly.
+
+    WHY IT EXISTS DESPITE G-3. At 7.8% it fails as a GATE, but succeeds as
+    three other things: evidence in the prompt (it is close to a mechanical
+    implementation of the adaptation criterion -- Amal has a twin, Abigail
+    does not), a stratification axis for the Stage-20 precision sample, and
+    a provenance value (llm_twin) that permits tightening to a strict bar
+    later without re-running a single call.
+
+    Keyed on the natural grain for the same reason the ledger is: rows are
+    re-inserted with new ids on every --pass names.
+    """
+
+    __tablename__ = "name_origin_twins"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    language_id: Mapped[int] = mapped_column(
+        ForeignKey("languages.id"), nullable=False
+    )
+    normalized_lemma: Mapped[str] = mapped_column(String(300), nullable=False)
+    name_type: Mapped[str] = mapped_column(String(12), nullable=False)
+
+    twin_language_id: Mapped[int] = mapped_column(
+        ForeignKey("languages.id"), nullable=False
+    )
+    twin_lemma: Mapped[str] = mapped_column(String(300), nullable=False)
+    # The key both sides matched on, kept for audit: a twin that looks wrong
+    # is almost always a normalization question, and re-deriving the key by
+    # hand to check is exactly the friction this column removes.
+    match_key: Mapped[str] = mapped_column(String(300), nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint(
+            "language_id", "normalized_lemma", "name_type",
+            "twin_language_id",
+            name="uq_name_origin_twins_key",
+        ),
+        CheckConstraint(
+            _sql_in("name_type", NAME_TYPES),
+            name="ck_name_origin_twins_name_type",
+        ),
     )
 
 

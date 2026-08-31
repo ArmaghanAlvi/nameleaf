@@ -40,6 +40,15 @@ from sqlalchemy import text                                           # noqa: E4
 from app.db.session import SessionLocal                               # noqa: E402
 from app.services.parallel_expansion import parallel_expand           # noqa: E402
 from scripts.eval.capture_engine_reference import most_used_sense_id  # noqa: E402
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+
+# Stage 17f. The trickle is fenced unless --allow-llm is passed EXPLICITLY,
+# and a capture taken with it records that fact in its own JSON. A file
+# captured live must never be used as a reference; `llm_live` is what makes
+# that detectable in diff() instead of silent.
+_LLM_LIVE = "--allow-llm" in sys.argv
+if not _LLM_LIVE:
+    fence_query_time_llm()
 
 PROBE_WORDS = ["brave", "light", "storm", "river", "calm"]
 
@@ -141,6 +150,7 @@ def capture(out_path: str, reuse_from: str | None) -> None:
     with open(out_path, "w") as fh:
         json.dump({"roots": roots, "cells": CELLS,
                    "scopes": [n for n, _ in SCOPES],
+                   "llm_live": _LLM_LIVE,
                    "capture": out, "scoped": scoped},
                   fh, ensure_ascii=False, indent=1)
     print(f"wrote {out_path}")
@@ -156,6 +166,12 @@ def diff(before_path: str, after_path: str) -> None:
         print("!! ROOT SENSES DIFFER -- rerun the 'after' capture with "
               "--reuse-from the 'before' file. Diff is meaningless.")
         return
+
+    if before.get("llm_live") or after.get("llm_live"):
+        print("!! ONE OR BOTH CAPTURES WAS TAKEN WITH --allow-llm.")
+        print("   Live LLM resolutions move trees with no commit behind "
+              "them. This diff is a MEASUREMENT of the trickle, not a "
+              "regression gate. Do not read a non-zero result as a bug.")
 
     totals = [0, 0, 0, 0]   # trees, changed trees, cells, changed cells
 
@@ -210,6 +226,10 @@ def main() -> None:
     ap.add_argument("--out")
     ap.add_argument("--reuse-from")
     ap.add_argument("--diff", nargs=2, metavar=("BEFORE", "AFTER"))
+    ap.add_argument("--allow-llm", action="store_true",
+                    help="Stage 17f measurement ONLY: run with the "
+                         "query-time trickle live. The output records "
+                         "llm_live=true and must never become a reference.")
     args = ap.parse_args()
 
     if args.diff:

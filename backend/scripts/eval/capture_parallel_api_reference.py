@@ -54,6 +54,9 @@ from scripts.eval.capture_engine_reference import most_used_sense_id  # noqa: E4
 # The route's only write. Silenced so re-running never shifts the root
 # senses this harness resolves.
 route.record_sense_selection = lambda *args, **kwargs: None
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+
+fence_query_time_llm()
 
 PROBE_WORDS = ["brave", "light", "storm", "river", "calm"]
 CELLS = [(3, 2), (1, 1)]

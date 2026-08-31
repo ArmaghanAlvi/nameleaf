@@ -23,7 +23,9 @@ from app.models.semantic import SenseEmbedding, SenseTranslation
 from app.services.expansion import expand
 from app.services.language_directory import visible_languages
 from app.services.multi_hop_expansion import HopNode, multi_hop_expand
-from app.services.root_llm import QUERY_TIME_LIVE, can_call_now, resolve_llm_root
+from app.services.root_llm import (
+    can_call_now, query_time_live, resolve_llm_roots,
+)
 from app.services.root_selection import (
     RootCandidate, select_root, select_roots, vector_fallback_root,
 )
@@ -310,6 +312,39 @@ def parallel_expand(
                          language_codes=non_en,
                          include_vector_fallback=False) if non_en else {}
 
+    # Stage 17b: ONE batched live call for every REQUESTED language the
+    # ladder could not fill, issued before the per-language loop.
+    #
+    # WHY THIS IS NOT A REFACTOR. can_call_now() goes False for 60/RPM
+    # seconds the moment the first call lands, and the old trickle sat
+    # INSIDE the loop below -- so it filled AT MOST ONE language per
+    # request, however many were thin. One throttle slot now fills all of
+    # them. Still opportunistic: if the shared limiter is busy this request
+    # simply skips, so a user never waits on another request's throttle
+    # window or a 429 retry.
+    #
+    # Scoped to `non_en`, which is already the requested set, so filling a
+    # tree the user has toggled off never costs quota.
+    #
+    # resolve_llm_roots commits. That is unchanged in KIND from the previous
+    # per-language resolve_llm_root, which also committed mid-request; what
+    # changed is that one commit now carries up to 19 ledger rows and up to
+    # 19 sense_translations rows instead of one of each.
+    if query_time_live():
+        missing = [c for c in non_en if roots.get(c) is None]
+        if missing and can_call_now():
+            filled = resolve_llm_roots(
+                db, english_sense_id=english_sense_id,
+                language_codes=missing)
+            refill = [c for c, lex in filled.items() if lex is not None]
+            if refill:
+                # Re-run the ladder ONLY for languages that gained a link.
+                # select_roots rebuilds the English anchor, so this is not
+                # free; it fires only when something was actually filled.
+                roots.update(select_roots(
+                    db, english_sense_id=english_sense_id,
+                    language_codes=refill, include_vector_fallback=False))
+
     # Lazily-built English anchor shared by every pivot rescue in this request
     # (F7). LAZY, not computed in the preamble: rescue only fires when a
     # language's ladder starves, which most requests never do -- an eager
@@ -339,18 +374,6 @@ def parallel_expand(
             trees[code] = LanguageTree(code, None, nodes, 0)
             continue
         rc = roots.get(code)
-        if rc is None and QUERY_TIME_LIVE and can_call_now():
-            # Opportunistic live trickle (decision 1d): only fires if the
-            # shared rate limiter is currently free, so a user's request
-            # never sleeps waiting for ANOTHER request's throttle window
-            # or a 429 retry. If the limiter is busy, this sense simply
-            # stays unresolved for this query -- the backfill or a later
-            # organic query will fill it eventually.
-            if resolve_llm_root(db, english_sense_id=english_sense_id,
-                                language_code=code) is not None:
-                rc = select_root(db, english_sense_id=english_sense_id,
-                                 language_code=code,
-                                 include_vector_fallback=False)
         if rc is None and code in _pivot_eligible_languages(db):
             # Rescue BEFORE vector fallback (Breakdown 4.5, decision 1a):
             # hard evidence through one synonym hop beats a direct rung

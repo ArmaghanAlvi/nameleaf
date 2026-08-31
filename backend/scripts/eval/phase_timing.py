@@ -37,6 +37,8 @@ from app.db.session import SessionLocal, engine                       # noqa: E4
 import app.services.embedding_provider as ep                          # noqa: E402
 import app.services.parallel_expansion as px                          # noqa: E402
 import app.services.vector_sense_search as vss                        # noqa: E402
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+fence_query_time_llm()
 from scripts.eval.capture_engine_reference import most_used_sense_id  # noqa: E402
 
 

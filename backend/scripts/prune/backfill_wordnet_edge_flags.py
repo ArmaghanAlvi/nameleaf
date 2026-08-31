@@ -36,7 +36,9 @@ from app.db.session import SessionLocal                      # noqa: E402
 from app.models.generated_name import Language               # noqa: E402
 from app.models.semantic import Lexeme, Sense, SenseRelation  # noqa: E402
 from app.utils.provenance import pivot_counting_provenances  # noqa: E402
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
 
+fence_query_time_llm()
 
 def has_wordnet_edge(db, language_id: int, provenances: tuple[str, ...]) -> bool:
     """Byte-for-byte the probe in parallel_expansion._has_wordnet_edge."""
@@ -95,7 +97,7 @@ def main() -> None:
 
         # --- WRITE PHASE -----------------------------------------------------
         for lang_id, code, value, _stored in changed:
-            db.get(Language, lang_id).has_wordnet_edges = value
+            db.get(Language, lang_id).has_wordnet_edges = value # type: ignore
         db.commit()
         print(f"\nApplied: {len(changed)} language rows updated.")
 

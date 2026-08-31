@@ -38,6 +38,8 @@ import app.api.routes.explore_v2 as route                             # noqa: E4
 from app.db.session import SessionLocal                               # noqa: E402
 from app.models.generated_name import Language                        # noqa: E402
 from app.schemas.explore_v2 import ExploreV2Request                   # noqa: E402
+from app.services.root_llm import fence_query_time_llm            # noqa: E402
+fence_query_time_llm()
 from scripts.eval.capture_engine_reference import most_used_sense_id  # noqa: E402
 
 route.record_sense_selection = lambda *args, **kwargs: None

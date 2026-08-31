@@ -26,7 +26,18 @@ PASSES (all idempotent, all re-runnable independently):
   names      classify, group, derive meaning/equivalence/romanization, insert
   homograph  set homograph_lexeme_id  (mechanism 2, Stage 3c)
   tokens     rebuild established_name_tokens (mechanism 1 join surface)
-  all        names -> homograph -> tokens
+  origin     re-apply display_origin_language / origin_source from the
+             derived sources and name_origin_attempts (Stage 18d)
+  all        names -> homograph -> tokens -> origin
+
+  ⚠ `origin` MUST follow `homograph`: the gradient exemption reads
+  homograph_lexeme_id. It reads no meaning and feeds no edge, so
+  build_name_graph.py and propagate_name_meanings.py do NOT need re-running
+  after it. The reverse is not true -- propagate_name_meanings rewrites
+  meaning_text, which is INPUT to the Stage-22 origin prompt, so a full
+  rebuild that will be followed by asking runs:
+      names -> homograph -> build_name_graph -> propagate_name_meanings
+      -> tokens -> build_name_origin_twins -> origin
 
   ⚠ Stage 6 rewrites meaning_text (homograph inheritance, equivalence
   propagation). Re-run `--pass tokens` afterwards or the join surface will
@@ -45,11 +56,13 @@ import argparse
 import os
 import sys
 from collections import Counter
+from typing import cast
 
 sys.path.insert(0, os.getcwd())
 
-from sqlalchemy import bindparam, select, text                            # noqa: E402
+from sqlalchemy import bindparam, select, text                  # noqa: E402
 from sqlalchemy.orm import Session, selectinload                # noqa: E402
+from sqlalchemy.engine import CursorResult
 
 from app.db.session import SessionLocal                         # noqa: E402
 from app.models.generated_name import Language                  # noqa: E402
@@ -308,6 +321,95 @@ def link_homographs(db: Session, lang, dry_run: bool) -> dict[str, int]:
     return {"linked": int(getattr(result, "rowcount", 0) or 0)}
 
 
+def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
+    """
+    Stage 18d. Re-apply origins onto established_names from the DERIVED and
+    LEDGER sources, in precedence order.
+
+    MUST RUN AFTER --pass homograph: step 1 reads homograph_lexeme_id, which
+    that pass sets. The `all` cascade orders them correctly; a manual
+    `--pass origin` on a freshly rebuilt language without homographs would
+    silently produce zero exemptions.
+
+    PRECEDENCE, and why each:
+      1. gradient_exempt  a homograph row is by construction a name spelled
+                          identically to a word of the SAME language, so
+                          labelling it native is correct whether or not it
+                          renders gradient. Written as an explicit VALUE
+                          rather than left NULL, because NULL means
+                          "pending" and exempt rows would otherwise be
+                          re-queued forever.
+      2. category         a parsed Wiktionary category is stronger evidence
+                          than a model assertion, so it OVERWRITES (1).
+      3. ledger           fills only what is STILL NULL, so the model can
+                          never override a derived origin.
+
+    The exemption is DERIVED here rather than stored in the ledger. It is
+    computable from a column on the same row, so a ledger entry would buy
+    nothing and would go stale the first time a rebuild changed a row's
+    homograph status. The ledger exists to protect data that was PAID FOR.
+    """
+    if dry_run:
+        counts = db.execute(text("""
+            SELECT count(*) FILTER (WHERE homograph_lexeme_id IS NOT NULL)
+                       AS exempt,
+                   count(*) FILTER (WHERE origin_language_name IS NOT NULL)
+                       AS category,
+                   count(*) FILTER (WHERE homograph_lexeme_id IS NOT NULL
+                                      AND origin_language_name IS NOT NULL)
+                       AS overlap
+            FROM established_names WHERE language_id = :lid
+        """), {"lid": lang.id}).mappings().one()
+        return dict(counts) | {"ledger": 0}
+
+    db.execute(text("""
+        UPDATE established_names
+        SET display_origin_language = NULL, origin_source = NULL
+        WHERE language_id = :lid
+    """), {"lid": lang.id})
+
+    exempt = cast(CursorResult, db.execute(text("""
+        UPDATE established_names
+        SET origin_source = 'gradient_exempt'
+        WHERE language_id = :lid AND homograph_lexeme_id IS NOT NULL
+    """), {"lid": lang.id})).rowcount or 0
+
+    category = cast(CursorResult, db.execute(text("""
+        UPDATE established_names
+        SET origin_source = 'category',
+            display_origin_language = origin_language_name
+        WHERE language_id = :lid AND origin_language_name IS NOT NULL
+    """), {"lid": lang.id})).rowcount or 0
+
+    ledger = cast(CursorResult, db.execute(text("""
+        UPDATE established_names en
+        SET origin_source = a.src, display_origin_language = a.disp
+        FROM (
+            SELECT n.language_id, n.normalized_lemma, n.name_type,
+                   CASE n.status
+                     WHEN 'error'   THEN 'llm_error'
+                     WHEN 'unknown' THEN 'llm_unknown'
+                     ELSE CASE
+                       WHEN n.origin = l.name          THEN 'llm_native'
+                       WHEN n.twin_language IS NOT NULL THEN 'llm_twin'
+                       ELSE 'llm_foreign' END
+                   END AS src,
+                   CASE WHEN n.status = 'resolved' THEN n.origin END AS disp
+            FROM name_origin_attempts n
+            JOIN languages l ON l.id = n.language_id
+            WHERE n.language_id = :lid
+        ) a
+        WHERE en.language_id = a.language_id
+          AND en.normalized_lemma = a.normalized_lemma
+          AND en.name_type = a.name_type
+          AND en.origin_source IS NULL
+    """), {"lid": lang.id})).rowcount or 0
+
+    db.commit()
+    return {"exempt": exempt, "category": category, "ledger": ledger,
+            "overlap": 0}
+
+
 def english_lexeme_map(db: Session) -> dict[str, int]:
     """normalized_lemma -> lowest visible English lexeme id."""
     lang_id = db.scalar(select(Language.id).where(Language.code == "en"))
@@ -393,7 +495,10 @@ def report(db: Session) -> None:
                count(*) FILTER (WHERE en.gender = 'u') AS u,
                count(*) FILTER (WHERE en.is_also_surname) AS also_surname,
                count(en.origin_language_name) AS with_origin,
-               count(*) FILTER (WHERE en.language_header_warning) AS hdr_warn
+               count(*) FILTER (WHERE en.language_header_warning) AS hdr_warn,
+               count(en.display_origin_language) AS disp_origin,
+               count(*) FILTER (WHERE en.origin_source IS NOT NULL)
+                   AS origin_src
         FROM established_names en
         JOIN languages l ON l.id = en.language_id
         GROUP BY l.code, en.name_type
@@ -403,7 +508,7 @@ def report(db: Session) -> None:
     print(f"{'lang':5s} {'type':11s} {'rows':>7s} {'mean':>7s} {'mean%':>6s} "
           f"{'equiv':>6s} {'homo':>7s} {'roman':>7s} "
           f"{'m':>6s} {'f':>6s} {'x':>5s} {'u':>6s} {'also_sn':>7s} "
-          f"{'origin':>7s} {'hdrwarn':>7s}")
+          f"{'origin':>7s} {'hdrwarn':>7s} {'disp':>7s} {'osrc':>7s}")
     for r in rows:
         n = max(r["rows"], 1)
         print(f"{r['code']:5s} {r['name_type']:11s} {r['rows']:7d} "
@@ -411,7 +516,8 @@ def report(db: Session) -> None:
               f"{r['with_equiv']:6d} {r['with_homograph']:7d} "
               f"{r['with_roman']:7d} {r['m']:6d} {r['f']:6d} {r['x']:5d} "
               f"{r['u']:6d} {r['also_surname']:7d} "
-              f"{r['with_origin']:7d} {r['hdr_warn']:7d}")
+              f"{r['with_origin']:7d} {r['hdr_warn']:7d} "
+              f"{r['disp_origin']:7d} {r['origin_src']:7d}")
 
     chan = db.execute(text("""
         SELECT coalesce(meaning_channel, '<none>') AS ch, count(*) AS n
@@ -457,7 +563,8 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--lang", default=None, help="comma-separated ISO codes")
     ap.add_argument("--pass", dest="which", default="all",
-                    choices=["all", "names", "homograph", "tokens"])
+                    choices=["all", "names", "homograph", "tokens",
+                             "origin"])
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--report", action="store_true",
                     help="print coverage only, write nothing")
@@ -509,9 +616,19 @@ def main() -> None:
                 print(f"  tokens .............. {t.get('tokens_total', 0)}  "
                       f"(resolvable: {t.get('tokens_resolvable', 0)})")
                 totals["tokens"] += t.get("tokens_total", 0)
-
+            # LAST in the cascade, and after `homograph` specifically: the
+            # exemption reads homograph_lexeme_id. Nothing downstream reads
+            # origin, so its position relative to `tokens` is free.
+            if args.which in ("all", "origin"):
+                o = apply_origin(db, lang, args.dry_run)
+                print(f"  origin exempt ....... {o['exempt']}")
+                print(f"  origin category ..... {o['category']}")
+                print(f"  origin from ledger .. {o['ledger']}")
+                totals["origin"] += (o["exempt"] + o["category"]
+                                     + o["ledger"])
         print(f"\nTOTAL rows={totals['rows']}  "
-              f"homograph={totals['homograph']}  tokens={totals['tokens']}")
+              f"homograph={totals['homograph']}  tokens={totals['tokens']}  "
+              f"origin={totals['origin']}")
 
 
 if __name__ == "__main__":
