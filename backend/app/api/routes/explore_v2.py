@@ -94,6 +94,8 @@ def _green_payload(view: GreenCardView) -> GreenCardPayload:
         homographConfidence=name.homograph_confidence,
         originLanguage=name.origin_language_name,
         originShape=name.origin_shape,
+        displayOrigin=name.display_origin_language,
+        originSource=name.origin_source,
         # Off the VIEW, not off `name` directly: build_views is the single
         # place that resolves a card's display meaning, and reading the model
         # here would fork that responsibility across two modules.

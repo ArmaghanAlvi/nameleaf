@@ -27,13 +27,36 @@ from app.models.generated_name import Language
 
 HOST_CODE = "en"
 
-_PENDING_SQL = """
+_PENDING_HEAD = """
 SELECT en.id, en.lemma, en.normalized_lemma, en.name_type, en.gender,
        en.meaning_text, en.meaning_channel, en.source_sense_id
 FROM established_names en
 JOIN languages l ON l.id = en.language_id
 WHERE l.code = :code
   AND en.origin_source IS NULL
+"""
+
+# Rows the ledger has already SETTLED. Not a subset of origin_source: that
+# column is written only by --pass origin, which resets the whole language
+# first, so a multi-day Stage 22 run has nothing to resume against and
+# re-spends day one's quota on day two. Same skip-status contract as
+# _THIN_SQL.
+#
+# 'error' and 'disagreed' are deliberately ABSENT from the default skip
+# set: both mean the row is still owed a call. attempt_count is what stops
+# a permanently-failing row from being retried forever.
+_SETTLED_STATUSES: tuple[str, ...] = ("resolved", "unknown")
+
+_LEDGER_SKIP = """
+  AND NOT EXISTS (
+    SELECT 1 FROM name_origin_attempts a
+    WHERE a.language_id = en.language_id
+      AND a.normalized_lemma = en.normalized_lemma
+      AND a.name_type = en.name_type
+      AND (a.status IN ({settled}) OR a.attempt_count >= :max_attempts))
+"""
+
+_PENDING_ORDER = """
 ORDER BY CASE WHEN en.meaning_text IS NULL THEN 1 ELSE 0 END,
          en.name_type, en.normalized_lemma
 """
@@ -93,10 +116,27 @@ def _twin_index(db: Session) -> dict[tuple[str, str], tuple[str, ...]]:
 
 
 def select_pending(db: Session, *, limit: int | None = None,
-                   offset: int = 0) -> list[OriginItem]:
-    """Pending English rows in 19d order, with twin evidence attached."""
-    sql = _PENDING_SQL
+                   offset: int = 0, skip_ledger: bool = False,
+                   max_attempts: int = 3) -> list[OriginItem]:
+    """Pending English rows in 19d order, with twin evidence attached.
+
+    skip_ledger=False is the DEFAULT and reproduces the pre-Stage-20 query
+    exactly, so §22.9's reconciled count of 55,050 remains a measurement of
+    the same thing. The runner passes True; nothing else should.
+
+    The status list is interpolated as a literal rather than bound: the
+    values come from a module constant, never from user input, and `= ANY`
+    does not exist in SQLite -- which backend/tests runs on, and an
+    assembly function that cannot be unit-tested is exactly the thing that
+    drifts between the pilot and the pass.
+    """
+    sql = _PENDING_HEAD
     params: dict = {"code": HOST_CODE}
+    if skip_ledger:
+        settled = ", ".join(f"'{s}'" for s in _SETTLED_STATUSES)
+        sql += _LEDGER_SKIP.format(settled=settled)
+        params["max_attempts"] = max_attempts
+    sql += _PENDING_ORDER
     if limit is not None:
         sql += " LIMIT :limit OFFSET :offset"
         params |= {"limit": limit, "offset": offset}

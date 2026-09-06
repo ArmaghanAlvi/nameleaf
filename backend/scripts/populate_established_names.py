@@ -341,8 +341,19 @@ def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
                           re-queued forever.
       2. category         a parsed Wiktionary category is stronger evidence
                           than a model assertion, so it OVERWRITES (1).
-      3. ledger           fills only what is STILL NULL, so the model can
-                          never override a derived origin.
+      3. gloss_etym       a single unambiguous "from <Language>" phrase in
+                          the WINNING sense's own gloss or the first
+                          sentence of its etymology. Fills gaps only --
+                          weaker evidence than a structured category, so it
+                          never overwrites (2). A row where the phrase
+                          names MORE than one language is left NULL here
+                          on purpose: that is exactly the ambiguity the
+                          three-pass LLM mechanism exists to arbitrate, and
+                          picking first-match or last-match would require
+                          believing something about Wiktionary's phrasing
+                          convention that was never verified (§23.1).
+      4. ledger           fills only what is STILL NULL, so the model can
+                          never override a derived or extracted origin.
 
     The exemption is DERIVED here rather than stored in the ledger. It is
     computable from a column on the same row, so a ledger entry would buy
@@ -354,13 +365,10 @@ def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
             SELECT count(*) FILTER (WHERE homograph_lexeme_id IS NOT NULL)
                        AS exempt,
                    count(*) FILTER (WHERE origin_language_name IS NOT NULL)
-                       AS category,
-                   count(*) FILTER (WHERE homograph_lexeme_id IS NOT NULL
-                                      AND origin_language_name IS NOT NULL)
-                       AS overlap
+                       AS category
             FROM established_names WHERE language_id = :lid
         """), {"lid": lang.id}).mappings().one()
-        return dict(counts) | {"ledger": 0}
+        return dict(counts) | {"gloss_etym": 0, "ledger": 0}
 
     db.execute(text("""
         UPDATE established_names
@@ -381,20 +389,58 @@ def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
         WHERE language_id = :lid AND origin_language_name IS NOT NULL
     """), {"lid": lang.id})).rowcount or 0
 
+    gloss_etym = cast(CursorResult, db.execute(text("""
+        UPDATE established_names en
+        SET origin_source = 'gloss_etym', display_origin_language = m.lang_name
+        FROM (
+            SELECT p.id, min(lang.name) AS lang_name
+            FROM (
+                SELECT en2.id, s.definition AS gloss,
+                       split_part(s.etymology_text, '.', 1) AS etym1
+                FROM established_names en2
+                LEFT JOIN senses s ON s.id = en2.source_sense_id
+                WHERE en2.language_id = :lid AND en2.origin_source IS NULL
+            ) p
+            JOIN languages lang ON lang.code IS NOT NULL
+            WHERE p.gloss ~* ('\\yfrom ' || lang.name || '\\y')
+               OR p.etym1 ~* ('\\yfrom ' || lang.name || '\\y')
+            GROUP BY p.id
+            -- SINGLE match only. More than one language named is the
+            -- ambiguity the LLM pass exists for -- see the precedence
+            -- docstring above.
+            HAVING count(DISTINCT lang.name) = 1
+        ) m
+        WHERE en.id = m.id
+    """), {"lid": lang.id})).rowcount or 0
+
     ledger = cast(CursorResult, db.execute(text("""
         UPDATE established_names en
         SET origin_source = a.src, display_origin_language = a.disp
         FROM (
             SELECT n.language_id, n.normalized_lemma, n.name_type,
                    CASE n.status
-                     WHEN 'error'   THEN 'llm_error'
-                     WHEN 'unknown' THEN 'llm_unknown'
+                     WHEN 'error'     THEN 'llm_error'
+                     WHEN 'disagreed' THEN 'llm_error'
+                     WHEN 'unknown'   THEN 'llm_unknown'
                      ELSE CASE
-                       WHEN n.origin = l.name          THEN 'llm_native'
-                       WHEN n.twin_language IS NOT NULL THEN 'llm_twin'
+                       WHEN n.origin = l.name THEN 'llm_native'
+                       -- CORROBORATION, not exposure. twin_language is
+                       -- written only when the twin MATCHES the resolved
+                       -- origin, and this predicate enforces the same rule
+                       -- at the read site so `llm_twin` cannot come to
+                       -- mean "we showed the model a twin" again. Every
+                       -- twin that was SENT is still recoverable from
+                       -- name_origin_twins.
+                       WHEN n.twin_language IS NOT NULL
+                        AND n.twin_language = n.origin THEN 'llm_twin'
                        ELSE 'llm_foreign' END
                    END AS src,
-                   CASE WHEN n.status = 'resolved' THEN n.origin END AS disp
+                   -- D-4. `origin` is the BACKEND MARKER ('other');
+                   -- `origin_raw` is the badge string ('Turkish'). Writing
+                   -- n.origin here would put the literal word "other" on
+                   -- the card.
+                   CASE WHEN n.status = 'resolved'
+                        THEN n.origin_raw END AS disp
             FROM name_origin_attempts n
             JOIN languages l ON l.id = n.language_id
             WHERE n.language_id = :lid
@@ -406,8 +452,8 @@ def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
     """), {"lid": lang.id})).rowcount or 0
 
     db.commit()
-    return {"exempt": exempt, "category": category, "ledger": ledger,
-            "overlap": 0}
+    return {"exempt": exempt, "category": category,
+            "gloss_etym": gloss_etym, "ledger": ledger, "overlap": 0}
 
 
 def english_lexeme_map(db: Session) -> dict[str, int]:
@@ -623,9 +669,10 @@ def main() -> None:
                 o = apply_origin(db, lang, args.dry_run)
                 print(f"  origin exempt ....... {o['exempt']}")
                 print(f"  origin category ..... {o['category']}")
+                print(f"  origin gloss/etym ... {o['gloss_etym']}")
                 print(f"  origin from ledger .. {o['ledger']}")
                 totals["origin"] += (o["exempt"] + o["category"]
-                                     + o["ledger"])
+                                     + o["gloss_etym"] + o["ledger"])
         print(f"\nTOTAL rows={totals['rows']}  "
               f"homograph={totals['homograph']}  tokens={totals['tokens']}  "
               f"origin={totals['origin']}")

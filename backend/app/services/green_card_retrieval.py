@@ -32,7 +32,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, replace
 
-from sqlalchemy import select
+from sqlalchemy import select, and_, or_
 from sqlalchemy.orm import Session
 
 from app.models.generated_name import Language
@@ -151,6 +151,17 @@ def language_code_map(db: Session) -> dict[int, str]:
     }
 
 
+def language_names(db: Session) -> dict[int, str]:
+    """id -> display name, same shape as language_code_map. Origin verdicts
+    are stored as language NAMES (name_origin_llm normalizes against
+    Language.name, never a code), so scoping by effective language needs
+    this alongside the code map rather than instead of it."""
+    return {
+        lid: name
+        for lid, name in db.execute(select(Language.id, Language.name))
+    }
+
+
 def visible_index(nodes, codes_by_id) -> dict[tuple[int, str], TriggerRef]:
     """(language_id, normalized_lemma) -> best visible trigger.
 
@@ -190,8 +201,22 @@ def english_token_keys(nodes, english_visible) -> dict[str, TriggerRef]:
     return out
 
 
-def match_by_meaning_token(db, token_keys, language_ids, per_token_cap):
+def match_by_meaning_token(db, token_keys, language_ids, origin_names,
+                           all_language_names, include_other_origins,
+                           per_token_cap):
     """7b. Returns raw (name, mechanism, token, trigger) tuples.
+
+    Stage 21 adds a THIRD branch alongside "own language requested" and
+    "origin is a requested corpus language": a row whose origin is set but
+    names something OUTSIDE the corpus vocabulary entirely (a genuine
+    out-of-vocabulary answer, e.g. 'Turkish') is retrieved when
+    include_other_origins is true, independent of which named-language
+    boxes are checked -- there is no per-language sub-selection for a
+    language that isn't in the list to begin with. Without this branch such
+    a row is unreachable under ANY combination of checkboxes, including
+    every language enabled, which would silently shrink the green-card
+    count -- exactly the regression Step 12/22f's emission-count gate
+    exists to catch.
 
     The cap is applied in PYTHON, after a fully ordered fetch, not as a SQL
     LIMIT: a per-group SQL limit needs a window function, and the ordering
@@ -199,14 +224,26 @@ def match_by_meaning_token(db, token_keys, language_ids, per_token_cap):
     shows the raw row count is large enough for that to hurt, THAT is the
     measurement that justifies a window function -- not a guess now.
     """
-    if not token_keys or not language_ids:
+    if not token_keys or not (language_ids or origin_names
+                              or include_other_origins):
         return []
+    conditions = [
+        and_(EstablishedName.display_origin_language.is_(None),
+             EstablishedName.language_id.in_(sorted(language_ids))),
+        EstablishedName.display_origin_language.in_(sorted(origin_names)),
+    ]
+    if include_other_origins:
+        conditions.append(and_(
+            EstablishedName.display_origin_language.isnot(None),
+            EstablishedName.display_origin_language.notin_(
+                sorted(all_language_names)),
+        ))
     rows = db.execute(
         select(EstablishedNameToken.token, EstablishedName)
         .join(EstablishedName,
               EstablishedName.id == EstablishedNameToken.established_name_id)
         .where(EstablishedNameToken.token.in_(sorted(token_keys)),
-               EstablishedName.language_id.in_(sorted(language_ids)))
+               or_(*conditions))
         .order_by(EstablishedNameToken.token,
                   EstablishedName.name_type,
                   EstablishedName.normalized_lemma,
@@ -374,6 +411,7 @@ def apply_caps(cards, limit, surname_cap):
 
 def retrieve_green_cards(
     db: Session, *, english_nodes, visible_nodes, language_codes,
+    include_other_origins: bool = True,
     limit: int = DEFAULT_LIMIT,
     per_token_cap: int = DEFAULT_PER_TOKEN_CAP,
     surname_cap: int = DEFAULT_SURNAME_CAP,
@@ -388,11 +426,30 @@ def retrieve_green_cards(
     codes_by_id = language_code_map(db)
     language_ids = {lid for lid, code in codes_by_id.items()
                     if code in requested}
-    if not language_ids:
+    # Stage 21. A row's EFFECTIVE language is its resolved origin when it
+    # has one, and its own language otherwise. `Amal` is an English ROW
+    # whose origin is Arabic, so scoping on language_id alone means it is
+    # never retrieved for an Arabic search -- and no amount of client-side
+    # filtering can bring back a row the query did not return.
+    #
+    # Scoped here rather than on the client because apply_caps runs
+    # server-side: a 50-card budget spent on cards the client then hides is
+    # a budget spent on nothing.
+    names_by_id = language_names(db)
+    origin_names = {name for lid, name in names_by_id.items()
+                    if codes_by_id.get(lid) in requested}
+    # The 21 corpus languages' own names -- NOT scoped to `requested`. This
+    # is what tells an OUT-OF-VOCABULARY origin ("Turkish") apart from a
+    # corpus language that simply isn't currently checked; see
+    # match_by_meaning_token's docstring for why the distinction matters.
+    all_language_names = set(names_by_id.values())
+    if not language_ids and not origin_names and not include_other_origins:
         return []
     vis = visible_index(visible_nodes, codes_by_id)
     tokens = english_token_keys(english_nodes, "en" in requested)
-    matches = match_by_meaning_token(db, tokens, language_ids, per_token_cap)
+    matches = match_by_meaning_token(
+        db, tokens, language_ids, origin_names, all_language_names,
+        include_other_origins, per_token_cap)
     matches += match_by_homograph(db, vis, language_ids)
     cards = fold(matches, vis, codes_by_id)
     return apply_caps(collapse_clusters(cards), limit, surname_cap)

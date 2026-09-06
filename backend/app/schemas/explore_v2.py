@@ -20,6 +20,14 @@ class ExploreV2Request(BaseModel):
     # routes through parallel_expand. Unknown codes are silently dropped by
     # the orchestrator's order-intersection.
     languageCodes: list[str] | None = None
+    # Stage 21. Purely a DISPLAY toggle, unlike languageCodes (a query
+    # control that changes what parallel_expand builds): there is nothing
+    # further to fetch for these rows, so this never triggers a different
+    # tree. Governs whether rows whose origin resolved outside the corpus
+    # vocabulary are retrieved at all -- see
+    # green_card_retrieval.match_by_meaning_token.
+    includeOtherOrigins: bool = True
+
 
 
 class HopPathStep(BaseModel):
@@ -74,6 +82,17 @@ class GreenCardPayload(BaseModel):
     # categories stated nothing, never that the name is native.
     originLanguage: str | None = None
     originShape: str | None = None
+
+    # Stage 21. The LLM/derived origin, which is a DIFFERENT claim from
+    # originLanguage above: that one reports what Wiktionary's categories
+    # said, this one is the pipeline's resolved answer with provenance.
+    # Both can be present and both can be null.
+    #
+    # displayOrigin is a language NAME, not a code -- the frontend maps it
+    # back through availableLanguages, and anything that fails to map is
+    # an out-of-vocabulary origin and belongs in Other.
+    displayOrigin: str | None = None
+    originSource: str | None = None
 
     mechanisms: list[str]
     matchedTokens: list[str] = Field(default_factory=list)

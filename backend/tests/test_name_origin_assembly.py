@@ -9,6 +9,7 @@ payload -- §20.6 measured it at 86.4% corpus-wide boilerplate, so sending it
 biases the model toward "foreign" on natively-filed rows.
 """
 import pytest
+from sqlalchemy import text
 
 from app.models.generated_name import Language
 from app.models.semantic import (
@@ -101,3 +102,45 @@ def test_vocabulary_is_derived_from_the_languages_table(corpus):
     vocab = origin_vocabulary(corpus)
     assert vocab[-1] == "other"
     assert {"English", "Arabic"} <= set(vocab)
+
+
+def test_skip_ledger_default_is_the_original_query(corpus):
+    """The default must stay byte-identical: 22.9's 55,050 is a recorded
+    measurement of THIS query, and a silently changed default would make
+    that number describe something else."""
+    assert len(select_pending(corpus)) == len(
+        select_pending(corpus, skip_ledger=False))
+
+
+def test_skip_ledger_excludes_settled_rows(corpus):
+    before = len(select_pending(corpus, skip_ledger=True))
+    corpus.execute(text(
+        "INSERT INTO name_origin_attempts "
+        "(language_id, normalized_lemma, name_type, status, model, "
+        " attempt_count) "
+        "SELECT en.language_id, en.normalized_lemma, en.name_type, "
+        "       'resolved', 'test', 1 "
+        "FROM established_names en "
+        "WHERE en.normalized_lemma = 'zeta'"))
+    corpus.commit()
+    assert len(select_pending(corpus, skip_ledger=True)) == before - 1
+
+
+def test_skip_ledger_retries_error_and_disagreed(corpus):
+    before = len(select_pending(corpus, skip_ledger=True))
+    # 'zeta' and 'amal' are the fixture's two PENDING English rows -- real
+    # lemmas that exist, not placeholders. A row filtered on a lemma that
+    # doesn't exist inserts nothing, and a test that inserts nothing passes
+    # whether or not the code under test is correct.
+    for lemma, status in (("zeta", "error"), ("amal", "disagreed")):
+        corpus.execute(text(
+            "INSERT INTO name_origin_attempts "
+            "(language_id, normalized_lemma, name_type, status, model, "
+            " attempt_count) "
+            "SELECT en.language_id, en.normalized_lemma, en.name_type, "
+            f"      '{status}', 'test', 1 "
+            "FROM established_names en "
+            "WHERE en.normalized_lemma = :norm"),
+            {"norm": lemma})
+    corpus.commit()
+    assert len(select_pending(corpus, skip_ledger=True)) == before

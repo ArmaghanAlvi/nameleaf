@@ -77,6 +77,13 @@ export interface GreenCardPayload {
   /** 'from' (borrowed) | 'rendering' (an X-language way of writing a
    *  Y-language name). Different claims, different chip text. */
   originShape?: string | null;
+    /** Stage 21. The resolved origin and its provenance. A language NAME,
+   *  not a code. Null means pending or unresolvable — see originSource
+   *  for which. */
+  displayOrigin?: string | null;
+  /** 'category' | 'llm_native' | 'llm_foreign' | 'llm_twin' |
+   *  'llm_unknown' | 'llm_error' | 'gradient_exempt' | null (pending). */
+  originSource?: string | null;
   /** Stage 11d. The NAME's meaning. On a gradient card this is NOT
    *  `NameResult.meaning` -- that is the WORD's definition, from the yellow
    *  row this card merged onto. Mirrors GreenCardPayload.nameMeaning. */

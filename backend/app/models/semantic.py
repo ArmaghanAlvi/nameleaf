@@ -11,6 +11,7 @@ from sqlalchemy import (
     Index,
     Integer,
     JSON,
+    SmallInteger,
     String,
     Table,
     Text,
@@ -1453,11 +1454,16 @@ NAME_EDGE_RELATIONS: tuple[str, ...] = (
 #   llm_error       transport/parse failure on that row
 #   gradient_exempt homograph row, English by construction, never asked
 NAME_ORIGIN_SOURCES: tuple[str, ...] = (
-    "category", "llm_native", "llm_foreign", "llm_twin",
+    "category", "gloss_etym", "llm_native", "llm_foreign", "llm_twin",
     "llm_unknown", "llm_error", "gradient_exempt",
 )
 
-NAME_ORIGIN_STATUSES: tuple[str, ...] = ("resolved", "unknown", "error")
+# 'disagreed' -- both passes succeeded and contradicted each other, so the
+# row is owed a third call. It is NOT 'unknown': unknown means the question
+# was answered negatively, disagreed means it has not been answered yet.
+NAME_ORIGIN_STATUSES: tuple[str, ...] = (
+    "resolved", "unknown", "error", "disagreed",
+)
 
 
 def _sql_in(column: str, values: tuple[str, ...]) -> str:
@@ -1789,9 +1795,11 @@ class NameOriginAttempt(Base):
     # evidence; a column that stored only in-vocabulary values could not.
     pass_a_raw: Mapped[str | None] = mapped_column(String(80), nullable=True)
     pass_b_raw: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    pass_c_raw: Mapped[str | None] = mapped_column(String(80), nullable=True)
 
     # Normalized to the closed vocabulary, or 'other'.
     origin: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    origin_raw: Mapped[str | None] = mapped_column(String(80), nullable=True)
     confidence: Mapped[str | None] = mapped_column(String(8), nullable=True)
     is_coined: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
     in_vocabulary: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
@@ -1817,6 +1825,9 @@ class NameOriginAttempt(Base):
         DateTime(timezone=True), server_default=func.now(),
         onupdate=func.now(), nullable=False
     )
+
+    attempt_count: Mapped[int] = mapped_column(
+        SmallInteger, nullable=False, server_default="0")
 
     __table_args__ = (
         UniqueConstraint(
