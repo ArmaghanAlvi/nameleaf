@@ -338,6 +338,12 @@ def explore_v2(
             english_nodes=list(px.english_pass),
             visible_nodes=px.interleaved,
             language_codes=request.languageCodes,
+            # Stage 21. A DISPLAY toggle, not a query control: there is
+            # nothing further to fetch for these rows. Threaded through to
+            # retrieval rather than applied on the client because
+            # apply_caps runs server-side -- a 50-card budget spent on
+            # cards the client then hides is a budget spent on nothing.
+            include_other_origins=request.includeOtherOrigins,
         )
         results = _attach_green_cards(results, build_views(db, green_cards))
 

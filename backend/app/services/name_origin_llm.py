@@ -30,6 +30,8 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 
+import httpx
+
 from app.services import root_llm
 
 # English's own ancestral stages, folded to "English" for English host rows
@@ -327,13 +329,14 @@ def reconcile_c(a: Verdict, b: Verdict, c: Verdict) -> Reconciled:
 
 def propose_origins(name_type: str, vocabulary: list[str],
                     items: list[tuple[str, dict]], *,
-                    host_language_name: str) -> tuple[dict[str, Verdict], str]:
-    """One batch, one call. Returns ({token: Verdict}, served_model).
+                    host_language_name: str
+                    ) -> tuple[dict[str, Verdict], str, dict]:
+    """One batch, one call. Returns ({token: Verdict}, served_model, usage).
 
-    The served model version is returned rather than the alias for the same
-    reason propose_translations does it: 'latest' resolves to a concrete
-    version at request time, and a future alias rotation must not
-    retroactively blur what this row was answered by.
+    `usage` is the API's own usageMetadata (promptTokenCount,
+    candidatesTokenCount) when present, else {} -- real token counts, not
+    an estimate, so a dollar ceiling built on this is accurate rather than
+    a guess compounding a guess.
     """
     tokens = [t for t, _ in items]
     prompt = build_prompt(name_type, vocabulary, items)
@@ -343,5 +346,6 @@ def propose_origins(name_type: str, vocabulary: list[str],
         text_out = text_out.strip("`").removeprefix("json").strip()
     parsed = json.loads(text_out)
     served = response.get("modelVersion", root_llm.ROOT_LLM_MODEL)
-    return parse_batch(parsed, tokens, vocabulary,
-                       host_language_name), served
+    usage = response.get("usageMetadata", {})
+    return (parse_batch(parsed, tokens, vocabulary, host_language_name),
+            served, usage)

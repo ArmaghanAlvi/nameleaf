@@ -62,6 +62,7 @@ export interface ExploreSelectedSensesRequest {
   depth: number;     // hops (0-3); 0 = exact meaning only
   language: string | null;         // legacy field; unused on the parallel path
   languageCodes: string[] | null;  // which trees to build; null = legacy en-only path
+  includeOtherOrigins: boolean;   // display toggle; never changes the trees
   minLength: number;
   maxLength: number;
 }
@@ -169,6 +170,7 @@ export async function exploreSelectedSenses(
     depth: request.depth,
     language: request.language,
     languageCodes: request.languageCodes,
+    includeOtherOrigins: request.includeOtherOrigins,
     minLength: request.minLength,
     maxLength: request.maxLength,
   };

@@ -143,6 +143,73 @@ function isStandaloneGreen(result: NameResult): boolean {
   return Boolean(result.green) && result.category === "established";
 }
 
+// Stage 21. The bucket every origin that is not a corpus language lands
+// in. Prefixed so it can never collide with a real ISO code, the same
+// reasoning as 11e's `cardtype-` section keys.
+const OTHER_ORIGIN = "__other__";
+
+/**
+ * The language a card should DISPLAY and GROUP under.
+ *
+ * Deliberately NOT `languageCode`. That keeps its existing meaning -- the
+ * tree the card was retrieved from -- because `dirFor` reads it for script
+ * direction, and `Amal` is Arabic-origin but Latin-script and must render
+ * LTR.
+ *
+ * FALLBACK ORDER, and why each:
+ *   displayOrigin present   the resolved answer, whatever tier produced it
+ *                           (category, gloss_etym, or the ledger). When it
+ *                           names a language outside the 21 -- French and
+ *                           Italian lead that tail -- the card keeps the
+ *                           REAL language on its badge and groups under
+ *                           Other. §23.3 measured that at 12.5% of resolved
+ *                           rows, so it is a section, not a curiosity.
+ *   llm_unknown             the model was asked and declined, or three
+ *                           passes reached no majority. G5 measured this at
+ *                           2.3-5.6% per stratum, under the 10% ceiling, so
+ *                           it goes to Other as designed rather than
+ *                           falling back to English.
+ *   anything else           PENDING (origin_source null), llm_error, or
+ *                           disagreed. Falls back to the tree label.
+ *                           Pending recurs after every repopulate cascade,
+ *                           and showing "Unknown" on those rows would make
+ *                           an ordinary rebuild look like the English
+ *                           section had broken.
+ */
+function originGroup(
+  green: NameResult["green"] | null | undefined,
+  codeByName: Map<string, string>
+): { code: string; label: string } | null {
+  if (!green) return null;
+  if (green.displayOrigin) {
+    const code = codeByName.get(green.displayOrigin.toLowerCase());
+    return code
+      ? { code, label: green.displayOrigin }
+      : { code: OTHER_ORIGIN, label: green.displayOrigin };
+  }
+  if (green.originSource === "llm_unknown") {
+    return { code: OTHER_ORIGIN, label: "Other" };
+  }
+  return null;
+}
+
+/**
+ * The code a result sorts, groups and filters on. A gradient card is a
+ * name and a word of the SAME language by construction, so origin is not a
+ * separate fact about it and it keeps its tree code.
+ */
+function effectiveCode(
+  result: NameResult,
+  codeByName: Map<string, string>
+): string | null {
+  if (!isStandaloneGreen(result)) return result.languageCode ?? null;
+  return (
+    originGroup(result.green, codeByName)?.code ??
+    result.languageCode ??
+    null
+  );
+}
+
 /**
  * 11e. The card-type sections, expressed as MEMBERSHIP PREDICATES rather
  * than a rank function.
@@ -198,7 +265,8 @@ const cardTypeSections: {
  */
 function anchorGreenCards(
   rows: NameResult[],
-  mode: "tree" | "language"
+  mode: "tree" | "language",
+  codeByName: Map<string, string>
 ): NameResult[] {
   if (!rows.some(isStandaloneGreen)) return rows;
 
@@ -214,7 +282,15 @@ function anchorGreenCards(
     }
     const anchor = anchors.get(green.parentSenseId);
     if (!anchor || isStandaloneGreen(anchor)) return false;
-    return mode === "tree" || anchor.languageCode === green.languageCode;
+    // In language mode a green card whose origin differs from its tree
+    // must NOT anchor: anchoring pins it beside a trigger that now lives
+    // in a different section, which fights the grouping below. In tree
+    // mode the anchor relationship is about the TRIGGER, so origin is
+    // irrelevant and the original comparison stands.
+    return (
+      mode === "tree" ||
+      anchor.languageCode === effectiveCode(green, codeByName)
+    );
   }
 
   const byAnchor = new Map<number, NameResult[]>();
@@ -258,7 +334,8 @@ function anchorGreenCards(
 function sortResults(
   results: NameResult[],
   sort: SortOption,
-  languageOrder: Map<string, number>
+  languageOrder: Map<string, number>,
+  codeByName: Map<string, string>
 ) {
   if (sort === "relevance") {
     // Depth-ascending lineage structure (root first, then each hop level
@@ -274,12 +351,14 @@ function sortResults(
       if (depthDelta !== 0) return depthDelta;
 
       const firstIndex =
-        languageOrder.get(first.languageCode ?? "") ?? Number.MAX_SAFE_INTEGER;
+        languageOrder.get(effectiveCode(first, codeByName) ?? "") ??
+        Number.MAX_SAFE_INTEGER;
       const secondIndex =
-        languageOrder.get(second.languageCode ?? "") ?? Number.MAX_SAFE_INTEGER;
+        languageOrder.get(effectiveCode(second, codeByName) ?? "") ??
+        Number.MAX_SAFE_INTEGER;
       return firstIndex - secondIndex;
     });
-    return anchorGreenCards(ordered, "tree");
+    return anchorGreenCards(ordered, "tree", codeByName);
   }
 
   if (sort === "language") {
@@ -293,12 +372,14 @@ function sortResults(
     // into per-tree groups.
     const ordered = [...results].sort((first, second) => {
       const firstIndex =
-        languageOrder.get(first.languageCode ?? "") ?? Number.MAX_SAFE_INTEGER;
+        languageOrder.get(effectiveCode(first, codeByName) ?? "") ??
+        Number.MAX_SAFE_INTEGER;
       const secondIndex =
-        languageOrder.get(second.languageCode ?? "") ?? Number.MAX_SAFE_INTEGER;
+        languageOrder.get(effectiveCode(second, codeByName) ?? "") ??
+        Number.MAX_SAFE_INTEGER;
       return firstIndex - secondIndex;
     });
-    return anchorGreenCards(ordered, "language");
+    return anchorGreenCards(ordered, "language", codeByName);
   }
 
   if (sort === "cardtype") {
@@ -423,6 +504,11 @@ export function GeneratorPrototype() {
   const [sort, setSort] = useState<SortOption>("relevance");
   const [availableLanguages, setAvailableLanguages] = useState<LanguageInfo[]>([]);
   const [enabledCodes, setEnabledCodes] = useState<string[]>([]);
+  // Stage 21. Defaults ON: §23.3 measured origin='other' on 12.5% of
+  // resolved rows, so defaulting it off would hide roughly an eighth of
+  // green cards on first load, which reads as missing recall rather than
+  // as a filter.
+  const [includeOtherOrigins, setIncludeOtherOrigins] = useState(true);
   const [breadth, setBreadth] = useState(0);
   const [depth, setDepth] = useState(0);
   const [flavor, setFlavor] = useState<GenerationFlavor>("default");
@@ -484,6 +570,18 @@ export function GeneratorPrototype() {
     return order;
   }, [sortedLanguages]);
 
+  // Language NAME -> code. displayOrigin is a name, not a code, because
+  // it is a display column shared by three tiers (category, gloss_etym,
+  // ledger) and only the ledger ever knew about codes. Anything that fails
+  // to map here is an origin outside the 21 and belongs in Other.
+  const languageCodeByName = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const lang of availableLanguages) {
+      map.set(lang.name.toLowerCase(), lang.code);
+    }
+    return map;
+  }, [availableLanguages]);
+
   const visibleResults = useMemo(() => {
     const filteredResults = results.filter((result) => {
       // A gradient card IS an established name, so the "Established names"
@@ -495,8 +593,17 @@ export function GeneratorPrototype() {
         result.category === category ||
         (category === "established" && result.category === "word-established");
 
+      // Stage 21. A standalone green card filters on its ORIGIN, not on
+      // the tree that produced it: a name whose origin is Arabic belongs
+      // to the Arabic selection even though it was retrieved from the
+      // English pass. retrieve_green_cards scopes the query the same way,
+      // so this is the client half of one rule rather than a second one.
+      const cardCode = effectiveCode(result, languageCodeByName);
       const matchesLanguage =
-        !result.languageCode || enabledCodes.includes(result.languageCode);
+        !cardCode ||
+        (cardCode === OTHER_ORIGIN
+          ? includeOtherOrigins
+          : enabledCodes.includes(cardCode));
 
       const resultLength = getNameLength(result.name);
 
@@ -519,7 +626,8 @@ export function GeneratorPrototype() {
       );
     });
 
-    return sortResults(filteredResults, sort, languageOrder);
+    return sortResults(filteredResults, sort, languageOrder,
+                       languageCodeByName);
   }, [
     category,
     enabledCodes,
@@ -527,6 +635,8 @@ export function GeneratorPrototype() {
     sort,
     results,
     languageOrder,
+    languageCodeByName,
+    includeOtherOrigins,
   ]);
 
   // Grouping is a property of the SORT, not the view -- so card view and
@@ -576,15 +686,34 @@ export function GeneratorPrototype() {
     }[] = [];
 
     for (const result of visibleResults) {
-      const code = result.languageCode ?? null;
+      // Origin cards fold into the EXISTING per-language sections rather
+      // than getting their own "Arabic origin" ones. The pill on these
+      // cards already reads Arabic (11f), so there is no contradiction to
+      // explain -- and separate sections would need prefixed codes, which
+      // both collapsedLanguages and languageSectionId are keyed on.
+      const code = effectiveCode(result, languageCodeByName) ?? null;
+      const group = isStandaloneGreen(result)
+        ? originGroup(result.green, languageCodeByName)
+        : null;
+      const label = group?.label ?? result.language;
       const last = groups[groups.length - 1];
 
-      if (last && last.code === code) last.items.push(result);
-      else groups.push({ code, label: result.language, items: [result] });
+      // Every Other-bucket card shares the same OTHER_ORIGIN code but
+      // carries its OWN label (Armenian, Meitei, Hungarian...). Merging on
+      // code alone would fold consecutive Other cards from different
+      // languages into one section wearing whichever label came first.
+      // Checking label too gives each out-of-vocabulary language its own
+      // labelled run inside the Other region, while every ordinary
+      // section (one code, one label) is completely unaffected.
+      if (last && last.code === code && last.label === label) {
+        last.items.push(result);
+      } else {
+        groups.push({ code, label, items: [result] });
+      }
     }
 
     return groups;
-  }, [visibleResults, sort]);
+  }, [visibleResults, sort, languageCodeByName]);
 
   const rtlCodes = useMemo(() => {
     const set = new Set(RTL_FALLBACK_CODES);
@@ -697,8 +826,14 @@ export function GeneratorPrototype() {
               )}
           </div>
 
+          {/* Stage 21. On a standalone green card this reads the ORIGIN,
+              not the tree it was retrieved from. A gradient card keeps its
+              tree label: it is a name and a word of the same language by
+              construction, so origin is not a separate fact about it. */}
           <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-slate-700">
-            {result.language}
+            {(isStandaloneGreen(result) &&
+              originGroup(result.green, languageCodeByName)?.label) ||
+              result.language}
           </span>
         </div>
 
@@ -1093,6 +1228,7 @@ export function GeneratorPrototype() {
           // the /languages fetch failed -- degrade to the legacy en-only path
           // rather than sending [] and getting zero trees.
           languageCodes: availableLanguages.length > 0 ? enabledCodes : null,
+          includeOtherOrigins,
           minLength: MIN_LENGTH,
           maxLength: MAX_LENGTH,
         },
@@ -1363,6 +1499,26 @@ export function GeneratorPrototype() {
                       <span dir="auto">{languageLabel(lang)}</span>
                     </label>
                   ))}
+                  <label className="mt-2 flex items-center gap-2 border-t border-slate-200 pt-2 text-sm text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={includeOtherOrigins}
+                      onChange={() => setIncludeOtherOrigins((v) => !v)}
+                    />
+                    <span>
+                      Other origins
+                      <InfoTip label="Other origins">
+                        Some names match your meaning but come from a
+                        language outside this list — French and Italian are
+                        the most common. They keep their real language on
+                        the card and are grouped under{" "}
+                        <strong>Other</strong>, along with the few names we
+                        could not place at all. Unlike the boxes above,
+                        this one only shows and hides results — it never
+                        changes which languages the next search looks at.
+                      </InfoTip>
+                    </span>
+                  </label>
                 </div>
 
                 <p className="mt-2 text-xs text-slate-400">
