@@ -1763,7 +1763,7 @@ export function GeneratorPrototype() {
                   }
                   className="mt-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
                 >
-                  <option value="cardtype">Card type</option>
+                  <option value="cardtype">Type</option>
                   <option value="language">Language</option>
                   <option value="relevance">Tree order</option>
                   <option value="az">A to Z</option>
