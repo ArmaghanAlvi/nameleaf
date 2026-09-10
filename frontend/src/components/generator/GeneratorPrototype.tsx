@@ -37,9 +37,9 @@ type SortOption =
   | "cardtype";
 
 const categoryOptions: { value: CategoryFilter; label: string }[] = [
-  { value: "all", label: "All result types" },
+  { value: "all", label: "All" },
   { value: "established", label: "Established names" },
-  { value: "translation", label: "Translations and words" },
+  { value: "translation", label: "Related meanings" },
   { value: "generated", label: "Generated names" },
 ];
 
@@ -501,7 +501,7 @@ export function GeneratorPrototype() {
   const [inputValue, setInputValue] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("all");
-  const [sort, setSort] = useState<SortOption>("relevance");
+  const [sort, setSort] = useState<SortOption>("cardtype");
   const [availableLanguages, setAvailableLanguages] = useState<LanguageInfo[]>([]);
   const [enabledCodes, setEnabledCodes] = useState<string[]>([]);
   // Stage 21. Defaults ON: §23.3 measured origin='other' on 12.5% of
@@ -664,6 +664,7 @@ export function GeneratorPrototype() {
         .map((section) => ({
           code: section.code as string | null,
           label: section.label as string | null,
+          key: (section.code as string | null) ?? section.label ?? "section",
           items: visibleResults.filter(section.belongs),
         }))
         .filter((group) => group.items.length > 0);
@@ -674,6 +675,7 @@ export function GeneratorPrototype() {
         {
           code: null as string | null,
           label: null as string | null,
+          key: "all",
           items: visibleResults,
         },
       ];
@@ -682,6 +684,7 @@ export function GeneratorPrototype() {
     const groups: {
       code: string | null;
       label: string | null;
+      key: string;
       items: NameResult[];
     }[] = [];
 
@@ -708,7 +711,21 @@ export function GeneratorPrototype() {
       if (last && last.code === code && last.label === label) {
         last.items.push(result);
       } else {
-        groups.push({ code, label, items: [result] });
+        // code alone is not unique for Other-bucket groups: every
+        // out-of-vocabulary language shares OTHER_ORIGIN as `code` but
+        // carries its own `label` (Armenian, Meitei, Hungarian...), and
+        // the merge check above already treats (code, label) as the real
+        // identity. `key` makes that same compound identity available to
+        // every consumer -- React keys, collapsedLanguages, jumpToLanguage,
+        // the DOM anchor id -- so the Other-bucket case only has to be
+        // handled once, here, instead of re-derived at each call site
+        // (which is how it went missing before).
+        const key = code === null
+          ? `unknown-${groups.length}`
+          : code === OTHER_ORIGIN
+            ? `${code}:${label ?? groups.length}`
+            : code;
+        groups.push({ code, label, key, items: [result] });
       }
     }
 
@@ -1149,42 +1166,39 @@ export function GeneratorPrototype() {
     );
   }
 
-  function toggleLanguageCollapsed(code: string | null) {
-    if (code === null) return;
+  function toggleLanguageCollapsed(key: string) {
     setCollapsedLanguages((current) => {
       const next = new Set(current);
-      if (next.has(code)) next.delete(code);
-      else next.add(code);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
       return next;
     });
   }
 
   function collapseAllLanguages() {
-    setCollapsedLanguages(
-      new Set(
-        resultGroups
-          .map((group) => group.code)
-          .filter((code): code is string => code !== null)
-      )
-    );
+    setCollapsedLanguages(new Set(resultGroups.map((group) => group.key)));
   }
 
-  function jumpToLanguage(code: string | null) {
+  function jumpToLanguage(key: string) {
     // Expand first: scrolling to a collapsed section lands you on a header
     // with nothing under it, which reads as a broken link.
-    if (code !== null) {
-      setCollapsedLanguages((current) => {
-        const next = new Set(current);
-        next.delete(code);
-        return next;
-      });
-    }
+    setCollapsedLanguages((current) => {
+      const next = new Set(current);
+      next.delete(key);
+      return next;
+    });
 
     // getElementById rather than a ref map: the section list is rebuilt on
     // every search and every collapse toggle, and a ref map would need
     // pruning on each. The id is derived and stable.
+    //
+    // `key` (not `code`) drives this id -- see resultGroups' `key`
+    // computation: `code` alone collides across the Other bucket's
+    // per-language sections (Armenian/Meitei/Hungarian all share
+    // OTHER_ORIGIN as `code`), and this id must match whatever the
+    // sections themselves render at languageSectionId(group.key).
     document
-      .getElementById(languageSectionId(code))
+      .getElementById(languageSectionId(key))
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -1604,7 +1618,7 @@ export function GeneratorPrototype() {
                 <span>2</span>
                 <span>3</span>
               </div>
-              <p className="mt-2 text-sm text-slate-600" style={{ fontSize: '11px' }}><i>*Note that increasing the expansion depth beyond 1 can increase search times</i></p>
+              <p className="mt-2 text-sm text-slate-600" style={{ fontSize: '11px' }}><i>*Note that increasing the expansion depth beyond 1 can significantly increase search times (maximum 2-3 minutes)</i></p>
             </div>
 
             <datalist id="expansion-ticks">
@@ -1667,11 +1681,11 @@ export function GeneratorPrototype() {
               </div>
 
               <div className="mt-3 space-y-0.5">
-                {resultGroups.map((group, index) => (
+                {resultGroups.map((group) => (
                   <button
-                    key={group.code ?? `unknown-${index}`}
+                    key={group.key}
                     type="button"
-                    onClick={() => jumpToLanguage(group.code)}
+                    onClick={() => jumpToLanguage(group.key)}
                     className="flex w-full items-center justify-between rounded-lg px-2 py-1.5 text-left text-sm text-slate-700 transition hover:bg-slate-50"
                   >
                     <span dir="auto">{group.label ?? "Unknown"}</span>
@@ -1716,7 +1730,7 @@ export function GeneratorPrototype() {
                         : "bg-white text-slate-600 hover:bg-slate-50"
                     }`}
                   >
-                    Cards
+                    Card
                   </button>
                   <button
                     type="button"
@@ -1739,11 +1753,6 @@ export function GeneratorPrototype() {
                   className="block text-xs font-semibold uppercase tracking-wide text-slate-500"
                 >
                   Sort By
-                  <InfoTip label="Sort By">
-                    <strong>Hop order</strong> walks the tree: the searched
-                    word, then each hop outward, grouped under the word it
-                    expanded from. Recommended for depth-based expansion.
-                  </InfoTip>
                 </label>
 
                 <select
@@ -1754,13 +1763,13 @@ export function GeneratorPrototype() {
                   }
                   className="mt-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
                 >
-                  <option value="relevance">Hop order (tree)</option>
-                  <option value="language">Language (grouped)</option>
-                  <option value="cardtype">Card type (grouped)</option>
-                  <option value="az">First Letter: A–Z</option>
-                  <option value="za">First Letter: Z–A</option>
-                  <option value="shortest">Shortest first</option>
-                  <option value="longest">Longest first</option>
+                  <option value="cardtype">Card type</option>
+                  <option value="language">Language</option>
+                  <option value="relevance">Tree order</option>
+                  <option value="az">A to Z</option>
+                  <option value="za">Z to A</option>
+                  <option value="shortest">Shortest</option>
+                  <option value="longest">Longest</option>
                 </select>
               </div>
             </div>
@@ -1779,14 +1788,13 @@ export function GeneratorPrototype() {
             </div>
           ) : (
             <div className="mt-6 space-y-6">
-              {resultGroups.map((group, index) => {
-                const isCollapsed =
-                  group.code !== null && collapsedLanguages.has(group.code);
+              {resultGroups.map((group) => {
+                const isCollapsed = collapsedLanguages.has(group.key);
 
                 return (
                   <section
-                    key={group.code ?? `group-${index}`}
-                    id={languageSectionId(group.code)}
+                    key={group.key}
+                    id={languageSectionId(group.key)}
                     // Small top margin so a jumped-to header doesn't land
                     // flush against the viewport edge.
                     className="scroll-mt-6"
@@ -1794,7 +1802,7 @@ export function GeneratorPrototype() {
                     {group.label && (
                       <button
                         type="button"
-                        onClick={() => toggleLanguageCollapsed(group.code)}
+                        onClick={() => toggleLanguageCollapsed(group.key)}
                         aria-expanded={!isCollapsed}
                         className="flex w-full items-center gap-2 border-b border-slate-200 pb-2 text-left"
                       >

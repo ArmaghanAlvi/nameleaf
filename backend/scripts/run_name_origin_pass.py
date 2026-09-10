@@ -293,7 +293,7 @@ def run_report(path: str) -> None:
 
         # 20i-2: the floor, read on RAW strings, not the fold.
         anc = [r for r in rows
-               if (r["a"]["raw"] or "").lower() in nol._ANCESTRAL_ENGLISH]
+               if (r["a"]["raw"] or "").lower() in nol.ANCESTRAL_ENGLISH]
         surnames = [r for r in rows if r["name_type"] == "surname"] or [None]
         print(f"  ancestral-English raw: {len(anc)} "
               f"({100*len(anc)/len(surnames):.1f}% of surnames)")
@@ -497,6 +497,20 @@ def run_full(db, args):
             db, skip_ledger=True, limit=args.limit_rows or None)
         if p.established_name_id not in stuck_ids
     ]
+
+    # Error rows join PHASE ONE, not the pass-C drain: a failed batch wrote
+    # a placeholder for every row in it, so there is no A/B verdict to
+    # reconcile -- they owe a fresh ask. PREPENDED for the same priority
+    # reasoning as Defect B's backlog drain: a --max-calls ceiling should
+    # spend itself on the known, bounded backlog before opening new work.
+    # Behind a flag so the default plan stays byte-identical to Stage 22's,
+    # the same contract D-2 kept for skip_ledger.
+    retry = assembly.select_errors(db) if args.retry_errors else []
+    if retry:
+        retry_ids = {r.established_name_id for r in retry}
+        pending = retry + [p for p in pending
+                           if p.established_name_id not in retry_ids]
+
     db.commit()   # see main(): do not hold a transaction through the loop
 
     size = args.batch_size
@@ -504,7 +518,8 @@ def run_full(db, args):
     plan = {"rows": len(pending), "batches": planned,
             "calls_ab": planned * 2, "batch_size": size,
             "max_calls": args.max_calls,
-            "stuck_disagreements": len(stuck)}
+            "stuck_disagreements": len(stuck),
+            "retry_errors": len(retry)}
     print(json.dumps(plan, indent=2))
     if args.dry_plan:
         return
@@ -713,6 +728,10 @@ def main() -> None:
     p.add_argument("--yes", action="store_true")
     p.add_argument("--max-spend-usd", type=float, default=0.0,
                    help="hard spend ceiling in USD; 0 = no ceiling")
+    p.add_argument("--retry-errors", action="store_true",
+                   help="also re-offer ledger rows sitting at 'error' "
+                        "(they are unreachable via select_pending once "
+                        "apply_origin has written llm_error onto them)")
     args = p.parse_args()
 
     db = SessionLocal()

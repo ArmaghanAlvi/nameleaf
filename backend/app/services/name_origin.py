@@ -61,6 +61,33 @@ ORDER BY CASE WHEN en.meaning_text IS NULL THEN 1 ELSE 0 END,
          en.name_type, en.normalized_lemma
 """
 
+# Ledger rows sitting at 'error'. A batch-level failure -- an HTTP error, a
+# schema rejection -- wrote a placeholder for every row in the batch, so NO
+# verdict was ever paid for. That is what separates them from 'disagreed',
+# whose A and B verdicts are real evidence and which
+# load_stuck_disagreements routes straight to pass C: these owe a full,
+# fresh A/B and belong in phase one.
+#
+# They cannot come back through select_pending. _PENDING_HEAD requires
+# origin_source IS NULL, and apply_origin has already written 'llm_error'
+# onto every one of them. Once a pass has completed and been applied,
+# pending is empty by definition and the error backlog is invisible to it.
+# attempt_count is what stops this from being an infinite retry: error_rows
+# increments it SQL-side, so the third failure settles the row for good.
+_ERROR_HEAD = """
+SELECT en.id, en.lemma, en.normalized_lemma, en.name_type, en.gender,
+       en.meaning_text, en.meaning_channel, en.source_sense_id
+FROM established_names en
+JOIN languages l ON l.id = en.language_id
+JOIN name_origin_attempts a
+  ON a.language_id = en.language_id
+ AND a.normalized_lemma = en.normalized_lemma
+ AND a.name_type = en.name_type
+WHERE l.code = :code
+  AND a.status = 'error'
+  AND a.attempt_count < :max_attempts
+"""
+
 _TWINS_SQL = text("""
 SELECT t.normalized_lemma, t.name_type, l.name AS twin_language
 FROM name_origin_twins t
@@ -140,6 +167,15 @@ def select_pending(db: Session, *, limit: int | None = None,
     if limit is not None:
         sql += " LIMIT :limit OFFSET :offset"
         params |= {"limit": limit, "offset": offset}
+    return _build_items(db, sql, params)
+
+
+def _build_items(db: Session, sql: str, params: dict) -> list[OriginItem]:
+    """Row -> OriginItem, with twin evidence attached. Shared by
+    select_pending and select_errors for the same reason assembly is
+    shared between the pilot and the pass: the two must be asking about
+    exactly the same shape, or a retry is not a retry of the same
+    question."""
     twins = _twin_index(db)
     return [
         OriginItem(
@@ -152,6 +188,17 @@ def select_pending(db: Session, *, limit: int | None = None,
         )
         for r in db.execute(text(sql), params)
     ]
+
+
+def select_errors(db: Session, *, max_attempts: int = 3) -> list[OriginItem]:
+    """Rows the ledger holds at 'error' and that have not exhausted their
+    attempts. Full row data, not the thin reconstruction
+    load_stuck_disagreements uses: pass C there has real A/B verdicts to
+    reconcile against, whereas these rows are getting a first real ask and
+    must carry the same payload select_pending would have given them --
+    meaning_text included."""
+    return _build_items(db, _ERROR_HEAD + _PENDING_ORDER,
+                        {"code": HOST_CODE, "max_attempts": max_attempts})
 
 
 def item_payload(item: OriginItem) -> dict:

@@ -55,7 +55,12 @@ from app.services import root_llm
 # OLD NORSE IS DELIBERATELY ABSENT. Danelaw surnames genuinely are Old
 # Norse and `non` is a corpus language in its own right. Frankish is absent
 # for the same reason: it is not an English ancestral stage.
-_ANCESTRAL_ENGLISH = frozenset({
+# SHARED with scripts/populate_established_names.py:apply_origin as of
+# Breakdown K. Public, not underscore-private, because the fold now has
+# TWO write sites and a private name copied into the second one is exactly
+# how the two lists drift apart -- which is the defect 23.10 describes,
+# one level up.
+ANCESTRAL_ENGLISH = frozenset({
     "old english", "middle english", "anglo-saxon", "anglo saxon",
     "proto-west germanic", "proto-germanic",
 })
@@ -219,7 +224,7 @@ def normalize_origin(raw: str | None, vocabulary: list[str],
     if lowered in _DECLINE_TOKENS:
         return None, None
     if (host_language_name.lower() == "english"
-            and lowered in _ANCESTRAL_ENGLISH):
+            and lowered in ANCESTRAL_ENGLISH):
         return host_language_name, host_language_name
     alias = _ALIASES.get(lowered)
     if alias:

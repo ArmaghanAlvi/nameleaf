@@ -56,7 +56,7 @@ import argparse
 import os
 import sys
 from collections import Counter
-from typing import cast
+from typing import TypedDict, cast
 
 sys.path.insert(0, os.getcwd())
 
@@ -77,7 +77,8 @@ from app.services.established_names import (                    # noqa: E402
     meaning_tokens,
     reduce_gender,
 )
-from app.services.romanization import (                         # noqa: E402
+from app.services.name_origin_llm import ANCESTRAL_ENGLISH     # noqa: E402
+from app.services.romanization import (                        # noqa: E402
     extract_kaikki_romanization,
     needs_romanization,
 )
@@ -321,7 +322,25 @@ def link_homographs(db: Session, lang, dry_run: bool) -> dict[str, int]:
     return {"linked": int(getattr(result, "rowcount", 0) or 0)}
 
 
-def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
+class OriginApplyResult(TypedDict):
+    """apply_origin's return shape. `final` is the one field that isn't a
+    plain int -- it's the per-origin_source breakdown of the table's
+    ACTUAL final state, printed alongside the tier writes because the two
+    numbers legitimately differ (54-row exempt/category overlap; see the
+    comment on `final`'s assignment below). A TypedDict keeps that one
+    field's shape distinct from the rest instead of blending everything
+    into one int | dict union, which is what broke every arithmetic and
+    .items() call on the other fields."""
+    exempt: int
+    category: int
+    gloss_etym: int
+    ledger: int
+    folded: int
+    final: dict[str, int]
+    overlap: int
+
+
+def apply_origin(db: Session, lang, dry_run: bool) -> OriginApplyResult:
     """
     Stage 18d. Re-apply origins onto established_names from the DERIVED and
     LEDGER sources, in precedence order.
@@ -368,7 +387,10 @@ def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
                        AS category
             FROM established_names WHERE language_id = :lid
         """), {"lid": lang.id}).mappings().one()
-        return dict(counts) | {"gloss_etym": 0, "ledger": 0}
+        return OriginApplyResult(
+            exempt=counts["exempt"], category=counts["category"],
+            gloss_etym=0, ledger=0, folded=0, final={}, overlap=0,
+        )
 
     db.execute(text("""
         UPDATE established_names
@@ -451,9 +473,54 @@ def apply_origin(db: Session, lang, dry_run: bool) -> dict[str, int]:
           AND en.origin_source IS NULL
     """), {"lid": lang.id})).rowcount or 0
 
+    # THE FOLD, AT THE WRITE SITE. (23.10, closed in Breakdown K.)
+    #
+    # Until now the ancestral-English fold lived in exactly one place --
+    # name_origin_llm.normalize_origin -- reachable ONLY through the LEDGER
+    # tier, because that tier reads origin_raw, which was normalised when
+    # it was written. The `category` and `gloss_etym` UPDATEs above each
+    # take a language NAME straight out of Wiktionary text and write it to
+    # display_origin_language without ever passing through it. gloss_etym
+    # alone is an order of magnitude larger than the LLM-resolved
+    # population, which is why 1,925 production rows read "Old English"
+    # after Stage 22 despite D-5, and why the one-time UPDATE could not be
+    # the fix: --pass origin resets the language and re-derives, so the
+    # leak comes back on the next rebuild.
+    #
+    # RUNS LAST, so it covers every tier including any future one. Gated on
+    # an English host, exactly as normalize_origin is: "Old English" is a
+    # truthful, in-vocabulary answer for a RUSSIAN row and folding it there
+    # would be a defect, not a fix. Old Norse and Frankish stay out for the
+    # reason given at ANCESTRAL_ENGLISH's definition.
+    folded = 0
+    if lang.code == "en":
+        folded = cast(CursorResult, db.execute(text("""
+            UPDATE established_names
+            SET display_origin_language = :host
+            WHERE language_id = :lid
+              AND display_origin_language IS NOT NULL
+              AND lower(display_origin_language) IN :ancestral
+        """).bindparams(bindparam("ancestral", expanding=True)),
+            {"lid": lang.id, "host": lang.name,
+             "ancestral": sorted(ANCESTRAL_ENGLISH)})).rowcount or 0
+
+    # WRITES vs. FINAL STATE. The rowcounts above are what each UPDATE
+    # touched; `category` deliberately overwrites gradient rows, so 54 rows
+    # are counted by both `exempt` and `category` while holding exactly one
+    # final value. That discrepancy between the printed TOTAL and the
+    # summed per-source table has been re-derived from scratch in 23.5 and
+    # again in 23.11. Printing the final state next to the writes retires
+    # the question instead of documenting it a fourth time.
+    final = {r.origin_source or "(pending)": r.rows for r in db.execute(text("""
+        SELECT origin_source, count(*) AS rows
+        FROM established_names WHERE language_id = :lid
+        GROUP BY 1 ORDER BY 2 DESC
+    """), {"lid": lang.id})}
+
     db.commit()
     return {"exempt": exempt, "category": category,
-            "gloss_etym": gloss_etym, "ledger": ledger, "overlap": 0}
+            "gloss_etym": gloss_etym, "ledger": ledger,
+            "folded": folded, "final": final, "overlap": 0}
 
 
 def english_lexeme_map(db: Session) -> dict[str, int]:
@@ -671,6 +738,10 @@ def main() -> None:
                 print(f"  origin category ..... {o['category']}")
                 print(f"  origin gloss/etym ... {o['gloss_etym']}")
                 print(f"  origin from ledger .. {o['ledger']}")
+                print(f"  origin folded to en . {o['folded']}")
+                print("  origin final state ..")
+                for src, n in o["final"].items():
+                    print(f"      {src:<18} {n}")
                 totals["origin"] += (o["exempt"] + o["category"]
                                      + o["gloss_etym"] + o["ledger"])
         print(f"\nTOTAL rows={totals['rows']}  "
