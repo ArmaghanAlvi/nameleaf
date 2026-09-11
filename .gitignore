@@ -75,5 +75,8 @@ backend/*_import.log
 #my notes
 notes/
 
+# Claude Code personal overrides (project .claude/settings.json IS committed)
+.claude/settings.local.json
+
 #Backup before pruning english database
 scripts/prune/backup/
