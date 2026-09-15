@@ -751,6 +751,10 @@ export function GeneratorPrototype() {
     const query = inputValue.trim();
 
     if (query.length === 0) {
+      // Deliberate: clearing on an emptied box must be synchronous. Deferring
+      // it into the 350ms debounce below would leave stale sense options
+      // visible while the user is looking at an empty search field.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSenseOptions([]);
       setShowDropdown(false);
       return;
@@ -1548,7 +1552,7 @@ export function GeneratorPrototype() {
               Expansion
               <InfoTip label="Expansion">
                 A <strong>hop</strong> refers to the retreiveing of related words.
-                For example, searching one hop away from "light" will also retrieve "luminance."
+                For example, searching one hop away from &quot;light&quot; will also retrieve &quot;luminance.&quot;
                 <br />
                 <strong>Breadth</strong> is the amount of words related to 
                 your searched meaning that will be retrieved per hop for each language.

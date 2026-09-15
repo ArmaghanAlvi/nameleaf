@@ -27,7 +27,7 @@ WORDNET_PROVENANCES: frozenset[str] = frozenset({
     "omw-he",    # Hebrew — license per manifest
     "omw-cmn",   # Chinese (Mandarin) — license per manifest
     "odenet",    # German — CC BY-SA 4.0, share-alike
-    "lsg",       # Irish (Líonra Séimeantach na Gaeilge) — GFDL
+    "lsg",       # Irish (Líonra Séimeantach na Gaeilge) — CC BY-SA 4.0, as declared by the OMW LMF file imported
 })
 
 # Non-wordnet provenance, listed because the embedding allowlist needs it.

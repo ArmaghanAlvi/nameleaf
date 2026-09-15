@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. **Production is unreachable from this machine, by design.** This machine only ever talks to the local Docker database. Never write a non-localhost database URL or production hostname into any file, script default, config, or command. Never ask for production credentials, SSH to a server, or run deploy/publish steps against a server. If a task appears to require production access, stop: that step belongs to the user.
 3. **Secrets stay unread.** Do not read `backend/.env` or `frontend/.env*.local`; use `backend/.env.example` for variable names. Never print, log, or commit secrets. Every new setting gets a placeholder line in `.env.example`.
 4. **Guardrails mean stop.** If a hook or permission rule blocks a command, do not look for an equivalent command that achieves the same effect. Stop, say what was blocked, and ask.
-5. **Git hygiene.** Work on the current task's branch; never commit directly to `main`; never force-push or rewrite pushed history.
+5. **Git is the user's.** Never stage, commit, push, pull, merge, rebase, or otherwise write to git history (`git add`, `git commit`, `git rm`, `git mv`, `git push`, …), not even on a task branch, and never discard uncommitted work (`git restore`, `git checkout -- <path>`, `git clean`, `git reset --hard`). Make changes in the working tree only, and keep a running list of the files you changed so the user can commit them. Read-only git commands (`status`, `diff`, `log`, `ls-files`, `check-ignore`) are fine. The guard hook (`.claude/hooks/guard.py`) enforces this.
 6. **Zero-review constraint.** No solution may require the user to manually review, label, or edit data (imports, embeddings, publish builds). Data changes are produced by scripts from the master database, reproducibly.
 7. **No unrequested paid API calls.** Nothing you run should trigger live Gemini calls unless the task explicitly says so (see "Query-time LLM trickle" below).
 
@@ -179,7 +179,8 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7). Tasks arrive as 
 
 **Workflow:**
 - Plan first, in plan mode. The plan lists the files to touch, the tests and gates to run, and the stop-and-ask points it expects to hit. Wait for approval before implementing.
-- One branch per breakdown, one logical change per commit.
+- Work happens directly on `main`. The user makes every commit and push; you never do.
+- Log every finding in the `# Findings Log` section at the bottom of `notes/PUBLISHING_ROADMAP.md`, in the same format as the Findings Log sections of the previous `notes/*_ROADMAP*.md` files. Append only; never edit existing entries or the roadmap's Stages. Log the real output of any test you run, not a verdict.
 - Stay in scope: no "while I'm in here" changes. Note them for the user instead.
 
 **Stop and ask before:**

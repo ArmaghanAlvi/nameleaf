@@ -1,0 +1,49 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    env:
+      # Dummy values: tests use in-memory SQLite and never connect, but
+      # importing app.config requires DATABASE_URL to exist.
+      DATABASE_URL: postgresql+psycopg://ci:ci@localhost:5432/ci
+      ROOT_LLM_QUERY_TIME: "0"
+      PREWARM_ON_STARTUP: "0"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"   # matches backend/.venv (3.14.2)
+          cache: pip
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-dev.txt
+      - name: Install CPU-only torch (pinned version)
+        run: pip install --index-url https://download.pytorch.org/whl/cpu "$(grep -E '^torch==' backend/requirements.txt)"
+      - name: Install backend dependencies
+        run: pip install -r backend/requirements.txt "$(grep -E '^pytest==' backend/requirements-dev.txt)"
+      - name: Run tests
+        run: python -m pytest
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24"   # matches node v24.14.1
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build

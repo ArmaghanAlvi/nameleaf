@@ -27,8 +27,19 @@ _ENV_NAME = re.compile(r"(?<![\w.])\.env(?:\.[A-Za-z0-9_-]+)*(?![\w.-])")
 
 _LOCAL_HOST = r"(?:localhost|127\.0\.0\.1|db)(?:[:/]|$)"
 
-# Rules checked against every Bash command.
+# `git`, optionally followed by -C <path> / -c <key=value>, then the subcommand.
+_GIT = r"\bgit(?:\s+-[cC]\s+\S+)*\s+"
+
 _BASH_RULES: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(_GIT + r"(?:add|commit|push|pull|rm|mv|merge|rebase|cherry-pick|revert|am)(?![\w-])"),
+     "staging, committing, pushing and other git history writes are the user's steps "
+     "(CLAUDE.md safety rule 5)"),
+    (re.compile(_GIT + r"apply\b[^;&|]*\s--(?:index|cached)\b"),
+     "`git apply --index/--cached` stages changes, which is the user's step"),
+    (re.compile(_GIT + r"(?:reset\s+--hard|clean|restore)(?![\w-])"),
+     "this git command discards uncommitted work irreversibly"),
+    (re.compile(_GIT + r"checkout\b[^;&|]*\s--(?:\s|$)"),
+     "`git checkout -- <path>` discards uncommitted work irreversibly"),
     (re.compile(r"\bdocker(?:-compose|\s+compose)\b(?=[^;&|]*\bdown\b)(?=[^;&|]*\s(?:-v|--volumes)\b)"),
      "`docker compose down -v` deletes database volumes"),
     (re.compile(r"\bdocker\s+(?:volume\s+(?:rm|prune)|system\s+prune)\b"),
@@ -37,12 +48,6 @@ _BASH_RULES: tuple[tuple[re.Pattern[str], str], ...] = (
      "pg_restore / dropdb overwrite or delete a database"),
     (re.compile(r"\balembic\s+downgrade\b"),
      "`alembic downgrade` is a destructive schema change"),
-    (re.compile(r"\bgit\s+push\b[^;&|]*\s(?:-f|--force|--force-with-lease)\b"),
-     "force-pushing rewrites shared history"),
-    (re.compile(r"\bgit\s+push\b[^;&|]*[\s:]main\b"),
-     "pushing to main is the user's step; work on the task branch"),
-    (re.compile(r"\bgit\s+reset\s+--hard\b"),
-     "`git reset --hard` discards work irreversibly"),
     (re.compile(r"(?:^|[\s;&|(])(?:ssh|scp|sftp)\s"),
      "connecting to remote machines is the user's step (production is unreachable by design)"),
     (re.compile(r"\brsync\b[^;&|]*\s(?:[\w.-]+@)?[\w.-]+:"),

@@ -47,6 +47,17 @@ uvloop==0.22.1
 watchfiles==1.2.0
 websockets==16.0
 pgvector==0.4.2
-sentence-transformers
-orjson
-tqdm
+# ML stack — pinned (Stage 0c) so the production image and local gates run
+# identical model code. torch==X also matches PyTorch's Linux CPU wheel X+cpu.
+torch==2.14.0
+sentence-transformers==6.0.1
+transformers==5.17.0
+tokenizers==0.23.2
+huggingface_hub==1.16.1
+safetensors==0.8.0
+numpy==2.5.3
+scipy==1.18.1
+scikit-learn==1.9.0
+pillow==12.3.0
+orjson==3.12.0
+tqdm==4.70.0
