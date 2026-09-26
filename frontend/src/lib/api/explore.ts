@@ -4,6 +4,8 @@ import type {
   NameResult,
 } from "@/features/generator/types";
 
+import { apiUrl } from "./base";
+
 export interface SenseOption {
   senseId: number;
   word: string;
@@ -45,7 +47,7 @@ export async function lookupSenses(
   });
 
   const response = await fetch(
-    `http://127.0.0.1:8000/senses/lookup?${params.toString()}`
+    apiUrl(`/senses/lookup?${params.toString()}`)
   );
 
   if (!response.ok) {
@@ -175,7 +177,7 @@ export async function exploreSelectedSenses(
     maxLength: request.maxLength,
   };
 
-  const response = await fetch("http://127.0.0.1:8000/explore-v2", {
+  const response = await fetch(apiUrl("/explore-v2"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -201,7 +203,7 @@ export interface LanguageInfo {
 
 
 export async function fetchLanguages(): Promise<LanguageInfo[]> {
-  const response = await fetch("http://127.0.0.1:8000/languages");
+  const response = await fetch(apiUrl("/languages"));
   if (!response.ok) {
     throw new Error(`Backend returned status ${response.status}`);
   }

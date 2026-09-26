@@ -1,0 +1,111 @@
+# Production stack (publishing Stage 3f). The same file runs on the server.
+# Secrets come from .env.production, which exists only where the stack runs
+# (gitignored; template: .env.production.example). ALWAYS pass both flags:
+#
+#   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+#
+# The project name "nameforge" keeps containers and volumes separate from the
+# dev stack (docker-compose.yml), whose volume holds the master database.
+name: nameforge
+
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-name_generator}
+      POSTGRES_USER: ${POSTGRES_USER:?set POSTGRES_USER in .env.production}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env.production}
+    command: >
+      postgres
+      -c shared_buffers=${PG_SHARED_BUFFERS:-512MB}
+      -c effective_cache_size=${PG_EFFECTIVE_CACHE_SIZE:-4GB}
+      -c maintenance_work_mem=${PG_MAINTENANCE_WORK_MEM:-512MB}
+    shm_size: 1gb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks: [data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: ${DB_MEMORY_LIMIT:-6g}
+    # NO `ports:` entry. Postgres is reachable only from the backend over the
+    # internal `data` network. (Docker-published ports bypass ufw.)
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    image: nameforge-backend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL in .env.production}
+      SENTRY_DSN: ${SENTRY_DSN:-}
+      ROOT_LLM_QUERY_TIME: "0"
+      # ROOT_LLM_API_KEY is deliberately never passed through.
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [edge, data]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=5).status == 200 else 1)"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 180s
+    deploy:
+      resources:
+        limits:
+          memory: ${BACKEND_MEMORY_LIMIT:-3g}
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    image: nameforge-frontend:${IMAGE_TAG:-latest}
+    restart: unless-stopped
+    networks: [edge]
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-localhost}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+    networks: [edge]
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
+networks:
+  edge: {}
+  data:
+    internal: true   # Postgres gets no route to the outside world at all
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

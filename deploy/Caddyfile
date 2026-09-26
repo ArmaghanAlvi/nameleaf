@@ -1,0 +1,22 @@
+# Reverse proxy and TLS (publishing Stage 3f).
+# SITE_ADDRESS: "localhost" on the Mac (Caddy's internal CA), the real domain
+# on the server (automatic Let's Encrypt).
+{$SITE_ADDRESS} {
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "DENY"
+		-Server
+	}
+
+	# /api/* -> FastAPI with the /api prefix stripped (/api/explore-v2 -> /explore-v2).
+	handle_path /api/* {
+		reverse_proxy backend:8000
+	}
+
+	handle {
+		reverse_proxy frontend:3000
+	}
+}

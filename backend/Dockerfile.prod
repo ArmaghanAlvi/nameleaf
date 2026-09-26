@@ -1,0 +1,44 @@
+# syntax=docker/dockerfile:1.7
+# Production backend image (publishing Stage 3e). Build context: backend/
+ARG PYTHON_VERSION=3.14
+
+FROM python:${PYTHON_VERSION}-slim AS builder
+ENV PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
+WORKDIR /build
+COPY requirements.txt .
+# CPU-only torch first, at the pinned version. The default PyPI wheel on
+# x86-64 Linux bundles CUDA (gigabytes) that this server can't use.
+RUN pip install --index-url https://download.pytorch.org/whl/cpu "$(grep -E '^torch==' requirements.txt)" \
+ && pip install -r requirements.txt
+# Bake the embedding model in so startup never contacts Hugging Face.
+ENV HF_HOME=/opt/hf
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('intfloat/multilingual-e5-base', device='cpu')"
+
+FROM python:${PYTHON_VERSION}-slim AS runtime
+ENV PATH="/opt/venv/bin:${PATH}" \
+    HF_HOME=/opt/hf \
+    HF_HUB_OFFLINE=1 \
+    TRANSFORMERS_OFFLINE=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    APP_ENV=production \
+    PREWARM_ON_STARTUP=1
+RUN useradd --create-home --uid 10001 app
+COPY --from=builder /opt/venv /opt/venv
+COPY --from=builder --chown=app:app /opt/hf /opt/hf
+WORKDIR /srv/backend
+COPY --chown=app:app app/ ./app/
+COPY --chown=app:app migrations/ ./migrations/
+COPY --chown=app:app alembic.ini ./
+# Build-time proof that the trimmed app imports without the excluded tooling.
+# The URL is a placeholder: importing never connects.
+RUN DATABASE_URL=postgresql+psycopg://build@localhost/build python -c "import app.main"
+USER app
+EXPOSE 8000
+# One worker: each worker loads its own model copy on a RAM-bound server.
+# --proxy-headers makes rate limiting see real visitor IPs; trusting "*" is
+# safe only because the backend has no published port (only Caddy reaches it).
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
+     "--workers", "1", "--proxy-headers", "--forwarded-allow-ips", "*"]
