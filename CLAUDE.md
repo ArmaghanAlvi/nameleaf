@@ -73,11 +73,27 @@ npm run lint
 
 `npm run lint` and `npm run build` must pass before committing frontend changes.
 
+### Production stack (rehearsal only on this machine)
+
+`docker-compose.prod.yml` + `deploy/Caddyfile` + `.env.production` (template: `.env.production.example`). Always pass `-f docker-compose.prod.yml --env-file .env.production`: without `-f`, compose targets the dev stack, whose volume is the master database. Tear down rehearsal volumes by explicit name (`nameforge_*`), never with `down -v`. Running this stack and creating `.env.production` are the user's steps.
+
+The guard hook at `.claude/hooks/guard.py` enforces the destructive-command, secret-file, and git-write rules; its tests are `backend/tests/test_claude_guard.py`.
+
 ## Architecture
 
 ### Configuration
 
-`app/config.py` currently only holds `database_url` and `sql_echo`. Several settings are still read directly from `os.environ` elsewhere: `PREWARM_ON_STARTUP`, `ROOT_LLM_API_KEY`, `ROOT_LLM_MODEL`, `ROOT_LLM_QUERY_TIME`, `ROOT_LLM_RPM`. New settings go into `app/config.py` (publishing Stage 3a centralizes the existing ones). Backend CORS (`app/main.py`) currently only allows `localhost:3000`/`127.0.0.1:3000`; Stage 3 makes it configurable.
+All settings live in `app/config.py` (`Settings`, pydantic-settings, loaded from the environment and `backend/.env`). `APP_ENV` (`local` by default, or `production`) derives the security defaults: production turns API docs off, ignores `includeHidden`, enables rate limiting, and fences the query-time LLM (unless `ALLOW_QUERY_TIME_LLM_IN_PRODUCTION=1`). Each can be overridden explicitly (`EXPOSE_API_DOCS`, `ALLOW_INCLUDE_HIDDEN`, `RATE_LIMIT_ENABLED`).
+
+Exception: `ROOT_LLM_*` stay in `services/root_llm.py`, because the harness fence depends on that module's globals.
+
+The app is built by `create_app(settings)` in `app/main.py`; tests build production-configured apps with it. `GET /health` is liveness; `GET /ready` also checks the database.
+
+Rate limiting (`app/middleware/rate_limit.py`) is in-process, assumes one worker, and is off locally so gate captures aren't throttled.
+
+Error reports go to Sentry only when `SENTRY_DSN` is set, and `app/observability.py` scrubs `key=` values, because `root_llm.py` sends the Gemini key in the URL.
+
+The browser always calls a relative `/api`: locally through Next's dev proxy to `127.0.0.1:8000`, in production through Caddy.
 
 ### Domain model (`backend/app/models/`)
 
@@ -203,10 +219,10 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7). Tasks arrive as 
 
 | Stage | Status |
 |---|---|
-| 0 Repo prep | in progress |
+| 0 Repo prep | done (Breakdown A) |
 | 1 CPU readiness | not started |
 | 2 Production data build | not started |
-| 3 Configuration and hardening | not started |
+| 3 Configuration and hardening | done (Breakdown A) |
 | 4 Name, legal pages, UI | not started |
 | 5 Findability | not started |
 | 6 Hosting and first publish | not started (user) |
