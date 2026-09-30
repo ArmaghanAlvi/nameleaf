@@ -1,7 +1,8 @@
 """
 Root selection (MULTILINGUAL_EXPANSION_MODEL.md 2a): English sense -> one
-root per target language, through a four-rung provenance ladder
-(Breakdown 4, Step 1a):
+root per target language, through the rungs below (Breakdown 4, Step 1a;
+rung 4 `llm` added in Breakdown 4.5 — see the "rung 4" block below;
+`pivoted_root` is assigned in parallel_expansion.py):
 
   corroborated  translation link AND shared ILI
   primary       translation link only
@@ -78,7 +79,8 @@ _OVERRIDE_MIN_POOL_ILI = 2      # rung-3 candidate must share at least this
 class RootCandidate:
     language_code: str
     sense: Sense
-    rung: str           # corroborated | primary | ili | fallback
+    rung: str           # corroborated | primary | ili | llm | fallback
+                        # (+ pivoted_root, assigned in parallel_expansion.py)
     similarity: float   # cross-language cosine to the EN sense (tie-break record)
 
 

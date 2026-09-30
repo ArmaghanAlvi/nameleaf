@@ -127,11 +127,13 @@ With `ROOT_LLM_QUERY_TIME=1` (the local default), root selection can call Gemini
 
 ### Root selection: the multilingual entry point
 
-Before a language's tree can be expanded, it needs a *root* — the equivalent word in that language for the queried English sense. This is its own subsystem, `services/root_selection.py`, described in full in `notes/MULTILINGUAL_EXPANSION_MODEL.md`. It's a five-rung provenance ladder, evaluated in this order:
+Before a language's tree can be expanded, it needs a *root* — the equivalent word in that language for the queried English sense. This is its own subsystem, `services/root_selection.py`, described in full in `notes/MULTILINGUAL_EXPANSION_MODEL.md`. It's a six-rung provenance ladder spanning two files, evaluated in this order:
 
 ```
 corroborated → primary → ili → llm → pivoted_root → fallback (vector NN)
 ```
+
+Five rungs are assigned in `root_selection.py`: corroborated, primary, ili, llm (reads persisted LLM links only), and the vector fallback, which is exposed separately as `vector_fallback_root`. `pivoted_root` is assigned by `_pivot_root_rescue` in `services/parallel_expansion.py`, which calls root selection with `include_vector_fallback=False`, so the rescue runs after llm and before fallback for pivot-eligible languages. Corroborated and primary share one evidence source (translation links), which is why there are six rungs but five sources below.
 
 Each rung is a different evidence source (translation link, shared interlingual index, LLM-proposed + DB-validated translation, a pivot through Russian, or embedding nearest-neighbor as last resort). Fallback-rung roots are the least trustworthy — a wrong root poisons its entire tree — and are marked with their rung in the API response (`rootRung`) so a bad root is diagnosable from the output. Per-language-pair similarity floors for the fallback and pivot-rescue rungs are hardcoded calibration constants at the top of `root_selection.py`, derived from `scripts/eval/root_link_calibration.py` — don't hand-tune them without re-running that calibration.
 
@@ -186,7 +188,7 @@ The site is used mostly on phones (baby-name browsing), and searches can take se
 
 ## Publishing work
 
-The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7). Tasks arrive as a breakdown or brief referencing a stage. Read the relevant stage before planning.
+The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7), sequenced into Manual and Claude Code sections in `notes/publishing_roadmap_breakdowns/PARTITION.md`. Tasks arrive as a handoff for one Claude Code section. Read that section and the roadmap Stage parts it names before planning, and do only that section.
 
 **Stage labels:**
 - **Claude Code:** implement it.
@@ -198,6 +200,7 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7). Tasks arrive as 
 - Work happens directly on `main`. The user makes every commit and push; you never do.
 - Log every finding in the `# Findings Log` section at the bottom of `notes/PUBLISHING_ROADMAP.md`, in the same format as the Findings Log sections of the previous `notes/*_ROADMAP*.md` files. Append only; never edit existing entries or the roadmap's Stages. Log the real output of any test you run, not a verdict.
 - Stay in scope: no "while I'm in here" changes. Note them for the user instead.
+- Approved plans are often run in auto mode. A handoff may pre-approve specific stop-and-ask items by name. If you reach a stop-and-ask condition the handoff does not name, log it in the Findings Log and end the section there. Do not work around it or continue past it.
 
 **Stop and ask before:**
 - any schema change in `app/models/semantic.py`, or a migration touching reference tables;
