@@ -18,3 +18,11 @@ git archive \
   HEAD
 
 echo "Created archive: $OUTPUT"
+
+# Also include the gitignored publishing notes, so one snapshot carries the
+# roadmap, Findings Log and partition.
+for f in notes/PUBLISHING_ROADMAP.md notes/publishing_roadmap_breakdowns; do
+  if [[ -e "$f" ]]; then
+    zip -qr "$OUTPUT" "$f"
+  fi
+done
