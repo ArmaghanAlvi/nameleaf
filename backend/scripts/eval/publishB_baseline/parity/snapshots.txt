@@ -1,0 +1,9 @@
+== Mac (~/.cache/huggingface/hub/models--intfloat--multilingual-e5-base)
+refs/main: d128750597153bb5987e10b1c3493a34e5a4502a
+snapshots: d128750597153bb5987e10b1c3493a34e5a4502a
+== image nameforge-backend:latest (/opt/hf/hub/models--intfloat--multilingual-e5-base)
+refs/main: d128750597153bb5987e10b1c3493a34e5a4502a
+snapshots: d128750597153bb5987e10b1c3493a34e5a4502a
+versions: 2.14.0+cpu 6.0.1 5.17.0 aarch64 3.14.7
+== Mac versions
+versions: 2.14.0 6.0.1 5.17.0 arm64 3.14.2

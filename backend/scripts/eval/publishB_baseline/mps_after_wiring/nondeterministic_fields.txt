@@ -1,0 +1,21 @@
+Part 3 pre-declaration (written before any Part 3 run), per correction 1.
+
+Gate = each script's own --diff (diff_reference.py --engine/--api for the
+engine capture). cmp of the JSON files is informational.
+
+Non-deterministic fields, by output:
+- parallel_reference.json (roots, cells, scopes, llm_live, capture, scoped):
+  NONE. No timings, timestamps or host metadata are written. llm_live is a
+  constant False (fenced). roots are reused via --reuse-from.
+- parallel_api_reference.json (roots, cells, scopes, capture; cell keys
+  yellow, yellow_sense_ids, expanded, summaries, green_count, gradient_count,
+  green_sample): NONE. green_* / gradient_count are ungated by --diff but are
+  deterministic outputs, not metadata.
+- roots.json (sample, languages, roots): NONE. sample is reused.
+- engine_reference.json: NONE. Root senses come from SenseSelectionStat
+  reads; the stats fingerprint is checked before and after.
+- phase_timing.log / *.log: timings are non-deterministic by nature; only the
+  trees= / nodes= counts are compared. Logs are not cmp'd.
+
+Consequence: any cmp mismatch in the four JSON files is a diff and ends the
+section.

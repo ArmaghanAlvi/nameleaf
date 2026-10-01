@@ -1,0 +1,9 @@
+A: {"platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O", "machine": "arm64", "python": "3.14.2", "torch": "2.14.0", "sentence_transformers": "6.0.1", "transformers": "5.17.0", "device": "cpu", "torch_num_threads": 2, "config_json": "/Users/armaghan/.cache/huggingface/hub/models--intfloat--multilingual-e5-base/snapshots/d128750597153bb5987e10b1c3493a34e5a4502a/config.json", "n_texts": 64, "median_single_encode_ms": 27.163, "mean_single_encode_ms": 27.484}
+B: {"platform": "Linux-6.12.76-linuxkit-aarch64-with-glibc2.41", "machine": "aarch64", "python": "3.14.7", "torch": "2.14.0+cpu", "sentence_transformers": "6.0.1", "transformers": "5.17.0", "device": "cpu", "torch_num_threads": 2, "config_json": "/opt/hf/hub/models--intfloat--multilingual-e5-base/snapshots/d128750597153bb5987e10b1c3493a34e5a4502a/config.json", "n_texts": 64, "median_single_encode_ms": 76.426, "mean_single_encode_ms": 78.859}
+vectors=64 dim=768
+all_bitwise_identical=False
+bitwise_identical_vectors=0/64
+max_abs_diff=4.545e-07
+mean_abs_diff=5.005e-08
+per_vector_max_abs_diff: min=1.118e-07 median=2.135e-07 max=4.545e-07
+rank_order_vs_vector0_preserved=True

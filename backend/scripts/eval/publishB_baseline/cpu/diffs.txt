@@ -1,0 +1,41 @@
+=== parallel_reference --diff
+
+0/250 trees changed
+0/30 cells changed
+=== parallel_api_reference --diff
+
+0/30 cells changed (yellow path)
+green cards: 185 -> 185
+=== root_selection_diff --diff
+0/6000 cells changed
+
+ar: 0 changed
+ja: 0 changed
+ru: 0 changed
+la: 0 changed
+ga: 0 changed
+hi: 0 changed
+sa: 0 changed
+he: 0 changed
+fa: 0 changed
+de: 0 changed
+pl: 0 changed
+es: 0 changed
+zh: 0 changed
+ko: 0 changed
+ang: 0 changed
+el: 0 changed
+cy: 0 changed
+sw: 0 changed
+non: 0 changed
+is: 0 changed
+=== diff_reference --engine mps --api cpu
+
+0/160 cells differ
+=== established_names
+106398
+=== cmp (informational)
+parallel_reference.json identical
+parallel_api_reference.json identical
+roots.json identical
+engine_reference.json identical

@@ -1,0 +1,42 @@
+before=scripts/eval/publishB_baseline/mps/parallel_reference.json
+after =scripts/eval/publishB_baseline/cpu/parallel_reference.json
+
+-- parallel trees (keyed by sense_id) --
+units compared=250  differing=0
+
+-- parallel interleaved sequences --
+units compared=30  differing=0
+
+-- parallel english_pass sequences --
+units compared=30  differing=0
+
+-- scalar fields --
+  pivoted: 0/250 differ
+  root_rung: 0/250 differ
+  root_sense_id: 0/250 differ
+before=scripts/eval/publishB_baseline/mps/parallel_api_reference.json
+after =scripts/eval/publishB_baseline/cpu/parallel_api_reference.json
+
+-- api yellow rows (keyed by matchedSenseId) --
+units compared=30  differing=0
+
+-- api expandedSenses --
+units compared=30  differing=0
+
+-- scalar fields --
+  summaries: 0/30 differ
+  yellow labels: 0/30 differ
+before=scripts/eval/publishB_baseline/mps/roots.json
+after =scripts/eval/publishB_baseline/cpu/roots.json
+
+-- root_selection cells --
+cells compared=6000  differing=0
+before=scripts/eval/publishB_baseline/mps/engine_reference.json
+after =scripts/eval/publishB_baseline/cpu/engine_reference.json
+
+-- engine_reference cells (word sequence, keyed by sense_id) --
+units compared=160  differing=0
+
+-- scalar fields --
+  anchored_score (shared items, 4dp): 0/629 differ
+  root_sense_id: 0/10 differ

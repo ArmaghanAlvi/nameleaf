@@ -1,0 +1,13 @@
+commit e31a420ebb1b6a7ab9d42b7b249e73fdecf90de6
+uncommitted edits at Part 1 (harness only):
+ backend/scripts/eval/batch_embed_identity.py     | 13 ++++++
+ backend/scripts/eval/capture_engine_reference.py | 11 ++++-
+ backend/scripts/eval/diff_reference.py           | 57 +++++++++++++++---------
+ 3 files changed, 58 insertions(+), 23 deletions(-)
+untracked:
+?? scripts/eval/device_report.py
+?? scripts/eval/publishB_baseline/diff_reference_postrefactor.txt
+?? scripts/eval/publishB_baseline/diff_reference_prerefactor.txt
+?? scripts/eval/publishB_baseline/mps/part1_git_state.txt
+?? scripts/eval/publishB_baseline/mps/stats_fingerprint_before.txt
+?? scripts/eval/publishB_baseline/preflight.txt

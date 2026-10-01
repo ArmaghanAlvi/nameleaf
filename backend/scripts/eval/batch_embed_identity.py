@@ -11,9 +11,13 @@ This probe uses REAL query texts pulled from the engine, not toy strings --
 length distribution is exactly what drives padding.
 
 USAGE (from backend/): python3 scripts/eval/batch_embed_identity.py
+       [--export-texts PATH]   # also write the 64 texts, "query: " prefix
+                               # included, as a JSON list (publishing B1)
 """
 from __future__ import annotations
 
+import argparse
+import json
 import os
 import sys
 
@@ -31,6 +35,10 @@ from app.services.vector_sense_search import (                        # noqa: E4
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--export-texts")
+    args = ap.parse_args()
+
     with SessionLocal() as db:
         sids = [
             sid for (sid,) in db.execute(
@@ -45,6 +53,11 @@ def main() -> None:
         senses = get_selected_senses(db, sense_ids=sids)
         texts = [f"query: {build_query_text_from_selected_senses([s])}"
                  for s in senses]
+
+    if args.export_texts:
+        with open(args.export_texts, "w") as fh:
+            json.dump(texts, fh, ensure_ascii=False, indent=1)
+        print(f"wrote {len(texts)} texts to {args.export_texts}")
 
     lengths = sorted(len(t) for t in texts)
     print(f"{len(texts)} real query texts; char length "

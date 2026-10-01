@@ -4,6 +4,7 @@ at every breadth x depth cell. This is the reference the unified API route
 
 Must reproduce end-to-end. Read-only against the engine.
 """
+import argparse
 import os
 import sys
 import json
@@ -88,6 +89,12 @@ def capture_cell(db, sid, breadth, depth):
 
 
 def main():
+    # --out (publishing B1) writes elsewhere so a baseline capture never
+    # overwrites the tracked reference; the default is unchanged.
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--out", default="scripts/eval/engine_reference.json")
+    args = ap.parse_args()
+
     out = {}
     with SessionLocal() as db:
         for word in PROBE_WORDS:
@@ -100,8 +107,8 @@ def main():
                 key = f"b{breadth}_d{depth}"
                 out[word]["cells"][key] = capture_cell(db, sid, breadth, depth)
 
-    os.makedirs("scripts/eval", exist_ok=True)
-    path = "scripts/eval/engine_reference.json"
+    path = args.out
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     with open(path, "w") as f:
         json.dump(out, f, indent=2)
     print(f"wrote {path}")

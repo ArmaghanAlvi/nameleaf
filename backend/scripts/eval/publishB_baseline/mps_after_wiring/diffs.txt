@@ -1,0 +1,28 @@
+=== parallel_reference --diff
+
+0/250 trees changed
+0/30 cells changed
+=== parallel_api_reference --diff
+
+0/30 cells changed (yellow path)
+green cards: 185 -> 185
+=== root_selection_diff --diff
+0/6000 cells changed
+
+ar: 0 changed
+=== diff_reference --engine mps --api mps_after_wiring
+
+0/160 cells differ
+=== established_names
+106398
+106398
+=== phase_timing counts
+scripts/eval/publishB_baseline/mps_after_wiring/phase_timing.log:wall             74.11s     trees=21 nodes=343
+scripts/eval/publishB_baseline/mps_after_wiring/phase_timing.log:wall             69.68s     trees=21 nodes=343
+scripts/eval/publishB_baseline/mps/phase_timing.log:wall            128.13s     trees=21 nodes=343
+scripts/eval/publishB_baseline/mps/phase_timing.log:wall             78.11s     trees=21 nodes=343
+=== cmp (informational)
+parallel_reference.json identical
+parallel_api_reference.json identical
+roots.json identical
+engine_reference.json identical
