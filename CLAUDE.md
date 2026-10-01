@@ -161,7 +161,7 @@ This project's standing convention (see `notes/CLEANUP_AND_TWEAKS_ROADMAP.MD` ap
 - The established-names invariant is 106,398 rows; a change that alters it is a finding, not a side effect.
 
 Additional rules for the publishing work:
-- **Gates certify production only when run in production's configuration**: CPU device (once `EMBEDDING_DEVICE` exists), query-time LLM off, and ranking-stats behaviour matching production. Say which configuration a gate ran in when reporting it.
+- **Gates certify production only when run in production's configuration**: CPU device (`EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2`), query-time LLM off, and ranking-stats behaviour matching production. Say which configuration a gate ran in when reporting it.
 - **Record baselines before changing anything**, and report gate output as-is.
 - **Any non-zero diff is the user's decision.** Never regenerate a reference file to make a gate pass without explicit approval in the current session.
 

@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import Literal
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,8 +19,15 @@ class Settings(BaseSettings):
 
     Deliberately NOT here: ROOT_LLM_* are read by services/root_llm.py
     directly, because the harness fence works through that module's
-    globals. EMBEDDING_DEVICE / TORCH_NUM_THREADS arrive in Stage 1 and
-    RANKING_STATS_WRITE in Stage 2.
+    globals. RANKING_STATS_WRITE arrives in Stage 2.
+
+    EMBEDDING_DEVICE / TORCH_NUM_THREADS (Stage 1a) pin the embedding model's
+    device and torch's intra-op thread count. Unset keeps today's behaviour:
+    auto-detect mps, then cuda, then cpu, with torch's default thread count.
+    An explicit device that isn't available fails at model load rather than
+    falling back, so a measurement can never carry the wrong label. The CPU
+    configuration that gates certify production in is
+    EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2.
 
     Leave optional flags UNSET rather than empty in env files: an empty
     string is not a valid boolean.
@@ -49,6 +57,10 @@ class Settings(BaseSettings):
     allow_query_time_llm_in_production: bool = False
 
     sentry_dsn: str | None = None
+
+    # None = auto-detect / torch default (see the docstring).
+    embedding_device: Literal["cpu", "mps", "cuda"] | None = None
+    torch_num_threads: int | None = Field(default=None, ge=1)
 
     model_config = SettingsConfigDict(
         env_file=BACKEND_DIR / ".env",

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from functools import lru_cache
 
 from sentence_transformers import SentenceTransformer
@@ -9,15 +10,46 @@ import torch
 DEFAULT_EMBEDDING_MODEL = "intfloat/multilingual-e5-base"
 DEFAULT_EMBEDDING_DIMENSIONS = 768
 
+logger = logging.getLogger(__name__)
+
+
+def _resolve_device(requested: str | None) -> str:
+    """None = the original auto-detection, unchanged. An explicit device that
+    isn't available raises: a silent fallback would mislabel a measurement."""
+    if requested is None:
+        return (
+            "mps" if torch.backends.mps.is_available()
+            else "cuda" if torch.cuda.is_available()
+            else "cpu"
+        )
+    available = {
+        "cpu": True,
+        "mps": torch.backends.mps.is_available(),
+        "cuda": torch.cuda.is_available(),
+    }[requested]
+    if not available:
+        raise RuntimeError(
+            f"EMBEDDING_DEVICE={requested} is not available in this process"
+        )
+    return requested
+
 
 @lru_cache(maxsize=1)
 def get_model() -> SentenceTransformer:
-    device = (
-        "mps" if torch.backends.mps.is_available()
-        else "cuda" if torch.cuda.is_available()
-        else "cpu"
+    # Imported here, not at module top, so the settings object is read when
+    # the model loads (and tests can swap it).
+    from app import config
+
+    device = _resolve_device(config.settings.embedding_device)
+    # Before the load, so the model never runs a forward pass at the default.
+    if config.settings.torch_num_threads is not None:
+        torch.set_num_threads(config.settings.torch_num_threads)
+    model = SentenceTransformer(DEFAULT_EMBEDDING_MODEL, device=device)
+    logger.info(
+        "embedding model loaded: device=%s torch_num_threads=%d",
+        model.device, torch.get_num_threads(),
     )
-    return SentenceTransformer(DEFAULT_EMBEDDING_MODEL, device=device)
+    return model
 
 
 def embed_passage(text: str) -> list[float]:
