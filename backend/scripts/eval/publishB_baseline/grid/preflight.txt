@@ -1,0 +1,42 @@
+HEAD 39fdb67e78153d5b925548e71b1e2d198dd9194f
+git status --short: [?? scripts/eval/publishB_baseline/grid/]
+== SELECT 1
+1
+== settings
+SET
+2GB
+4MB
+4GB
+== docker stats
+CONTAINER ID   NAME                CPU %     MEM USAGE / LIMIT    MEM %     NET I/O           BLOCK I/O        PIDS
+54c4f347c6a0   name_generator_db   0.00%     2.449GiB / 7.75GiB   31.60%    1.51GB / 31.9GB   92.4GB / 315kB   7
+== sense_selection_stats fingerprint (count|sum|max)
+112|17314|2026-09-29 13:24:31.471237+00
+== pg_stat_activity unfiltered count (excl. own)
+6
+== client backends excl. own
+731||idle|2026-09-30 17:00:14.322316+00
+== uvicorn/streamlit processes
+armaghan          2127   0.0  0.1 412780800  14208 s003  S+   Wed09AM   0:31.84 /Library/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/armaghan/Personal-Projects/name-generator/backend/.venv/bin/uvicorn app.main:app --reload
+== pg_stat_user_tables (before)
+languages|||0
+lexemes|||0
+sense_embeddings|||0
+sense_relations|||0
+senses|||0
+== pg_class.reltuples (planner estimates) + pg_stats presence
+languages|21|6
+lexemes|1668955|12
+sense_embeddings|1549501|6
+sense_relations|6368029|10
+senses|2265753|16
+== stats reset / postmaster start
+
+2026-09-30 13:14:54.67728+00
+== client backend 731 detail
+731|postgres|192.168.65.1|2026-09-30 17:00:14.268481+00|2026-09-30 17:00:14.322325+00|DEALLOCATE ALL
+== RECHECK after user stopped dev server Thu Oct  1 13:25:00 UTC 2026
+client backends excl. own:
+unfiltered count excl. own: 5
+uvicorn/streamlit:
+none

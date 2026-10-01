@@ -1,0 +1,3135 @@
+{
+ "brave_w0_d0": [
+  {
+   "COLD": {
+    "wall": 0.55,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.36,
+    "sql_n": 569,
+    "rest": 0.19,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 1.22,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.69,
+    "sql_n": 546,
+    "rest": 0.53,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w1_d0": [
+  {
+   "COLD": {
+    "wall": 4.84,
+    "trees": 21,
+    "nodes": 25,
+    "embed": 0.08,
+    "embed_n": 12,
+    "sql": 3.93,
+    "sql_n": 2315,
+    "rest": 0.83,
+    "vector": {
+     "t": 2.84,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.15,
+     "n": 437
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 2.49,
+    "trees": 21,
+    "nodes": 25,
+    "embed": 0.0,
+    "embed_n": 12,
+    "sql": 1.38,
+    "sql_n": 2292,
+    "rest": 1.11,
+    "vector": {
+     "t": 0.12,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.07,
+     "n": 437
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w2_d0": [
+  {
+   "COLD": {
+    "wall": 3.47,
+    "trees": 21,
+    "nodes": 28,
+    "embed": 0.09,
+    "embed_n": 12,
+    "sql": 2.39,
+    "sql_n": 2775,
+    "rest": 0.98,
+    "vector": {
+     "t": 1.22,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.17,
+     "n": 842
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 1.7,
+    "trees": 21,
+    "nodes": 28,
+    "embed": 0.0,
+    "embed_n": 12,
+    "sql": 0.94,
+    "sql_n": 2752,
+    "rest": 0.77,
+    "vector": {
+     "t": 0.26,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.12,
+     "n": 842
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w3_d0": [
+  {
+   "COLD": {
+    "wall": 2.31,
+    "trees": 21,
+    "nodes": 34,
+    "embed": 0.07,
+    "embed_n": 12,
+    "sql": 1.32,
+    "sql_n": 2877,
+    "rest": 0.93,
+    "vector": {
+     "t": 0.38,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.14,
+     "n": 888
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 1.68,
+    "trees": 21,
+    "nodes": 34,
+    "embed": 0.0,
+    "embed_n": 12,
+    "sql": 0.88,
+    "sql_n": 2854,
+    "rest": 0.8,
+    "vector": {
+     "t": 0.19,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.13,
+     "n": 888
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w0_d1": [
+  {
+   "COLD": {
+    "wall": 0.5,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.3,
+    "sql_n": 569,
+    "rest": 0.19,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 1.38,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.84,
+    "sql_n": 546,
+    "rest": 0.54,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w1_d1": [
+  {
+   "COLD": {
+    "wall": 8.1,
+    "trees": 21,
+    "nodes": 40,
+    "embed": 0.62,
+    "embed_n": 43,
+    "sql": 6.07,
+    "sql_n": 4141,
+    "rest": 1.41,
+    "vector": {
+     "t": 4.53,
+     "n": 14
+    },
+    "relations": {
+     "t": 0.67,
+     "n": 2510
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 2.89,
+    "trees": 21,
+    "nodes": 40,
+    "embed": 0.0,
+    "embed_n": 43,
+    "sql": 1.77,
+    "sql_n": 4106,
+    "rest": 1.12,
+    "vector": {
+     "t": 0.8,
+     "n": 14
+    },
+    "relations": {
+     "t": 0.43,
+     "n": 2498
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w2_d1": [
+  {
+   "COLD": {
+    "wall": 5.4,
+    "trees": 21,
+    "nodes": 57,
+    "embed": 0.57,
+    "embed_n": 45,
+    "sql": 3.31,
+    "sql_n": 4564,
+    "rest": 1.52,
+    "vector": {
+     "t": 1.78,
+     "n": 15
+    },
+    "relations": {
+     "t": 0.57,
+     "n": 2689
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 3.08,
+    "trees": 21,
+    "nodes": 57,
+    "embed": 0.0,
+    "embed_n": 45,
+    "sql": 1.8,
+    "sql_n": 4517,
+    "rest": 1.28,
+    "vector": {
+     "t": 0.72,
+     "n": 15
+    },
+    "relations": {
+     "t": 0.48,
+     "n": 2665
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w3_d1": [
+  {
+   "COLD": {
+    "wall": 4.73,
+    "trees": 21,
+    "nodes": 75,
+    "embed": 0.57,
+    "embed_n": 45,
+    "sql": 2.71,
+    "sql_n": 4577,
+    "rest": 1.45,
+    "vector": {
+     "t": 1.26,
+     "n": 15
+    },
+    "relations": {
+     "t": 0.51,
+     "n": 2689
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 2.91,
+    "trees": 21,
+    "nodes": 75,
+    "embed": 0.0,
+    "embed_n": 45,
+    "sql": 1.64,
+    "sql_n": 4519,
+    "rest": 1.26,
+    "vector": {
+     "t": 0.63,
+     "n": 15
+    },
+    "relations": {
+     "t": 0.43,
+     "n": 2654
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w0_d2": [
+  {
+   "COLD": {
+    "wall": 0.44,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.25,
+    "sql_n": 569,
+    "rest": 0.18,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 1.2,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.72,
+    "sql_n": 546,
+    "rest": 0.48,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w1_d2": [
+  {
+   "COLD": {
+    "wall": 10.41,
+    "trees": 21,
+    "nodes": 47,
+    "embed": 1.0,
+    "embed_n": 62,
+    "sql": 7.02,
+    "sql_n": 7316,
+    "rest": 2.39,
+    "vector": {
+     "t": 4.61,
+     "n": 27
+    },
+    "relations": {
+     "t": 1.0,
+     "n": 4840
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 4.98,
+    "trees": 21,
+    "nodes": 47,
+    "embed": 0.0,
+    "embed_n": 62,
+    "sql": 2.96,
+    "sql_n": 7277,
+    "rest": 2.02,
+    "vector": {
+     "t": 1.36,
+     "n": 27
+    },
+    "relations": {
+     "t": 0.73,
+     "n": 4824
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w2_d2": [
+  {
+   "COLD": {
+    "wall": 11.6,
+    "trees": 21,
+    "nodes": 92,
+    "embed": 1.47,
+    "embed_n": 81,
+    "sql": 6.79,
+    "sql_n": 10551,
+    "rest": 3.35,
+    "vector": {
+     "t": 3.73,
+     "n": 40
+    },
+    "relations": {
+     "t": 1.37,
+     "n": 7155
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 6.84,
+    "trees": 21,
+    "nodes": 92,
+    "embed": 0.0,
+    "embed_n": 81,
+    "sql": 3.94,
+    "sql_n": 10457,
+    "rest": 2.9,
+    "vector": {
+     "t": 1.67,
+     "n": 40
+    },
+    "relations": {
+     "t": 1.13,
+     "n": 7084
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w3_d2": [
+  {
+   "COLD": {
+    "wall": 17.85,
+    "trees": 21,
+    "nodes": 148,
+    "embed": 2.09,
+    "embed_n": 98,
+    "sql": 11.33,
+    "sql_n": 14380,
+    "rest": 4.43,
+    "vector": {
+     "t": 7.26,
+     "n": 55
+    },
+    "relations": {
+     "t": 1.95,
+     "n": 10142
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 9.55,
+    "trees": 21,
+    "nodes": 148,
+    "embed": 0.0,
+    "embed_n": 98,
+    "sql": 5.51,
+    "sql_n": 14197,
+    "rest": 4.04,
+    "vector": {
+     "t": 2.46,
+     "n": 55
+    },
+    "relations": {
+     "t": 1.57,
+     "n": 9982
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w0_d3": [
+  {
+   "COLD": {
+    "wall": 0.5,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.32,
+    "sql_n": 569,
+    "rest": 0.19,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 1.36,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.8,
+    "sql_n": 546,
+    "rest": 0.56,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w1_d3": [
+  {
+   "COLD": {
+    "wall": 8.44,
+    "trees": 21,
+    "nodes": 49,
+    "embed": 1.15,
+    "embed_n": 69,
+    "sql": 4.72,
+    "sql_n": 8134,
+    "rest": 2.58,
+    "vector": {
+     "t": 2.21,
+     "n": 30
+    },
+    "relations": {
+     "t": 1.0,
+     "n": 5342
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 5.31,
+    "trees": 21,
+    "nodes": 49,
+    "embed": 0.0,
+    "embed_n": 69,
+    "sql": 3.09,
+    "sql_n": 8092,
+    "rest": 2.23,
+    "vector": {
+     "t": 1.31,
+     "n": 30
+    },
+    "relations": {
+     "t": 0.84,
+     "n": 5323
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w2_d3": [
+  {
+   "COLD": {
+    "wall": 20.4,
+    "trees": 21,
+    "nodes": 125,
+    "embed": 2.26,
+    "embed_n": 116,
+    "sql": 12.85,
+    "sql_n": 16630,
+    "rest": 5.3,
+    "vector": {
+     "t": 8.13,
+     "n": 66
+    },
+    "relations": {
+     "t": 2.42,
+     "n": 11867
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 12.3,
+    "trees": 21,
+    "nodes": 125,
+    "embed": 0.0,
+    "embed_n": 116,
+    "sql": 7.43,
+    "sql_n": 16471,
+    "rest": 4.86,
+    "vector": {
+     "t": 3.58,
+     "n": 66
+    },
+    "relations": {
+     "t": 1.98,
+     "n": 11731
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 28.76,
+    "trees": 21,
+    "nodes": 125,
+    "embed": 2.65,
+    "embed_n": 116,
+    "sql": 20.6,
+    "sql_n": 16630,
+    "rest": 5.5,
+    "vector": {
+     "t": 14.98,
+     "n": 66
+    },
+    "relations": {
+     "t": 2.68,
+     "n": 11867
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 12.64,
+    "trees": 21,
+    "nodes": 125,
+    "embed": 0.0,
+    "embed_n": 116,
+    "sql": 7.77,
+    "sql_n": 16471,
+    "rest": 4.87,
+    "vector": {
+     "t": 3.9,
+     "n": 66
+    },
+    "relations": {
+     "t": 2.03,
+     "n": 11731
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 27.92,
+    "trees": 21,
+    "nodes": 125,
+    "embed": 2.3,
+    "embed_n": 116,
+    "sql": 20.01,
+    "sql_n": 16630,
+    "rest": 5.62,
+    "vector": {
+     "t": 14.59,
+     "n": 66
+    },
+    "relations": {
+     "t": 2.6,
+     "n": 11867
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 13.74,
+    "trees": 21,
+    "nodes": 125,
+    "embed": 0.0,
+    "embed_n": 116,
+    "sql": 8.82,
+    "sql_n": 16471,
+    "rest": 4.92,
+    "vector": {
+     "t": 4.7,
+     "n": 66
+    },
+    "relations": {
+     "t": 2.19,
+     "n": 11731
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "brave_w3_d3": [
+  {
+   "COLD": {
+    "wall": 45.88,
+    "trees": 21,
+    "nodes": 273,
+    "embed": 3.6,
+    "embed_n": 171,
+    "sql": 32.59,
+    "sql_n": 29205,
+    "rest": 9.68,
+    "vector": {
+     "t": 23.94,
+     "n": 120
+    },
+    "relations": {
+     "t": 4.64,
+     "n": 22793
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 38.01,
+    "trees": 21,
+    "nodes": 273,
+    "embed": 0.0,
+    "embed_n": 171,
+    "sql": 28.19,
+    "sql_n": 28738,
+    "rest": 9.82,
+    "vector": {
+     "t": 19.88,
+     "n": 120
+    },
+    "relations": {
+     "t": 4.75,
+     "n": 22349
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 120
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 51.83,
+    "trees": 21,
+    "nodes": 273,
+    "embed": 4.26,
+    "embed_n": 171,
+    "sql": 37.63,
+    "sql_n": 29205,
+    "rest": 9.94,
+    "vector": {
+     "t": 28.46,
+     "n": 120
+    },
+    "relations": {
+     "t": 5.03,
+     "n": 22793
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 46.61,
+    "trees": 21,
+    "nodes": 273,
+    "embed": 0.0,
+    "embed_n": 171,
+    "sql": 36.61,
+    "sql_n": 28738,
+    "rest": 10.0,
+    "vector": {
+     "t": 27.79,
+     "n": 120
+    },
+    "relations": {
+     "t": 4.92,
+     "n": 22349
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 120
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 52.14,
+    "trees": 21,
+    "nodes": 273,
+    "embed": 3.74,
+    "embed_n": 171,
+    "sql": 38.32,
+    "sql_n": 29205,
+    "rest": 10.07,
+    "vector": {
+     "t": 29.17,
+     "n": 120
+    },
+    "relations": {
+     "t": 4.94,
+     "n": 22793
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 46.06,
+    "trees": 21,
+    "nodes": 273,
+    "embed": 0.0,
+    "embed_n": 171,
+    "sql": 36.18,
+    "sql_n": 28738,
+    "rest": 9.87,
+    "vector": {
+     "t": 27.44,
+     "n": 120
+    },
+    "relations": {
+     "t": 4.76,
+     "n": 22349
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 120
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w0_d0": [
+  {
+   "COLD": {
+    "wall": 0.35,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.23,
+    "sql_n": 338,
+    "rest": 0.11,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.21,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.1,
+    "sql_n": 315,
+    "rest": 0.11,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w1_d0": [
+  {
+   "COLD": {
+    "wall": 0.75,
+    "trees": 21,
+    "nodes": 24,
+    "embed": 0.03,
+    "embed_n": 8,
+    "sql": 0.42,
+    "sql_n": 795,
+    "rest": 0.29,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 1.07,
+    "trees": 21,
+    "nodes": 24,
+    "embed": 0.0,
+    "embed_n": 8,
+    "sql": 0.64,
+    "sql_n": 772,
+    "rest": 0.44,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w2_d0": [
+  {
+   "COLD": {
+    "wall": 9.64,
+    "trees": 21,
+    "nodes": 34,
+    "embed": 0.02,
+    "embed_n": 8,
+    "sql": 6.98,
+    "sql_n": 6252,
+    "rest": 2.64,
+    "vector": {
+     "t": 4.71,
+     "n": 8
+    },
+    "relations": {
+     "t": 0.98,
+     "n": 5288
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 5.65,
+    "trees": 21,
+    "nodes": 34,
+    "embed": 0.0,
+    "embed_n": 8,
+    "sql": 3.09,
+    "sql_n": 6229,
+    "rest": 2.56,
+    "vector": {
+     "t": 1.17,
+     "n": 8
+    },
+    "relations": {
+     "t": 0.83,
+     "n": 5288
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w3_d0": [
+  {
+   "COLD": {
+    "wall": 6.69,
+    "trees": 21,
+    "nodes": 40,
+    "embed": 0.03,
+    "embed_n": 8,
+    "sql": 3.81,
+    "sql_n": 6561,
+    "rest": 2.85,
+    "vector": {
+     "t": 1.61,
+     "n": 8
+    },
+    "relations": {
+     "t": 0.97,
+     "n": 5552
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 6.0,
+    "trees": 21,
+    "nodes": 40,
+    "embed": 0.0,
+    "embed_n": 8,
+    "sql": 3.26,
+    "sql_n": 6538,
+    "rest": 2.74,
+    "vector": {
+     "t": 1.24,
+     "n": 8
+    },
+    "relations": {
+     "t": 0.89,
+     "n": 5552
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w0_d1": [
+  {
+   "COLD": {
+    "wall": 0.31,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.18,
+    "sql_n": 338,
+    "rest": 0.12,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.68,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.42,
+    "sql_n": 315,
+    "rest": 0.26,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w1_d1": [
+  {
+   "COLD": {
+    "wall": 11.87,
+    "trees": 21,
+    "nodes": 41,
+    "embed": 0.59,
+    "embed_n": 42,
+    "sql": 9.82,
+    "sql_n": 4168,
+    "rest": 1.46,
+    "vector": {
+     "t": 8.46,
+     "n": 18
+    },
+    "relations": {
+     "t": 0.7,
+     "n": 3181
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 3.32,
+    "trees": 21,
+    "nodes": 41,
+    "embed": 0.0,
+    "embed_n": 42,
+    "sql": 2.1,
+    "sql_n": 4130,
+    "rest": 1.22,
+    "vector": {
+     "t": 1.17,
+     "n": 18
+    },
+    "relations": {
+     "t": 0.55,
+     "n": 3166
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w2_d1": [
+  {
+   "COLD": {
+    "wall": 5.0,
+    "trees": 21,
+    "nodes": 57,
+    "embed": 0.64,
+    "embed_n": 43,
+    "sql": 2.99,
+    "sql_n": 4418,
+    "rest": 1.37,
+    "vector": {
+     "t": 1.74,
+     "n": 19
+    },
+    "relations": {
+     "t": 0.64,
+     "n": 3361
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 3.13,
+    "trees": 21,
+    "nodes": 57,
+    "embed": 0.0,
+    "embed_n": 43,
+    "sql": 1.89,
+    "sql_n": 4365,
+    "rest": 1.25,
+    "vector": {
+     "t": 0.91,
+     "n": 19
+    },
+    "relations": {
+     "t": 0.56,
+     "n": 3331
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w3_d1": [
+  {
+   "COLD": {
+    "wall": 5.14,
+    "trees": 21,
+    "nodes": 75,
+    "embed": 0.54,
+    "embed_n": 44,
+    "sql": 2.93,
+    "sql_n": 5160,
+    "rest": 1.68,
+    "vector": {
+     "t": 1.47,
+     "n": 20
+    },
+    "relations": {
+     "t": 0.74,
+     "n": 4022
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 3.94,
+    "trees": 21,
+    "nodes": 75,
+    "embed": 0.0,
+    "embed_n": 44,
+    "sql": 2.37,
+    "sql_n": 5092,
+    "rest": 1.56,
+    "vector": {
+     "t": 1.17,
+     "n": 20
+    },
+    "relations": {
+     "t": 0.68,
+     "n": 3977
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w0_d2": [
+  {
+   "COLD": {
+    "wall": 0.29,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.17,
+    "sql_n": 338,
+    "rest": 0.12,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.51,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.3,
+    "sql_n": 315,
+    "rest": 0.21,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w1_d2": [
+  {
+   "COLD": {
+    "wall": 14.97,
+    "trees": 21,
+    "nodes": 53,
+    "embed": 1.17,
+    "embed_n": 62,
+    "sql": 11.08,
+    "sql_n": 8211,
+    "rest": 2.71,
+    "vector": {
+     "t": 8.64,
+     "n": 37
+    },
+    "relations": {
+     "t": 1.38,
+     "n": 6712
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 7.13,
+    "trees": 21,
+    "nodes": 53,
+    "embed": 0.0,
+    "embed_n": 62,
+    "sql": 4.69,
+    "sql_n": 8158,
+    "rest": 2.44,
+    "vector": {
+     "t": 2.82,
+     "n": 37
+    },
+    "relations": {
+     "t": 1.19,
+     "n": 6682
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 37
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w2_d2": [
+  {
+   "COLD": {
+    "wall": 18.97,
+    "trees": 21,
+    "nodes": 102,
+    "embed": 1.79,
+    "embed_n": 79,
+    "sql": 13.13,
+    "sql_n": 11716,
+    "rest": 4.05,
+    "vector": {
+     "t": 9.89,
+     "n": 53
+    },
+    "relations": {
+     "t": 1.95,
+     "n": 9716
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 11.5,
+    "trees": 21,
+    "nodes": 102,
+    "embed": 0.0,
+    "embed_n": 79,
+    "sql": 7.82,
+    "sql_n": 11590,
+    "rest": 3.67,
+    "vector": {
+     "t": 5.01,
+     "n": 53
+    },
+    "relations": {
+     "t": 1.77,
+     "n": 9613
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 53
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 22.19,
+    "trees": 21,
+    "nodes": 102,
+    "embed": 1.47,
+    "embed_n": 79,
+    "sql": 16.69,
+    "sql_n": 11716,
+    "rest": 4.03,
+    "vector": {
+     "t": 13.47,
+     "n": 53
+    },
+    "relations": {
+     "t": 1.96,
+     "n": 9716
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 11.18,
+    "trees": 21,
+    "nodes": 102,
+    "embed": 0.0,
+    "embed_n": 79,
+    "sql": 7.59,
+    "sql_n": 11590,
+    "rest": 3.58,
+    "vector": {
+     "t": 4.79,
+     "n": 53
+    },
+    "relations": {
+     "t": 1.76,
+     "n": 9613
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 22.08,
+    "trees": 21,
+    "nodes": 102,
+    "embed": 1.44,
+    "embed_n": 79,
+    "sql": 16.62,
+    "sql_n": 11716,
+    "rest": 4.03,
+    "vector": {
+     "t": 13.37,
+     "n": 53
+    },
+    "relations": {
+     "t": 1.97,
+     "n": 9716
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 11.9,
+    "trees": 21,
+    "nodes": 102,
+    "embed": 0.0,
+    "embed_n": 79,
+    "sql": 8.28,
+    "sql_n": 11590,
+    "rest": 3.62,
+    "vector": {
+     "t": 5.48,
+     "n": 53
+    },
+    "relations": {
+     "t": 1.75,
+     "n": 9613
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 53
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w3_d2": [
+  {
+   "COLD": {
+    "wall": 33.56,
+    "trees": 21,
+    "nodes": 175,
+    "embed": 1.85,
+    "embed_n": 95,
+    "sql": 26.01,
+    "sql_n": 15751,
+    "rest": 5.7,
+    "vector": {
+     "t": 21.1,
+     "n": 68
+    },
+    "relations": {
+     "t": 2.92,
+     "n": 13238
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 22.25,
+    "trees": 21,
+    "nodes": 175,
+    "embed": 0.0,
+    "embed_n": 95,
+    "sql": 16.63,
+    "sql_n": 15501,
+    "rest": 5.62,
+    "vector": {
+     "t": 12.46,
+     "n": 68
+    },
+    "relations": {
+     "t": 2.66,
+     "n": 13011
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 68
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 31.54,
+    "trees": 21,
+    "nodes": 175,
+    "embed": 1.76,
+    "embed_n": 95,
+    "sql": 24.3,
+    "sql_n": 15751,
+    "rest": 5.48,
+    "vector": {
+     "t": 19.59,
+     "n": 68
+    },
+    "relations": {
+     "t": 2.78,
+     "n": 13238
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 29.58,
+    "trees": 21,
+    "nodes": 175,
+    "embed": 0.0,
+    "embed_n": 95,
+    "sql": 24.14,
+    "sql_n": 15501,
+    "rest": 5.44,
+    "vector": {
+     "t": 19.8,
+     "n": 68
+    },
+    "relations": {
+     "t": 2.7,
+     "n": 13011
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 68
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 33.43,
+    "trees": 21,
+    "nodes": 175,
+    "embed": 1.85,
+    "embed_n": 95,
+    "sql": 26.02,
+    "sql_n": 15751,
+    "rest": 5.56,
+    "vector": {
+     "t": 21.27,
+     "n": 68
+    },
+    "relations": {
+     "t": 2.76,
+     "n": 13238
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 33.59,
+    "trees": 21,
+    "nodes": 175,
+    "embed": 0.01,
+    "embed_n": 95,
+    "sql": 27.76,
+    "sql_n": 15501,
+    "rest": 5.82,
+    "vector": {
+     "t": 23.02,
+     "n": 68
+    },
+    "relations": {
+     "t": 2.91,
+     "n": 13011
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 68
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w0_d3": [
+  {
+   "COLD": {
+    "wall": 0.29,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.17,
+    "sql_n": 338,
+    "rest": 0.12,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.26,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 0,
+    "sql": 0.13,
+    "sql_n": 315,
+    "rest": 0.14,
+    "vector": null,
+    "relations": null,
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w1_d3": [
+  {
+   "COLD": {
+    "wall": 18.14,
+    "trees": 21,
+    "nodes": 61,
+    "embed": 1.43,
+    "embed_n": 74,
+    "sql": 13.24,
+    "sql_n": 10478,
+    "rest": 3.48,
+    "vector": {
+     "t": 10.4,
+     "n": 47
+    },
+    "relations": {
+     "t": 1.72,
+     "n": 8630
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 10.65,
+    "trees": 21,
+    "nodes": 61,
+    "embed": 0.0,
+    "embed_n": 74,
+    "sql": 7.34,
+    "sql_n": 10413,
+    "rest": 3.3,
+    "vector": {
+     "t": 4.81,
+     "n": 47
+    },
+    "relations": {
+     "t": 1.61,
+     "n": 8588
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 47
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 19.16,
+    "trees": 21,
+    "nodes": 61,
+    "embed": 1.35,
+    "embed_n": 74,
+    "sql": 14.28,
+    "sql_n": 10478,
+    "rest": 3.53,
+    "vector": {
+     "t": 11.45,
+     "n": 47
+    },
+    "relations": {
+     "t": 1.71,
+     "n": 8630
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 9.96,
+    "trees": 21,
+    "nodes": 61,
+    "embed": 0.0,
+    "embed_n": 74,
+    "sql": 6.78,
+    "sql_n": 10413,
+    "rest": 3.17,
+    "vector": {
+     "t": 4.36,
+     "n": 47
+    },
+    "relations": {
+     "t": 1.56,
+     "n": 8588
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 47
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 19.57,
+    "trees": 21,
+    "nodes": 61,
+    "embed": 1.39,
+    "embed_n": 74,
+    "sql": 14.66,
+    "sql_n": 10478,
+    "rest": 3.52,
+    "vector": {
+     "t": 11.76,
+     "n": 47
+    },
+    "relations": {
+     "t": 1.73,
+     "n": 8630
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 10.88,
+    "trees": 21,
+    "nodes": 61,
+    "embed": 0.0,
+    "embed_n": 74,
+    "sql": 7.65,
+    "sql_n": 10413,
+    "rest": 3.23,
+    "vector": {
+     "t": 5.16,
+     "n": 47
+    },
+    "relations": {
+     "t": 1.6,
+     "n": 8588
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 47
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w2_d3": [
+  {
+   "COLD": {
+    "wall": 36.47,
+    "trees": 21,
+    "nodes": 155,
+    "embed": 3.0,
+    "embed_n": 124,
+    "sql": 26.26,
+    "sql_n": 20461,
+    "rest": 7.22,
+    "vector": {
+     "t": 20.43,
+     "n": 94
+    },
+    "relations": {
+     "t": 3.58,
+     "n": 17306
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 94
+    }
+   },
+   "WARM": {
+    "wall": 36.24,
+    "trees": 21,
+    "nodes": 155,
+    "embed": 0.0,
+    "embed_n": 124,
+    "sql": 29.16,
+    "sql_n": 20225,
+    "rest": 7.08,
+    "vector": {
+     "t": 23.68,
+     "n": 94
+    },
+    "relations": {
+     "t": 3.43,
+     "n": 17093
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 94
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 39.95,
+    "trees": 21,
+    "nodes": 155,
+    "embed": 2.63,
+    "embed_n": 124,
+    "sql": 30.02,
+    "sql_n": 20461,
+    "rest": 7.29,
+    "vector": {
+     "t": 24.28,
+     "n": 94
+    },
+    "relations": {
+     "t": 3.51,
+     "n": 17306
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 37.3,
+    "trees": 21,
+    "nodes": 155,
+    "embed": 0.0,
+    "embed_n": 124,
+    "sql": 30.21,
+    "sql_n": 20225,
+    "rest": 7.1,
+    "vector": {
+     "t": 24.63,
+     "n": 94
+    },
+    "relations": {
+     "t": 3.42,
+     "n": 17093
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 94
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 41.05,
+    "trees": 21,
+    "nodes": 155,
+    "embed": 2.84,
+    "embed_n": 124,
+    "sql": 30.79,
+    "sql_n": 20461,
+    "rest": 7.43,
+    "vector": {
+     "t": 25.02,
+     "n": 94
+    },
+    "relations": {
+     "t": 3.54,
+     "n": 17306
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 38.18,
+    "trees": 21,
+    "nodes": 155,
+    "embed": 0.0,
+    "embed_n": 124,
+    "sql": 30.91,
+    "sql_n": 20225,
+    "rest": 7.27,
+    "vector": {
+     "t": 25.25,
+     "n": 94
+    },
+    "relations": {
+     "t": 3.52,
+     "n": 17093
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 94
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "light_w3_d3": [
+  {
+   "COLD": {
+    "wall": 75.78,
+    "trees": 21,
+    "nodes": 343,
+    "embed": 4.21,
+    "embed_n": 195,
+    "sql": 58.87,
+    "sql_n": 35818,
+    "rest": 12.7,
+    "vector": {
+     "t": 48.36,
+     "n": 158
+    },
+    "relations": {
+     "t": 6.28,
+     "n": 30407
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 69.23,
+    "trees": 21,
+    "nodes": 343,
+    "embed": 0.0,
+    "embed_n": 195,
+    "sql": 56.46,
+    "sql_n": 35196,
+    "rest": 12.77,
+    "vector": {
+     "t": 46.5,
+     "n": 158
+    },
+    "relations": {
+     "t": 6.09,
+     "n": 29808
+    },
+    "reset": {
+     "t": 0.03,
+     "n": 158
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 79.26,
+    "trees": 21,
+    "nodes": 343,
+    "embed": 4.31,
+    "embed_n": 195,
+    "sql": 62.33,
+    "sql_n": 35818,
+    "rest": 12.62,
+    "vector": {
+     "t": 51.74,
+     "n": 158
+    },
+    "relations": {
+     "t": 6.34,
+     "n": 30407
+    },
+    "reset": {
+     "t": 0.03,
+     "n": 158
+    }
+   },
+   "WARM": {
+    "wall": 74.2,
+    "trees": 21,
+    "nodes": 343,
+    "embed": 0.0,
+    "embed_n": 195,
+    "sql": 60.99,
+    "sql_n": 35196,
+    "rest": 13.21,
+    "vector": {
+     "t": 50.55,
+     "n": 158
+    },
+    "relations": {
+     "t": 6.38,
+     "n": 29808
+    },
+    "reset": {
+     "t": 0.04,
+     "n": 158
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 76.36,
+    "trees": 21,
+    "nodes": 343,
+    "embed": 4.29,
+    "embed_n": 195,
+    "sql": 59.36,
+    "sql_n": 35818,
+    "rest": 12.72,
+    "vector": {
+     "t": 48.83,
+     "n": 158
+    },
+    "relations": {
+     "t": 6.32,
+     "n": 30407
+    },
+    "reset": {
+     "t": 0.03,
+     "n": 158
+    }
+   },
+   "WARM": {
+    "wall": 69.42,
+    "trees": 21,
+    "nodes": 343,
+    "embed": 0.0,
+    "embed_n": 195,
+    "sql": 56.61,
+    "sql_n": 35196,
+    "rest": 12.8,
+    "vector": {
+     "t": 46.72,
+     "n": 158
+    },
+    "relations": {
+     "t": 6.03,
+     "n": 29808
+    },
+    "reset": {
+     "t": 0.03,
+     "n": 158
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w0_d0": [
+  {
+   "COLD": {
+    "wall": 4.21,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.03,
+    "embed_n": 1,
+    "sql": 3.73,
+    "sql_n": 1012,
+    "rest": 0.44,
+    "vector": {
+     "t": 2.31,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.21,
+     "n": 604
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.8,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 1,
+    "sql": 0.47,
+    "sql_n": 989,
+    "rest": 0.33,
+    "vector": {
+     "t": 0.14,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.1,
+     "n": 604
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w1_d0": [
+  {
+   "COLD": {
+    "wall": 11.15,
+    "trees": 21,
+    "nodes": 27,
+    "embed": 0.18,
+    "embed_n": 11,
+    "sql": 9.02,
+    "sql_n": 5018,
+    "rest": 1.96,
+    "vector": {
+     "t": 6.98,
+     "n": 11
+    },
+    "relations": {
+     "t": 0.84,
+     "n": 4206
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 3.84,
+    "trees": 21,
+    "nodes": 27,
+    "embed": 0.0,
+    "embed_n": 11,
+    "sql": 2.08,
+    "sql_n": 4995,
+    "rest": 1.77,
+    "vector": {
+     "t": 0.66,
+     "n": 11
+    },
+    "relations": {
+     "t": 0.64,
+     "n": 4206
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w2_d0": [
+  {
+   "COLD": {
+    "wall": 9.55,
+    "trees": 21,
+    "nodes": 31,
+    "embed": 0.16,
+    "embed_n": 11,
+    "sql": 6.16,
+    "sql_n": 8814,
+    "rest": 3.22,
+    "vector": {
+     "t": 3.46,
+     "n": 11
+    },
+    "relations": {
+     "t": 1.35,
+     "n": 7940
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 6.63,
+    "trees": 21,
+    "nodes": 31,
+    "embed": 0.0,
+    "embed_n": 11,
+    "sql": 3.56,
+    "sql_n": 8791,
+    "rest": 3.07,
+    "vector": {
+     "t": 1.17,
+     "n": 11
+    },
+    "relations": {
+     "t": 1.19,
+     "n": 7940
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w3_d0": [
+  {
+   "COLD": {
+    "wall": 7.43,
+    "trees": 21,
+    "nodes": 37,
+    "embed": 0.18,
+    "embed_n": 11,
+    "sql": 4.02,
+    "sql_n": 9284,
+    "rest": 3.22,
+    "vector": {
+     "t": 1.39,
+     "n": 11
+    },
+    "relations": {
+     "t": 1.26,
+     "n": 8364
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 7.05,
+    "trees": 21,
+    "nodes": 37,
+    "embed": 0.0,
+    "embed_n": 11,
+    "sql": 3.74,
+    "sql_n": 9261,
+    "rest": 3.31,
+    "vector": {
+     "t": 1.22,
+     "n": 11
+    },
+    "relations": {
+     "t": 1.26,
+     "n": 8364
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w0_d1": [
+  {
+   "COLD": {
+    "wall": 1.18,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.03,
+    "embed_n": 1,
+    "sql": 0.76,
+    "sql_n": 1012,
+    "rest": 0.39,
+    "vector": {
+     "t": 0.36,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.12,
+     "n": 604
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.69,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 1,
+    "sql": 0.4,
+    "sql_n": 989,
+    "rest": 0.29,
+    "vector": {
+     "t": 0.12,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.09,
+     "n": 604
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w1_d1": [
+  {
+   "COLD": {
+    "wall": 9.68,
+    "trees": 21,
+    "nodes": 40,
+    "embed": 0.62,
+    "embed_n": 45,
+    "sql": 7.24,
+    "sql_n": 5432,
+    "rest": 1.81,
+    "vector": {
+     "t": 5.41,
+     "n": 19
+    },
+    "relations": {
+     "t": 0.95,
+     "n": 4352
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 5.71,
+    "trees": 21,
+    "nodes": 40,
+    "embed": 0.0,
+    "embed_n": 45,
+    "sql": 3.65,
+    "sql_n": 5395,
+    "rest": 2.05,
+    "vector": {
+     "t": 2.03,
+     "n": 19
+    },
+    "relations": {
+     "t": 0.85,
+     "n": 4338
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w2_d1": [
+  {
+   "COLD": {
+    "wall": 7.69,
+    "trees": 21,
+    "nodes": 57,
+    "embed": 0.65,
+    "embed_n": 45,
+    "sql": 4.75,
+    "sql_n": 6614,
+    "rest": 2.29,
+    "vector": {
+     "t": 2.81,
+     "n": 21
+    },
+    "relations": {
+     "t": 1.06,
+     "n": 5498
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 4.66,
+    "trees": 21,
+    "nodes": 57,
+    "embed": 0.0,
+    "embed_n": 45,
+    "sql": 2.61,
+    "sql_n": 6562,
+    "rest": 2.04,
+    "vector": {
+     "t": 1.07,
+     "n": 21
+    },
+    "relations": {
+     "t": 0.82,
+     "n": 5469
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w3_d1": [
+  {
+   "COLD": {
+    "wall": 9.46,
+    "trees": 21,
+    "nodes": 74,
+    "embed": 0.73,
+    "embed_n": 46,
+    "sql": 6.11,
+    "sql_n": 7560,
+    "rest": 2.61,
+    "vector": {
+     "t": 3.9,
+     "n": 24
+    },
+    "relations": {
+     "t": 1.22,
+     "n": 6374
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 5.92,
+    "trees": 21,
+    "nodes": 74,
+    "embed": 0.0,
+    "embed_n": 46,
+    "sql": 3.37,
+    "sql_n": 7490,
+    "rest": 2.55,
+    "vector": {
+     "t": 1.49,
+     "n": 24
+    },
+    "relations": {
+     "t": 1.04,
+     "n": 6327
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w0_d2": [
+  {
+   "COLD": {
+    "wall": 1.2,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.03,
+    "embed_n": 1,
+    "sql": 0.73,
+    "sql_n": 1012,
+    "rest": 0.44,
+    "vector": {
+     "t": 0.31,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.13,
+     "n": 604
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.68,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 1,
+    "sql": 0.4,
+    "sql_n": 989,
+    "rest": 0.29,
+    "vector": {
+     "t": 0.12,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.09,
+     "n": 604
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w1_d2": [
+  {
+   "COLD": {
+    "wall": 15.8,
+    "trees": 21,
+    "nodes": 51,
+    "embed": 1.23,
+    "embed_n": 64,
+    "sql": 11.37,
+    "sql_n": 9004,
+    "rest": 3.2,
+    "vector": {
+     "t": 8.55,
+     "n": 35
+    },
+    "relations": {
+     "t": 1.56,
+     "n": 7360
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 11.8,
+    "trees": 21,
+    "nodes": 51,
+    "embed": 0.0,
+    "embed_n": 64,
+    "sql": 8.36,
+    "sql_n": 8954,
+    "rest": 3.43,
+    "vector": {
+     "t": 5.55,
+     "n": 35
+    },
+    "relations": {
+     "t": 1.61,
+     "n": 7333
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 17.23,
+    "trees": 21,
+    "nodes": 51,
+    "embed": 1.23,
+    "embed_n": 64,
+    "sql": 12.86,
+    "sql_n": 9004,
+    "rest": 3.14,
+    "vector": {
+     "t": 9.33,
+     "n": 35
+    },
+    "relations": {
+     "t": 1.59,
+     "n": 7360
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 10.23,
+    "trees": 21,
+    "nodes": 51,
+    "embed": 0.0,
+    "embed_n": 64,
+    "sql": 6.99,
+    "sql_n": 8954,
+    "rest": 3.24,
+    "vector": {
+     "t": 4.37,
+     "n": 35
+    },
+    "relations": {
+     "t": 1.46,
+     "n": 7333
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 16.64,
+    "trees": 21,
+    "nodes": 51,
+    "embed": 1.37,
+    "embed_n": 64,
+    "sql": 12.15,
+    "sql_n": 9004,
+    "rest": 3.12,
+    "vector": {
+     "t": 9.02,
+     "n": 35
+    },
+    "relations": {
+     "t": 1.53,
+     "n": 7360
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 8.32,
+    "trees": 21,
+    "nodes": 51,
+    "embed": 0.0,
+    "embed_n": 64,
+    "sql": 5.49,
+    "sql_n": 8954,
+    "rest": 2.83,
+    "vector": {
+     "t": 3.25,
+     "n": 35
+    },
+    "relations": {
+     "t": 1.3,
+     "n": 7333
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w2_d2": [
+  {
+   "COLD": {
+    "wall": 18.3,
+    "trees": 21,
+    "nodes": 99,
+    "embed": 1.53,
+    "embed_n": 81,
+    "sql": 12.08,
+    "sql_n": 13534,
+    "rest": 4.69,
+    "vector": {
+     "t": 7.94,
+     "n": 52
+    },
+    "relations": {
+     "t": 2.28,
+     "n": 11395
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 12.4,
+    "trees": 21,
+    "nodes": 99,
+    "embed": 0.0,
+    "embed_n": 81,
+    "sql": 7.78,
+    "sql_n": 13420,
+    "rest": 4.62,
+    "vector": {
+     "t": 4.12,
+     "n": 52
+    },
+    "relations": {
+     "t": 2.2,
+     "n": 11304
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 56
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 21.35,
+    "trees": 21,
+    "nodes": 99,
+    "embed": 1.8,
+    "embed_n": 81,
+    "sql": 14.33,
+    "sql_n": 13534,
+    "rest": 5.23,
+    "vector": {
+     "t": 9.66,
+     "n": 52
+    },
+    "relations": {
+     "t": 2.93,
+     "n": 11395
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 11.49,
+    "trees": 21,
+    "nodes": 99,
+    "embed": 0.0,
+    "embed_n": 81,
+    "sql": 7.24,
+    "sql_n": 13420,
+    "rest": 4.25,
+    "vector": {
+     "t": 3.95,
+     "n": 52
+    },
+    "relations": {
+     "t": 1.95,
+     "n": 11304
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 56
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 17.99,
+    "trees": 21,
+    "nodes": 99,
+    "embed": 1.52,
+    "embed_n": 81,
+    "sql": 11.8,
+    "sql_n": 13534,
+    "rest": 4.68,
+    "vector": {
+     "t": 7.9,
+     "n": 52
+    },
+    "relations": {
+     "t": 2.31,
+     "n": 11395
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 12.4,
+    "trees": 21,
+    "nodes": 99,
+    "embed": 0.0,
+    "embed_n": 81,
+    "sql": 8.02,
+    "sql_n": 13420,
+    "rest": 4.37,
+    "vector": {
+     "t": 4.55,
+     "n": 52
+    },
+    "relations": {
+     "t": 2.09,
+     "n": 11304
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 56
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w3_d2": [
+  {
+   "COLD": {
+    "wall": 29.94,
+    "trees": 21,
+    "nodes": 158,
+    "embed": 1.94,
+    "embed_n": 98,
+    "sql": 21.37,
+    "sql_n": 17916,
+    "rest": 6.62,
+    "vector": {
+     "t": 15.91,
+     "n": 69
+    },
+    "relations": {
+     "t": 3.23,
+     "n": 15060
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 23.25,
+    "trees": 21,
+    "nodes": 158,
+    "embed": 0.0,
+    "embed_n": 98,
+    "sql": 17.14,
+    "sql_n": 17709,
+    "rest": 6.11,
+    "vector": {
+     "t": 11.79,
+     "n": 69
+    },
+    "relations": {
+     "t": 3.0,
+     "n": 14876
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 73
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 25.75,
+    "trees": 21,
+    "nodes": 158,
+    "embed": 1.96,
+    "embed_n": 98,
+    "sql": 17.6,
+    "sql_n": 17916,
+    "rest": 6.19,
+    "vector": {
+     "t": 12.02,
+     "n": 69
+    },
+    "relations": {
+     "t": 3.05,
+     "n": 15060
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 20.8,
+    "trees": 21,
+    "nodes": 158,
+    "embed": 0.0,
+    "embed_n": 98,
+    "sql": 14.82,
+    "sql_n": 17709,
+    "rest": 5.99,
+    "vector": {
+     "t": 9.98,
+     "n": 69
+    },
+    "relations": {
+     "t": 2.91,
+     "n": 14876
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 73
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 28.42,
+    "trees": 21,
+    "nodes": 158,
+    "embed": 1.96,
+    "embed_n": 98,
+    "sql": 19.97,
+    "sql_n": 17916,
+    "rest": 6.49,
+    "vector": {
+     "t": 14.13,
+     "n": 69
+    },
+    "relations": {
+     "t": 3.32,
+     "n": 15060
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 21.38,
+    "trees": 21,
+    "nodes": 158,
+    "embed": 0.0,
+    "embed_n": 98,
+    "sql": 15.39,
+    "sql_n": 17709,
+    "rest": 5.99,
+    "vector": {
+     "t": 10.51,
+     "n": 69
+    },
+    "relations": {
+     "t": 3.02,
+     "n": 14876
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 73
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w0_d3": [
+  {
+   "COLD": {
+    "wall": 1.63,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.03,
+    "embed_n": 1,
+    "sql": 1.18,
+    "sql_n": 1012,
+    "rest": 0.42,
+    "vector": {
+     "t": 0.69,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.11,
+     "n": 604
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 0.81,
+    "trees": 21,
+    "nodes": 21,
+    "embed": 0.0,
+    "embed_n": 1,
+    "sql": 0.48,
+    "sql_n": 989,
+    "rest": 0.32,
+    "vector": {
+     "t": 0.11,
+     "n": 1
+    },
+    "relations": {
+     "t": 0.1,
+     "n": 604
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w1_d3": [
+  {
+   "COLD": {
+    "wall": 16.53,
+    "trees": 21,
+    "nodes": 55,
+    "embed": 1.34,
+    "embed_n": 75,
+    "sql": 11.42,
+    "sql_n": 11088,
+    "rest": 3.77,
+    "vector": {
+     "t": 8.36,
+     "n": 45
+    },
+    "relations": {
+     "t": 1.75,
+     "n": 9164
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 10.77,
+    "trees": 21,
+    "nodes": 55,
+    "embed": 0.0,
+    "embed_n": 75,
+    "sql": 7.16,
+    "sql_n": 11028,
+    "rest": 3.6,
+    "vector": {
+     "t": 4.08,
+     "n": 45
+    },
+    "relations": {
+     "t": 1.67,
+     "n": 9127
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 14.39,
+    "trees": 21,
+    "nodes": 55,
+    "embed": 1.35,
+    "embed_n": 75,
+    "sql": 9.42,
+    "sql_n": 11088,
+    "rest": 3.62,
+    "vector": {
+     "t": 6.41,
+     "n": 45
+    },
+    "relations": {
+     "t": 1.66,
+     "n": 9164
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 10.03,
+    "trees": 21,
+    "nodes": 55,
+    "embed": 0.0,
+    "embed_n": 75,
+    "sql": 6.57,
+    "sql_n": 11028,
+    "rest": 3.46,
+    "vector": {
+     "t": 3.89,
+     "n": 45
+    },
+    "relations": {
+     "t": 1.59,
+     "n": 9127
+    },
+    "reset": {
+     "t": 0.01,
+     "n": 49
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 16.12,
+    "trees": 21,
+    "nodes": 55,
+    "embed": 1.29,
+    "embed_n": 75,
+    "sql": 11.0,
+    "sql_n": 11088,
+    "rest": 3.82,
+    "vector": {
+     "t": 7.87,
+     "n": 45
+    },
+    "relations": {
+     "t": 1.72,
+     "n": 9164
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 11.63,
+    "trees": 21,
+    "nodes": 55,
+    "embed": 0.0,
+    "embed_n": 75,
+    "sql": 8.04,
+    "sql_n": 11028,
+    "rest": 3.59,
+    "vector": {
+     "t": 5.21,
+     "n": 45
+    },
+    "relations": {
+     "t": 1.65,
+     "n": 9127
+    },
+    "reset": null
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w2_d3": [
+  {
+   "COLD": {
+    "wall": 41.51,
+    "trees": 21,
+    "nodes": 136,
+    "embed": 2.75,
+    "embed_n": 123,
+    "sql": 31.09,
+    "sql_n": 22053,
+    "rest": 7.67,
+    "vector": {
+     "t": 24.36,
+     "n": 91
+    },
+    "relations": {
+     "t": 4.0,
+     "n": 18801
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 95
+    }
+   },
+   "WARM": {
+    "wall": 43.51,
+    "trees": 21,
+    "nodes": 136,
+    "embed": 0.02,
+    "embed_n": 123,
+    "sql": 35.4,
+    "sql_n": 21850,
+    "rest": 8.09,
+    "vector": {
+     "t": 27.91,
+     "n": 91
+    },
+    "relations": {
+     "t": 4.27,
+     "n": 18621
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 95
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 38.74,
+    "trees": 21,
+    "nodes": 136,
+    "embed": 2.56,
+    "embed_n": 123,
+    "sql": 28.7,
+    "sql_n": 22053,
+    "rest": 7.48,
+    "vector": {
+     "t": 22.22,
+     "n": 91
+    },
+    "relations": {
+     "t": 3.92,
+     "n": 18801
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 95
+    }
+   },
+   "WARM": {
+    "wall": 36.12,
+    "trees": 21,
+    "nodes": 136,
+    "embed": 0.0,
+    "embed_n": 123,
+    "sql": 28.53,
+    "sql_n": 21850,
+    "rest": 7.59,
+    "vector": {
+     "t": 22.24,
+     "n": 91
+    },
+    "relations": {
+     "t": 3.84,
+     "n": 18621
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 95
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 39.71,
+    "trees": 21,
+    "nodes": 136,
+    "embed": 2.5,
+    "embed_n": 123,
+    "sql": 29.52,
+    "sql_n": 22053,
+    "rest": 7.69,
+    "vector": {
+     "t": 23.02,
+     "n": 91
+    },
+    "relations": {
+     "t": 3.98,
+     "n": 18801
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 95
+    }
+   },
+   "WARM": {
+    "wall": 36.1,
+    "trees": 21,
+    "nodes": 136,
+    "embed": 0.0,
+    "embed_n": 123,
+    "sql": 28.48,
+    "sql_n": 21850,
+    "rest": 7.62,
+    "vector": {
+     "t": 22.09,
+     "n": 91
+    },
+    "relations": {
+     "t": 3.82,
+     "n": 18621
+    },
+    "reset": {
+     "t": 0.02,
+     "n": 95
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ],
+ "storm_w3_d3": [
+  {
+   "COLD": {
+    "wall": 73.23,
+    "trees": 21,
+    "nodes": 281,
+    "embed": 4.01,
+    "embed_n": 182,
+    "sql": 56.92,
+    "sql_n": 34917,
+    "rest": 12.29,
+    "vector": {
+     "t": 45.72,
+     "n": 143
+    },
+    "relations": {
+     "t": 6.45,
+     "n": 29459
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 71.3,
+    "trees": 21,
+    "nodes": 281,
+    "embed": 0.0,
+    "embed_n": 182,
+    "sql": 58.56,
+    "sql_n": 34423,
+    "rest": 12.74,
+    "vector": {
+     "t": 46.98,
+     "n": 143
+    },
+    "relations": {
+     "t": 6.86,
+     "n": 28988
+    },
+    "reset": {
+     "t": 0.03,
+     "n": 147
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 69.43,
+    "trees": 21,
+    "nodes": 281,
+    "embed": 4.03,
+    "embed_n": 182,
+    "sql": 53.08,
+    "sql_n": 34917,
+    "rest": 12.33,
+    "vector": {
+     "t": 42.33,
+     "n": 143
+    },
+    "relations": {
+     "t": 6.35,
+     "n": 29459
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 75.56,
+    "trees": 21,
+    "nodes": 281,
+    "embed": 0.0,
+    "embed_n": 182,
+    "sql": 62.6,
+    "sql_n": 34423,
+    "rest": 12.95,
+    "vector": {
+     "t": 51.19,
+     "n": 143
+    },
+    "relations": {
+     "t": 6.79,
+     "n": 28988
+    },
+    "reset": {
+     "t": 0.03,
+     "n": 147
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  },
+  {
+   "COLD": {
+    "wall": 67.68,
+    "trees": 21,
+    "nodes": 281,
+    "embed": 3.94,
+    "embed_n": 182,
+    "sql": 51.59,
+    "sql_n": 34917,
+    "rest": 12.15,
+    "vector": {
+     "t": 40.9,
+     "n": 143
+    },
+    "relations": {
+     "t": 6.25,
+     "n": 29459
+    },
+    "reset": null
+   },
+   "WARM": {
+    "wall": 62.81,
+    "trees": 21,
+    "nodes": 281,
+    "embed": 0.0,
+    "embed_n": 182,
+    "sql": 50.54,
+    "sql_n": 34423,
+    "rest": 12.26,
+    "vector": {
+     "t": 40.33,
+     "n": 143
+    },
+    "relations": {
+     "t": 6.08,
+     "n": 28988
+    },
+    "reset": {
+     "t": 0.03,
+     "n": 147
+    }
+   },
+   "device": "[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'"
+  }
+ ]
+}
