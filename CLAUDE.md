@@ -83,7 +83,9 @@ The guard hook at `.claude/hooks/guard.py` enforces the destructive-command, sec
 
 ### Configuration
 
-All settings live in `app/config.py` (`Settings`, pydantic-settings, loaded from the environment and `backend/.env`). `APP_ENV` (`local` by default, or `production`) derives the security defaults: production turns API docs off, ignores `includeHidden`, enables rate limiting, turns on search limits and admission control, and fences the query-time LLM (unless `ALLOW_QUERY_TIME_LLM_IN_PRODUCTION=1`). Each can be overridden explicitly (`EXPOSE_API_DOCS`, `ALLOW_INCLUDE_HIDDEN`, `RATE_LIMIT_ENABLED`, `SEARCH_LIMITS_ENABLED`, `SEARCH_ADMISSION_ENABLED`).
+All settings live in `app/config.py` (`Settings`, pydantic-settings, loaded from the environment and `backend/.env`). `APP_ENV` (`local` by default, or `production`) derives the security defaults: production turns API docs off, ignores `includeHidden`, enables rate limiting, turns on search limits and admission control, stops usage-statistics writes, and fences the query-time LLM (unless `ALLOW_QUERY_TIME_LLM_IN_PRODUCTION=1`). Each can be overridden explicitly (`EXPOSE_API_DOCS`, `ALLOW_INCLUDE_HIDDEN`, `RATE_LIMIT_ENABLED`, `SEARCH_LIMITS_ENABLED`, `SEARCH_ADMISSION_ENABLED`, `RANKING_STATS_WRITE`).
+
+`RANKING_STATS_WRITE` (C2): on locally, off in production. When off, `POST /explore-v2` records nothing to the usage-statistics tables; it is the only writer of them. The route passes the switch to `_run_search` as an explicit `record=` argument, and the record call stays on the module-global `record_sense_selection`, so the eval harness's no-op patch still intercepts it.
 
 Exception: `ROOT_LLM_*` stay in `services/root_llm.py`, because the harness fence depends on that module's globals.
 
@@ -95,7 +97,7 @@ The app is built by `create_app(settings)` in `app/main.py`; tests build product
 - Normal searches queue FIFO, up to `SEARCH_QUEUE_SIZE=4` waiting for up to `SEARCH_QUEUE_WAIT_SECONDS=30`. A second large search gets an immediate 503; there is no large-search queue.
 - `SEARCH_TIMEOUT_SECONDS=300` is measured from admission, so queue time counts.
 
-Order in `POST /explore-v2`: validate limits (422) → *result-cache seam (not built)* → admission (503) → record the sense selection → search → attach name cards → commit. Record and search share one session and stay in that order, because the search reads the statistics just recorded.
+Order in `POST /explore-v2`: validate limits (422) → *result-cache seam (not built)* → admission (503) → record the sense selection (if `RANKING_STATS_WRITE`) → search → attach name cards → commit. Since C2 the search no longer reads statistics, so the record/search order no longer affects results; it is kept as is.
 
 Keep-the-slot: the engine can't be cancelled, so a timed-out search returns 504 but keeps running. Its slot (and large permit) is released by the search thread when it finishes, never by the request. An admitted search runs in its own session, bound to the request session's engine (so test overrides apply), and an abandoned search rolls back instead of committing. That guarantee needs the query-time LLM fenced, as it is in production, because the trickle commits mid-search; `create_app` warns if admission is on while the trickle is live.
 
@@ -115,6 +117,8 @@ Two model files, split by role:
 - `generated_name.py` — `Language`, `GeneratedName`, `NamePart`, `GenerationFlavorModel`: the curated/generated-name side.
 - `semantic.py` — the sense graph: `Source`, `Lexeme`/`Word`, `Sense`, `WordSense`, `Concept`, `SenseRelation`, `SenseEmbedding` (pgvector), `SenseSynset`/ILI bridge rows, `SenseTranslation`, `RootLlmAttempt`, plus the stats/event tables. This is the larger, load-bearing schema. **Any schema change here is a stop-and-ask.**
 
+Two Postgres schemas (C2; migration `a7c3e91f0b52`, applied to master in C3): `public` holds reference data and is replaced wholesale on each publish; `live` holds live-traffic data and is never touched by publishing. The four usage tables (`SenseSelectionStat`, `SenseSelectionEvent`, `WordSearchStat`, `WordSearchEvent`) declare `schema="live"`; `RootLlmAttempt` stays in `public` (Findings A-0.1). There are no database foreign keys from `live` into `public` (a publish would break them); the ORM relationships use explicit `foreign()` join conditions, and readers must tolerate a statistics row whose sense no longer exists. SQLite tests map `live` to the default schema with `schema_translate_map={"live": None}` on every test engine.
+
 Large columns that the request path never reads: `lexemes.raw_entry` and `senses.raw_sense` (full import JSON, ~3.9 GB) and `sense_embeddings.embedded_text`. They're used only by importers and backfills. Don't add request-path reads of them — the production copy will have them emptied (Stage 2).
 
 ### Request flow
@@ -131,7 +135,9 @@ Large columns that the request path never reads: `lexemes.raw_entry` and `senses
 
 ### Tables written by live traffic
 
-Ordinary searches write `sense_selection_stats` / `sense_selection_events` and `word_search_stats` / `word_search_events`. `SenseSelectionStat` feeds ranking, which is why gate references drift after ordinary API use. In the publishing design these tables form the "live" data zone that publishing never replaces (Stage 2).
+Ordinary searches write `live.sense_selection_stats` / `live.sense_selection_events` (when `RANKING_STATS_WRITE` is on); `live.word_search_stats` / `live.word_search_events` have writers and readers in `services/word_search_stats.py` but no callers. These tables form the "live" data zone that publishing never replaces (Stage 2).
+
+**Rule: usage statistics shape the sense dropdown only; search results never read them** (C2, cache plan Part A). The dropdown (`services/sense_lookup.py` → `dropdown_ranker.py`) orders meanings by selection count. The results path (`vector_sense_search`, `sense_reranker`, the expansion and root-selection modules, green cards) must not reference the statistics tables; `tests/test_results_never_read_statistics.py` enforces this by grep. One harness input still reads statistics: `capture_engine_reference.py`'s `most_used_sense_id` picks each probe word's root sense from them, so pass `--reuse-from` to pin root ids whenever comparing captures across databases.
 
 ### Query-time LLM trickle
 
@@ -173,9 +179,10 @@ This project's standing convention (see `notes/CLEANUP_AND_TWEAKS_ROADMAP.MD` ap
 - These are run after any change touching `multi_hop_expansion.py`, `parallel_expansion.py`, `root_selection.py`, `vector_scope.py`, `sense_reranker.py`, `dropdown_ranker.py`, `embedding_provider.py`, etc. — a 0-diff result is the bar, not a nice-to-have.
 - `capture_api_current.py` has a side effect (writes `SenseSelectionStat`) that `capture_engine_reference.py` does not — re-baseline references before comparing if ordinary API usage happened in between.
 - The established-names invariant is 106,398 rows; a change that alters it is a finding, not a side effect.
+- The usage-statistics fingerprint, recorded before and after every gate run, is `count(*) | sum(selection_count) | max(last_selected_at)` over `live.sense_selection_stats` (over `public.sense_selection_stats` until C3 applies migration `a7c3e91f0b52`). `scripts/eval/db_preflight.py` prints it, read-only and without docker, through the model, so it follows the table.
 
 Additional rules for the publishing work:
-- **Gates certify production only when run in production's configuration**: CPU device (`EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2`), query-time LLM off, and ranking-stats behaviour matching production. Say which configuration a gate ran in when reporting it.
+- **Gates certify production only when run in production's configuration**: `EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2 RANKING_STATS_WRITE=0`, with the query-time LLM off. Say which configuration a gate ran in when reporting it.
 - **Record baselines before changing anything**, and report gate output as-is.
 - **Any non-zero diff is the user's decision.** Never regenerate a reference file to make a gate pass without explicit approval in the current session.
 

@@ -850,7 +850,10 @@ class Sense(Base):
         uselist=False,
     )
 
+    # SenseSelectionStat lives in schema `live` with no database FK into
+    # `public` (C2), so the join is declared explicitly with foreign().
     selection_stat: Mapped["SenseSelectionStat | None"] = relationship(
+        primaryjoin="Sense.id == foreign(SenseSelectionStat.sense_id)",
         back_populates="sense",
         cascade="all, delete-orphan",
         uselist=False,
@@ -899,10 +902,16 @@ class Sense(Base):
 
 
 class SenseSelectionStat(Base):
+    """Usage statistics: schema `live`, never replaced by publishing (C2).
+
+    No database foreign key into `public`: a publish replaces `public` and
+    would break or drop it. Readers must tolerate a row whose sense is gone.
+    """
     __tablename__ = "sense_selection_stats"
+    __table_args__ = {"schema": "live"}
 
     sense_id: Mapped[int] = mapped_column(
-        ForeignKey("senses.id", ondelete="CASCADE"),
+        Integer,
         primary_key=True,
     )
 
@@ -918,17 +927,19 @@ class SenseSelectionStat(Base):
     )
 
     sense: Mapped["Sense"] = relationship(
+        primaryjoin="Sense.id == foreign(SenseSelectionStat.sense_id)",
         back_populates="selection_stat",
     )
 
 
 class SenseSelectionEvent(Base):
+    """Schema `live`; no database FK into `public` (see SenseSelectionStat)."""
     __tablename__ = "sense_selection_events"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
     sense_id: Mapped[int] = mapped_column(
-        ForeignKey("senses.id", ondelete="CASCADE"),
+        Integer,
         nullable=False,
     )
 
@@ -944,23 +955,27 @@ class SenseSelectionEvent(Base):
         nullable=False,
     )
 
-    sense: Mapped["Sense"] = relationship()
+    sense: Mapped["Sense"] = relationship(
+        primaryjoin="Sense.id == foreign(SenseSelectionEvent.sense_id)",
+    )
 
     __table_args__ = (
         Index(
             "ix_sense_selection_events_sense_id",
             "sense_id",
         ),
+        {"schema": "live"},
     )
 
 
 class WordSearchStat(Base):
+    """Schema `live`; no database FK into `public` (see SenseSelectionStat)."""
     __tablename__ = "word_search_stats"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
     language_id: Mapped[int] = mapped_column(
-        ForeignKey("languages.id"),
+        Integer,
         nullable=False,
     )
 
@@ -980,7 +995,9 @@ class WordSearchStat(Base):
         nullable=True,
     )
 
-    language: Mapped["Language"] = relationship()
+    language: Mapped["Language"] = relationship(
+        primaryjoin="Language.id == foreign(WordSearchStat.language_id)",
+    )
 
     __table_args__ = (
         UniqueConstraint(
@@ -997,16 +1014,18 @@ class WordSearchStat(Base):
             "ix_word_search_stats_count",
             "search_count",
         ),
+        {"schema": "live"},
     )
 
 
 class WordSearchEvent(Base):
+    """Schema `live`; no database FK into `public` (see SenseSelectionStat)."""
     __tablename__ = "word_search_events"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
     language_id: Mapped[int] = mapped_column(
-        ForeignKey("languages.id"),
+        Integer,
         nullable=False,
     )
 
@@ -1027,7 +1046,9 @@ class WordSearchEvent(Base):
         nullable=False,
     )
 
-    language: Mapped["Language"] = relationship()
+    language: Mapped["Language"] = relationship(
+        primaryjoin="Language.id == foreign(WordSearchEvent.language_id)",
+    )
 
     __table_args__ = (
         Index(
@@ -1035,6 +1056,7 @@ class WordSearchEvent(Base):
             "language_id",
             "normalized_query",
         ),
+        {"schema": "live"},
     )
 
 

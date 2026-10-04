@@ -265,8 +265,9 @@ def explore_v2(
     db: Session = Depends(get_db),
     policy: SearchPolicy = Depends(get_search_policy),
 ) -> ExploreV2Response:
-    """Order (B5): validate limits -> [cache seam] -> admission -> record ->
-    search -> attach name cards. See app/search_admission.py."""
+    """Order (B5, C2): validate limits -> [cache seam] -> admission -> record
+    (only if RANKING_STATS_WRITE) -> search -> attach name cards. See
+    app/search_admission.py."""
     # Called directly as a function (the eval harnesses do), FastAPI injects
     # nothing and `policy` is still its Depends marker.
     policy = resolve_policy(policy)
@@ -280,11 +281,12 @@ def explore_v2(
 
     if policy.admission is None:
         # Local default: exactly the pre-B5 path, in the request's session.
-        return _run_search(db, request)
+        return _run_search(db, request, record=policy.stats_write)
     return policy.admission.run(
         request_db=db,
         large=policy.is_large(width, request.depth),
-        work=lambda session, commit: _run_search(session, request, commit),
+        work=lambda session, commit: _run_search(
+            session, request, commit, record=policy.stats_write),
     )
 
 
@@ -292,18 +294,27 @@ def _run_search(
     db: Session,
     request: ExploreV2Request,
     commit: Callable[[], None] | None = None,
+    *,
+    record: bool,
 ) -> ExploreV2Response:
-    """Record, then search, in ONE session: the search reads the selection
-    statistics the record just flushed, so the two must stay in this order
-    and in the same transaction. `commit` lets admission veto the commit of
-    an abandoned (timed-out) search; None means commit directly."""
+    """Record the sense selection (if `record`), then search, in one session.
+
+    `record` is RANKING_STATS_WRITE (C2), keyword-only with no default so
+    every caller decides explicitly. The call stays on the module-global
+    `record_sense_selection`, which is what the eval harness patches to a
+    no-op. Search results do not read usage statistics (C2, cache plan
+    Part A), so the record/search order no longer affects results.
+
+    `commit` lets admission veto the commit of an abandoned (timed-out)
+    search; None means commit directly."""
     commit = commit or db.commit
-    for sense_id in request.selectedSenseIds:
-        record_sense_selection(
-            db,
-            sense_id=sense_id,
-            query_text=request.queryText,
-        )
+    if record:
+        for sense_id in request.selectedSenseIds:
+            record_sense_selection(
+                db,
+                sense_id=sense_id,
+                query_text=request.queryText,
+            )
 
     results: list[ExploreV2Result] = []
     expanded: list[ExpandedSenseResponse] = []

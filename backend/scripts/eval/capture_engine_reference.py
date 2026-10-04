@@ -93,12 +93,26 @@ def main():
     # overwrites the tracked reference; the default is unchanged.
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", default="scripts/eval/engine_reference.json")
+    # --reuse-from (publishing C2): take each word's root_sense_id from a
+    # prior capture instead of most_used_sense_id, which picks roots from
+    # usage statistics. Pinning is what makes a comparison across databases
+    # (e.g. production, whose live tables start empty) meaningful.
+    ap.add_argument("--reuse-from")
     args = ap.parse_args()
+
+    pinned: dict[str, int | None] | None = None
+    if args.reuse_from:
+        with open(args.reuse_from) as f:
+            prior = json.load(f)
+        pinned = {word: data.get("root_sense_id")
+                  for word, data in prior.items()}
+        print(f"reusing root senses from {args.reuse_from}: {pinned}")
 
     out = {}
     with SessionLocal() as db:
         for word in PROBE_WORDS:
-            sid = most_used_sense_id(db, word)
+            sid = (pinned.get(word) if pinned is not None
+                   else most_used_sense_id(db, word))
             if sid is None:
                 out[word] = {"skipped": "no embedded visible sense"}
                 continue

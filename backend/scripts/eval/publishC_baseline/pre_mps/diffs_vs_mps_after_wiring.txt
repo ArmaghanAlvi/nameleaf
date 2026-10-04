@@ -1,0 +1,19 @@
+(informational) diffs vs mps_after_wiring; nondeterministic_fields.txt declares none in the JSON outputs
+=== parallel_reference --diff
+
+0/250 trees changed
+0/30 cells changed
+=== root_selection_diff --diff
+0/6000 cells changed
+=== diff_reference --engine mps_after_wiring --api pre_mps
+
+0/160 cells differ
+=== parallel_api_reference --diff
+
+0/30 cells changed (yellow path)
+green cards: 185 -> 185
+=== cmp
+parallel_reference.json identical
+roots.json identical
+engine_reference.json identical
+parallel_api_reference.json identical

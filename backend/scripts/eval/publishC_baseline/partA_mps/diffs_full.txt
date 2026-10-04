@@ -1,0 +1,63 @@
+light w3_d2: INTERLEAVE differs (175 -> 174)
+light w3_d2 [en]:
+    rung  selected -> selected
+    words ['light', 'luminance', 'luminosity', 'illumination', 'luminousness', 'brightness']
+       -> ['light', 'luminance', 'luminosity', 'illumination', 'luminousness', 'brightness']
+light w3_d2 [ang]:
+    rung  primary -> primary
+    words ['leoht', 'heofonleoma', 'heofonleoht', 'heofonwuldor', 'swegelwuldor', 'leoma']
+       -> ['leoht', 'heofonleoma', 'heofonleoht', 'heofonwuldor', 'swegelwuldor', 'scima']
+storm w3_d2: INTERLEAVE differs (158 -> 159)
+storm w3_d2 [en]:
+    rung  selected -> selected
+    words ['storm', 'tempest', 'cyclone', 'tough', 'tempest-tossed', 'col']
+       -> ['storm', 'tempest', 'cyclone', 'tough', 'tempest-tossed', 'col']
+light [ru_only] w3_d2: ENGLISH PASS differs
+light [nonlatin] w3_d2: ENGLISH PASS differs
+storm [ru_only] w3_d2: ENGLISH PASS differs
+storm [nonlatin] w3_d2: ENGLISH PASS differs
+
+3/250 trees changed
+6/30 cells changed
+0/6000 cells changed
+brave b3_d3:
+    engine: ['brave', 'bold', 'courageous', 'fortitudinous', 'audacious', 'daring', 'valorous', 'courageously', 'mighty', 'long-headed', 'temerarious', 'adventurous', 'dareful', 'venturous', 'valour', 'bravely', 'valiantly', 'strongly', 'strong', 'powerful', 'superpowered', 'insightful', 'high-powered']
+    api   : ['brave', 'bold', 'courageous', 'fortitudinous', 'audacious', 'daring', 'valorous', 'courageously', 'mighty', 'long-headed', 'temerarious', 'adventurous', 'dareful', 'venturous', 'valour', 'bravely', 'valiantly', 'strongly', 'powerful', 'superpowered', 'vigorous', 'insightful', 'high-powered']
+light b3_d2:
+    engine: ['light', 'luminance', 'luminosity', 'illumination', 'luminousness', 'brightness', 'radiance', 'lumination', 'lighting', 'elucidation']
+    api   : ['light', 'luminance', 'luminosity', 'illumination', 'luminousness', 'brightness', 'lambency', 'lumination', 'lighting', 'elucidation']
+light b3_d3:
+    engine: ['light', 'luminance', 'luminosity', 'illumination', 'luminousness', 'brightness', 'radiance', 'lumination', 'lighting', 'elucidation', 'cleverness', 'refulgence', 'effulgence', 'resplendency', 'bright', 'illuminating', 'ignition', 'clarifying', 'clearing', 'explanation']
+    api   : ['light', 'luminance', 'luminosity', 'illumination', 'luminousness', 'brightness', 'lambency', 'lumination', 'lighting', 'elucidation', 'cleverness', 'gleaming', 'lambience', 'lucent', 'illuminating', 'ignition', 'clarifying', 'clearing', 'explanation']
+storm b3_d2:
+    engine: ['storm', 'tempest', 'cyclone', 'tough', 'tempest-tossed', 'col', 'clime', 'inclement', 'hard']
+    api   : ['storm', 'tempest', 'cyclone', 'tough', 'tempest-tossed', 'col', 'clime', 'inclement', 'rugged', 'hard']
+storm b3_d3:
+    engine: ['storm', 'tempest', 'cyclone', 'tough', 'tempest-tossed', 'col', 'clime', 'inclement', 'hard', 'buffeted', 'battered', 'low-pressure', 'bicentric', 'bicyclic', 'climate', 'cold', 'inflect', 'heavily', 'intemperately', 'strong']
+    api   : ['storm', 'tempest', 'cyclone', 'tough', 'tempest-tossed', 'col', 'clime', 'inclement', 'rugged', 'hard', 'buffeted', 'battered', 'low-pressure', 'bicentric', 'bicyclic', 'climate', 'milieu', 'inflect', 'turbulent', 'troubled', 'angular', 'heavily', 'intemperately', 'severely']
+joy b3_d3:
+    engine: ['joy', 'happiness', 'delight', 'elatedness', 'contentedness', 'cheeriness', 'gladness', 'delectation', 'delightedness', 'pleasedness', 'blithesomeness', 'contentness', 'cheerfulness', 'joyousness', 'joyfulness', 'enjoyment', 'gleesomeness', 'blitheness']
+    api   : ['joy', 'happiness', 'delight', 'elatedness', 'contentedness', 'cheeriness', 'gladness', 'delectation', 'delightedness', 'pleasedness', 'blithesomeness', 'contentness', 'cheerfulness', 'joyousness', 'joyfulness', 'enjoyment', 'elation', 'gleesomeness', 'blitheness']
+gold b3_d2:
+    engine: ['gold', 'goldlike', 'gold-bearing', 'radiogold', 'petallike', 'coinlike', 'ironlike', 'auriferous', 'argentiferous', 'apple-bearing', 'radioisotope', 'radon']
+    api   : ['gold', 'goldlike', 'gold-bearing', 'radiogold', 'petallike', 'coinlike', 'ironlike', 'auriferous', 'argentiferous', 'apple-bearing', 'radioisotope', 'radioactinium', 'radon']
+gold b3_d3:
+    engine: ['gold', 'goldlike', 'gold-bearing', 'radiogold', 'petallike', 'coinlike', 'ironlike', 'auriferous', 'argentiferous', 'apple-bearing', 'radioisotope', 'radon', 'olivelike', 'bonelike', 'palmlike', 'nummular', 'columnlike', 'limolike', 'toothlike', 'auroargentiferous', 'argentine', 'pomiferous', 'seedbearing', 'fruit-bearing', 'radionuclide', 'radiostrontium', 'thoron']
+    api   : ['gold', 'goldlike', 'gold-bearing', 'radiogold', 'petallike', 'coinlike', 'ironlike', 'auriferous', 'argentiferous', 'apple-bearing', 'radioisotope', 'radioactinium', 'radon', 'olivelike', 'bonelike', 'palmlike', 'nummular', 'columnlike', 'limolike', 'toothlike', 'auroargentiferous', 'argentine', 'pomiferous', 'seedbearing', 'fruit-bearing', 'radionuclide', 'radiostrontium', 'actinium', 'radioiodine', 'thoron']
+
+8/160 cells differ
+light [all] w3_d2: YELLOW differs
+    before ['en:light', 'ar:نور', 'ja:光源', 'ru:освещение', 'la:lumen', 'ga:solas']
+    after  ['en:light', 'ar:نور', 'ja:光源', 'ru:освещение', 'la:lumen', 'ga:solas']
+light [all] w3_d2: YELLOW_SENSE_IDS differs
+light [all] w3_d2: EXPANDED differs
+light [all] w3_d2: SUMMARIES differs
+storm [all] w3_d2: YELLOW differs
+    before ['en:storm', 'ar:عاصفة', 'ja:嵐', 'ru:буря', 'la:tempestas', 'ga:stoirm']
+    after  ['en:storm', 'ar:عاصفة', 'ja:嵐', 'ru:буря', 'la:tempestas', 'ga:stoirm']
+storm [all] w3_d2: YELLOW_SENSE_IDS differs
+storm [all] w3_d2: EXPANDED differs
+storm [all] w3_d2: SUMMARIES differs
+
+2/30 cells changed (yellow path)
+green cards: 185 -> 181

@@ -25,6 +25,19 @@ config.set_main_option("sqlalchemy.url", settings.database_url)
 
 target_metadata = Base.metadata
 
+
+# Two-zone schema (publishing C2): reference data in `public`, live-traffic
+# data in `live`. Autogenerate must inspect both -- with only the default
+# schema it would see live.* as missing and propose recreating those tables
+# -- and nothing else (no system or extension schemas).
+_SCHEMAS = {None, "public", "live"}
+
+
+def include_name(name, type_, parent_names):
+    if type_ == "schema":
+        return name in _SCHEMAS
+    return True
+
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
@@ -49,6 +62,8 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
+        include_schemas=True,
+        include_name=include_name,
     )
 
     with context.begin_transaction():
@@ -70,7 +85,10 @@ def run_migrations_online() -> None:
 
     with connectable.connect() as connection:
         context.configure(
-            connection=connection, target_metadata=target_metadata
+            connection=connection,
+            target_metadata=target_metadata,
+            include_schemas=True,
+            include_name=include_name,
         )
 
         with context.begin_transaction():

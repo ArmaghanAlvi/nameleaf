@@ -1,0 +1,42 @@
+before=scripts/eval/publishC_baseline/pre_mps/parallel_reference.json
+after =scripts/eval/publishC_baseline/partA_mps/parallel_reference.json
+statistics senses=112
+
+-- parallel_reference trees --
+units compared=250  differing=3  explained by a statistics sense=2  UNEXPLAINED=1
+  explained   light w3_d2 [en]: statistics senses in before = [23466, 89052, 89055, 217234]
+  explained   storm w3_d2 [en]: statistics senses in before = [7459]
+  UNEXPLAINED light w3_d2 [ang]
+before=scripts/eval/publishC_baseline/pre_mps/roots.json
+after =scripts/eval/publishC_baseline/partA_mps/roots.json
+statistics senses=112
+
+-- root_selection cells --
+units compared=6000  differing=0  explained by a statistics sense=0  UNEXPLAINED=0
+before=scripts/eval/publishC_baseline/pre_mps/engine_reference.json
+after =scripts/eval/publishC_baseline/partA_mps/engine_reference.json
+statistics senses=112
+
+-- engine_reference cells --
+units compared=160  differing=8  explained by a statistics sense=8  UNEXPLAINED=0
+  explained   brave b3_d3: statistics senses in before = [49096, 72902]
+  explained   light b3_d2: statistics senses in before = [23466, 89052, 89055, 217234]
+  explained   light b3_d3: statistics senses in before = [23466, 24898, 89052, 89055, 217234]
+  explained   storm b3_d2: statistics senses in before = [7459]
+  explained   storm b3_d3: statistics senses in before = [7459, 12946, 49094]
+  explained   joy b3_d3: statistics senses in before = [57055]
+  explained   gold b3_d2: statistics senses in before = [8825]
+  explained   gold b3_d3: statistics senses in before = [8825]
+before=scripts/eval/publishC_baseline/pre_mps/parallel_api_reference.json
+after =scripts/eval/publishC_baseline/partA_mps/parallel_api_reference.json
+statistics senses=112
+
+-- parallel_api yellow rows --
+units compared=30  differing=2  explained by a statistics sense=2  UNEXPLAINED=0
+  explained   light [all] w3_d2: statistics senses in before = [23466, 89052, 89055, 217234]
+  explained   storm [all] w3_d2: statistics senses in before = [7459]
+
+-- parallel_api expandedSenses --
+units compared=30  differing=2  explained by a statistics sense=1  UNEXPLAINED=1
+  explained   light [all] w3_d2: statistics senses in before = [89052, 89055, 217234]
+  UNEXPLAINED storm [all] w3_d2

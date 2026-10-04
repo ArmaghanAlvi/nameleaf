@@ -1,8 +1,9 @@
 """Search limits and admission control for POST /explore-v2 (publishing B5).
 
 ORDER IN THE ROUTE: validate limits (422) -> [future result-cache seam] ->
-admission (503) -> record the sense selection -> search -> attach name cards
--> commit. Everything here is OFF locally (settings unset): the route then
+admission (503) -> record the sense selection (only if RANKING_STATS_WRITE;
+the policy carries it as `stats_write`) -> search -> attach name cards ->
+commit. Everything here is OFF locally (settings unset): the route then
 calls the search inline in the request's session, exactly as before B5.
 
 WHY THREADS, NOT ASYNC: the route is a sync `def`, so Starlette runs it in
@@ -270,6 +271,8 @@ class SearchPolicy:
     max_depth: int
     large_threshold: int
     admission: AdmissionController | None
+    # RANKING_STATS_WRITE (C2): whether the route records the sense selection.
+    stats_write: bool
 
     @classmethod
     def from_settings(cls, cfg: Settings) -> "SearchPolicy":
@@ -288,6 +291,7 @@ class SearchPolicy:
             max_depth=cfg.search_max_depth,
             large_threshold=cfg.search_large_threshold,
             admission=admission,
+            stats_write=cfg.ranking_stats_write_on,
         )
 
     @staticmethod

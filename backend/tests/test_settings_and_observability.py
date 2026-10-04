@@ -69,3 +69,15 @@ def test_large_lane_must_leave_a_normal_slot():
              search_concurrency=2)
     # Only enforced when admission is on.
     _cfg(search_large_concurrency=2, search_concurrency=2)
+
+
+def test_ranking_stats_write_derives_from_app_env():
+    # C2: statistics are recorded locally, never in production by default.
+    assert _cfg().ranking_stats_write_on
+    assert not _cfg(app_env="production").ranking_stats_write_on
+
+
+def test_ranking_stats_write_explicit_override_wins():
+    assert _cfg(app_env="production",
+                ranking_stats_write=True).ranking_stats_write_on
+    assert not _cfg(ranking_stats_write=False).ranking_stats_write_on

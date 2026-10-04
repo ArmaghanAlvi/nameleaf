@@ -4,14 +4,8 @@ import re
 from dataclasses import dataclass
 
 from app.models.semantic import Sense
-from app.services.sense_selection import (
-    SenseSearchKey,
-    sense_search_key_for_sense,
-)
 from app.utils.text import normalize_text
 
-
-POPULAR_SENSE_BONUS = 0.025
 
 NO_SYNONYM_PENALTY = -0.05
 
@@ -164,70 +158,6 @@ def broad_domain_penalty(
     return -0.05, f"broad-domain signal: {', '.join(labels)}"
 
 
-def popular_sense_keys_in_candidate_set(
-    *,
-    candidates: list[RerankCandidate],
-    sense_selection_counts: dict[SenseSearchKey, int] | None,
-) -> set[SenseSearchKey]:
-    """
-    Within the current candidate set, find the upper 50% of exact meanings
-    by selection/search count.
-
-    Only meanings with selection_count > 0 are eligible.
-    The bonus is constant, not proportional to count.
-    """
-    if not sense_selection_counts:
-        return set()
-
-    unique_keys: set[SenseSearchKey] = {
-        sense_search_key_for_sense(candidate.sense)
-        for candidate in candidates
-    }
-
-    scored_keys = [
-        (
-            key,
-            sense_selection_counts.get(key, 0),
-        )
-        for key in unique_keys
-    ]
-
-    # Zero-search meanings never get the popularity bonus.
-    scored_keys = [
-        (key, count)
-        for key, count in scored_keys
-        if count > 0
-    ]
-
-    if not scored_keys:
-        return set()
-
-    scored_keys.sort(
-        key=lambda item: item[1],
-        reverse=True,
-    )
-
-    keep_count = max(1, (len(scored_keys) + 1) // 2)
-
-    return {
-        key
-        for key, _count in scored_keys[:keep_count]
-    }
-
-
-def sense_popularity_bonus(
-    *,
-    candidate: Sense,
-    popular_sense_keys: set[SenseSearchKey],
-) -> tuple[float, str | None]:
-    key = sense_search_key_for_sense(candidate)
-
-    if key not in popular_sense_keys:
-        return 0.0, None
-
-    return POPULAR_SENSE_BONUS, "upper-half exact-meaning popularity"
-
-
 def no_synonym_penalty(candidate: Sense) -> tuple[float, str | None]:
     """
     Penalize senses with no synonym relations. Such senses tend to have
@@ -247,13 +177,14 @@ def no_synonym_penalty(candidate: Sense) -> tuple[float, str | None]:
 def rerank_candidates(
     *,
     candidates: list[RerankCandidate],
-    sense_selection_counts: dict[SenseSearchKey, int] | None = None,
 ) -> list[RerankResult]:
-    popular_sense_keys = popular_sense_keys_in_candidate_set(
-        candidates=candidates,
-        sense_selection_counts=sense_selection_counts,
-    )
+    """Score = vector score plus definition-quality penalties, nothing else.
 
+    No usage-popularity bonus (C2, cache plan Part A): search results never
+    read usage statistics; they shape the sense dropdown only. That keeps
+    results independent of traffic -- stable enough to cache, and not
+    steerable by repeated searches.
+    """
     results: list[RerankResult] = []
 
     for candidate in candidates:
@@ -263,10 +194,6 @@ def rerank_candidates(
         ]
 
         adjustments = [
-            sense_popularity_bonus(
-                candidate=candidate.sense,
-                popular_sense_keys=popular_sense_keys,
-            ),
             generic_definition_penalty(candidate.sense),
             broad_domain_penalty(candidate.sense),
             no_synonym_penalty(candidate.sense),

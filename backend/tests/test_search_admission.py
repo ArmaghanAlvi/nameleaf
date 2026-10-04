@@ -148,7 +148,7 @@ def test_release_is_idempotent():
 
 def test_policy_limits_and_large_classification():
     p = SearchPolicy(limits_on=True, max_width=3, max_depth=3,
-                     large_threshold=4, admission=None)
+                     large_threshold=4, admission=None, stats_write=False)
     assert SearchPolicy.effective_width(None, 10) == 10
     assert SearchPolicy.effective_width(2, 10) == 2
     p.check_limits(3, 3)
@@ -159,7 +159,7 @@ def test_policy_limits_and_large_classification():
     assert p.is_large(2, 2) and p.is_large(3, 3)
     assert not p.is_large(1, 3) and not p.is_large(3, 1) and not p.is_large(0, 3)
     off = SearchPolicy(limits_on=False, max_width=3, max_depth=3,
-                       large_threshold=4, admission=None)
+                       large_threshold=4, admission=None, stats_write=True)
     off.check_limits(10, 3)
 
 

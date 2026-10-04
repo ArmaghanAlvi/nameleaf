@@ -25,8 +25,10 @@ from app.config import Settings
 from app.db.base import Base
 from app.db.session import get_db
 from app.main import create_app
-from app.models.semantic import SenseSelectionStat
+from app.models.semantic import SenseSelectionEvent, SenseSelectionStat
 from app.schemas.explore_v2 import ExploreV2Response
+from app.services import root_llm
+from app.services.parallel_expansion import ParallelExpansion
 
 
 def _cfg(**overrides) -> Settings:
@@ -41,11 +43,14 @@ ON = dict(search_limits_enabled=True, search_admission_enabled=True)
 
 @pytest.fixture
 def engine(tmp_path):
-    eng = create_engine(f"sqlite+pysqlite:///{tmp_path / 'admission.db'}",
-                        connect_args={"check_same_thread": False})
+    base = create_engine(f"sqlite+pysqlite:///{tmp_path / 'admission.db'}",
+                         connect_args={"check_same_thread": False})
+    # C2: schema "live" -> SQLite's default schema, for DDL and queries. The
+    # worker session's get_bind() returns this same engine, so it inherits it.
+    eng = base.execution_options(schema_translate_map={"live": None})
     Base.metadata.create_all(eng)
     yield eng
-    eng.dispose()
+    base.dispose()
 
 
 class Harness:
@@ -57,6 +62,7 @@ class Harness:
         self.request_sessions: list[Session] = []
         self.search_sessions: list[Session] = []
         self.search_threads: list[str] = []
+        self.record_flags: list[bool] = []
         self.release = threading.Event()
         self.block_when = lambda req: True
         self._lock = threading.Lock()
@@ -73,9 +79,10 @@ class Harness:
 
         self.app.dependency_overrides[get_db] = override
 
-        def fake_search(db, request, commit=None):
+        def fake_search(db, request, commit=None, *, record):
             with self._lock:
                 self.search_sessions.append(db)
+                self.record_flags.append(record)
                 self.search_threads.append(threading.current_thread().name)
                 row_id = next(self._ids)
             if self.block_when(request):
@@ -268,3 +275,66 @@ def test_search_limits_endpoint_reports_settings(engine, monkeypatch):
     with TestClient(create_app(_cfg())) as client:
         body = client.get("/search-limits").json()
     assert body["limitsEnforced"] is False and body["maxWidth"] == 3
+
+
+# -- RANKING_STATS_WRITE (C2) --------------------------------------------------
+
+def _stub_engine(monkeypatch):
+    """Run the REAL _run_search -- including its record decision and its
+    commit -- with only the engine calls stubbed to empty results."""
+    monkeypatch.setattr(route, "parallel_expand", lambda *a, **k:
+                        ParallelExpansion(trees={}, interleaved=[]))
+    monkeypatch.setattr(route, "retrieve_green_cards", lambda *a, **k: [])
+    monkeypatch.setattr(route, "build_views", lambda *a, **k: [])
+
+
+def _search_and_count(engine, cfg: Settings) -> tuple[int, int]:
+    app = create_app(cfg)
+
+    def override():
+        db = Session(bind=engine, autoflush=False)
+        try:
+            yield db
+        finally:
+            db.close()
+
+    app.dependency_overrides[get_db] = override
+    with TestClient(app) as client:
+        r = client.post("/explore-v2", json={
+            "selectedSenseIds": [42], "width": 1, "depth": 1,
+            "languageCodes": ["en"]})
+    assert r.status_code == 200, r.text
+    with Session(bind=engine) as s:
+        return (s.scalar(select(func.count()).select_from(SenseSelectionStat)),
+                s.scalar(select(func.count()).select_from(SenseSelectionEvent)))
+
+
+@pytest.fixture
+def _restore_llm_fence(monkeypatch):
+    # create_app(production) fences the trickle process-wide; undo per test.
+    monkeypatch.setattr(root_llm, "_QUERY_TIME_LIVE", root_llm._QUERY_TIME_LIVE)
+
+
+def test_production_search_writes_no_statistics(engine, monkeypatch,
+                                                _restore_llm_fence):
+    _stub_engine(monkeypatch)
+    assert _search_and_count(engine, _cfg(app_env="production")) == (0, 0)
+
+
+def test_local_default_still_records_statistics(engine, monkeypatch):
+    _stub_engine(monkeypatch)
+    assert _search_and_count(engine, _cfg()) == (1, 1)
+
+
+def test_explicit_switch_wins_over_app_env(engine, monkeypatch,
+                                           _restore_llm_fence):
+    _stub_engine(monkeypatch)
+    assert _search_and_count(engine, _cfg(ranking_stats_write=False)) == (0, 0)
+
+
+def test_route_passes_the_stats_switch_explicitly(engine, monkeypatch):
+    h = Harness(engine, _cfg(ranking_stats_write=False), monkeypatch)
+    h.block_when = lambda req: False
+    with h.client:
+        assert h.post().status_code == 200
+    assert h.record_flags == [False]

@@ -1,0 +1,92 @@
+before=scripts/eval/publishC_baseline/pre_mps/parallel_reference.json
+after =scripts/eval/publishC_baseline/partA_mps/parallel_reference.json
+
+-- parallel trees (keyed by sense_id) --
+units compared=250  differing=3
+  pure reorder (same items)=0  set changed=3  length changed=2
+  items entered=3  left=3  shared items that moved rank=1
+  rank displacement distribution: |d|=1:1
+  flipped pairs=0  with recorded scores=0  near-tie (equal at 4dp)=0
+    light w3_d2 [en]: len 10->10 moved=0 max|d|=0 entered=1 left=1 flips=0
+    light w3_d2 [ang]: len 7->6 moved=0 max|d|=0 entered=1 left=2 flips=0
+    storm w3_d2 [en]: len 9->10 moved=1 max|d|=1 entered=1 left=0 flips=0
+
+-- parallel interleaved sequences --
+units compared=30  differing=2
+  pure reorder (same items)=0  set changed=2  length changed=2
+  items entered=3  left=3  shared items that moved rank=62
+  rank displacement distribution: |d|=1:61, |d|=10:1
+  flipped pairs=9  with recorded scores=0  near-tie (equal at 4dp)=0
+    light w3_d2: len 175->174 moved=50 max|d|=1 entered=2 left=3 flips=0
+    storm w3_d2: len 158->159 moved=12 max|d|=10 entered=1 left=0 flips=9
+
+-- parallel english_pass sequences --
+units compared=30  differing=4
+  pure reorder (same items)=0  set changed=4  length changed=2
+  items entered=4  left=2  shared items that moved rank=2
+  rank displacement distribution: |d|=1:2
+  flipped pairs=0  with recorded scores=0  near-tie (equal at 4dp)=0
+    light [ru_only] w3_d2: len 10->10 moved=0 max|d|=0 entered=1 left=1 flips=0
+    light [nonlatin] w3_d2: len 10->10 moved=0 max|d|=0 entered=1 left=1 flips=0
+    storm [ru_only] w3_d2: len 9->10 moved=1 max|d|=1 entered=1 left=0 flips=0
+    storm [nonlatin] w3_d2: len 9->10 moved=1 max|d|=1 entered=1 left=0 flips=0
+
+-- scalar fields --
+  pivoted: 1/250 differ
+  root_rung: 0/250 differ
+  root_sense_id: 0/250 differ
+    light w3_d2 [ang] pivoted: 2 -> 1
+before=scripts/eval/publishC_baseline/pre_mps/roots.json
+after =scripts/eval/publishC_baseline/partA_mps/roots.json
+
+-- root_selection cells --
+cells compared=6000  differing=0
+before=scripts/eval/publishC_baseline/pre_mps/engine_reference.json
+after =scripts/eval/publishC_baseline/partA_mps/engine_reference.json
+
+-- engine_reference cells (word sequence, keyed by sense_id) --
+units compared=160  differing=8
+  pure reorder (same items)=0  set changed=8  length changed=6
+  items entered=18  left=9  shared items that moved rank=37
+  rank displacement distribution: |d|=1:34, |d|=3:1, |d|=4:2
+  flipped pairs=0  with recorded scores=0  near-tie (equal at 4dp)=0
+    brave b3_d3: len 23->23 moved=2 max|d|=1 entered=1 left=1 flips=0
+    light b3_d2: len 10->10 moved=0 max|d|=0 entered=1 left=1 flips=0
+    light b3_d3: len 20->19 moved=5 max|d|=1 entered=4 left=5 flips=0
+    storm b3_d2: len 9->10 moved=1 max|d|=1 entered=1 left=0 flips=0
+    storm b3_d3: len 20->24 moved=10 max|d|=4 entered=6 left=2 flips=0
+    joy b3_d3: len 18->19 moved=2 max|d|=1 entered=1 left=0 flips=0
+    gold b3_d2: len 12->13 moved=1 max|d|=1 entered=1 left=0 flips=0
+    gold b3_d3: len 27->30 moved=16 max|d|=3 entered=3 left=0 flips=0
+
+-- scalar fields --
+  anchored_score (shared items, 4dp): 0/620 differ
+  root_sense_id: 0/10 differ
+before=scripts/eval/publishC_baseline/pre_mps/parallel_api_reference.json
+after =scripts/eval/publishC_baseline/partA_mps/parallel_api_reference.json
+
+-- api yellow rows (keyed by matchedSenseId) --
+units compared=30  differing=2
+  pure reorder (same items)=0  set changed=2  length changed=2
+  items entered=3  left=3  shared items that moved rank=62
+  rank displacement distribution: |d|=1:61, |d|=10:1
+  flipped pairs=9  with recorded scores=0  near-tie (equal at 4dp)=0
+    light [all] w3_d2: len 175->174 moved=50 max|d|=1 entered=2 left=3 flips=0
+    storm [all] w3_d2: len 158->159 moved=12 max|d|=10 entered=1 left=0 flips=9
+
+-- api expandedSenses --
+units compared=30  differing=2
+  pure reorder (same items)=0  set changed=2  length changed=2
+  items entered=3  left=3  shared items that moved rank=62
+  rank displacement distribution: |d|=1:61, |d|=10:1
+  flipped pairs=9  with recorded scores=0  near-tie (equal at 4dp)=0
+    light [all] w3_d2: len 154->153 moved=50 max|d|=1 entered=2 left=3 flips=0
+    storm [all] w3_d2: len 137->138 moved=12 max|d|=10 entered=1 left=0 flips=9
+
+-- scalar fields --
+  summaries: 2/30 differ
+  yellow labels: 2/30 differ
+    light [all] w3_d2 yellow labels: ['en:light', 'ar:نور', 'ja:光源', 'ru:освещение', 'la:lumen', 'ga:solas', 'hi:उजाला', 'sa:प्रभा', 'he:אור', 'fa:چراغ', 'de:Licht', 'pl:światło', 'es:luz', 'zh:光源', 'ko:불', 'ang:leoht', 'el:φως', 'cy:lleu', 'sw:mwanga', 'non:ljós', 'is:ljós', 'en:luminance', 'ar:نير', 'ja:明かり', 'ru:осветитель', 'la:lux', 'ga:lampa', 'hi:रोशनी', 'sa:भाम', 'he:אורה', 'fa:لامپ', 'de:Beleuchtung', 'pl:oświetlenie', 'es:iluminación', 'zh:採光', 'ko:화재', 'ang:heofonleoma', 'el:δοκός', 'cy:gwawl', 'sw:nuru', 'is:ljósleitur', 'en:luminosity', 'ar:ضياء', 'ja:光', 'ru:светильник', 'la:levo', 'ga:féinleas', 'hi:प्रकाश', 'sa:अर्चिस्', 'he:אווירה', 'de:Belichtung', 'pl:elektryczność', 'es:luminosidad', 'zh:光譜', 'ko:염화', 'ang:heofonleoht', 'el:δόξα', 'cy:llwydwyn', 'sw:kuvu', 'is:greindur', 'en:illumination', 'ar:سراب', 'ja:燭', 'ru:освещённость', 'la:levigo', 'ga:soilsiú', 'hi:उज्ज्वल', 'sa:प्रुष्वा', 'he:נור', 'de:Helligkeit', 'pl:prąd', 'es:luminancia', 'zh:流明', 'ko:폭죽', 'ang:heofonwuldor', 'el:αντί', 'cy:goleulas', 'sw:mwaranda', 'is:glæta', 'en:luminousness', 'ar:أسفر', 'ja:灯', 'ru:болгарка', 'la:lucidus', 'ga:lóchrann', 'hi:ज्योति', 'sa:भास्', 'de:illuminieren', 'pl:iluminować', 'es:claridad', 'zh:亮光', 'ang:swegelwuldor', 'el:ψιχάλα', 'cy:gloywder', 'sw:nchi', 'is:meðbyr', 'en:brightness', 'ar:نقاء', 'ja:電気', 'ru:светотехника', 'la:luceo', 'ga:sanas', 'hi:अंशुल', 'sa:रश्मन्', 'de:Leuchterscheinung', 'pl:wiązka', 'es:iluminado', 'zh:放光', 'ang:leoma', 'el:αντιφέγγισμα', 'cy:disglair', 'sw:gugu', 'is:meðvindur', 'en:radiance', 'ar:مرير', 'ja:洋灯', 'ru:подражатель', 'la:allevio', 'ga:féinspéis', 'hi:तेजस्वी', 'sa:वस्मन्', 'de:hell', 'pl:życie', 'zh:發亮', 'ang:beorht', 'cy:gwamal', 'sw:kwekwe', 'is:klár', 'en:lumination', 'ar:إبراق', 'ru:светоч', 'la:edo', 'ga:féinmharú', 'hi:दमकना', 'sa:शोभा', 'zh:射線', 'cy:blawr', 'sw:kinyo', 'is:næmur', 'en:lighting', 'ar:إشراق', 'ru:коптилка', 'la:commitigo', 'ga:leithleach', 'sa:भर्गस्', 'zh:線段', 'cy:gloywi', 'sw:karanga', 'is:skilningur', 'en:elucidation', 'ar:وجيه', 'ru:лава-лампа', 'la:mitigo', 'ga:sólás', 'sa:अशनि', 'zh:實線', 'cy:gwynlas', 'is:ljóstýra', 'ar:محرقة', 'ru:апостильб', 'ga:eolas', 'sa:रश्मि', 'zh:馬告', 'cy:glaswyn', 'is:skíma', 'ar:ارتسم', 'ru:выпуклость', 'sa:ईरण', 'zh:羊栖菜', 'cy:gwelwlas', 'is:glóra', 'ar:دهر', 'ru:уместность', 'sa:ईर', 'zh:英尋'] -> ['en:light', 'ar:نور', 'ja:光源', 'ru:освещение', 'la:lumen', 'ga:solas', 'hi:उजाला', 'sa:प्रभा', 'he:אור', 'fa:چراغ', 'de:Licht', 'pl:światło', 'es:luz', 'zh:光源', 'ko:불', 'ang:leoht', 'el:φως', 'cy:lleu', 'sw:mwanga', 'non:ljós', 'is:ljós', 'en:luminance', 'ar:نير', 'ja:明かり', 'ru:осветитель', 'la:lux', 'ga:lampa', 'hi:रोशनी', 'sa:भाम', 'he:אורה', 'fa:لامپ', 'de:Beleuchtung', 'pl:oświetlenie', 'es:iluminación', 'zh:採光', 'ko:화재', 'ang:heofonleoma', 'el:δοκός', 'cy:gwawl', 'sw:nuru', 'is:ljósleitur', 'en:luminosity', 'ar:ضياء', 'ja:光', 'ru:светильник', 'la:levo', 'ga:féinleas', 'hi:प्रकाश', 'sa:अर्चिस्', 'he:אווירה', 'de:Belichtung', 'pl:elektryczność', 'es:luminosidad', 'zh:光譜', 'ko:염화', 'ang:heofonleoht', 'el:δόξα', 'cy:llwydwyn', 'sw:kuvu', 'is:greindur', 'en:illumination', 'ar:سراب', 'ja:燭', 'ru:освещённость', 'la:levigo', 'ga:soilsiú', 'hi:उज्ज्वल', 'sa:प्रुष्वा', 'he:נור', 'de:Helligkeit', 'pl:prąd', 'es:luminancia', 'zh:流明', 'ko:폭죽', 'ang:heofonwuldor', 'el:αντί', 'cy:goleulas', 'sw:mwaranda', 'is:glæta', 'en:luminousness', 'ar:أسفر', 'ja:灯', 'ru:болгарка', 'la:lucidus', 'ga:lóchrann', 'hi:ज्योति', 'sa:भास्', 'de:illuminieren', 'pl:iluminować', 'es:claridad', 'zh:亮光', 'ang:swegelwuldor', 'el:ψιχάλα', 'cy:gloywder', 'sw:nchi', 'is:meðbyr', 'en:brightness', 'ar:نقاء', 'ja:電気', 'ru:светотехника', 'la:luceo', 'ga:sanas', 'hi:अंशुल', 'sa:रश्मन्', 'de:Leuchterscheinung', 'pl:wiązka', 'es:iluminado', 'zh:放光', 'ang:scima', 'el:αντιφέγγισμα', 'cy:disglair', 'sw:gugu', 'is:meðvindur', 'en:lambency', 'ar:مرير', 'ja:洋灯', 'ru:подражатель', 'la:allevio', 'ga:féinspéis', 'hi:तेजस्वी', 'sa:वस्मन्', 'de:hell', 'pl:życie', 'zh:發亮', 'cy:gwamal', 'sw:kwekwe', 'is:klár', 'en:lumination', 'ar:إبراق', 'ru:светоч', 'la:edo', 'ga:féinmharú', 'hi:दमकना', 'sa:शोभा', 'zh:射線', 'cy:blawr', 'sw:kinyo', 'is:næmur', 'en:lighting', 'ar:إشراق', 'ru:коптилка', 'la:commitigo', 'ga:leithleach', 'sa:भर्गस्', 'zh:線段', 'cy:gloywi', 'sw:karanga', 'is:skilningur', 'en:elucidation', 'ar:وجيه', 'ru:лава-лампа', 'la:mitigo', 'ga:sólás', 'sa:अशनि', 'zh:實線', 'cy:gwynlas', 'is:ljóstýra', 'ar:محرقة', 'ru:апостильб', 'ga:eolas', 'sa:रश्मि', 'zh:馬告', 'cy:glaswyn', 'is:skíma', 'ar:ارتسم', 'ru:выпуклость', 'sa:ईरण', 'zh:羊栖菜', 'cy:gwelwlas', 'is:glóra', 'ar:دهر', 'ru:уместность', 'sa:ईर', 'zh:英尋']
+    light [all] w3_d2 summaries: [['en', 'light', 'selected', 10, 0], ['ar', 'نور', 'primary', 13, 0], ['ja', '光源', 'primary', 7, 0], ['ru', 'освещение', 'primary', 13, 0], ['la', 'lumen', 'primary', 10, 0], ['ga', 'solas', 'primary', 11, 0], ['hi', 'उजाला', 'primary', 8, 0], ['sa', 'प्रभा', 'llm', 13, 0], ['he', 'אור', 'primary', 4, 0], ['fa', 'چراغ', 'llm', 2, 0], ['de', 'Licht', 'primary', 7, 0], ['pl', 'światło', 'primary', 7, 0], ['es', 'luz', 'primary', 6, 0], ['zh', '光源', 'primary', 13, 0], ['ko', '불', 'primary', 4, 0], ['ang', 'leoht', 'primary', 7, 2], ['el', 'φως', 'primary', 6, 1], ['cy', 'lleu', 'primary', 12, 0], ['sw', 'mwanga', 'primary', 9, 0], ['non', 'ljós', 'llm', 1, 0], ['is', 'ljós', 'primary', 12, 0]] -> [['en', 'light', 'selected', 10, 0], ['ar', 'نور', 'primary', 13, 0], ['ja', '光源', 'primary', 7, 0], ['ru', 'освещение', 'primary', 13, 0], ['la', 'lumen', 'primary', 10, 0], ['ga', 'solas', 'primary', 11, 0], ['hi', 'उजाला', 'primary', 8, 0], ['sa', 'प्रभा', 'llm', 13, 0], ['he', 'אור', 'primary', 4, 0], ['fa', 'چراغ', 'llm', 2, 0], ['de', 'Licht', 'primary', 7, 0], ['pl', 'światło', 'primary', 7, 0], ['es', 'luz', 'primary', 6, 0], ['zh', '光源', 'primary', 13, 0], ['ko', '불', 'primary', 4, 0], ['ang', 'leoht', 'primary', 6, 1], ['el', 'φως', 'primary', 6, 1], ['cy', 'lleu', 'primary', 12, 0], ['sw', 'mwanga', 'primary', 9, 0], ['non', 'ljós', 'llm', 1, 0], ['is', 'ljós', 'primary', 12, 0]]
+    storm [all] w3_d2 yellow labels: ['en:storm', 'ar:عاصفة', 'ja:嵐', 'ru:буря', 'la:tempestas', 'ga:stoirm', 'hi:तूफ़ान', 'sa:चक्रवात', 'he:סערה', 'fa:طوفان', 'de:Sturm', 'pl:burza', 'es:tormenta', 'zh:豪雨', 'ko:폭풍', 'ang:storm', 'el:θύελλα', 'cy:storm', 'sw:dhoruba', 'non:veðr', 'is:óveður', 'en:tempest', 'ar:طوفان', 'ja:暴風', 'ru:шторм', 'la:procella', 'ga:anfa', 'hi:आंधी', 'he:שביט', 'fa:بوراب', 'de:Attacke', 'pl:wicher', 'es:tronada', 'zh:暴雨', 'ko:토우', 'ang:yst', 'el:καταιγίδα', 'cy:tymestl', 'sw:tufani', 'is:aftakaveður', 'en:cyclone', 'ar:رعد', 'ja:ストーム', 'ru:буран', 'la:calamitas', 'ga:doineann', 'hi:आँधी', 'he:זר', 'fa:هجا', 'de:Angriff', 'pl:płomień', 'es:tempestad', 'zh:兇狂雨', 'ko:쇼크', 'ang:ystan', 'el:σίφουνας', 'cy:brochell', 'sw:muhibu', 'is:vonskuveður', 'en:tough', 'ar:عاصف', 'ja:竜巻', 'ru:мор', 'la:casus', 'ga:spéirling', 'hi:बाढ़', 'he:זרע', 'fa:ضرب', 'de:Übergriff', 'pl:pożar', 'es:borrasca', 'zh:大陣雨', 'ko:폭우', 'ang:hlyd', 'el:ανεμοζάλη', 'cy:sobr', 'sw:mahabubu', 'is:illviðri', 'en:tempest-tossed', 'ar:هطول', 'ja:疾風', 'ru:торнадо', 'la:tumultus', 'ga:anbhá', 'hi:तपन', 'he:חליל', 'de:Zugriff', 'pl:wichura', 'es:tramontana', 'zh:青狂雨', 'ko:지우개똥', 'ang:cræsta', 'el:μπαράζ', 'cy:rhyferthwy', 'sw:vuguvugu', 'en:col', 'ar:صاعقة', 'ja:トルネード', 'ru:пурга', 'la:turbo', 'ga:gealtachas', 'hi:अंधड़', 'he:פלסטר', 'de:Eingriff', 'pl:ogień', 'es:ventisca', 'zh:大雨', 'ko:히트', 'el:ανεμοστρόβιλος', 'cy:cythrwfl', 'sw:habibu', 'en:clime', 'ar:برق', 'ja:旋風', 'ru:метель', 'la:limbus', 'ga:síon', 'hi:झींसी', 'he:אבן', 'pl:namiętność', 'es:turbión', 'zh:大水', 'ko:리액션', 'el:αμμοσίφουνας', 'cy:arswyd', 'sw:mpenzi', 'en:inclement', 'ar:أرعد', 'ru:падёж', 'la:infortunium', 'ga:deabhaidh', 'hi:छाया', 'he:אגוז', 'es:chubasco', 'ko:호우', 'el:αναμπουμπούλα', 'cy:echryd', 'en:hard', 'ar:إعصار', 'ru:смердеть', 'la:miseria', 'ga:bualadh', 'hi:जलप्रवाह', 'he:ציקלון', 'ko:큰물', 'el:ανεμοθύελλα', 'cy:poethwg', 'ar:غائم', 'la:malum', 'hi:धारा', 'ko:장대비', 'el:ανεμόβροχο', 'cy:difrifol', 'ar:هبوب', 'la:detrimentum', 'hi:क़तरा', 'cy:syber', 'cy:sad'] -> ['en:storm', 'ar:عاصفة', 'ja:嵐', 'ru:буря', 'la:tempestas', 'ga:stoirm', 'hi:तूफ़ान', 'sa:चक्रवात', 'he:סערה', 'fa:طوفان', 'de:Sturm', 'pl:burza', 'es:tormenta', 'zh:豪雨', 'ko:폭풍', 'ang:storm', 'el:θύελλα', 'cy:storm', 'sw:dhoruba', 'non:veðr', 'is:óveður', 'en:tempest', 'ar:طوفان', 'ja:暴風', 'ru:шторм', 'la:procella', 'ga:anfa', 'hi:आंधी', 'he:שביט', 'fa:بوراب', 'de:Attacke', 'pl:wicher', 'es:tronada', 'zh:暴雨', 'ko:토우', 'ang:yst', 'el:καταιγίδα', 'cy:tymestl', 'sw:tufani', 'is:aftakaveður', 'en:cyclone', 'ar:رعد', 'ja:ストーム', 'ru:буран', 'la:calamitas', 'ga:doineann', 'hi:आँधी', 'he:זר', 'fa:هجا', 'de:Angriff', 'pl:płomień', 'es:tempestad', 'zh:兇狂雨', 'ko:쇼크', 'ang:ystan', 'el:σίφουνας', 'cy:brochell', 'sw:muhibu', 'is:vonskuveður', 'en:tough', 'ar:عاصف', 'ja:竜巻', 'ru:мор', 'la:casus', 'ga:spéirling', 'hi:बाढ़', 'he:זרע', 'fa:ضرب', 'de:Übergriff', 'pl:pożar', 'es:borrasca', 'zh:大陣雨', 'ko:폭우', 'ang:hlyd', 'el:ανεμοζάλη', 'cy:sobr', 'sw:mahabubu', 'is:illviðri', 'en:tempest-tossed', 'ar:هطول', 'ja:疾風', 'ru:торнадо', 'la:tumultus', 'ga:anbhá', 'hi:तपन', 'he:חליל', 'de:Zugriff', 'pl:wichura', 'es:tramontana', 'zh:青狂雨', 'ko:지우개똥', 'ang:cræsta', 'el:μπαράζ', 'cy:rhyferthwy', 'sw:vuguvugu', 'en:col', 'ar:صاعقة', 'ja:トルネード', 'ru:пурга', 'la:turbo', 'ga:gealtachas', 'hi:अंधड़', 'he:פלסטר', 'de:Eingriff', 'pl:ogień', 'es:ventisca', 'zh:大雨', 'ko:히트', 'el:ανεμοστρόβιλος', 'cy:cythrwfl', 'sw:habibu', 'en:clime', 'ar:برق', 'ja:旋風', 'ru:метель', 'la:limbus', 'ga:síon', 'hi:झींसी', 'he:אבן', 'pl:namiętność', 'es:turbión', 'zh:大水', 'ko:리액션', 'el:αμμοσίφουνας', 'cy:arswyd', 'sw:mpenzi', 'en:inclement', 'ar:أرعد', 'ru:падёж', 'la:infortunium', 'ga:deabhaidh', 'hi:छाया', 'he:אגוז', 'es:chubasco', 'ko:호우', 'el:αναμπουμπούλα', 'cy:echryd', 'en:rugged', 'ar:إعصار', 'ru:смердеть', 'la:miseria', 'ga:bualadh', 'hi:जलप्रवाह', 'he:ציקלון', 'ko:큰물', 'el:ανεμοθύελλα', 'cy:poethwg', 'en:hard', 'ar:غائم', 'la:malum', 'hi:धारा', 'ko:장대비', 'el:ανεμόβροχο', 'cy:difrifol', 'ar:هبوب', 'la:detrimentum', 'hi:क़तरा', 'cy:syber', 'cy:sad']
+    storm [all] w3_d2 summaries: [['en', 'storm', 'selected', 9, 0], ['ar', 'عاصفة', 'ili', 11, 0], ['ja', '嵐', 'ili', 7, 0], ['ru', 'буря', 'llm', 9, 0], ['la', 'tempestas', 'llm', 11, 0], ['ga', 'stoirm', 'ili', 9, 0], ['hi', 'तूफ़ान', 'llm', 11, 0], ['sa', 'चक्रवात', 'pivoted_root', 1, 0], ['he', 'סערה', 'ili', 9, 1], ['fa', 'طوفان', 'llm', 4, 0], ['de', 'Sturm', 'ili', 6, 0], ['pl', 'burza', 'ili', 7, 0], ['es', 'tormenta', 'ili', 8, 0], ['zh', '豪雨', 'fallback', 7, 0], ['ko', '폭풍', 'llm', 10, 0], ['ang', 'storm', 'llm', 5, 0], ['el', 'θύελλα', 'ili', 10, 0], ['cy', 'storm', 'llm', 12, 0], ['sw', 'dhoruba', 'llm', 7, 0], ['non', 'veðr', 'llm', 1, 0], ['is', 'óveður', 'llm', 4, 0]] -> [['en', 'storm', 'selected', 10, 0], ['ar', 'عاصفة', 'ili', 11, 0], ['ja', '嵐', 'ili', 7, 0], ['ru', 'буря', 'llm', 9, 0], ['la', 'tempestas', 'llm', 11, 0], ['ga', 'stoirm', 'ili', 9, 0], ['hi', 'तूफ़ान', 'llm', 11, 0], ['sa', 'चक्रवात', 'pivoted_root', 1, 0], ['he', 'סערה', 'ili', 9, 1], ['fa', 'طوفان', 'llm', 4, 0], ['de', 'Sturm', 'ili', 6, 0], ['pl', 'burza', 'ili', 7, 0], ['es', 'tormenta', 'ili', 8, 0], ['zh', '豪雨', 'fallback', 7, 0], ['ko', '폭풍', 'llm', 10, 0], ['ang', 'storm', 'llm', 5, 0], ['el', 'θύελλα', 'ili', 10, 0], ['cy', 'storm', 'llm', 12, 0], ['sw', 'dhoruba', 'llm', 7, 0], ['non', 'veðr', 'llm', 1, 0], ['is', 'óveður', 'llm', 4, 0]]

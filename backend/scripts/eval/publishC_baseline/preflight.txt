@@ -1,0 +1,18 @@
+HEAD 55d632edcceeab97cf7b726d587f49502bcd1653
+git status:
+ M scripts/eval/capture_engine_reference.py
+?? scripts/eval/db_preflight.py
+?? scripts/eval/harness_patch_check.py
+?? scripts/eval/publishC_baseline/
+== ports 8000/3000 listeners:
+(end of listeners)
+== db_preflight C2 pre-flight 2026-10-04T19:16:05.195470+00:00
+fingerprint: 112|17314|2026-09-29 13:24:31.471237+00:00
+established_names: 106398
+other client backends: 0 []
+wrote 112 statistics sense ids to scripts/eval/publishC_baseline/stat_sense_ids.json
+== harness patch check
+record_sense_selection is harness lambda: True
+_run_search resolves via route module globals: True
+_run_search body calls record_sense_selection by global name: True
+direct-call policy: limits_on=False admission_on=False stats_write=n/a

@@ -31,6 +31,10 @@ def db() -> Iterator[Session]:
             len,
         )
 
+    # C2: the usage tables declare schema "live"; SQLite has no schemas, so
+    # map it to the default one for both DDL and queries.
+    engine = engine.execution_options(schema_translate_map={"live": None})
+
     Base.metadata.create_all(engine)
 
     TestingSession = sessionmaker(

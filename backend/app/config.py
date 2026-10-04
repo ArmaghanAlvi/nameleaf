@@ -37,6 +37,11 @@ class Settings(BaseSettings):
     production values; locally both switches are off and the request path
     is exactly the pre-B5 code.
 
+    RANKING_STATS_WRITE (Stage 2b, C2) governs every usage-statistics write
+    (POST /explore-v2's record_sense_selection is the only writer). On
+    locally, off in production; an explicit value wins. Search results never
+    read statistics (cache plan Part A), so this only affects the dropdown.
+
     Leave optional flags UNSET rather than empty in env files: an empty
     string is not a valid boolean.
     """
@@ -86,6 +91,9 @@ class Settings(BaseSettings):
     # Measured from admission start, so time spent queued counts against it.
     search_timeout_seconds: float = Field(default=300.0, gt=0)
 
+    # None = derive from app_env: on locally, off in production.
+    ranking_stats_write: bool | None = None
+
     model_config = SettingsConfigDict(
         env_file=BACKEND_DIR / ".env",
         extra="ignore",
@@ -112,6 +120,12 @@ class Settings(BaseSettings):
         if self.rate_limit_enabled is not None:
             return self.rate_limit_enabled
         return self.is_production
+
+    @property
+    def ranking_stats_write_on(self) -> bool:
+        if self.ranking_stats_write is not None:
+            return self.ranking_stats_write
+        return not self.is_production
 
     @property
     def search_limits_on(self) -> bool:

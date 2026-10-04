@@ -1,0 +1,12 @@
+== settings unset
+record_sense_selection is harness lambda: True
+_run_search resolves via route module globals: True
+_run_search body calls record_sense_selection by global name: True
+direct-call policy: limits_on=False admission_on=False stats_write=True
+rc=0
+== SEARCH_LIMITS_ENABLED=1 SEARCH_ADMISSION_ENABLED=1 RANKING_STATS_WRITE=0
+record_sense_selection is harness lambda: True
+_run_search resolves via route module globals: True
+_run_search body calls record_sense_selection by global name: True
+direct-call policy: limits_on=True admission_on=True stats_write=False
+rc=0

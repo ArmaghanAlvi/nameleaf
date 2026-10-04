@@ -110,7 +110,8 @@ def _search_posture(cfg: Settings) -> str:
                  f"{cfg.search_queue_wait_seconds:g}s "
                  f"timeout={cfg.search_timeout_seconds:g}s"
                  if cfg.search_admission_on else "off")
-    return f"search_limits=[{limits}] search_admission=[{admission}]"
+    return (f"search_limits=[{limits}] search_admission=[{admission}] "
+            f"ranking_stats_write={cfg.ranking_stats_write_on}")
 
 
 def create_app(cfg: Settings = settings) -> FastAPI:

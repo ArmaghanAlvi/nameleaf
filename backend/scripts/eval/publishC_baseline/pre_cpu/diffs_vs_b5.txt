@@ -1,0 +1,21 @@
+=== parallel_reference --diff (b5 vs pre_cpu)
+
+0/250 trees changed
+0/30 cells changed
+=== root_selection_diff --diff
+0/6000 cells changed
+=== diff_reference --engine b5 --api pre_cpu
+
+0/160 cells differ
+=== parallel_api_reference --diff
+
+0/30 cells changed (yellow path)
+green cards: 185 -> 185
+=== cmp
+parallel_reference.json identical
+roots.json identical
+engine_reference.json identical
+parallel_api_reference.json identical
+=== established_names
+scripts/eval/publishC_baseline/pre_cpu/db_after.txt:established_names: 106398
+scripts/eval/publishC_baseline/pre_cpu/db_before.txt:established_names: 106398

@@ -1,0 +1,14 @@
+[device_report] start: device=model not loaded torch_num_threads=8 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'
+duplicate-word groups: 1458 (with more than one sense: 164)
+groups containing a statistics sense: 5
+  group [7459, 7461, 7460, 7463, 7469, 7465, 7467, 7482, 7481, 7477, 7464, 7466, 7470, 7471, 7478, 7473, 7479, 7480, 7472, 7474, 7475]: statistics senses [7459, 7460, 7461, 7463]  <- tie-break could act
+  group [7461, 7459, 7463, 7460, 7464, 7482, 7466, 7470, 7477, 7469, 7467, 7471, 7465, 7478, 7479, 7481, 7480]: statistics senses [7459, 7460, 7461, 7463]  <- tie-break could act
+  group [49111, 49101, 49098, 49097, 49095, 49114, 49107, 49099, 49096, 49100, 49112]: statistics senses [49096]  <- tie-break could act
+  group [7481, 7477, 7459, 7460, 7461, 7470, 7464, 7469, 7465]: statistics senses [7459, 7460, 7461]  <- tie-break could act
+  group [124805]: statistics senses [124805]
+reranked candidate sets: 4
+candidate sets containing a statistics sense (bonus could act): 3
+  set of 388: statistics senses [7459]
+  set of 385: statistics senses [7461]
+  set of 330: statistics senses [124805]
+[device_report] end: device=cpu torch_num_threads=2 env EMBEDDING_DEVICE='cpu' TORCH_NUM_THREADS='2'

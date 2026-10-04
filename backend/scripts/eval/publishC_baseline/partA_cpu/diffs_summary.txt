@@ -1,0 +1,12 @@
+=== parallel_reference --diff (pre_cpu vs partA_cpu)
+3/250 trees changed
+6/30 cells changed
+=== root_selection_diff --diff
+0/6000 cells changed
+=== diff_reference --engine pre_cpu --api partA_cpu
+8/160 cells differ
+=== parallel_api_reference --diff
+2/30 cells changed (yellow path)
+green cards: 185 -> 181
+=== established_names
+established_names: 106398

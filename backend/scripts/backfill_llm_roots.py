@@ -42,7 +42,8 @@ from app.services.root_llm import resolve_llm_roots  # noqa: E402
 # Phase 1: the candidate sense pool, ordered exactly as the per-language
 # _THIN_SQL used to order. OVERSAMPLED (--pool), because a sense high in this
 # order may have zero thin languages left, and filtering after the fact would
-# silently shrink the session below --limit.
+# silently shrink the session below --limit. Usage statistics live in schema
+# `live` from migration a7c3e91f0b52 on (publishing C2).
 _POOL_SQL = text("""
 CREATE TEMP TABLE tmp_llm_pool AS
 SELECT p.sense_id,
@@ -56,7 +57,7 @@ FROM (
   JOIN sense_embeddings se ON se.sense_id = s.id
   WHERE lx.language_id = 1 AND s.visibility_status = 'visible'
 ) p
-LEFT JOIN sense_selection_stats sel ON sel.sense_id = p.sense_id
+LEFT JOIN live.sense_selection_stats sel ON sel.sense_id = p.sense_id
 ORDER BY (COALESCE(sel.selection_count, 0) = 0) ASC,
          COALESCE(sel.selection_count, 0) DESC,
          COALESCE(json_array_length(p.raw_entry->'translations'), 0) DESC,

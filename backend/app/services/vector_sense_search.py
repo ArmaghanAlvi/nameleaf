@@ -12,7 +12,6 @@ from app.models.generated_name import Language
 from app.models.semantic import Lexeme, Sense, SenseEmbedding
 from app.services.embedding_provider import DEFAULT_EMBEDDING_MODEL, embed_query
 from app.utils.text import normalize_text
-from app.services.sense_selection import get_sense_selection_counts_for_senses
 from app.services.sense_reranker import (
     RerankCandidate,
     rerank_candidates,
@@ -220,6 +219,18 @@ def collect_antonym_lemmas(selected_senses: list[Sense]) -> set[str]:
     return out
 
 
+def _best_duplicate(group: list[RerankCandidate]) -> RerankCandidate:
+    """When several candidate senses share one displayed word, keep the
+    strongest vector match. An exact score tie keeps the first in the group,
+    i.e. the first fetched (the query orders by distance), because max()
+    returns the first maximal element.
+
+    Usage statistics are deliberately NOT consulted (C2, cache plan Part A):
+    search results never read them; they shape the sense dropdown only.
+    """
+    return max(group, key=lambda candidate: candidate.vector_score)
+
+
 def expand_from_selected_senses(
     db: Session,
     *,
@@ -403,42 +414,12 @@ def expand_from_selected_senses(
             )
         )
 
-    duplicate_candidates = [
-        candidate
-        for group in candidate_groups.values()
-        for candidate in group
-    ]
-
-    duplicate_candidate_senses = [
-        candidate.sense
-        for candidate in duplicate_candidates
-    ]
-
-    sense_selection_counts = get_sense_selection_counts_for_senses(
-        db,
-        senses=duplicate_candidate_senses,
-    )
-
-    def duplicate_candidate_sort_key(
-        candidate: RerankCandidate,
-    ) -> tuple[int, float]:
-        # If multiple candidate senses have the same displayed word, choose the
-        # exact meaning that has been selected/searched most often.
-        # If selection counts tie, keep the strongest vector match.
-        return (
-            sense_selection_counts.get(candidate.sense.id, 0),
-            candidate.vector_score,
-        )
-
     rerank_candidates_input = [
-        max(group, key=duplicate_candidate_sort_key)
+        _best_duplicate(group)
         for group in candidate_groups.values()
     ]
 
-    reranked = rerank_candidates(
-        candidates=rerank_candidates_input,
-        sense_selection_counts=sense_selection_counts,
-    )
+    reranked = rerank_candidates(candidates=rerank_candidates_input)
 
     expanded_added = 0
 
