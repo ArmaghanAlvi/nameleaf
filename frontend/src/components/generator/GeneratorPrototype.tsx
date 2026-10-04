@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
+  ApiError,
   exploreSelectedSenses,
   lookupSenses,
   type SenseOption,
   fetchLanguages,
+  fetchSearchLimits,
   type LanguageInfo,
+  type SearchLimits,
 } from "@/lib/api/explore";
 import { InfoTip } from "@/components/generator/InfoTip";
 import { ResultDetails } from "@/components/generator/ResultDetails";
@@ -497,6 +500,29 @@ const rootRungLabels: Record<string, string> = {
   fallback: "vector fallback",
 };
 
+type SliderLimits = Pick<SearchLimits, "maxWidth" | "maxDepth" | "largeThreshold">;
+
+// Today's production values; used only until GET /search-limits answers.
+const DEFAULT_SEARCH_LIMITS: SliderLimits = {
+  maxWidth: 3,
+  maxDepth: 3,
+  largeThreshold: 4,
+};
+
+function sliderValues(max: number): number[] {
+  return Array.from({ length: max + 1 }, (_, i) => i);
+}
+
+function SliderTicks({ max }: { max: number }) {
+  return (
+    <div className="flex justify-between px-0.5 text-[10px] tabular-nums text-slate-400">
+      {sliderValues(max).map((v) => (
+        <span key={v}>{v}</span>
+      ))}
+    </div>
+  );
+}
+
 export function GeneratorPrototype() {
   const [inputValue, setInputValue] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
@@ -511,6 +537,10 @@ export function GeneratorPrototype() {
   const [includeOtherOrigins, setIncludeOtherOrigins] = useState(true);
   const [breadth, setBreadth] = useState(0);
   const [depth, setDepth] = useState(0);
+  // B5: slider maxima and the large-search threshold come from the backend
+  // (GET /search-limits); these defaults apply only until it answers.
+  const [searchLimits, setSearchLimits] =
+    useState<SliderLimits>(DEFAULT_SEARCH_LIMITS);
   const [flavor, setFlavor] = useState<GenerationFlavor>("default");
 
   const [results, setResults] = useState<NameResult[]>([]);
@@ -789,6 +819,19 @@ export function GeneratorPrototype() {
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    fetchSearchLimits()
+      .then((limits) => {
+        setSearchLimits(limits);
+        setBreadth((b) => Math.min(b, limits.maxWidth));
+        setDepth((d) => Math.min(d, limits.maxDepth));
+      })
+      .catch(() => {
+        // Backend down at mount: keep the defaults; the backend still
+        // enforces its own limits on every search.
+      });
   }, []);
 
   useEffect(() => {
@@ -1265,8 +1308,12 @@ export function GeneratorPrototype() {
       console.error(error);
       setResults([]);
       setActiveSearch(queryAtDispatch);
+      // B5: a limit (422), busy (503) or timeout (504) response carries a
+      // message meant for the user; show it instead of a generic failure.
       setErrorMessage(
-        "The exploration backend is unavailable. Start FastAPI and search again."
+        error instanceof ApiError && error.userMessage
+          ? error.userMessage
+          : "The exploration backend is unavailable. Start FastAPI and search again."
       );
     } finally {
       if (requestId === requestIdRef.current) setIsLoading(false);
@@ -1578,19 +1625,14 @@ export function GeneratorPrototype() {
                 id="breadth-slider"
                 type="range"
                 min={0}
-                max={3}
+                max={searchLimits.maxWidth}
                 step={1}
                 value={breadth}
                 onChange={(event) => setBreadth(Number(event.target.value))}
-                list="expansion-ticks"
+                list="breadth-ticks"
                 className="mt-1 w-full accent-slate-900"
               />
-              <div className="flex justify-between px-0.5 text-[10px] tabular-nums text-slate-400">
-                <span>0</span>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-              </div>
+              <SliderTicks max={searchLimits.maxWidth} />
             </div>
 
             <div className="mt-3">
@@ -1609,27 +1651,33 @@ export function GeneratorPrototype() {
                 id="depth-slider"
                 type="range"
                 min={0}
-                max={3}
+                max={searchLimits.maxDepth}
                 step={1}
                 value={depth}
                 onChange={(event) => setDepth(Number(event.target.value))}
-                list="expansion-ticks"
-                className="mt-1 w-full accent-slate-900"
+                // Breadth 0 returns only the exact meaning at every depth
+                // (B-3.5), so depth is not a real choice there.
+                disabled={breadth === 0}
+                list="depth-ticks"
+                className="mt-1 w-full accent-slate-900 disabled:opacity-40"
               />
-              <div className="flex justify-between px-0.5 text-[10px] tabular-nums text-slate-400">
-                <span>0</span>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-              </div>
-              <p className="mt-2 text-sm text-slate-600" style={{ fontSize: '11px' }}><i>*Note that increasing the expansion depth beyond 1 can significantly increase search times (maximum 2-3 minutes)</i></p>
+              <SliderTicks max={searchLimits.maxDepth} />
+              {breadth * depth >= searchLimits.largeThreshold && (
+                <p className="mt-2 text-slate-600" style={{ fontSize: "11px" }}>
+                  <i>Large searches can take a few minutes.</i>
+                </p>
+              )}
             </div>
 
-            <datalist id="expansion-ticks">
-              <option value="0" />
-              <option value="1" />
-              <option value="2" />
-              <option value="3" />
+            <datalist id="breadth-ticks">
+              {sliderValues(searchLimits.maxWidth).map((v) => (
+                <option key={v} value={v} />
+              ))}
+            </datalist>
+            <datalist id="depth-ticks">
+              {sliderValues(searchLimits.maxDepth).map((v) => (
+                <option key={v} value={v} />
+              ))}
             </datalist>
           </div>
 

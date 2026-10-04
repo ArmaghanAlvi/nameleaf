@@ -40,3 +40,32 @@ def test_scrub_removes_gemini_key_from_any_field():
     text = str(scrubbed)
     assert "AIzaSECRET123" not in text
     assert "[scrubbed]" in text
+
+
+def test_search_limits_and_admission_derive_from_app_env():
+    local, prod = _cfg(), _cfg(app_env="production")
+    assert not local.search_limits_on and not local.search_admission_on
+    assert prod.search_limits_on and prod.search_admission_on
+    # The numbers ARE the production values.
+    assert (prod.search_max_width, prod.search_max_depth) == (3, 3)
+    assert (prod.search_large_threshold, prod.search_concurrency,
+            prod.search_large_concurrency) == (4, 2, 1)
+    assert (prod.search_queue_size, prod.search_queue_wait_seconds,
+            prod.search_timeout_seconds) == (4, 30.0, 300.0)
+
+
+def test_search_switches_override_app_env():
+    assert not _cfg(app_env="production",
+                    search_limits_enabled=False).search_limits_on
+    assert _cfg(search_admission_enabled=True).search_admission_on
+
+
+def test_large_lane_must_leave_a_normal_slot():
+    import pytest
+    from pydantic import ValidationError
+
+    with pytest.raises(ValidationError):
+        _cfg(app_env="production", search_large_concurrency=2,
+             search_concurrency=2)
+    # Only enforced when admission is on.
+    _cfg(search_large_concurrency=2, search_concurrency=2)

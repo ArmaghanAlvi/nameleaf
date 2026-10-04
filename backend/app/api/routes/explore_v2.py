@@ -1,3 +1,5 @@
+from collections.abc import Callable
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import select
@@ -5,6 +7,7 @@ from typing import Literal, cast
 
 from app.db.session import get_db
 from app.models.generated_name import Language
+from app.search_admission import SearchPolicy, get_search_policy, resolve_policy
 from app.schemas.explore_v2 import (
     ExpandedSenseResponse,
     ExploreV2Request,
@@ -260,7 +263,41 @@ def _attach_green_cards(
 def explore_v2(
     request: ExploreV2Request,
     db: Session = Depends(get_db),
+    policy: SearchPolicy = Depends(get_search_policy),
 ) -> ExploreV2Response:
+    """Order (B5): validate limits -> [cache seam] -> admission -> record ->
+    search -> attach name cards. See app/search_admission.py."""
+    # Called directly as a function (the eval harnesses do), FastAPI injects
+    # nothing and `policy` is still its Depends marker.
+    policy = resolve_policy(policy)
+    width = SearchPolicy.effective_width(request.width, request.expansionCount)
+    # 422 BEFORE anything writes: record_sense_selection runs later.
+    policy.check_limits(width, request.depth)
+
+    # --- SEAM: the future result-cache lookup goes here -------------------
+    # (notes/post_launch/RESULT_CACHE_PLAN.md): after validation, before
+    # admission, so a hit never waits for or occupies a slot. Not built.
+
+    if policy.admission is None:
+        # Local default: exactly the pre-B5 path, in the request's session.
+        return _run_search(db, request)
+    return policy.admission.run(
+        request_db=db,
+        large=policy.is_large(width, request.depth),
+        work=lambda session, commit: _run_search(session, request, commit),
+    )
+
+
+def _run_search(
+    db: Session,
+    request: ExploreV2Request,
+    commit: Callable[[], None] | None = None,
+) -> ExploreV2Response:
+    """Record, then search, in ONE session: the search reads the selection
+    statistics the record just flushed, so the two must stay in this order
+    and in the same transaction. `commit` lets admission veto the commit of
+    an abandoned (timed-out) search; None means commit directly."""
+    commit = commit or db.commit
     for sense_id in request.selectedSenseIds:
         record_sense_selection(
             db,
@@ -347,7 +384,7 @@ def explore_v2(
         )
         results = _attach_green_cards(results, build_views(db, green_cards))
 
-        db.commit()
+        commit()
         return ExploreV2Response(
             selectedSenseIds=request.selectedSenseIds,
             expandedSenses=expanded,
@@ -381,7 +418,7 @@ def explore_v2(
                 )
             results.append(_hopnode_to_result(node))
             
-    db.commit()
+    commit()
 
     return ExploreV2Response(
         selectedSenseIds=request.selectedSenseIds,

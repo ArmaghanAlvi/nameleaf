@@ -48,6 +48,11 @@ services:
       DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL in .env.production}
       SENTRY_DSN: ${SENTRY_DSN:-}
       ROOT_LLM_QUERY_TIME: "0"
+      # The CPU configuration the gates certify (B1, B-2.1): 2 torch threads
+      # on the 2-core host. SEARCH_* limits and admission come from
+      # APP_ENV=production (app/config.py).
+      EMBEDDING_DEVICE: cpu
+      TORCH_NUM_THREADS: "2"
       # ROOT_LLM_API_KEY is deliberately never passed through.
     depends_on:
       db:
@@ -77,7 +82,8 @@ services:
           memory: 512m
 
   caddy:
-    image: caddy:2
+    # Pinned, not caddy:2 -- see the comment at the top of deploy/Caddyfile.
+    image: caddy:2.11.4
     restart: unless-stopped
     ports:
       - "80:80"

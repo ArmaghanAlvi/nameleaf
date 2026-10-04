@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -28,6 +28,14 @@ class Settings(BaseSettings):
     falling back, so a measurement can never carry the wrong label. The CPU
     configuration that gates certify production in is
     EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2.
+
+    SEARCH_* (Stage 1f, B5) bound what one search may cost and how many run
+    at once. Two switches, each derived from APP_ENV like rate limiting:
+    SEARCH_LIMITS_ENABLED (422 for width/depth above the maxima) and
+    SEARCH_ADMISSION_ENABLED (slots, the large-search lane, the queue and
+    the timeout; see app/search_admission.py). The numeric values ARE the
+    production values; locally both switches are off and the request path
+    is exactly the pre-B5 code.
 
     Leave optional flags UNSET rather than empty in env files: an empty
     string is not a valid boolean.
@@ -62,6 +70,22 @@ class Settings(BaseSettings):
     embedding_device: Literal["cpu", "mps", "cuda"] | None = None
     torch_num_threads: int | None = Field(default=None, ge=1)
 
+    # None = derive from app_env (see the docstring and the properties).
+    search_limits_enabled: bool | None = None
+    # Width is EFFECTIVE width: `width`, or `expansionCount` when absent.
+    search_max_width: int = Field(default=3, ge=0)
+    search_max_depth: int = Field(default=3, ge=0)
+
+    search_admission_enabled: bool | None = None
+    # width x depth at or above this is a "large" search.
+    search_large_threshold: int = Field(default=4, ge=1)
+    search_concurrency: int = Field(default=2, ge=1)
+    search_large_concurrency: int = Field(default=1, ge=1)
+    search_queue_size: int = Field(default=4, ge=0)
+    search_queue_wait_seconds: float = Field(default=30.0, gt=0)
+    # Measured from admission start, so time spent queued counts against it.
+    search_timeout_seconds: float = Field(default=300.0, gt=0)
+
     model_config = SettingsConfigDict(
         env_file=BACKEND_DIR / ".env",
         extra="ignore",
@@ -88,6 +112,30 @@ class Settings(BaseSettings):
         if self.rate_limit_enabled is not None:
             return self.rate_limit_enabled
         return self.is_production
+
+    @property
+    def search_limits_on(self) -> bool:
+        if self.search_limits_enabled is not None:
+            return self.search_limits_enabled
+        return self.is_production
+
+    @property
+    def search_admission_on(self) -> bool:
+        if self.search_admission_enabled is not None:
+            return self.search_admission_enabled
+        return self.is_production
+
+    @model_validator(mode="after")
+    def _large_lane_leaves_room(self) -> "Settings":
+        # B-4.4: a large search must never block a normal one, so at least
+        # one slot always stays free of large searches.
+        if (self.search_admission_on
+                and self.search_large_concurrency >= self.search_concurrency):
+            raise ValueError(
+                "SEARCH_LARGE_CONCURRENCY must be less than "
+                "SEARCH_CONCURRENCY when search admission is on"
+            )
+        return self
 
     @property
     def cors_origin_list(self) -> list[str]:

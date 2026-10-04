@@ -155,6 +155,45 @@ export function toNameResult(r: ExploreV2Result): NameResult {
   };
 }
 
+// B5: the backend's 422 (limits), 503 (busy) and 504 (timeout) bodies share
+// one shape -- {"detail": {"code", "message", "retryAfter"?}} -- documented in
+// CLAUDE.md. FastAPI's own schema-validation 422 has `detail` as a LIST, so
+// only an object `detail` with a string message is treated as a message meant
+// for the user.
+export class ApiError extends Error {
+  constructor(
+    readonly status: number,
+    readonly code: string | null,
+    readonly userMessage: string | null,
+    readonly retryAfter: number | null
+  ) {
+    super(userMessage ?? `Backend returned status ${status}`);
+    this.name = "ApiError";
+  }
+}
+
+async function apiErrorFrom(response: Response): Promise<ApiError> {
+  try {
+    const body: unknown = await response.json();
+    const detail =
+      body && typeof body === "object"
+        ? (body as { detail?: unknown }).detail
+        : undefined;
+    if (detail && typeof detail === "object" && !Array.isArray(detail)) {
+      const d = detail as { code?: unknown; message?: unknown; retryAfter?: unknown };
+      return new ApiError(
+        response.status,
+        typeof d.code === "string" ? d.code : null,
+        typeof d.message === "string" ? d.message : null,
+        typeof d.retryAfter === "number" ? d.retryAfter : null
+      );
+    }
+  } catch {
+    // Not JSON (e.g. a proxy error page): fall through to the bare status.
+  }
+  return new ApiError(response.status, null, null, null);
+}
+
 export async function exploreSelectedSenses(
   request: ExploreSelectedSensesRequest,
   signal?: AbortSignal
@@ -185,7 +224,7 @@ export async function exploreSelectedSenses(
   });
 
   if (!response.ok) {
-    throw new Error(`Backend returned status ${response.status}`);
+    throw await apiErrorFrom(response);
   }
 
   const data: ExploreSelectedSensesResponse = await response.json();
@@ -204,6 +243,25 @@ export interface LanguageInfo {
 
 export async function fetchLanguages(): Promise<LanguageInfo[]> {
   const response = await fetch(apiUrl("/languages"));
+  if (!response.ok) {
+    throw new Error(`Backend returned status ${response.status}`);
+  }
+  return response.json();
+}
+
+
+// B5: the backend's search limits, so slider maxima and the large-search note
+// follow server settings (raising SEARCH_MAX_WIDTH is a config change only).
+export interface SearchLimits {
+  maxWidth: number;
+  maxDepth: number;
+  largeThreshold: number;
+  limitsEnforced: boolean;
+  admissionEnforced: boolean;
+}
+
+export async function fetchSearchLimits(): Promise<SearchLimits> {
+  const response = await fetch(apiUrl("/search-limits"));
   if (!response.ok) {
     throw new Error(`Backend returned status ${response.status}`);
   }

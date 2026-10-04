@@ -83,11 +83,25 @@ The guard hook at `.claude/hooks/guard.py` enforces the destructive-command, sec
 
 ### Configuration
 
-All settings live in `app/config.py` (`Settings`, pydantic-settings, loaded from the environment and `backend/.env`). `APP_ENV` (`local` by default, or `production`) derives the security defaults: production turns API docs off, ignores `includeHidden`, enables rate limiting, and fences the query-time LLM (unless `ALLOW_QUERY_TIME_LLM_IN_PRODUCTION=1`). Each can be overridden explicitly (`EXPOSE_API_DOCS`, `ALLOW_INCLUDE_HIDDEN`, `RATE_LIMIT_ENABLED`).
+All settings live in `app/config.py` (`Settings`, pydantic-settings, loaded from the environment and `backend/.env`). `APP_ENV` (`local` by default, or `production`) derives the security defaults: production turns API docs off, ignores `includeHidden`, enables rate limiting, turns on search limits and admission control, and fences the query-time LLM (unless `ALLOW_QUERY_TIME_LLM_IN_PRODUCTION=1`). Each can be overridden explicitly (`EXPOSE_API_DOCS`, `ALLOW_INCLUDE_HIDDEN`, `RATE_LIMIT_ENABLED`, `SEARCH_LIMITS_ENABLED`, `SEARCH_ADMISSION_ENABLED`).
 
 Exception: `ROOT_LLM_*` stay in `services/root_llm.py`, because the harness fence depends on that module's globals.
 
-The app is built by `create_app(settings)` in `app/main.py`; tests build production-configured apps with it. `GET /health` is liveness; `GET /ready` also checks the database.
+The app is built by `create_app(settings)` in `app/main.py`; tests build production-configured apps with it. `GET /health` is liveness. `GET /ready` returns 200 only when the database answers and the startup pre-warm succeeded or was skipped (`PREWARM_ON_STARTUP=0`). A failed pre-warm is retried in the background with backoff, and `/ready` flips to 200 when a retry succeeds.
+
+**Search limits and admission (`app/search_admission.py`, B5).** Both are off locally (settings unset), so the request path is exactly the pre-B5 code. In production:
+- `SEARCH_MAX_WIDTH=3` and `SEARCH_MAX_DEPTH=3` (raise width to 5 as a settings change only). Width means *effective* width: `width`, or `expansionCount` when `width` is absent.
+- `SEARCH_CONCURRENCY=2` searches run at once, at most `SEARCH_LARGE_CONCURRENCY=1` of them large (width × depth ≥ `SEARCH_LARGE_THRESHOLD=4`). The large lane must stay strictly smaller than the total, so a large search never blocks a normal one.
+- Normal searches queue FIFO, up to `SEARCH_QUEUE_SIZE=4` waiting for up to `SEARCH_QUEUE_WAIT_SECONDS=30`. A second large search gets an immediate 503; there is no large-search queue.
+- `SEARCH_TIMEOUT_SECONDS=300` is measured from admission, so queue time counts.
+
+Order in `POST /explore-v2`: validate limits (422) → *result-cache seam (not built)* → admission (503) → record the sense selection → search → attach name cards → commit. Record and search share one session and stay in that order, because the search reads the statistics just recorded.
+
+Keep-the-slot: the engine can't be cancelled, so a timed-out search returns 504 but keeps running. Its slot (and large permit) is released by the search thread when it finishes, never by the request. An admitted search runs in its own session, bound to the request session's engine (so test overrides apply), and an abandoned search rolls back instead of committing. That guarantee needs the query-time LLM fenced, as it is in production, because the trickle commits mid-search; `create_app` warns if admission is on while the trickle is live.
+
+Error body for the 422 (limits), 503 (busy) and 504 (timeout) responses: `{"detail": {"code": str, "message": str, "retryAfter": int}}`, with `retryAfter` and a `Retry-After` header on 503 only. Codes: `search_limit_exceeded`, `search_queue_full`, `search_queue_timeout`, `large_search_busy`, `search_timeout`. FastAPI's own schema-validation 422 keeps `detail` as a list. `message` is written for the user; the frontend shows it as-is.
+
+`GET /search-limits` returns `{maxWidth, maxDepth, largeThreshold, limitsEnforced, admissionEnforced}` (no database). It is the UI's single source for slider maxima and the large-search note.
 
 Rate limiting (`app/middleware/rate_limit.py`) is in-process, assumes one worker, and is off locally so gate captures aren't throttled.
 

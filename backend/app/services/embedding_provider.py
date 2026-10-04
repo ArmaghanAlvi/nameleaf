@@ -9,6 +9,9 @@ import torch
 
 DEFAULT_EMBEDDING_MODEL = "intfloat/multilingual-e5-base"
 DEFAULT_EMBEDDING_DIMENSIONS = 768
+# Pinned snapshot (B-2.4). Dockerfile.prod's EMBEDDING_MODEL_REVISION ARG must
+# match; tests/test_embedding_device.py checks that the two agree.
+DEFAULT_EMBEDDING_MODEL_REVISION = "d128750597153bb5987e10b1c3493a34e5a4502a"
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +47,8 @@ def get_model() -> SentenceTransformer:
     # Before the load, so the model never runs a forward pass at the default.
     if config.settings.torch_num_threads is not None:
         torch.set_num_threads(config.settings.torch_num_threads)
-    model = SentenceTransformer(DEFAULT_EMBEDDING_MODEL, device=device)
+    model = SentenceTransformer(DEFAULT_EMBEDDING_MODEL, device=device,
+                                revision=DEFAULT_EMBEDDING_MODEL_REVISION)
     logger.info(
         "embedding model loaded: device=%s torch_num_threads=%d",
         model.device, torch.get_num_threads(),

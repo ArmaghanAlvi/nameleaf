@@ -25,7 +25,8 @@ class _FakeModel:
 def calls(monkeypatch):
     log: list[tuple] = []
 
-    def fake_st(name, device):
+    def fake_st(name, device, revision=None):
+        assert revision == ep.DEFAULT_EMBEDDING_MODEL_REVISION
         log.append(("load", device))
         return _FakeModel(name, device)
 
@@ -105,3 +106,19 @@ def test_parity_probe_encodes_texts_verbatim():
     from scripts.eval.vector_parity_probe import encode_inputs
     texts = ["query: verbatim check", "query: second"]
     assert encode_inputs(texts) == texts
+
+
+def test_dockerfile_pins_the_same_model_revision():
+    """B-2.4: get_model() and the image's build-time download must pin one
+    snapshot. The builder stage has no app/, so the Dockerfile carries its
+    own ARG; this keeps the two from drifting."""
+    import re
+    from pathlib import Path
+
+    dockerfile = Path(__file__).resolve().parent.parent / "Dockerfile.prod"
+    m = re.search(r"^ARG EMBEDDING_MODEL_REVISION=(\S+)$",
+                  dockerfile.read_text(), re.M)
+    assert m, "Dockerfile.prod must declare ARG EMBEDDING_MODEL_REVISION"
+    assert m.group(1) == ep.DEFAULT_EMBEDDING_MODEL_REVISION
+    assert ep.DEFAULT_EMBEDDING_MODEL_REVISION == (
+        "d128750597153bb5987e10b1c3493a34e5a4502a")

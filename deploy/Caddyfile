@@ -1,4 +1,17 @@
 # Reverse proxy and TLS (publishing Stage 3f).
+#
+# CADDY VERSION (B5): stay on 2.11.4, pinned in docker-compose.prod.yml. Its
+# defaults put no read or write limit on a proxied response, so a 5-minute
+# search (SEARCH_TIMEOUT_SECONDS, plus up to 30 s queued) gets through.
+# 2.11.6 adds 1-minute read_body_idle / write_idle defaults that cancel an
+# HTTP/1.1 POST 60 s after its body is read (caddy#8103), and can panic when
+# an HTTP/2 proxied request body is still being read after the handler
+# returned (caddy#8106; fix in PR #8107, unreleased). When upgrading, use the
+# release that closes #8106, and if the 1-minute defaults remain, set them
+# explicitly here (>= 6m), e.g.:
+#   { servers { timeouts { read_body_idle 6m
+#                          write_idle 6m } } }
+# 2.11.4 rejects those option names, so add them only with the upgrade.
 # SITE_ADDRESS: "localhost" on the Mac (Caddy's internal CA), the real domain
 # on the server (automatic Let's Encrypt).
 {$SITE_ADDRESS} {
