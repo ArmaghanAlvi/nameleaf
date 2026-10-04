@@ -1,0 +1,10 @@
+recorded_at: 2026-10-04T18:19:52Z
+git_head: b3630a74a6857d9b2791c3f3ac4a53912e7ec8a1
+dump_path: /Users/armaghan/Personal-Projects/nameforge_master_20261004.dump
+server_version | 17.10 (Debian 17.10-1.pgdg12+1)
+alembic_version | 3f7c1a90d5e2
+database_size | 21 GB | 23074256563
+fingerprint_before | 112 | 17314 | 2026-09-29 13:24:31.471237+00
+06b3f9b796d2e6df217d22dbba0c06617194da3791c826683e45a08b35ea4c72  /Users/armaghan/Personal-Projects/nameforge_master_20261004.dump
+-rw-r--r--@ 1 armaghan  staff  7589419082 Oct  4 14:42 /Users/armaghan/Personal-Projects/nameforge_master_20261004.dump
+fingerprint_after | 112 | 17314 | 2026-09-29 13:24:31.471237+00
