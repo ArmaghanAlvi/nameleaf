@@ -1,0 +1,23 @@
+=== parallel_reference --diff (cpu vs b5, settings unset)
+
+0/250 trees changed
+0/30 cells changed
+=== root_selection_diff --diff (settings unset)
+0/6000 cells changed
+=== diff_reference --engine cpu --api b5 (settings unset)
+
+0/160 cells differ
+=== parallel_api_reference --diff (settings unset)
+
+0/30 cells changed (yellow path)
+green cards: 185 -> 185
+=== parallel_api_reference --diff (SEARCH_LIMITS_ENABLED=1 SEARCH_ADMISSION_ENABLED=1)
+
+0/30 cells changed (yellow path)
+green cards: 185 -> 185
+=== cmp (informational)
+parallel_reference.json identical to cpu/parallel_reference.json
+roots.json identical to cpu/roots.json
+engine_reference.json identical to cpu/engine_reference.json
+parallel_api_reference.json identical to cpu/parallel_api_reference.json
+parallel_api_reference_admission.json identical to cpu/parallel_api_reference.json

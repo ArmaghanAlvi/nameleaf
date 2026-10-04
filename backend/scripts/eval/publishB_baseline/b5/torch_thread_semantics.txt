@@ -1,0 +1,12 @@
+# Experiment 1 -- the admission gate's situation: main thread never calls set_num_threads
+main before: 8
+first search thread after set(2): 2
+later new thread: 2
+later new thread: 2
+main after: 8
+
+# Experiment 2 -- main thread calls set_num_threads(8) first
+first search thread after set(2): 2
+later new thread: 2
+later new thread: 2
+main after: 2
