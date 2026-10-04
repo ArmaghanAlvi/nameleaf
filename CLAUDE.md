@@ -155,9 +155,9 @@ Each rung is a different evidence source (translation link, shared interlingual 
 
 ### Vector search and embeddings
 
-`services/vector_scope.py` / `vector_sense_search.py` wrap pgvector HNSW queries over `SenseEmbedding` (~1.55M rows; the HNSW index is ~6 GB). `embedding_provider.py` wraps the embedding model (`intfloat/multilingual-e5-base`; cosine similarity is only meaningful *within* one language pair — there's a constant anisotropy offset across pairs, see comments in `root_selection.py`). `embed_query` is LRU-cached (safe — deterministic inference, results copied on return) since it's the largest single cost in a cold search per `phase_timing.py` measurements.
+`services/vector_scope.py` / `vector_sense_search.py` wrap pgvector HNSW queries over `SenseEmbedding` (~1.55M rows; the HNSW index is ~6 GB). `embedding_provider.py` wraps the embedding model (`intfloat/multilingual-e5-base`; cosine similarity is only meaningful *within* one language pair — there's a constant anisotropy offset across pairs, see comments in `root_selection.py`). `embed_query` is LRU-cached (safe — deterministic inference, results copied on return) ; on CPU it's ~5–8% of a cold search, with the database phase dominating (Findings B-1.4).
 
-**Production runs on CPU.** Development uses MPS; the production target is a 2-core ARM CPU. Measured locally, the ~290 single `embed_query` calls of a 21-language search cost ~9 s on 2 CPU threads versus ~0.64 s batched. Any embedding change must consider CPU behaviour. `scripts/eval/batch_embed_identity.py` (roadmap C4c) already tests whether batched encodes are bitwise-identical to single encodes — read its recorded outcome in `notes/` before any batching work. Each uvicorn worker loads its own model copy, so worker count is a RAM decision.
+**Production runs on CPU.** Development uses MPS; the production target is a 2-core ARM CPU (`EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2`). Measured on CPU (Findings B-1.4, B-3.4), a 21-language 3×3 search makes ~195 `embed_query` calls (~5 s, 5–8% of a cold search); the database phase is 60–86% of wall time, so embedding is not the bottleneck. Batching was measured and dropped (B-2.2): bitwise-inexact for a gain of at most ~4 s. Mac CPU gate output is byte-identical to MPS (B-1.5), and the gate reference is `scripts/eval/publishB_baseline/cpu/`. Each uvicorn worker loads its own model copy, so worker count is a RAM decision.
 
 ### Data pipeline (import-once, not request-path)
 
@@ -230,6 +230,7 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7), sequenced into M
 - Postgres schema `public` holds reference data and is replaced wholesale on each publish. Schema `live` holds live-traffic data (and later accounts) and is never touched by publishing.
 - The app connects as a least-privilege role: read-only on `public`, writes only to `live`.
 - Production defaults: `ROOT_LLM_QUERY_TIME=0`, ranking-stats writes off, API docs off, `includeHidden` ignored, one uvicorn worker with an explicit thread count, rate limits on expensive endpoints.
+- Search behaviour (Findings B-4.1–B-4.4): every search from 0×0 to 3×3 is allowed; width × depth ≥ 4 is "large", at most one at a time. Target on the server: normal searches within 30 s COLD median, large ones within the 300 s timeout without blocking a normal one. Limits are `SEARCH_*` settings, so tightening them is a configuration change.
 - No monetization at launch. Ads and user accounts may come later, so don't design anything that blocks them.
 
 **Publishing status** (the user updates this as stages merge):
