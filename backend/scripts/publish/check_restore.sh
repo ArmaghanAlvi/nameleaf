@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+# check_restore.sh -- verify a restored database against the build manifest
+# (PARTITION C4; first run in C5). READ-ONLY: every session runs with
+# default_transaction_read_only=on, so it may be pointed at any database.
+#
+# Prints PASS / FAIL / INFO lines; exits 1 if anything FAILs.
+#   PASS/FAIL  public row counts == manifest (exact, per table)
+#              synonyms digests (senses, lexemes) == manifest
+#              embeddings digest == manifest
+#              alembic == manifest == REQUIRED_ALEMBIC
+#              106,398 established names; schema live present
+#              exactly 1 HNSW index on sense_embeddings; no invalid index
+#   INFO       live row counts; orphan statistics/event rows (no matching
+#              sense -- tolerated by readers); pgvector version; C1's
+#              rowcounts_before.tsv cross-check (public may legitimately have
+#              changed since C1: the manifest is the reference)
+#
+# Usage: check_restore.sh --container <ctr> --db <db> --build-dir <dir>
+#        [--c1-counts <path>]
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib.sh
+source "$SCRIPT_DIR/lib.sh"
+
+CTR="" DB="" BUILD_DIR="" C1_COUNTS="$SCRIPT_DIR/c1_master/rowcounts_before.tsv"
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --container) CTR="${2:-}"; shift 2 ;;
+        --db) DB="${2:-}"; shift 2 ;;
+        --build-dir) BUILD_DIR="${2:-}"; shift 2 ;;
+        --c1-counts) C1_COUNTS="${2:-}"; shift 2 ;;
+        *) die "unknown argument: $1" ;;
+    esac
+done
+require_arg --container "$CTR"
+require_arg --db "$DB"
+require_arg --build-dir "$BUILD_DIR"
+valid_identifier --db "$DB"
+[[ -f "$BUILD_DIR/manifest.txt" ]] || die "no manifest.txt in $BUILD_DIR"
+
+manifest() { manifest_value "$BUILD_DIR" "$1"; }
+TAB=$'\t'
+FAILS=0
+pass() { echo "PASS $*"; }
+fail() { echo "FAIL $*"; FAILS=$((FAILS + 1)); }
+info() { echo "INFO $*"; }
+
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+
+# Row counts -----------------------------------------------------------------
+psql_ro "$CTR" "$DB" -At -F "$TAB" < "$SCRIPT_DIR/public_counts.sql" > "$WORK/counts.tsv"
+if diff "$BUILD_DIR/$(manifest counts_file)" "$WORK/counts.tsv" > "$WORK/counts.diff"; then
+    pass "public_counts: $(wc -l < "$WORK/counts.tsv" | tr -d ' ') tables match the manifest"
+else
+    fail "public_counts: differ from the manifest:"
+    cat "$WORK/counts.diff"
+fi
+
+# Digests --------------------------------------------------------------------
+psql_ro "$CTR" "$DB" -At -F "$TAB" < "$SCRIPT_DIR/synonyms_digest.sql" > "$WORK/digests.tsv"
+psql_ro "$CTR" "$DB" -At -F "$TAB" < "$SCRIPT_DIR/embeddings_digest.sql" >> "$WORK/digests.tsv"
+while IFS="$TAB" read -r label rows digest; do
+    got="$(awk -F "$TAB" -v l="$label" '$1 == l {print $2 "\t" $3}' "$WORK/digests.tsv")"
+    if [[ "$got" == "$rows$TAB$digest" ]]; then
+        pass "digest $label: $rows rows, $digest"
+    else
+        fail "digest $label: manifest '$rows $digest', restored '${got//$TAB/ }'"
+    fi
+done < "$BUILD_DIR/$(manifest digests_file)"
+
+# Facts ----------------------------------------------------------------------
+psql_ro "$CTR" "$DB" -At -F "$TAB" < "$SCRIPT_DIR/check_restore.sql" > "$WORK/facts.tsv"
+fact() { awk -F "$TAB" -v k="$1" '$1 == k {print $2}' "$WORK/facts.tsv"; }
+
+ALEMBIC="$(fact alembic)"
+if [[ "$ALEMBIC" == "$(manifest alembic)" && "$ALEMBIC" == "$REQUIRED_ALEMBIC" ]]; then
+    pass "alembic $ALEMBIC"
+else
+    fail "alembic '$ALEMBIC' (manifest $(manifest alembic), required $REQUIRED_ALEMBIC)"
+fi
+[[ "$(fact established_names)" == 106398 ]] \
+    && pass "established_names 106398" \
+    || fail "established_names $(fact established_names), expected 106398"
+[[ "$(fact live_schema)" == 1 ]] && pass "schema live present" || fail "schema live missing"
+[[ "$(fact hnsw_indexes)" == 1 ]] \
+    && pass "hnsw_indexes 1" || fail "hnsw_indexes $(fact hnsw_indexes), expected 1"
+[[ "$(fact invalid_indexes)" == 0 ]] \
+    && pass "invalid_indexes 0" || fail "invalid_indexes $(fact invalid_indexes)"
+
+{ grep '^live_rows:' "$WORK/facts.tsv" || true; } | while IFS="$TAB" read -r k v; do
+    info "${k#live_rows:} rows $v"
+done
+info "orphan_stats $(fact orphan_stats) (statistics rows with no matching sense)"
+info "orphan_events $(fact orphan_events) (event rows with no matching sense)"
+info "pgvector $(fact pgvector) (build manifest: master $(manifest pgvector_master), build $(manifest pgvector_build))"
+
+# C1 cross-check (INFO only) -------------------------------------------------
+if [[ -f "$C1_COUNTS" ]]; then
+    awk -F "$TAB" '$1 == "public" {print $2 "\t" $3}' "$C1_COUNTS" | LC_ALL=C sort > "$WORK/c1.tsv"
+    LC_ALL=C sort "$WORK/counts.tsv" > "$WORK/counts.sorted"
+    LC_ALL=C join -t "$TAB" "$WORK/c1.tsv" "$WORK/counts.sorted" \
+        | awk -F "$TAB" '$2 != $3 {printf "INFO c1_crosscheck %s: C1 %s, now %s\n", $1, $2, $3; d++}
+                         END {if (!d) print "INFO c1_crosscheck: public counts equal C1 for every shared table"}'
+else
+    info "c1_crosscheck skipped: $C1_COUNTS not found"
+fi
+
+if (( FAILS > 0 )); then
+    echo "check_restore: $FAILS FAIL(s)"
+    exit 1
+fi
+echo "check_restore: all PASS"

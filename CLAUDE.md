@@ -79,6 +79,14 @@ npm run lint
 
 The guard hook at `.claude/hooks/guard.py` enforces the destructive-command, secret-file, and git-write rules; its tests are `backend/tests/test_claude_guard.py`.
 
+### Publish build (`backend/scripts/publish/`, C4; first run in C5)
+
+Mechanism: each publish restores a slimmed reference dump of schema `public` into a **new** database (`name_generator_<stamp>`) in the same Postgres instance, creates `live` (empty on the first publish, otherwise carried from the current database with no writes in flight), switches the backend's `DATABASE_URL` and restarts it, and keeps the previous database for one cycle as the rollback. `live` and `public` share a database because the dropdown joins them.
+- `build_reference.sh`: master is only read (a `pg_dump`, `psql` with `default_transaction_read_only=on`) and must be quiet. It slims by projection in a throwaway container and verifies counts plus synonyms and embeddings digests against master. The build manifest, not C1's counts, is the reference.
+- `roles.sql` (once per cluster) and `grants.sql` (each database): `nameforge_admin` owns every restored object; `nameforge_app` (the backend's role) gets read-only `public` plus `SELECT`/`INSERT`/`UPDATE` on `live`. Passwords come from the environment via `\getenv`, never the repo.
+- `restore_reference.sh`, `check_restore.sh`, `check_roles.sql`: restore, `ANALYZE`, `live`, grants, then checks.
+- Every write-side script requires explicit targets and refuses master's container, port and database before running anything. All Postgres clients run inside Postgres 17 containers (`docker exec -e PGOPTIONS=…`), never the host's. `backend/scripts/publish/README.md` has the commands and what remains unverified.
+
 ## Architecture
 
 ### Configuration
@@ -119,7 +127,7 @@ Two model files, split by role:
 
 Two Postgres schemas (C2; migration `a7c3e91f0b52`, applied to master in C3): `public` holds reference data and is replaced wholesale on each publish; `live` holds live-traffic data and is never touched by publishing. The four usage tables (`SenseSelectionStat`, `SenseSelectionEvent`, `WordSearchStat`, `WordSearchEvent`) declare `schema="live"`; `RootLlmAttempt` stays in `public` (Findings A-0.1). There are no database foreign keys from `live` into `public` (a publish would break them); the ORM relationships use explicit `foreign()` join conditions, and readers must tolerate a statistics row whose sense no longer exists. SQLite tests map `live` to the default schema with `schema_translate_map={"live": None}` on every test engine.
 
-Large columns that the request path never reads: `lexemes.raw_entry` and `senses.raw_sense` (full import JSON, ~3.9 GB) and `sense_embeddings.embedded_text`. They're used only by importers and backfills. Don't add request-path reads of them — the production copy will have them emptied (Stage 2).
+Large columns the publish build slims (C4): `lexemes.raw_entry` and `senses.raw_sense` (full import JSON, ~3.9 GB) and `sense_embeddings.embedded_text`. **Projection rule: request-path code may read only the `_EMBEDDABLE_SYNONYM_KEYS` keys (`"synonyms"`) of `raw_sense` and `raw_entry`; the publish build drops everything else** and empties `embedded_text`. The only request-path readers are `_kaikki_sense_level_synonyms` / `_kaikki_entry_level_synonyms` in `services/sense_embeddings.py` (via `build_query_text_from_selected_senses` → `collect_synonyms_for_embedding`). `tests/test_raw_columns_guard.py` fails if any other `app/` module mentions these columns; a new reader would silently get empty data in production.
 
 ### Request flow
 
