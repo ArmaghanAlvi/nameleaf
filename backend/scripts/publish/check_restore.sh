@@ -80,14 +80,26 @@ if [[ "$ALEMBIC" == "$(manifest alembic)" && "$ALEMBIC" == "$REQUIRED_ALEMBIC" ]
 else
     fail "alembic '$ALEMBIC' (manifest $(manifest alembic), required $REQUIRED_ALEMBIC)"
 fi
-[[ "$(fact established_names)" == 106398 ]] \
-    && pass "established_names 106398" \
-    || fail "established_names $(fact established_names), expected 106398"
-[[ "$(fact live_schema)" == 1 ]] && pass "schema live present" || fail "schema live missing"
-[[ "$(fact hnsw_indexes)" == 1 ]] \
-    && pass "hnsw_indexes 1" || fail "hnsw_indexes $(fact hnsw_indexes), expected 1"
-[[ "$(fact invalid_indexes)" == 0 ]] \
-    && pass "invalid_indexes 0" || fail "invalid_indexes $(fact invalid_indexes)"
+if [[ "$(fact established_names)" == 106398 ]]; then
+    pass "established_names 106398"
+else
+    fail "established_names $(fact established_names), expected 106398"
+fi
+if [[ "$(fact live_schema)" == 1 ]]; then
+    pass "schema live present"
+else
+    fail "schema live missing"
+fi
+if [[ "$(fact hnsw_indexes)" == 1 ]]; then
+    pass "hnsw_indexes 1"
+else
+    fail "hnsw_indexes $(fact hnsw_indexes), expected 1"
+fi
+if [[ "$(fact invalid_indexes)" == 0 ]]; then
+    pass "invalid_indexes 0"
+else
+    fail "invalid_indexes $(fact invalid_indexes)"
+fi
 
 { grep '^live_rows:' "$WORK/facts.tsv" || true; } | while IFS="$TAB" read -r k v; do
     info "${k#live_rows:} rows $v"

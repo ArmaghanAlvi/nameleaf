@@ -23,6 +23,7 @@ MASTER_VOLUME="name-generator_name_generator_pgdata"
 
 # The alembic revision every published database must be at. Equal to the
 # repo's migration head; tests/test_publish_scripts.py keeps them in sync.
+# shellcheck disable=SC2034  # read by build_reference.sh, which sources this file
 REQUIRED_ALEMBIC="a7c3e91f0b52"
 
 # Session options.

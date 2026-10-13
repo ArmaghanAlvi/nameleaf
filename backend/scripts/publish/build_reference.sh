@@ -80,8 +80,9 @@ require_arg --out "$OUT"
 refuse_target "$BUILD_CTR" "" "$PORT"
 [[ "$BUILD_CTR" != "$SRC_CTR" ]] || die "build container must differ from the source"
 [[ "$BUILD_CTR" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*$ ]] || die "bad --build-container"
-[[ "$PORT" =~ ^[0-9]+$ ]] && (( PORT >= 1024 && PORT <= 65535 )) \
-    || die "--port must be 1024-65535"
+if ! [[ "$PORT" =~ ^[0-9]+$ ]] || (( PORT < 1024 || PORT > 65535 )); then
+    die "--port must be 1024-65535"
+fi
 valid_identifier --source-db "$SRC_DB"
 [[ "$JOBS" =~ ^[0-9]+$ && "$WORKERS" =~ ^[0-9]+$ ]] || die "bad --jobs/--parallel-workers"
 [[ "$MWM" =~ ^[0-9]+(kB|MB|GB)$ ]] || die "bad --maintenance-work-mem"
