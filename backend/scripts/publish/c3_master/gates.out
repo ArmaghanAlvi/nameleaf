@@ -1,0 +1,46 @@
+== config EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2 HF_HUB_OFFLINE=1 RANKING_STATS_WRITE=0
+== db_preflight before scripts/eval/publishC_baseline/post_cpu 2026-10-13T06:00:59.677275+00:00
+fingerprint: 112|17314|2026-09-29 13:24:31.471237+00:00
+established_names: 106398
+other client backends: 0 []
+== parallel_reference Tue Oct 13 02:00:59 EDT 2026
+rc=0
+== roots Tue Oct 13 02:05:21 EDT 2026
+rc=0
+== engine_reference Tue Oct 13 02:05:37 EDT 2026
+rc=0
+== harness_patch_check Tue Oct 13 02:07:48 EDT 2026
+record_sense_selection is harness lambda: True
+_run_search resolves via route module globals: True
+_run_search body calls record_sense_selection by global name: True
+direct-call policy: limits_on=False admission_on=False stats_write=False
+== parallel_api_reference Tue Oct 13 02:07:52 EDT 2026
+rc=0
+== db_preflight after scripts/eval/publishC_baseline/post_cpu 2026-10-13T06:11:03.198197+00:00
+fingerprint: 112|17314|2026-09-29 13:24:31.471237+00:00
+established_names: 106398
+other client backends: 0 []
+== DONE Tue Oct 13 02:11:03 EDT 2026
+== config EMBEDDING_DEVICE= TORCH_NUM_THREADS= HF_HUB_OFFLINE= RANKING_STATS_WRITE=
+== db_preflight before scripts/eval/publishC_baseline/post_mps 2026-10-13T06:11:03.545535+00:00
+fingerprint: 112|17314|2026-09-29 13:24:31.471237+00:00
+established_names: 106398
+other client backends: 0 []
+== parallel_reference Tue Oct 13 02:11:03 EDT 2026
+rc=0
+== roots Tue Oct 13 02:14:01 EDT 2026
+rc=0
+== engine_reference Tue Oct 13 02:14:16 EDT 2026
+rc=0
+== harness_patch_check Tue Oct 13 02:16:19 EDT 2026
+record_sense_selection is harness lambda: True
+_run_search resolves via route module globals: True
+_run_search body calls record_sense_selection by global name: True
+direct-call policy: limits_on=False admission_on=False stats_write=True
+== parallel_api_reference Tue Oct 13 02:16:23 EDT 2026
+rc=0
+== db_preflight after scripts/eval/publishC_baseline/post_mps 2026-10-13T06:19:17.594356+00:00
+fingerprint: 112|17314|2026-09-29 13:24:31.471237+00:00
+established_names: 106398
+other client backends: 0 []
+== DONE Tue Oct 13 02:19:17 EDT 2026

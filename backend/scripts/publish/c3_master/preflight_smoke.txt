@@ -1,0 +1,4 @@
+== db_preflight C3 after smoke search 2026-10-13T06:50:46.203974+00:00
+fingerprint: 112|17316|2026-10-13 06:49:19.174220+00:00
+established_names: 106398
+other client backends: 0 []

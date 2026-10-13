@@ -1,0 +1,7 @@
+table | live.sense_selection_events
+table | live.sense_selection_stats
+table | live.word_search_events
+table | live.word_search_stats
+table | public.root_llm_attempts
+schema_live | 1
+alembic | a7c3e91f0b52

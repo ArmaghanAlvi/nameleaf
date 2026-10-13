@@ -1,0 +1,8 @@
+cpu parallel_reference: byte-identical
+cpu roots: byte-identical
+cpu engine_reference: byte-identical
+cpu parallel_api_reference: byte-identical
+mps parallel_reference: byte-identical
+mps roots: byte-identical
+mps engine_reference: byte-identical
+mps parallel_api_reference: byte-identical
