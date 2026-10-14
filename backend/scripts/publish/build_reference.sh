@@ -174,7 +174,7 @@ step_done dump_master
 
 # --- start the throwaway build container -------------------------------------
 note "start"
-BUILD_PW="$(LC_ALL=C tr -dc 'a-f0-9' < /dev/urandom | head -c 32)"
+BUILD_PW="$(openssl rand -hex 16)"
 docker run -d --rm --name "$BUILD_CTR" --shm-size "$SHM" \
     -e POSTGRES_PASSWORD="$BUILD_PW" -p "127.0.0.1:$PORT:5432" \
     -v "$OUT_ABS:/work" "$IMAGE" >/dev/null
@@ -182,7 +182,8 @@ STARTED=1
 assert_not_master_container "$BUILD_CTR"
 assert_shm_fits "$BUILD_CTR" "$MWM" "$WORKERS"
 for _ in $(seq 1 90); do
-    if docker logs "$BUILD_CTR" 2>&1 | grep -q 'PostgreSQL init process complete' \
+    BUILD_LOGS="$(docker logs "$BUILD_CTR" 2>&1 || true)"
+    if [[ "$BUILD_LOGS" == *'PostgreSQL init process complete'* ]] \
        && docker exec "$BUILD_CTR" pg_isready -U postgres -q; then
         break
     fi
