@@ -1,0 +1,32 @@
+# Publish-build manifest (PARTITION C4). THIS file, not C1's counts,
+# is the reference for check_restore: master must be quiet during the
+# build, and an unfenced local search can write public.root_llm_attempts
+# and public.sense_translations between C1 and any build.
+built_at=2026-10-15T15:16:51Z
+source_time=2026-10-15T13:16:56Z
+source_container=name_generator_db
+source_db=name_generator
+git_head=ecffa12fd834d54e0bb6bb87984fc46466e494d8
+git_dirty_files=0
+alembic=a7c3e91f0b52
+fingerprint_before=112|17316|2026-10-13 06:49:19.17422+00
+fingerprint_after=112|17316|2026-10-13 06:49:19.17422+00
+source_server_version_num=170010
+pg_dump_version=pg_dump (PostgreSQL) 17.10 (Debian 17.10-1.pgdg12+1)
+pgvector_master=0.8.3
+pgvector_build=0.8.3
+build_image=pgvector/pgvector:pg17
+build_image_id=sha256:be400b50812ab2cc908ed78593fda2e51e3b45fe774fa637f1c7b16e68531d95
+build_maintenance_work_mem=2GB
+build_parallel_workers=2
+build_jobs=4
+master_dump_bytes=7589226916
+master_dump_sha256=18fc4da385bcad59a8219e492f1ad8dbee5dbb9f2dbb6eb0513b40da65776bfa
+reference_dump=reference_public.dump
+reference_dump_bytes=6298177592
+reference_dump_sha256=37c7ef51806a53e623346aa62bfcea51eeda2a657a122d5e519bda08c711b40c
+counts_file=public_counts.tsv
+digests_file=digests.tsv
+live_schema_file=live_schema.sql
+sense_embeddings_indexes_file=master_sense_embeddings_indexes.tsv
+timings_file=timings.tsv

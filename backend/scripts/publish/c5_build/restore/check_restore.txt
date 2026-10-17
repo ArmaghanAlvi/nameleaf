@@ -1,0 +1,18 @@
+PASS public_counts: 31 tables match the manifest
+PASS digest senses_synonyms: 2262079 rows, ec603b6154b67c96d21b437cbeaa1191
+PASS digest lexemes_synonyms: 1678927 rows, 81f1375b2cb2466af6477674aedda245
+PASS digest sense_embeddings_vectors: 1549089 rows, 37b50cd82cbe4fe50654cee60240fb30
+PASS alembic a7c3e91f0b52
+PASS established_names 106398
+PASS schema live present
+PASS hnsw_indexes 1
+PASS invalid_indexes 0
+INFO sense_selection_events rows 0
+INFO sense_selection_stats rows 0
+INFO word_search_events rows 0
+INFO word_search_stats rows 0
+INFO orphan_stats 0 (statistics rows with no matching sense)
+INFO orphan_events 0 (event rows with no matching sense)
+INFO pgvector 0.8.3 (build manifest: master 0.8.3, build 0.8.3)
+INFO c1_crosscheck: public counts equal C1 for every shared table
+check_restore: all PASS

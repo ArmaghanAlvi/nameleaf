@@ -1,0 +1,24 @@
+BEGIN
+SET
+DO
+NOTICE:  PASS drop_public_table: refused (must be owner of table senses)
+DO
+DO
+NOTICE:  PASS insert_public: refused (permission denied for table alembic_version)
+NOTICE:  PASS update_public: refused (permission denied for table alembic_version)
+DO
+DO
+NOTICE:  PASS create_in_public: refused (permission denied for schema public)
+DO
+NOTICE:  PASS delete_live: refused (permission denied for table sense_selection_events)
+DO
+NOTICE:  PASS truncate_live: refused (permission denied for table sense_selection_events)
+NOTICE:  PASS select_public: SELECT on public works
+DO
+NOTICE:  PASS select_live: SELECT on live works
+DO
+NOTICE:  PASS insert_live: INSERT into live (with sequence) works
+DO
+NOTICE:  PASS update_live: INSERT/UPDATE on live works
+DO
+ROLLBACK

@@ -1,0 +1,16 @@
+23466 ru DIFF rows=15 exact=15 master_hits=13 restored_hits=12
+23466 el DIFF rows=15 exact=15 master_hits=15 restored_hits=14
+23466 ga DIFF rows=15 exact=15 master_hits=13 restored_hits=11
+23466 is SAME rows=15 exact=15 master_hits=15 restored_hits=15
+7459 ru DIFF rows=15 exact=15 master_hits=15 restored_hits=14
+7459 el DIFF rows=15 exact=15 master_hits=11 restored_hits=12
+7459 ga DIFF rows=15 exact=15 master_hits=7 restored_hits=7
+7459 is DIFF rows=15 exact=15 master_hits=12 restored_hits=15
+72902 ru SAME rows=15 exact=15 master_hits=15 restored_hits=15
+72902 el DIFF rows=15 exact=15 master_hits=14 restored_hits=13
+72902 ga DIFF rows=15 exact=15 master_hits=8 restored_hits=6
+72902 is DIFF rows=15 exact=15 master_hits=13 restored_hits=14
+57055 ru SAME rows=15 exact=15 master_hits=15 restored_hits=15
+57055 el DIFF rows=15 exact=15 master_hits=14 restored_hits=15
+57055 ga SAME rows=15 exact=15 master_hits=14 restored_hits=14
+57055 is DIFF rows=15 exact=15 master_hits=11 restored_hits=10

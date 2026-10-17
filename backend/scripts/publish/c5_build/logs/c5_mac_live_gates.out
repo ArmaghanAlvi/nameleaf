@@ -1,0 +1,23 @@
+== config EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2 HF_HUB_OFFLINE=1 RANKING_STATS_WRITE=0
+== db_preflight before scripts/eval/publishC_baseline/c5_mac_cpu_live 2026-10-17T03:30:50.190949+00:00
+fingerprint: 112|17316|2026-10-13 06:49:19.174220+00:00
+established_names: 106398
+other client backends: 0 []
+== parallel_reference Fri Oct 16 23:30:50 EDT 2026
+rc=0
+== roots Fri Oct 16 23:34:00 EDT 2026
+rc=0
+== engine_reference Fri Oct 16 23:34:45 EDT 2026
+rc=0
+== harness_patch_check Fri Oct 16 23:36:36 EDT 2026
+record_sense_selection is harness lambda: True
+_run_search resolves via route module globals: True
+_run_search body calls record_sense_selection by global name: True
+direct-call policy: limits_on=False admission_on=False stats_write=False
+== parallel_api_reference Fri Oct 16 23:36:41 EDT 2026
+rc=0
+== db_preflight after scripts/eval/publishC_baseline/c5_mac_cpu_live 2026-10-17T03:39:39.057604+00:00
+fingerprint: 112|17316|2026-10-13 06:49:19.174220+00:00
+established_names: 106398
+other client backends: 0 []
+== DONE Fri Oct 16 23:39:39 EDT 2026

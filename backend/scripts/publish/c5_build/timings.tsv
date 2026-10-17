@@ -1,0 +1,12 @@
+step	seconds
+preflight	1
+dump_master	716
+start	4
+predata	0
+data	111
+project	129
+postdata	5107
+digests	423
+dump_slim	698
+live_schema	6
+manifest	0

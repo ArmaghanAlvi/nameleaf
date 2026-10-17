@@ -1,0 +1,5 @@
+nameforge-backend-1	peak 0.91 GiB at 01:06:42	(929.2MiB / 3GiB)
+nameforge-caddy-1	peak 0.07 GiB at 01:02:18	(73.26MiB / 256MiB)
+nameforge-db-1	peak 5.97 GiB at 22:09:51	(5.971GiB / 6GiB)
+nameforge-frontend-1	peak 0.05 GiB at 01:01:07	(46.62MiB / 512MiB)
+nameforge_gates	peak 1.32 GiB at 00:09:48	(1.322GiB / 11.67GiB)

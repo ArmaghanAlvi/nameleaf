@@ -1,0 +1,18 @@
+non-object JSON rows (left untouched):
+     ?column?     | count 
+------------------+-------
+ senses.raw_sense |     0
+(1 row)
+
+     ?column?      | count 
+-------------------+-------
+ lexemes.raw_entry |     0
+(1 row)
+
+Timing is on.
+UPDATE 2262079
+Time: 60416.784 ms (01:00.417)
+UPDATE 1678927
+Time: 53007.891 ms (00:53.008)
+UPDATE 1549089
+Time: 2997.644 ms (00:02.998)

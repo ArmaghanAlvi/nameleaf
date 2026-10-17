@@ -1,0 +1,50 @@
+brave [all] w3_d2: YELLOW differs
+    before ['en:brave', 'ar:مقدام', 'ja:勇敢', 'ru:смелый', 'la:animosus', 'ga:cróga']
+    after  ['en:brave', 'ar:مقدام', 'ja:勇敢', 'ru:смелый', 'la:animosus', 'ga:cróga']
+brave [all] w3_d2: YELLOW_SENSE_IDS differs
+brave [all] w3_d2: EXPANDED differs
+light [all] w3_d2: YELLOW differs
+    before ['en:light', 'ar:نور', 'ja:光源', 'ru:освещение', 'la:lumen', 'ga:solas']
+    after  ['en:light', 'ar:نور', 'ja:光源', 'ru:освещение', 'la:lumen', 'ga:solas']
+light [all] w3_d2: YELLOW_SENSE_IDS differs
+light [all] w3_d2: EXPANDED differs
+light [all] w3_d2: SUMMARIES differs
+storm [all] w3_d2: YELLOW differs
+    before ['en:storm', 'ar:عاصفة', 'ja:嵐', 'ru:буря', 'la:tempestas', 'ga:stoirm']
+    after  ['en:storm', 'ar:عاصفة', 'ja:嵐', 'ru:буря', 'la:tempestas', 'ga:stoirm']
+storm [all] w3_d2: YELLOW_SENSE_IDS differs
+storm [all] w3_d2: EXPANDED differs
+storm [all] w3_d2: SUMMARIES differs
+river [all] w3_d2: YELLOW differs
+    before ['en:river', 'ar:نهر', 'ja:川', 'ru:река', 'la:fluvius', 'ga:abhainn']
+    after  ['en:river', 'ar:نهر', 'ja:川', 'ru:река', 'la:fluvius', 'ga:abhainn']
+river [all] w3_d2: YELLOW_SENSE_IDS differs
+river [all] w3_d2: EXPANDED differs
+river [all] w3_d2: SUMMARIES differs
+calm [all] w3_d2: YELLOW differs
+    before ['en:calm', 'ar:هدوء', 'ja:平静', 'ru:спокойствие', 'la:tranquillitas', 'ga:ciúnas']
+    after  ['en:calm', 'ar:هدوء', 'ja:平静', 'ru:спокойствие', 'la:tranquillitas', 'ga:ciúnas']
+calm [all] w3_d2: YELLOW_SENSE_IDS differs
+calm [all] w3_d2: EXPANDED differs
+calm [all] w3_d2: SUMMARIES differs
+calm [all] w1_d1: YELLOW differs
+    before ['en:calm', 'ar:هدوء', 'ja:平静', 'ru:спокойствие', 'la:tranquillitas', 'ga:ciúnas']
+    after  ['en:calm', 'ar:هدوء', 'ja:平静', 'ru:спокойствие', 'la:tranquillitas', 'ga:ciúnas']
+calm [all] w1_d1: YELLOW_SENSE_IDS differs
+calm [all] w1_d1: EXPANDED differs
+calm [all] w1_d1: SUMMARIES differs
+calm [ru_only] w3_d2: YELLOW differs
+    before ['ru:спокойствие', 'ru:байховый', 'ru:жидкость', 'ru:раскачать', 'ru:распрощаться', 'ru:разбудить']
+    after  ['ru:спокойствие', 'ru:безмятежность', 'ru:покой', 'ru:успокоительный']
+calm [ru_only] w3_d2: YELLOW_SENSE_IDS differs
+calm [ru_only] w3_d2: EXPANDED differs
+calm [ru_only] w3_d2: SUMMARIES differs
+calm [ru_only] w1_d1: YELLOW differs
+    before ['ru:спокойствие', 'ru:байховый']
+    after  ['ru:спокойствие', 'ru:безмятежность']
+calm [ru_only] w1_d1: YELLOW_SENSE_IDS differs
+calm [ru_only] w1_d1: EXPANDED differs
+calm [ru_only] w1_d1: SUMMARIES differs
+
+8/30 cells changed (yellow path)
+green cards: 181 -> 181

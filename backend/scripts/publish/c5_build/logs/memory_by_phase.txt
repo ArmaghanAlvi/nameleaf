@@ -1,0 +1,7 @@
+gates    nameforge-db-1         peak 4.80 GiB at 23:32:43
+gates    nameforge_gates        peak 1.32 GiB at 00:09:48
+restore  nameforge-db-1         peak 5.97 GiB at 22:09:51
+stack    nameforge-backend-1    peak 0.91 GiB at 01:06:42
+stack    nameforge-caddy-1      peak 0.07 GiB at 01:02:18
+stack    nameforge-db-1         peak 4.82 GiB at 01:11:06
+stack    nameforge-frontend-1   peak 0.05 GiB at 01:01:07

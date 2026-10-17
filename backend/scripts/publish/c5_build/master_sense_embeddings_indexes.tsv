@@ -1,0 +1,3 @@
+ix_sense_embeddings_embedding_hnsw	hnsw	6011 MB	t
+ix_sense_embeddings_model	btree	10 MB	t
+sense_embeddings_pkey	btree	36 MB	t
