@@ -1,0 +1,7 @@
+C6 recall_check predictions, recorded BEFORE any measure run (from C-5.10):
+- exact sets (distance lists) identical across master and the restored copy (their digests are equal)
+- overall recall@15 (ann15) about 0.85 on both databases
+- master minus restored within +/-0.02
+- Irish (ga) lowest
+- strict_order LIMIT 1 (ann1) identical, or nearly
+recorded_at=2026-10-17T07:37:19Z

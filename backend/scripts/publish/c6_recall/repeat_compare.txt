@@ -1,0 +1,20 @@
+# recall_check compare: baseline=c6_recall/repeat_a candidate=c6_recall/repeat_b max_drop=0
+
+## exact top-150 distance lists (a difference = the DATA differs)
+exact_distance_lists_differing=0
+exact_id_lists_differing_only_in_ties=0
+
+## plan type differences (index vs noindex)
+plan_type_differences=0
+
+## overall recall per list: baseline candidate drop (all cases | excluding plan-type differences)
+ann1	1.0000	1.0000	+0.0000	ok	|	1.0000	1.0000	+0.0000
+ann15	0.9619	0.9619	+0.0000	ok	|	0.9619	0.9619	+0.0000
+ann150	0.6733	0.6733	+0.0000	ok	|	0.6733	0.6733	+0.0000
+
+## per language, per list: baseline_hits candidate_hits exact delta
+
+## per case (only cases whose hits changed): sid lang list baseline candidate
+cases_changed=0
+
+RESULT: PASS (exit 0): no list's overall recall dropped by more than 0

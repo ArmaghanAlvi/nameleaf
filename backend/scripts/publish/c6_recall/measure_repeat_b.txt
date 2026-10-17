@@ -1,0 +1,79 @@
+[2026-10-17T08:37:21Z] recall_check measure: container=name_generator_db db=name_generator probe=c6_recall/repeat_probe.tsv out=c6_recall/repeat_b
+container=name_generator_db
+db=name_generator
+server_version_num=170010
+pgvector=0.8.3
+hnsw_indexes=ix_sense_embeddings_embedding_hnsw
+embedding_models=1
+probe=c6_recall/repeat_probe.tsv
+probe_sha256=30f266046cc2096680573781eceeea8c68cef4bcac8bf808f5962215acfca395
+cases=14
+strict=ann1 measured on cross-language cases
+measured_at=2026-10-17T08:37:22Z
+[2026-10-17T08:40:26Z] case 10/14 done
+[2026-10-17T08:41:22Z] case 14/14 done
+# recall_check summary (name_generator on name_generator_db), wall 241s
+container=name_generator_db
+db=name_generator
+server_version_num=170010
+pgvector=0.8.3
+hnsw_indexes=ix_sense_embeddings_embedding_hnsw
+embedding_models=1
+probe=c6_recall/repeat_probe.tsv
+probe_sha256=30f266046cc2096680573781eceeea8c68cef4bcac8bf808f5962215acfca395
+cases=14
+strict=ann1 measured on cross-language cases
+measured_at=2026-10-17T08:37:22Z
+
+## overall (hits / exact, recall), per list
+ann1	13	13	1.0000	cases=13
+ann15	202	210	0.9619	cases=14
+ann150	1414	2100	0.6733	cases=14
+
+## per language (list lang hits exact recall noindex_cases)
+ann1	ar	1	1	1.0000	0
+ann1	de	1	1	1.0000	0
+ann1	es	1	1	1.0000	0
+ann1	fa	1	1	1.0000	0
+ann1	ga	1	1	1.0000	0
+ann1	he	1	1	1.0000	0
+ann1	hi	1	1	1.0000	0
+ann1	ja	1	1	1.0000	0
+ann1	la	1	1	1.0000	0
+ann1	pl	1	1	1.0000	0
+ann1	ru	1	1	1.0000	0
+ann1	sa	1	1	1.0000	0
+ann1	zh	1	1	1.0000	0
+ann15	ar	15	15	1.0000	0
+ann15	de	15	15	1.0000	0
+ann15	en	15	15	1.0000	0
+ann15	es	15	15	1.0000	0
+ann15	fa	11	15	0.7333	0
+ann15	ga	13	15	0.8667	0
+ann15	he	15	15	1.0000	0
+ann15	hi	15	15	1.0000	0
+ann15	ja	15	15	1.0000	0
+ann15	la	15	15	1.0000	0
+ann15	pl	15	15	1.0000	0
+ann15	ru	13	15	0.8667	0
+ann15	sa	15	15	1.0000	0
+ann15	zh	15	15	1.0000	0
+ann150	ar	85	150	0.5667	0
+ann150	de	141	150	0.9400	0
+ann150	en	149	150	0.9933	0
+ann150	es	108	150	0.7200	0
+ann150	fa	39	150	0.2600	0
+ann150	ga	42	150	0.2800	0
+ann150	he	73	150	0.4867	0
+ann150	hi	80	150	0.5333	0
+ann150	ja	143	150	0.9533	0
+ann150	la	94	150	0.6267	0
+ann150	pl	135	150	0.9000	0
+ann150	ru	109	150	0.7267	0
+ann150	sa	74	150	0.4933	0
+ann150	zh	142	150	0.9467	0
+
+## non-index plan cases per language (all lists)
+
+wall_seconds=241
+COMPLETE

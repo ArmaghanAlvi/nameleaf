@@ -55,18 +55,28 @@ def _prewarm() -> bool:
     """
     t0 = time.perf_counter()
     try:
+        import torch
+
         from app.db.session import SessionLocal
         from app.services.embedding_provider import embed_query, get_model
         from app.services.language_directory import visible_languages
         from app.services.parallel_expansion import _pivot_eligible_languages
 
-        get_model()
+        model = get_model()
         embed_query("warmup")
         with SessionLocal() as db:
             visible_languages(db)
             _pivot_eligible_languages(db)
-        logger.info("startup pre-warm finished in %.2fs",
-                    time.perf_counter() - t0)
+        # C-5.13: what the process ACTUALLY resolved, after get_model() ran
+        # set_num_threads (the posture line, logged before the load, could
+        # only show intent). get_model's own load line goes to an unconfigured
+        # logger under uvicorn and is dropped; this one goes to uvicorn.error.
+        # The thread count is THIS (pre-warm) thread's; threads started later,
+        # such as admission's search workers, inherit it (B-5.9).
+        logger.info("startup pre-warm finished in %.2fs "
+                    "(embedding_device=%s prewarm_thread_torch_num_threads=%d)",
+                    time.perf_counter() - t0, model.device,
+                    torch.get_num_threads())
         runtime_state.mark_prewarm_finished(ok=True)
         return True
     except Exception:

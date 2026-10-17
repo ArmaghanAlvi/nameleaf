@@ -1,0 +1,113 @@
+[2026-10-17T07:53:01Z] recall_check measure: container=nameforge-db-1 db=name_generator_20261015 probe=recall_probe.tsv out=c6_recall/restored
+container=nameforge-db-1
+db=name_generator_20261015
+server_version_num=170010
+pgvector=0.8.3
+hnsw_indexes=ix_sense_embeddings_embedding_hnsw
+embedding_models=1
+probe=recall_probe.tsv
+probe_sha256=3b65d49ee5f51ae2200f05848d2aec1ec4da066d25504fd82c816268703c294c
+cases=147
+strict=ann1 measured on cross-language cases
+measured_at=2026-10-17T07:53:02Z
+[2026-10-17T07:55:32Z] case 10/147 done
+[2026-10-17T07:58:16Z] case 20/147 done
+[2026-10-17T08:00:50Z] case 30/147 done
+[2026-10-17T08:03:39Z] case 40/147 done
+[2026-10-17T08:06:19Z] case 50/147 done
+[2026-10-17T08:08:38Z] case 60/147 done
+[2026-10-17T08:11:26Z] case 70/147 done
+[2026-10-17T08:13:49Z] case 80/147 done
+[2026-10-17T08:16:46Z] case 90/147 done
+[2026-10-17T08:19:21Z] case 100/147 done
+[2026-10-17T08:22:21Z] case 110/147 done
+[2026-10-17T08:24:56Z] case 120/147 done
+[2026-10-17T08:27:47Z] case 130/147 done
+[2026-10-17T08:30:24Z] case 140/147 done
+[2026-10-17T08:32:55Z] case 147/147 done
+# recall_check summary (name_generator_20261015 on nameforge-db-1), wall 2394s
+container=nameforge-db-1
+db=name_generator_20261015
+server_version_num=170010
+pgvector=0.8.3
+hnsw_indexes=ix_sense_embeddings_embedding_hnsw
+embedding_models=1
+probe=recall_probe.tsv
+probe_sha256=3b65d49ee5f51ae2200f05848d2aec1ec4da066d25504fd82c816268703c294c
+cases=147
+strict=ann1 measured on cross-language cases
+measured_at=2026-10-17T07:53:02Z
+
+## overall (hits / exact, recall), per list
+ann1	119	140	0.8500	cases=140
+ann15	1794	2205	0.8136	cases=147
+ann150	10473	22050	0.4750	cases=147
+
+## per language (list lang hits exact recall noindex_cases)
+ann1	ang	7	7	1.0000	0
+ann1	ar	6	7	0.8571	0
+ann1	cy	4	7	0.5714	0
+ann1	de	7	7	1.0000	0
+ann1	el	7	7	1.0000	0
+ann1	es	6	7	0.8571	0
+ann1	fa	6	7	0.8571	0
+ann1	ga	3	7	0.4286	0
+ann1	he	6	7	0.8571	0
+ann1	hi	6	7	0.8571	0
+ann1	is	6	7	0.8571	0
+ann1	ja	7	7	1.0000	0
+ann1	ko	4	7	0.5714	0
+ann1	la	7	7	1.0000	0
+ann1	non	5	7	0.7143	0
+ann1	pl	7	7	1.0000	0
+ann1	ru	7	7	1.0000	0
+ann1	sa	4	7	0.5714	0
+ann1	sw	7	7	1.0000	0
+ann1	zh	7	7	1.0000	0
+ann15	ang	80	105	0.7619	0
+ann15	ar	91	105	0.8667	0
+ann15	cy	75	105	0.7143	0
+ann15	de	104	105	0.9905	0
+ann15	el	90	105	0.8571	0
+ann15	en	104	105	0.9905	0
+ann15	es	103	105	0.9810	0
+ann15	fa	74	105	0.7048	0
+ann15	ga	67	105	0.6381	0
+ann15	he	80	105	0.7619	0
+ann15	hi	100	105	0.9524	0
+ann15	is	86	105	0.8190	0
+ann15	ja	102	105	0.9714	0
+ann15	ko	72	105	0.6857	0
+ann15	la	102	105	0.9714	0
+ann15	non	33	105	0.3143	0
+ann15	pl	103	105	0.9810	0
+ann15	ru	92	105	0.8762	0
+ann15	sa	87	105	0.8286	0
+ann15	sw	44	105	0.4190	0
+ann15	zh	105	105	1.0000	0
+ann150	ang	243	1050	0.2314	0
+ann150	ar	387	1050	0.3686	0
+ann150	cy	304	1050	0.2895	0
+ann150	de	937	1050	0.8924	0
+ann150	el	486	1050	0.4629	0
+ann150	en	1018	1050	0.9695	0
+ann150	es	759	1050	0.7229	0
+ann150	fa	260	1050	0.2476	0
+ann150	ga	253	1050	0.2410	0
+ann150	he	286	1050	0.2724	0
+ann150	hi	545	1050	0.5190	0
+ann150	is	279	1050	0.2657	0
+ann150	ja	941	1050	0.8962	0
+ann150	ko	342	1050	0.3257	0
+ann150	la	563	1050	0.5362	0
+ann150	non	65	1050	0.0619	0
+ann150	pl	826	1050	0.7867	0
+ann150	ru	562	1050	0.5352	0
+ann150	sa	372	1050	0.3543	0
+ann150	sw	67	1050	0.0638	0
+ann150	zh	978	1050	0.9314	0
+
+## non-index plan cases per language (all lists)
+
+wall_seconds=2394
+COMPLETE

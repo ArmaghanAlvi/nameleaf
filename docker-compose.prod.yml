@@ -13,7 +13,9 @@ services:
     image: pgvector/pgvector:pg17
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-name_generator}
+      # Bootstrap database only (C-5.8): published data lives in
+      # name_generator_<stamp> databases created by restore_reference.sh.
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
       POSTGRES_USER: ${POSTGRES_USER:?set POSTGRES_USER in .env.production}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env.production}
     command: >
@@ -33,7 +35,8 @@ services:
     deploy:
       resources:
         limits:
-          memory: ${DB_MEMORY_LIMIT:-6g}
+          # C-5.12: HNSW 5.87 GiB + shared_buffers exceed 6g.
+          memory: ${DB_MEMORY_LIMIT:-8g}
     # NO `ports:` entry. Postgres is reachable only from the backend over the
     # internal `data` network. (Docker-published ports bypass ufw.)
 

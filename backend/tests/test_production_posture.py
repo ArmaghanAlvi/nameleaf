@@ -105,3 +105,22 @@ def test_ready_reflects_database_state():
         assert client.get("/ready").status_code == 200
     with _client(_cfg(), db=_FakeDB(fail=True)) as client:
         assert client.get("/ready").status_code == 503
+
+
+def test_compose_defaults_match_template():
+    """C-5.8 / C-5.12: docker-compose.prod.yml's ${VAR:-default} fallbacks and
+    .env.production.example must agree, or a missing env line silently
+    reverts a decided value (the template's old POSTGRES_DB would have
+    created an empty database named like master's)."""
+    import re
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[2]
+    compose = (root / "docker-compose.prod.yml").read_text()
+    template = (root / ".env.production.example").read_text()
+    expected = {"DB_MEMORY_LIMIT": "8g", "POSTGRES_DB": "postgres"}
+    for var, value in expected.items():
+        defaults = re.findall(r"\$\{" + var + r":-([^}]*)\}", compose)
+        assert defaults == [value], (var, defaults)
+        lines = re.findall(r"^" + var + r"=(.*)$", template, re.M)
+        assert lines == [value], (var, lines)

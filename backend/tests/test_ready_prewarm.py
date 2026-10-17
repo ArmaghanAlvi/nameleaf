@@ -90,3 +90,45 @@ def test_retry_stops_at_shutdown(fake_prewarm, monkeypatch):
     assert calls >= 2
     time.sleep(0.3)
     assert fake_prewarm["calls"] == calls    # no retries after shutdown
+
+
+def test_prewarm_logs_device_and_threads(monkeypatch, caplog):
+    """C-5.13: the real _prewarm reports the model's resolved device and the
+    pre-warm thread's torch thread count on the uvicorn.error logger (the
+    one uvicorn shows). Everything it imports is faked: no model, no DB."""
+    import logging
+
+    import torch
+
+    import app.db.session as session_mod
+    import app.services.embedding_provider as ep
+    import app.services.language_directory as language_directory
+    import app.services.parallel_expansion as px
+
+    class _Model:
+        device = torch.device("cpu")
+
+    class _Session:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            return False
+
+    monkeypatch.setattr(ep, "get_model", lambda: _Model())
+    monkeypatch.setattr(ep, "embed_query", lambda text: [0.0])
+    monkeypatch.setattr(session_mod, "SessionLocal", lambda: _Session())
+    monkeypatch.setattr(language_directory, "visible_languages", lambda db: [])
+    monkeypatch.setattr(px, "_pivot_eligible_languages", lambda db: set())
+    # mark_prewarm_finished mutates module globals; put them back afterwards.
+    for name in ("_prewarm_finished", "_prewarm_ok", "_prewarm_attempts"):
+        monkeypatch.setattr(runtime_state, name, getattr(runtime_state, name))
+
+    with caplog.at_level(logging.INFO, logger="uvicorn.error"):
+        assert app_main._prewarm() is True
+
+    lines = [r.getMessage() for r in caplog.records
+             if "startup pre-warm finished" in r.getMessage()]
+    assert len(lines) == 1, caplog.text
+    assert "embedding_device=cpu" in lines[0]
+    assert f"prewarm_thread_torch_num_threads={torch.get_num_threads()}" in lines[0]

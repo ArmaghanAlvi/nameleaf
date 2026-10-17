@@ -1,0 +1,11 @@
+container=nameforge-db-1
+db=name_generator_20261015
+server_version_num=170010
+pgvector=0.8.3
+hnsw_indexes=ix_sense_embeddings_embedding_hnsw
+embedding_models=1
+probe=recall_probe.tsv
+probe_sha256=3b65d49ee5f51ae2200f05848d2aec1ec4da066d25504fd82c816268703c294c
+cases=147
+strict=ann1 measured on cross-language cases
+measured_at=2026-10-17T07:53:02Z

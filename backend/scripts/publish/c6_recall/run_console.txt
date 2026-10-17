@@ -1,0 +1,14 @@
+== measure master start 2026-10-17T07:38:43Z
+measure master exit=0 wall=858s end 2026-10-17T07:53:01Z
+== measure restored start 2026-10-17T07:53:01Z
+measure restored exit=0 wall=2394s end 2026-10-17T08:32:55Z
+== compare start 2026-10-17T08:32:55Z
+compare exit=1 end 2026-10-17T08:32:55Z
+== repeat_a start 2026-10-17T08:32:55Z
+repeat_a exit=0 wall=266s end 2026-10-17T08:37:21Z
+== repeat_b start 2026-10-17T08:37:21Z
+repeat_b exit=0 wall=241s end 2026-10-17T08:41:22Z
+repeat compare exit=0 end 2026-10-17T08:41:22Z
+repeat cases.tsv (cols 1-8, i.e. without timings) identical
+repeat ids.tsv identical
+== DONE 2026-10-17T08:41:22Z

@@ -32,7 +32,8 @@ FAKES = ("docker", "psql", "pg_dump", "pg_restore", "vacuumdb", "pg_isready")
 def test_expected_files_exist():
     names = {p.name for p in PUBLISH.iterdir()}
     for name in ("lib.sh", "build_reference.sh", "restore_reference.sh",
-                 "check_restore.sh", "projection.sql", "synonyms_digest.sql",
+                 "check_restore.sh", "recall_check.sh", "recall_case.sql",
+                 "recall_probe.tsv", "projection.sql", "synonyms_digest.sql",
                  "embeddings_digest.sql", "public_counts.sql", "roles.sql",
                  "grants.sql", "check_restore.sql", "check_roles.sql",
                  "README.md"):
@@ -353,7 +354,9 @@ def test_strict_mode_and_no_drop_database():
     for script in SCRIPTS:
         text = script.read_text()
         if script.name != "lib.sh":
-            assert "set -euo pipefail" in text, script.name
+            # -E (errtrace) is allowed on top: recall_check.sh needs its ERR
+            # trap to fire inside functions.
+            assert re.search(r"^set -E?euo pipefail$", text, re.M), script.name
     for path in [*SCRIPTS, *SQL_FILES]:
         assert not re.search(r"drop\s+database|dropdb", path.read_text(), re.I), path.name
 
@@ -410,3 +413,256 @@ def test_required_alembic_matches_the_migration_head():
     lib = (PUBLISH / "lib.sh").read_text()
     m = re.search(r'^REQUIRED_ALEMBIC="([0-9a-f]+)"', lib, re.M)
     assert m and heads == {m.group(1)}, (heads, m and m.group(1))
+
+
+# --- recall_check.sh (C6) ------------------------------------------------------
+
+PROBE = PUBLISH / "recall_probe.tsv"
+CASE_SQL = PUBLISH / "recall_case.sql"
+
+
+def _measure_args(out: Path, **over) -> list[str]:
+    a = {"--container": "nameforge-db-1", "--db": "name_generator_20261015",
+         "--probe": str(PROBE), "--out": str(out)}
+    a.update(over)
+    return ["measure", *[x for k, v in a.items() if v is not None for x in (k, v)]]
+
+
+@pytest.mark.parametrize("over,why", [
+    ({"--container": None}, "missing --container"),
+    ({"--db": None}, "missing --db"),
+    ({"--probe": None}, "missing --probe"),
+    ({"--out": None}, "missing --out"),
+    ({"--probe": "/nonexistent/probe.tsv"}, "probe file missing"),
+    ({"--db": "bad;name"}, "invalid database name"),
+])
+def test_recall_measure_refuses_before_any_binary(tmp_path, fakes, over, why):
+    out = tmp_path / "out"
+    r, calls = _run("recall_check.sh", _measure_args(out, **over), fakes, tmp_path)
+    assert r.returncode == 2, (why, r.returncode, r.stderr)
+    assert calls == "", f"{why}: a binary was called: {calls}"
+    assert not out.exists(), why
+
+
+def test_recall_measure_refuses_existing_output(tmp_path, fakes):
+    out = tmp_path / "out"
+    out.mkdir()
+    r, calls = _run("recall_check.sh", _measure_args(out), fakes, tmp_path)
+    assert r.returncode == 2
+    assert calls == ""
+
+
+def test_recall_measure_reaches_the_container_on_valid_args(tmp_path, fakes):
+    """Control: valid arguments DO reach the (failing) fake docker, and the
+    unexpected failure maps to exit 4, never 1."""
+    r, calls = _run("recall_check.sh", _measure_args(tmp_path / "o"), fakes, tmp_path)
+    assert calls.startswith("docker exec"), (calls, r.stderr)
+    assert r.returncode == 4, (r.returncode, r.stderr)
+    assert not (tmp_path / "o" / "summary.txt").exists()
+
+
+def test_recall_usage_errors_exit_2(tmp_path, fakes):
+    for args in ([], ["nonsense"], ["compare", "--baseline", "a", "--candidate", "b"]):
+        r, calls = _run("recall_check.sh", args, fakes, tmp_path)
+        assert r.returncode == 2, (args, r.returncode, r.stderr)
+        assert calls == ""
+
+
+# Fixture directories for compare. Each case: (sid, lang, list, k, exact_n,
+# ann_n, hits, plan). ids.tsv carries the exact distance lists.
+
+def _write_measure_dir(d: Path, cases, exact: dict, complete=True):
+    d.mkdir()
+    rows = ["sid\tlang\tlist\tk\texact_n\tann_n\thits\tplan\tms"]
+    rows += ["\t".join(map(str, c)) + "\t5" for c in cases]
+    (d / "cases.tsv").write_text("\n".join(rows) + "\n")
+    ids = ["sid\tlang\tlist\trank\tsense_id\tdistance"]
+    for (sid, lang), pairs in exact.items():
+        for rank, (sense_id, dist) in enumerate(pairs, 1):
+            ids.append(f"{sid}\t{lang}\texact\t{rank}\t{sense_id}\t{dist}")
+    (d / "ids.tsv").write_text("\n".join(ids) + "\n")
+    if complete:
+        (d / "summary.txt").write_text("COMPLETE\n")
+
+
+BASE_CASES = [
+    (1, "ru", "ann150", 150, 150, 150, 140, "index"),
+    (1, "ru", "ann15", 15, 15, 15, 13, "index"),
+    (1, "ru", "ann1", 1, 1, 1, 1, "index"),
+    (1, "ga", "ann150", 150, 150, 150, 120, "index"),
+    (1, "ga", "ann15", 15, 15, 15, 8, "index"),
+    (1, "ga", "ann1", 1, 1, 1, 1, "index"),
+]
+EXACT = {(1, "ru"): [(10, "0.1"), (11, "0.2")], (1, "ga"): [(20, "0.3"), (21, "0.3")]}
+
+
+def _compare(tmp_path, fakes, cand_cases, cand_exact=EXACT, max_drop="0.03",
+             cand_complete=True):
+    base, cand = tmp_path / "base", tmp_path / "cand"
+    _write_measure_dir(base, BASE_CASES, EXACT)
+    _write_measure_dir(cand, cand_cases, cand_exact, complete=cand_complete)
+    r, calls = _run("recall_check.sh",
+                    ["compare", "--baseline", str(base), "--candidate", str(cand),
+                     "--max-drop", max_drop], fakes, tmp_path)
+    assert calls == "", "compare must not call any binary"
+    return r
+
+
+def test_recall_compare_identical_passes(tmp_path, fakes):
+    r = _compare(tmp_path, fakes, BASE_CASES)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "RESULT: PASS" in r.stdout
+    assert "exact_distance_lists_differing=0" in r.stdout
+
+
+def test_recall_compare_small_drop_within_threshold(tmp_path, fakes):
+    cand = list(BASE_CASES)
+    cand[1] = (1, "ru", "ann15", 15, 15, 15, 12, "index")  # ru hits 13 -> 12
+    r = _compare(tmp_path, fakes, cand, max_drop="0.05")
+    # ann15: baseline 21/30 = 0.7000, candidate 20/30 = 0.6667, drop 0.0333.
+    assert r.returncode == 0, r.stdout
+    assert "ann15\t0.7000\t0.6667\t+0.0333\tok" in r.stdout
+
+
+def test_recall_compare_drop_beyond_threshold_exits_1(tmp_path, fakes):
+    cand = list(BASE_CASES)
+    cand[3] = (1, "ga", "ann150", 150, 150, 150, 100, "index")  # 260/300 -> 240/300
+    r = _compare(tmp_path, fakes, cand, max_drop="0.03")
+    assert r.returncode == 1, r.stdout
+    assert "ann150\t0.8667\t0.8000\t+0.0667\tDROP>X" in r.stdout
+    assert "RESULT: FAIL" in r.stdout
+
+
+def test_recall_compare_gates_on_ann1_too(tmp_path, fakes):
+    cand = list(BASE_CASES)
+    cand[2] = (1, "ru", "ann1", 1, 1, 1, 0, "index")  # 2/2 -> 1/2
+    r = _compare(tmp_path, fakes, cand, max_drop="0.03")
+    assert r.returncode == 1, r.stdout
+
+
+def test_recall_compare_reports_plan_type_differences(tmp_path, fakes):
+    cand = list(BASE_CASES)
+    cand[4] = (1, "ga", "ann15", 15, 15, 15, 15, "noindex")  # sort plan: 'perfect'
+    r = _compare(tmp_path, fakes, cand, max_drop="0.03")
+    assert "plan_type_differences=1" in r.stdout
+    assert "1\tga\tann15\tindex -> noindex" in r.stdout
+    # with the case: 21/30 -> 28/30; without it: 13/15 -> 13/15.
+    assert "ann15\t0.7000\t0.9333\t-0.2333\tok\t|\t0.8667\t0.8667\t+0.0000" in r.stdout
+    assert r.returncode == 0
+
+
+def test_recall_compare_exact_ids_may_differ_only_inside_ties(tmp_path, fakes):
+    swapped = dict(EXACT)
+    swapped[(1, "ga")] = [(21, "0.3"), (20, "0.3")]  # tie at 0.3, ids swapped
+    r = _compare(tmp_path, fakes, BASE_CASES, cand_exact=swapped)
+    assert r.returncode == 0, r.stdout
+    assert "exact_id_lists_differing_only_in_ties=1" in r.stdout
+
+
+def test_recall_compare_exact_distances_differ_exits_3(tmp_path, fakes):
+    changed = dict(EXACT)
+    changed[(1, "ru")] = [(10, "0.1"), (12, "0.25")]
+    r = _compare(tmp_path, fakes, BASE_CASES, cand_exact=changed)
+    assert r.returncode == 3, r.stdout
+    assert "DIFFERS\t1\tru" in r.stdout
+
+
+def test_recall_compare_refuses_incomplete_measure(tmp_path, fakes):
+    r = _compare(tmp_path, fakes, BASE_CASES, cand_complete=False)
+    assert r.returncode == 3
+    assert "no summary.txt" in r.stdout
+
+
+def test_recall_compare_refuses_mismatched_probes(tmp_path, fakes):
+    r = _compare(tmp_path, fakes, BASE_CASES[:3])
+    assert r.returncode == 3
+    assert "probe cases differ" in r.stdout
+
+
+def test_recall_compare_bad_max_drop_exits_2(tmp_path, fakes):
+    r = _compare(tmp_path, fakes, BASE_CASES, max_drop="abc")
+    assert r.returncode == 2
+
+
+# --- the recall SQL mirrors the app -------------------------------------------
+
+def _sql_constants() -> dict[str, str]:
+    return dict(re.findall(r"^\\set (\w+) (\S+)$", CASE_SQL.read_text(), re.M))
+
+
+def test_recall_sql_constants_tie_to_python():
+    from app.services import vector_scope
+    from app.services.embedding_provider import DEFAULT_EMBEDDING_MODEL
+
+    c = _sql_constants()
+    assert int(c["max_scan_tuples"]) == vector_scope.MAX_SCAN_TUPLES
+    assert int(c["ef_search"]) == vector_scope.EF_SEARCH
+    assert c["model"] == DEFAULT_EMBEDDING_MODEL
+    assert c["k_continuity"] == "15"      # C-5.10's top 15
+    assert c["k_fallback"] == "1"
+    sql = CASE_SQL.read_text()
+    for mode in ("relaxed_order", "strict_order"):
+        assert mode in vector_scope._VALID_MODES
+        assert f"SET LOCAL hnsw.iterative_scan = {mode};" in sql
+    assert "SET LOCAL hnsw.max_scan_tuples = :max_scan_tuples;" in sql
+    assert "SET LOCAL hnsw.ef_search = :ef_search;" in sql
+
+
+def test_recall_k_traversal_is_the_apps_width3_fetch_limit():
+    src = (BACKEND / "app" / "services" / "vector_sense_search.py").read_text()
+    m = re.search(r"min\(\s*max\(expansion_count \* (\d+), (\d+)\),\s*"
+                  r"(\d+) if _tree_code == \"en\" else (\d+),\s*\)", src)
+    assert m, "candidate_fetch_limit formula changed; update recall_case.sql"
+    per, floor, en_cap, other_cap = map(int, m.groups())
+    width3 = max(3 * per, floor)
+    k = int(_sql_constants()["k_traversal"])
+    assert k == min(width3, other_cap) == min(width3, en_cap) == 150
+
+
+def test_recall_filters_mirror_the_app_queries():
+    vss = (BACKEND / "app" / "services" / "vector_sense_search.py").read_text()
+    for needle in ("SenseEmbedding.embedding_model == DEFAULT_EMBEDDING_MODEL",
+                   'Sense.visibility_status == "visible"',
+                   "Lexeme.language_id == tree_language_id",
+                   "~SenseEmbedding.sense_id.in_(selected_ids)",
+                   'mode="relaxed_order"'):
+        assert needle in vss, needle
+    rs = (BACKEND / "app" / "services" / "root_selection.py").read_text()
+    rung = rs[rs.index("def _vector_rung"):rs.index("def vector_fallback_root")]
+    assert 'mode="strict_order"' in rung and ".limit(1)" in rung
+    assert 'Sense.visibility_status == "visible"' in rung
+    assert "embedding_model" not in rung      # the rung has no model filter
+    sql = CASE_SQL.read_text()
+    traversal = [b for b in sql.split("\\echo @@begin ")[1:]
+                 if b.startswith(("ann150", "ann15", "exact"))]
+    assert len(traversal) == 3
+    for b in traversal:
+        for needle in ("se.embedding_model = :'model'",
+                       "s.visibility_status = 'visible'",
+                       "g.code = :'lang'",
+                       "se.sense_id NOT IN (SELECT x.id FROM senses x WHERE x.lexeme_id ="):
+            assert needle in b, needle
+    fallback = sql.split("\\echo @@begin ann1\n")[1].split("\\echo @@end")[0]
+    assert "s.visibility_status = 'visible'" in fallback
+    assert "se.embedding_model = :'model'" not in fallback
+    assert "NOT IN" not in fallback
+    assert "LIMIT :k_fallback" in fallback
+    exact = sql.split("\\echo @@begin exact\n")[1]
+    assert "ORDER BY 2, 1" in exact            # distance, then sense_id
+    assert "SET LOCAL enable_indexscan = off;" in sql
+    assert sql.strip().endswith("ROLLBACK;")
+
+
+def test_recall_probe_set():
+    lines = PROBE.read_text().splitlines()
+    assert lines[0].split("\t")[:2] == ["sense_id", "language"]
+    rows = [tuple(ln.split("\t")[:2]) for ln in lines[1:]]
+    assert len(rows) == len(set(rows))
+    seeds = sorted({int(s) for s, _ in rows})
+    langs = sorted({lang for _, lang in rows})
+    roots = json.loads((BACKEND / "scripts" / "eval" / "publishC_baseline" /
+                        "post_cpu" / "roots.json").read_text())
+    assert langs == sorted(["en", *roots["languages"]]) and len(langs) == 21
+    assert {23466, 7459, 72902, 57055} <= set(seeds)   # C-5.10's four
+    assert len(rows) == len(seeds) * 21                 # full cross product
+    assert len(rows) * 15 >= 2000                        # recall@15 comparisons
