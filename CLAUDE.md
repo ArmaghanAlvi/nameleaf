@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Namecraft — the working name in code (the product has also been called "NameForge"; the final public name is undecided, so do not rename anything unless a task says so). A semantic name generator: users search by *meaning*, and the backend traverses a multilingual wordnet-style graph (synonyms, translations, sense relations) to surface names/words related to that meaning across ~21 languages, ranked and grouped by hop distance from the queried sense.
+NameLeaf (nameleaf.app) is the public product name (Findings D-0.2). D1a replaces every live "Namecraft", "NameForge" and `nameforge` identifier with NameLeaf / `nameleaf`, in code, config, tests, comments, docs, and the notes that describe the running app; until then the old names remain. `name_generator`-style identifiers are permanent (the `name-generator` folder, `name_generator_db`, databases `name_generator*`). Records keep the old names: git history, Findings logs and past entries, committed run outputs, and files from past runs (Findings D-0.4). A semantic name generator: users search by *meaning*, and the backend traverses a multilingual wordnet-style graph (synonyms, translations, sense relations) to surface names/words related to that meaning across ~21 languages, ranked and grouped by hop distance from the queried sense.
 
 - `backend/` — FastAPI + SQLAlchemy + Postgres/pgvector. The real engine: sense graph traversal, root selection, vector search, data import pipeline.
 - `frontend/` — Next.js 16 (App Router) + React 19 + Tailwind 4. Thin client over the backend API.
@@ -258,7 +258,7 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7), sequenced into M
 | 1 CPU readiness | done (Breakdown B) |
 | 2 Production data build | done (Breakdown C) |
 | 3 Configuration and hardening | done (Breakdown A) |
-| 4 Name, legal pages, UI | not started |
+| 4 Name, legal pages, UI | in progress (D0 done) |
 | 5 Findability | not started |
 | 6 Hosting and first publish | not started (user) |
 | 7 Launch verification | not started |
