@@ -1,0 +1,28 @@
+{
+  "_about": "License texts reproduced on /sources, each copied byte for byte from the source's own download (Findings D-1b.2). sha256 is of the original and of the copy; tests/test_sources_attribution.py checks it.",
+  "omw-cmn": {
+    "file": "omw-cmn.LICENSE",
+    "sha256": "81a3cb1f97e120581d67c71424f2de5dd96325d951f991e8a092147a2a4b2321",
+    "copied_from": "~/Personal-Projects/datasets/wordnets/omw-cmn/LICENSE (from omw-cmn-2.0.tar.xz)"
+  },
+  "omw-el": {
+    "file": "omw-el.LICENSE",
+    "sha256": "74a216e70a322497653b9e3788b381bc2b141e71af40d712ef300fe04006f014",
+    "copied_from": "~/Personal-Projects/datasets/wordnets/omw-el/LICENSE (from omw-el-2.0.tar.xz; no NOTICE file in the package)"
+  },
+  "omw-he": {
+    "file": "omw-he.LICENSE",
+    "sha256": "a304d7a02f4821a622c73319aa40f848d729b659f9885ae723eb7329d85953b8",
+    "copied_from": "~/Personal-Projects/datasets/wordnets/omw-he/LICENSE (from omw-he-2.0.tar.xz)"
+  },
+  "omw-ja": {
+    "file": "omw-ja.LICENSE",
+    "sha256": "a4be32a83ad0a1cff9a31c23aaa107be20eb843d97c68a2ff72e10ff5ac17cee",
+    "copied_from": "~/Personal-Projects/datasets/wordnets/omw-ja/LICENSE (from omw-ja-2.0.tar.xz)"
+  },
+  "omw-pl": {
+    "file": "omw-pl.LICENSE",
+    "sha256": "57a869a263f18c49f8f9f8ea828f7745b2f40772b75c3e8b49a3f651d54d5426",
+    "copied_from": "~/Personal-Projects/datasets/wordnets/omw-pl/LICENSE (from omw-pl-2.0.tar.xz; includes the Princeton WordNet 3.0 license block)"
+  }
+}

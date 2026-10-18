@@ -10,13 +10,16 @@
 #              alembic == manifest == REQUIRED_ALEMBIC
 #              106,398 established names; schema live present
 #              exactly 1 HNSW index on sense_embeddings; no invalid index
+#              every slug in public.sources is in live_sources.txt (so it
+#              has a manifest and a /sources entry)
 #   INFO       live row counts; orphan statistics/event rows (no matching
 #              sense -- tolerated by readers); pgvector version; C1's
 #              rowcounts_before.tsv cross-check (public may legitimately have
-#              changed since C1: the manifest is the reference)
+#              changed since C1: the manifest is the reference); a slug in
+#              live_sources.txt that the database doesn't have
 #
 # Usage: check_restore.sh --container <ctr> --db <db> --build-dir <dir>
-#        [--c1-counts <path>]
+#        [--c1-counts <path>] [--live-sources <path>]
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -24,12 +27,14 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib.sh"
 
 CTR="" DB="" BUILD_DIR="" C1_COUNTS="$SCRIPT_DIR/c1_master/rowcounts_before.tsv"
+LIVE_SOURCES="$SCRIPT_DIR/../../data/source_manifests/live_sources.txt"
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --container) CTR="${2:-}"; shift 2 ;;
         --db) DB="${2:-}"; shift 2 ;;
         --build-dir) BUILD_DIR="${2:-}"; shift 2 ;;
         --c1-counts) C1_COUNTS="${2:-}"; shift 2 ;;
+        --live-sources) LIVE_SOURCES="${2:-}"; shift 2 ;;
         *) die "unknown argument: $1" ;;
     esac
 done
@@ -38,6 +43,7 @@ require_arg --db "$DB"
 require_arg --build-dir "$BUILD_DIR"
 valid_identifier --db "$DB"
 [[ -f "$BUILD_DIR/manifest.txt" ]] || die "no manifest.txt in $BUILD_DIR"
+[[ -f "$LIVE_SOURCES" ]] || die "no live sources list at $LIVE_SOURCES"
 
 manifest() { manifest_value "$BUILD_DIR" "$1"; }
 TAB=$'\t'
@@ -99,6 +105,24 @@ if [[ "$(fact invalid_indexes)" == 0 ]]; then
     pass "invalid_indexes 0"
 else
     fail "invalid_indexes $(fact invalid_indexes)"
+fi
+
+# Data sources: every database slug needs a manifest (live_sources.txt) ------
+{ grep -v '^[[:space:]]*#' "$LIVE_SOURCES" || true; } | awk 'NF {print $1}' | LC_ALL=C sort -u > "$WORK/live_sources"
+awk -F "$TAB" '$1 == "source" {print $2}' "$WORK/facts.tsv" | LC_ALL=C sort -u > "$WORK/db_sources"
+UNLISTED="$(LC_ALL=C comm -23 "$WORK/db_sources" "$WORK/live_sources")"
+ABSENT="$(LC_ALL=C comm -13 "$WORK/db_sources" "$WORK/live_sources")"
+if [[ -z "$UNLISTED" ]]; then
+    pass "sources: $(wc -l < "$WORK/db_sources" | tr -d ' ') in the database, all in live_sources.txt"
+else
+    while read -r slug; do
+        fail "source $slug is in the database but not in live_sources.txt (no manifest, no /sources entry)"
+    done <<< "$UNLISTED"
+fi
+if [[ -n "$ABSENT" ]]; then
+    while read -r slug; do
+        info "source $slug is in live_sources.txt but not in the database"
+    done <<< "$ABSENT"
 fi
 
 { grep '^live_rows:' "$WORK/facts.tsv" || true; } | while IFS="$TAB" read -r k v; do

@@ -65,6 +65,12 @@ The build computes all three on master and on the build database and fails
 on any difference. `check_restore.sh` recomputes them on every restored copy
 and compares them with the manifest.
 
+`check_restore.sh` also reads `SELECT slug FROM public.sources` (D1b). It FAILs
+if the database has a slug that isn't in
+`backend/data/source_manifests/live_sources.txt` (so it would have no
+manifest and no `/sources` entry), and prints INFO for a listed slug the
+database lacks. `--live-sources <path>` overrides the default list.
+
 **Attribution rule for C5:** if counts and both digests are equal, the data
 is identical. A gate diff on the restored copy then comes from the HNSW
 index rebuild (the index is rebuilt, never copied, and the search uses an

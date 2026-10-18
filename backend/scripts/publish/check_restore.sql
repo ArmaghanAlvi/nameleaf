@@ -22,6 +22,10 @@ SELECT 'orphan_events', count(*) FROM live.sense_selection_events e
  WHERE NOT EXISTS (SELECT 1 FROM public.senses x WHERE x.id = e.sense_id);
 
 SELECT 'pgvector', extversion FROM pg_extension WHERE extname = 'vector';
+
+-- Data sources (D1b): check_restore.sh compares them with
+-- backend/data/source_manifests/live_sources.txt.
+SELECT 'source', slug FROM public.sources ORDER BY slug;
 SELECT 'hnsw_indexes', count(*)
   FROM pg_index i JOIN pg_class c ON c.oid = i.indexrelid
   JOIN pg_am a ON a.oid = c.relam

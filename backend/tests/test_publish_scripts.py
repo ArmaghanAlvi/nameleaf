@@ -666,3 +666,98 @@ def test_recall_probe_set():
     assert {23466, 7459, 72902, 57055} <= set(seeds)   # C-5.10's four
     assert len(rows) == len(seeds) * 21                 # full cross product
     assert len(rows) * 15 >= 2000                        # recall@15 comparisons
+
+
+# --- check_restore.sh: data sources vs live_sources.txt (D1b) -------------------
+
+LIVE_SOURCES = BACKEND / "data" / "source_manifests" / "live_sources.txt"
+
+
+def _restore_check_env(tmp_path, db_sources: list[str]):
+    """A fake docker that answers each SQL file check_restore.sh sends with
+    output matching a tmp build dir, so every check but the source check
+    passes and the source rows are the variable under test."""
+    tab = "\t"
+    canned = tmp_path / "canned"
+    canned.mkdir()
+    (canned / "counts.tsv").write_text(f"senses{tab}10\nsources{tab}{len(db_sources)}\n")
+    (canned / "syn.tsv").write_text(f"senses_synonyms{tab}10{tab}aaa\n")
+    (canned / "emb.tsv").write_text(f"embeddings{tab}10{tab}bbb\n")
+    facts = [f"alembic{tab}a7c3e91f0b52", f"established_names{tab}106398",
+             f"live_schema{tab}1", f"orphan_stats{tab}0", f"orphan_events{tab}0",
+             f"pgvector{tab}0.8.3", f"hnsw_indexes{tab}1", f"invalid_indexes{tab}0",
+             *(f"source{tab}{s}" for s in db_sources)]
+    (canned / "facts.tsv").write_text("\n".join(facts) + "\n")
+
+    build = tmp_path / "build"
+    build.mkdir()
+    (build / "manifest.txt").write_text(
+        "alembic=a7c3e91f0b52\ncounts_file=counts.tsv\ndigests_file=digests.tsv\n"
+        "pgvector_master=0.8.3\npgvector_build=0.8.3\n")
+    (build / "counts.tsv").write_text((canned / "counts.tsv").read_text())
+    (build / "digests.tsv").write_text(
+        (canned / "syn.tsv").read_text() + (canned / "emb.tsv").read_text())
+
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    log = tmp_path / "calls.log"
+    docker = bin_dir / "docker"
+    docker.write_text(
+        "#!/bin/sh\n"
+        f'echo "docker $*" >> "{log}"\n'
+        'input=$(cat)\n'
+        'case "$input" in\n'
+        f'  *"Exact row counts"*) cat "{canned}/counts.tsv" ;;\n'
+        f'  *"Synonyms digest"*) cat "{canned}/syn.tsv" ;;\n'
+        f'  *"Embeddings digest"*) cat "{canned}/emb.tsv" ;;\n'
+        f'  *"check_restore.sql --"*) cat "{canned}/facts.tsv" ;;\n'
+        '  *) exit 1 ;;\n'
+        'esac\n')
+    docker.chmod(0o755)
+    return (bin_dir, log), build
+
+
+def _check_restore(tmp_path, db_sources: list[str], live: Path = LIVE_SOURCES):
+    fake, build = _restore_check_env(tmp_path, db_sources)
+    args = ["--container", "nameleaf-db-1", "--db", "name_generator_20261101",
+            "--build-dir", str(build), "--c1-counts", str(tmp_path / "no_c1.tsv"),
+            "--live-sources", str(live)]
+    r, calls = _run("check_restore.sh", args, fake, tmp_path)
+    assert "default_transaction_read_only=on" in calls   # every session read-only
+    return r
+
+
+def _live_slugs() -> list[str]:
+    return [ln.strip() for ln in LIVE_SOURCES.read_text().splitlines()
+            if ln.strip() and not ln.startswith("#")]
+
+
+def test_check_restore_sources_pass_when_all_listed(tmp_path):
+    r = _check_restore(tmp_path, _live_slugs())
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert f"PASS sources: {len(_live_slugs())} in the database, all in live_sources.txt" in r.stdout
+    assert "check_restore: all PASS" in r.stdout
+
+
+def test_check_restore_sources_fail_on_unlisted_slug(tmp_path):
+    r = _check_restore(tmp_path, [*_live_slugs(), "ruwordnet"])
+    assert r.returncode == 1, r.stdout
+    assert "FAIL source ruwordnet is in the database but not in live_sources.txt" in r.stdout
+    assert "PASS sources" not in r.stdout
+
+
+def test_check_restore_sources_info_on_listed_but_absent(tmp_path):
+    present = [s for s in _live_slugs() if s != "llm-root"]
+    r = _check_restore(tmp_path, present)
+    assert r.returncode == 0, r.stdout
+    assert "INFO source llm-root is in live_sources.txt but not in the database" in r.stdout
+    assert f"PASS sources: {len(present)} in the database" in r.stdout
+
+
+def test_check_restore_refuses_missing_live_list(tmp_path):
+    fake, build = _restore_check_env(tmp_path, _live_slugs())
+    args = ["--container", "nameleaf-db-1", "--db", "name_generator_20261101",
+            "--build-dir", str(build), "--live-sources", str(tmp_path / "missing.txt")]
+    r, calls = _run("check_restore.sh", args, fake, tmp_path)
+    assert r.returncode != 0 and "no live sources list" in r.stderr + r.stdout
+    assert calls == ""                                   # refused before docker

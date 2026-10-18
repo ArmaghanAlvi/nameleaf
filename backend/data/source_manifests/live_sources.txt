@@ -1,0 +1,18 @@
+# Live data sources: the slugs in master's `sources` table, as read by the
+# user on 2026-10-17 (Findings D-1b.1). Every slug here needs a
+# <slug>/source_manifest.json; backend/scripts/attribution/build_sources.py
+# generates /sources from them. check_restore.sh re-checks this list against
+# the restored database's `sources` table at every publish.
+awn4
+kaikki
+llm-root
+lsg
+odenet
+oewn-2025
+omw-arb
+omw-cmn
+omw-el
+omw-es
+omw-he
+omw-ja
+omw-pl

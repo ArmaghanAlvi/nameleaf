@@ -1,0 +1,22 @@
+{
+  "source_slug": "kaikki",
+  "language_code": "mul",
+  "language_codes": ["ang", "ar", "cy", "de", "el", "en", "es", "fa", "ga", "he", "hi", "is", "ja", "ko", "la", "non", "pl", "ru", "sa", "sw", "zh"],
+  "name": "Kaikki.org (Wiktionary data extracted with Wiktextract)",
+  "source_type": "dictionary_dump",
+  "upstream": "Wiktionary contributors",
+  "upstream_url": "https://en.wiktionary.org/",
+  "license": "CC-BY-SA 4.0 and GFDL",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "license_verified_from": "Primary: Wikimedia Foundation Terms of Use, section 7 'Licensing of Content' (https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use): text is licensed under CC BY-SA 4.0 and GFDL; 'Reusers may comply with either license or both.' Secondary: https://en.wiktionary.org/wiki/Wiktionary:Copyrights (states the same dual license; the page carries an 'outdated' / 'draft proposal' banner). kaikki.org states no license (https://kaikki.org/, https://kaikki.org/dictionary/rawdata.html, https://kaikki.org/dictionary/English/). All read 2026-10-18.",
+  "source_homepage": "https://kaikki.org/",
+  "format": "Wiktextract JSONL, English-edition per-language extracts (gzip)",
+  "attribution": "Tatu Ylonen: Wiktextract: Wiktionary as Machine-Readable Structured Data, Proceedings of the 13th Conference on Language Resources and Evaluation (LREC), pp. 1317-1325, Marseille, 20-25 June 2022.",
+  "allowed_uses": {
+    "store_headwords": true,
+    "store_short_glosses": true,
+    "redistribute_curated_rows": false,
+    "commit_raw_download_to_repo": false
+  },
+  "notes": "Imported from kaikki.org's per-language extracts of the English edition of Wiktionary (glosses and other metadata in English), one file per language, then modified: filtered, normalised and pruned before import (app/services/prune_taxonomy.py; notes PRUNING). SHARE-ALIKE: same posture as odenet/lsg/omw-arb (redistribute_curated_rows false). The attribution is the citation kaikki.org asks for."
+}

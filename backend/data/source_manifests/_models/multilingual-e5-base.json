@@ -1,0 +1,8 @@
+{
+  "name": "intfloat/multilingual-e5-base",
+  "revision": "d128750597153bb5987e10b1c3493a34e5a4502a",
+  "license": "MIT",
+  "license_as_stated": "mit",
+  "citation": "@article{wang2024multilingual,\n  title={Multilingual E5 Text Embeddings: A Technical Report},\n  author={Wang, Liang and Yang, Nan and Huang, Xiaolong and Yang, Linjun and Majumder, Rangan and Wei, Furu},\n  journal={arXiv preprint arXiv:2402.05672},\n  year={2024}\n}",
+  "license_verified_from": "Model card README.md front matter ('license: mit') and its Citation section, local Hugging Face cache, snapshot d128750597153bb5987e10b1c3493a34e5a4502a (README sha256 9d129cb0b912b55c7b5378f976a9c35ae4796c80466b659ad63930d8ca090fca), read 2026-10-18. The revision matches backend/Dockerfile.prod's EMBEDDING_MODEL_REVISION. Displayed as 'MIT' (user decision, D1b plan approval)."
+}
