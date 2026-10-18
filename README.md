@@ -2,7 +2,7 @@
 
 **Find names by meaning, across 21 languages.**
 
-You type a meaning, such as *light*, *freedom* or *brave*, and pick the sense you mean. NameLeaf then walks a multilingual word graph to find words and attested names that carry that meaning in 21 languages, from Arabic and Hindi to Old English and Welsh. Results are grouped by how far they are from the meaning you asked for. It is for anyone choosing a name with a meaning behind it: a baby, a story character, a game character.
+You type a meaning, such as *light*, *freedom* or *brave*, and pick the sense you mean. NameLeaf then walks a multilingual word graph to find words and attested names that carry that meaning in 21 languages, from Arabic and Latin to Japanese and Russian. Results are grouped by how far they are from the meaning you asked for. It is for anyone choosing a name with a meaning behind it: a baby, a story character, a game character.
 
 Launching soon at https://nameleaf.app
 
