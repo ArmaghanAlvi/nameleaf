@@ -36,8 +36,8 @@
 # Usage (all four required; no defaults for targets):
 #   build_reference.sh --source-container name_generator_db \
 #       --source-db name_generator \
-#       --build-container nameforge_build --port 55432 \
-#       --out ../nameforge_build_YYYYMMDD
+#       --build-container nameleaf_build --port 55432 \
+#       --out ../nameleaf_build_YYYYMMDD
 #   options: --image pgvector/pgvector:pg17  --shm-size 3g  --jobs 4
 #            --maintenance-work-mem 2GB  --parallel-workers 2
 #            --stop-after STEP  --keep-container
@@ -121,7 +121,7 @@ step_done() {  # name
 }
 
 TAB=$'\t'
-SRC_TMP="/tmp/nameforge_build_master_public.dump"
+SRC_TMP="/tmp/nameleaf_build_master_public.dump"
 
 # --- preflight (master read-only) --------------------------------------------
 note "preflight"

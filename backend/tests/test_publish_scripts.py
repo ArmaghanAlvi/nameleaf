@@ -82,14 +82,14 @@ def _run(script: str, args: list[str], fakes, cwd: Path):
 
 def _build_args(out: Path, **over) -> list[str]:
     a = {"--source-container": "name_generator_db", "--source-db": "name_generator",
-         "--build-container": "nameforge_build", "--port": "55432",
+         "--build-container": "nameleaf_build", "--port": "55432",
          "--out": str(out)}
     a.update(over)
     return [x for k, v in a.items() if v is not None for x in (k, v)]
 
 
 def _restore_args(build_dir: Path, **over) -> list[str]:
-    a = {"--container": "nameforge-db-1", "--db": "name_generator_20261101",
+    a = {"--container": "nameleaf-db-1", "--db": "name_generator_20261101",
          "--build-dir": str(build_dir), "--live": "empty"}
     a.update(over)
     out: list[str] = []
@@ -371,8 +371,8 @@ def test_sql_sessions_set_lock_timeout():
 def test_no_literal_passwords():
     roles = (PUBLISH / "roles.sql").read_text()
     assert not re.search(r"PASSWORD\s+'", roles)
-    assert "\\getenv admin_password NAMEFORGE_ADMIN_PASSWORD" in roles
-    assert "\\getenv app_password NAMEFORGE_APP_PASSWORD" in roles
+    assert "\\getenv admin_password NAMELEAF_ADMIN_PASSWORD" in roles
+    assert "\\getenv app_password NAMELEAF_APP_PASSWORD" in roles
     for path in [*SCRIPTS, *SQL_FILES]:
         assert not re.search(r"PASSWORD\s*=\s*['\"][^$'\"]", path.read_text()), path.name
 
@@ -383,7 +383,7 @@ def test_check_roles_runs_in_a_rolled_back_transaction():
     assert statements[0] == "BEGIN;"
     assert statements[-1] == "ROLLBACK;"
     text = (PUBLISH / "check_roles.sql").read_text()
-    assert "current_user <> 'nameforge_app'" in text
+    assert "current_user <> 'nameleaf_app'" in text
     assert text.count("RAISE NOTICE 'PASS") == 10
 
 
@@ -392,7 +392,7 @@ def test_grants_give_app_exactly_the_planned_privileges():
     grants = re.findall(r"^\s*GRANT .*?;", text, re.M | re.S)
     for g in grants:
         assert "DELETE" not in g and "TRUNCATE" not in g and "ALL PRIVILEGES" not in g, g
-        assert "nameforge_app" in g, g
+        assert "nameleaf_app" in g, g
     assert "GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA live" in text
     assert "GRANT SELECT ON ALL TABLES IN SCHEMA public" in text
     assert not re.search(r"GRANT\s+(INSERT|UPDATE)[^;]*SCHEMA public", text)
@@ -422,7 +422,7 @@ CASE_SQL = PUBLISH / "recall_case.sql"
 
 
 def _measure_args(out: Path, **over) -> list[str]:
-    a = {"--container": "nameforge-db-1", "--db": "name_generator_20261015",
+    a = {"--container": "nameleaf-db-1", "--db": "name_generator_20261015",
          "--probe": str(PROBE), "--out": str(out)}
     a.update(over)
     return ["measure", *[x for k, v in a.items() if v is not None for x in (k, v)]]

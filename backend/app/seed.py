@@ -362,7 +362,7 @@ def seed_database() -> None:
 
         seed_source = get_or_create_source(
             db,
-            name="Namecraft vertical-slice seed data",
+            name="NameLeaf vertical-slice seed data",
             source_type="development_seed",
             notes=(
                 "Temporary development data for validating the light "

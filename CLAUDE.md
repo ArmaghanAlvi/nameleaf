@@ -14,7 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-NameLeaf (nameleaf.app) is the public product name (Findings D-0.2). D1a replaces every live "Namecraft", "NameForge" and `nameforge` identifier with NameLeaf / `nameleaf`, in code, config, tests, comments, docs, and the notes that describe the running app; until then the old names remain. `name_generator`-style identifiers are permanent (the `name-generator` folder, `name_generator_db`, databases `name_generator*`). Records keep the old names: git history, Findings logs and past entries, committed run outputs, and files from past runs (Findings D-0.4). A semantic name generator: users search by *meaning*, and the backend traverses a multilingual wordnet-style graph (synonyms, translations, sense relations) to surface names/words related to that meaning across ~21 languages, ranked and grouped by hop distance from the queried sense.
+NameLeaf (nameleaf.app) is the public product name (Findings D-0.2). Code, config, tests, user-facing strings and internal identifiers use NameLeaf / `nameleaf` (compose project, images, roles `nameleaf_admin` / `nameleaf_app`, `NAMELEAF_*_PASSWORD`). `name_generator`-style identifiers are permanent (the `name-generator` folder, `name_generator_db`, databases `name_generator*`). Records keep the earlier names NameForge / Namecraft / `nameforge`: git history, Findings logs and past entries, the roadmap's Stages, committed run outputs, and files from past runs such as `nameforge_build_20261015/`, `nameforge_master_20261004.dump` and the pre-rename `nameforge_*` rehearsal volumes (Findings D-0.4, D-1a.2). A semantic name generator: users search by *meaning*, and the backend traverses a multilingual wordnet-style graph (synonyms, translations, sense relations) to surface names/words related to that meaning across ~21 languages, ranked and grouped by hop distance from the queried sense.
 
 - `backend/` — FastAPI + SQLAlchemy + Postgres/pgvector. The real engine: sense graph traversal, root selection, vector search, data import pipeline.
 - `frontend/` — Next.js 16 (App Router) + React 19 + Tailwind 4. Thin client over the backend API.
@@ -75,7 +75,7 @@ npm run lint
 
 ### Production stack (rehearsal only on this machine)
 
-`docker-compose.prod.yml` + `deploy/Caddyfile` + `.env.production` (template: `.env.production.example`). Always pass `-f docker-compose.prod.yml --env-file .env.production`: without `-f`, compose targets the dev stack, whose volume is the master database. Tear down rehearsal volumes by explicit name (`nameforge_*`), never with `down -v`. Running this stack and creating `.env.production` are the user's steps.
+`docker-compose.prod.yml` + `deploy/Caddyfile` + `.env.production` (template: `.env.production.example`). Always pass `-f docker-compose.prod.yml --env-file .env.production`: without `-f`, compose targets the dev stack, whose volume is the master database. Tear down rehearsal volumes by explicit name (`nameleaf_*`, and the pre-rename `nameforge_*` ones until D2 removes them), never with `down -v`. Running this stack and creating `.env.production` are the user's steps.
 
 The guard hook at `.claude/hooks/guard.py` enforces the destructive-command, secret-file, and git-write rules; its tests are `backend/tests/test_claude_guard.py`.
 
@@ -83,7 +83,7 @@ The guard hook at `.claude/hooks/guard.py` enforces the destructive-command, sec
 
 Mechanism: each publish restores a slimmed reference dump of schema `public` into a **new** database (`name_generator_<stamp>`) in the same Postgres instance, creates `live` (empty on the first publish, otherwise carried from the current database with no writes in flight), switches the backend's `DATABASE_URL` and restarts it, and keeps the previous database for one cycle as the rollback. `live` and `public` share a database because the dropdown joins them.
 - `build_reference.sh`: master is only read (a `pg_dump`, `psql` with `default_transaction_read_only=on`) and must be quiet. It slims by projection in a throwaway container and verifies counts plus synonyms and embeddings digests against master. The build manifest, not C1's counts, is the reference.
-- `roles.sql` (once per cluster) and `grants.sql` (each database): `nameforge_admin` owns every restored object; `nameforge_app` (the backend's role) gets read-only `public` plus `SELECT`/`INSERT`/`UPDATE` on `live`. Passwords come from the environment via `\getenv`, never the repo.
+- `roles.sql` (once per cluster) and `grants.sql` (each database): `nameleaf_admin` owns every restored object; `nameleaf_app` (the backend's role) gets read-only `public` plus `SELECT`/`INSERT`/`UPDATE` on `live`. Passwords come from the environment via `\getenv`, never the repo.
 - `restore_reference.sh`, `check_restore.sh`, `check_roles.sql`: restore, `ANALYZE`, `live`, grants, then checks.
 - Every write-side script requires explicit targets and refuses master's container, port and database before running anything. All Postgres clients run inside Postgres 17 containers (`docker exec -e PGOPTIONS=…`), never the host's. `backend/scripts/publish/README.md` has the commands and what remains unverified.
 

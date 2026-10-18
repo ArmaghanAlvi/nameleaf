@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Wordmark } from "@/components/brand/Wordmark";
 import { RotatingHeroSentence } from "@/components/landing/RotatingHeroSentence";
 
 const categories = [
@@ -24,8 +25,8 @@ export default function HomePage() {
     <main className="landing-bg min-h-screen">
       <header className="border-b border-slate-200 bg-white/70 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            Namecraft
+          <Link href="/">
+            <Wordmark />
           </Link>
 
           <Link

@@ -162,7 +162,7 @@ def create_app(cfg: Settings = settings) -> FastAPI:
 
     docs = cfg.docs_enabled
     app = FastAPI(
-        title="Namecraft API",
+        title="NameLeaf API",
         description="Backend API for searching and generating names by meaning.",
         lifespan=lifespan,
         docs_url="/docs" if docs else None,

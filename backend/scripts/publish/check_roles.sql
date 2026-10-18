@@ -1,7 +1,7 @@
--- check_roles.sql -- verify nameforge_app's privileges (PARTITION C4, Stage 2d).
--- Run AS nameforge_app, connected to the published database:
+-- check_roles.sql -- verify nameleaf_app's privileges (PARTITION C4, Stage 2d).
+-- Run AS nameleaf_app, connected to the published database:
 --   docker exec -i -e PGOPTIONS='-c lock_timeout=30s' <container> \
---     psql -X -U nameforge_app -d <db> < check_roles.sql
+--     psql -X -U nameleaf_app -d <db> < check_roles.sql
 -- Prints one NOTICE per item: "PASS <item>" or "FAIL <item>". Everything
 -- runs inside ONE transaction that is rolled back, so nothing persists even
 -- if a check that should fail unexpectedly succeeds. It refuses to run as
@@ -12,8 +12,8 @@ BEGIN;
 SET LOCAL lock_timeout = '30s';
 
 DO $$ BEGIN
-  IF current_user <> 'nameforge_app' THEN
-    RAISE EXCEPTION 'run check_roles.sql as nameforge_app (current_user=%)', current_user;
+  IF current_user <> 'nameleaf_app' THEN
+    RAISE EXCEPTION 'run check_roles.sql as nameleaf_app (current_user=%)', current_user;
   END IF;
 END $$;
 
@@ -50,7 +50,7 @@ END $$;
 
 DO $$ BEGIN
   BEGIN
-    EXECUTE 'CREATE TABLE public.nameforge_check_roles (x int)';
+    EXECUTE 'CREATE TABLE public.nameleaf_check_roles (x int)';
     RAISE NOTICE 'FAIL create_in_public: CREATE TABLE in public succeeded';
   EXCEPTION
     WHEN insufficient_privilege THEN RAISE NOTICE 'PASS create_in_public: refused (%)', SQLERRM;

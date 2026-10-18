@@ -8,12 +8,12 @@
 #   2. roles.sql once per Postgres cluster (re-runnable).
 #   3. THIS SCRIPT, into a new database name_generator_<stamp> in the same
 #      Postgres instance, while the current database keeps serving:
-#        preflight -> CREATE DATABASE (owner nameforge_admin) ->
-#        CREATE EXTENSION vector -> pg_restore -j (owner nameforge_admin) ->
+#        preflight -> CREATE DATABASE (owner nameleaf_admin) ->
+#        CREATE EXTENSION vector -> pg_restore -j (owner nameleaf_admin) ->
 #        ANALYZE -> live (empty, or carried from the current database) ->
-#        grants.sql -> check_restore.sh -> check_roles.sql as nameforge_app
+#        grants.sql -> check_restore.sh -> check_roles.sql as nameleaf_app
 #   4. (not scripted here) switch the backend's DATABASE_URL to
-#      nameforge_app@.../<new db> and restart it. Keep the previous database
+#      nameleaf_app@.../<new db> and restart it. Keep the previous database
 #      for one publish cycle as the rollback; drop it only after the next
 #      publish succeeds.
 #   `live` and `public` share one database (the dropdown joins
@@ -92,8 +92,8 @@ note "restore_reference.sh start: container=$CTR db=$DB live=$LIVE_MODE ${CARRY_
 manifest() { manifest_value "$BUILD_DIR" "$1"; }
 DUMP="$BUILD_DIR/$(manifest reference_dump)"
 LIVE_SQL="$BUILD_DIR/$(manifest live_schema_file)"
-TMP_DUMP="/tmp/nameforge_restore_$DB.dump"
-TMP_TOC="/tmp/nameforge_restore_$DB.toc"
+TMP_DUMP="/tmp/nameleaf_restore_$DB.dump"
+TMP_TOC="/tmp/nameleaf_restore_$DB.toc"
 STEP="preflight"
 trap 'note "FAILED during step: $STEP. Database $DB (if created) is left as is for inspection; nothing was dropped."' ERR
 
@@ -110,7 +110,7 @@ assert_shm_fits "$CTR" "$MWM" "$WORKERS"
 VERSION_NUM=$(psql_ro "$CTR" postgres -At -c "SHOW server_version_num")
 [[ "$VERSION_NUM" == 17* ]] || die "target is not Postgres 17 ($VERSION_NUM)"
 ROLES=$(psql_ro "$CTR" postgres -At -c \
-    "SELECT count(*) FROM pg_roles WHERE rolname IN ('nameforge_admin', 'nameforge_app')")
+    "SELECT count(*) FROM pg_roles WHERE rolname IN ('nameleaf_admin', 'nameleaf_app')")
 [[ "$ROLES" == 2 ]] || die "roles missing: run roles.sql first"
 EXISTS=$(psql_ro "$CTR" postgres -At -c "SELECT count(*) FROM pg_database WHERE datname = '$DB'")
 [[ "$EXISTS" == 0 ]] || die "database $DB already exists"
@@ -137,7 +137,7 @@ step_done preflight
 
 # --- create database + extension ------------------------------------------------
 STEP="create"
-psql_rw "$CTR" postgres -c "CREATE DATABASE $DB OWNER nameforge_admin"
+psql_rw "$CTR" postgres -c "CREATE DATABASE $DB OWNER nameleaf_admin"
 psql_rw "$CTR" "$DB" -c "CREATE EXTENSION IF NOT EXISTS vector"
 PGVECTOR=$(psql_rw "$CTR" "$DB" -At -c "SELECT extversion FROM pg_extension WHERE extname = 'vector'")
 [[ "$PGVECTOR" == "$(manifest pgvector_master)" ]] \
@@ -153,7 +153,7 @@ docker cp "$LOG_DIR/toc.filtered" "$CTR:$TMP_TOC"
 note "pg_restore -j $JOBS, maintenance_work_mem=$MWM, max_parallel_maintenance_workers=$WORKERS"
 docker exec -e PGOPTIONS="$PGOPTS_WRITE -c maintenance_work_mem=$MWM -c max_parallel_maintenance_workers=$WORKERS" \
     "$CTR" pg_restore -U postgres -d "$DB" -L "$TMP_TOC" --no-owner --no-privileges \
-    --role=nameforge_admin --exit-on-error -j "$JOBS" "$TMP_DUMP"
+    --role=nameleaf_admin --exit-on-error -j "$JOBS" "$TMP_DUMP"
 docker exec "$CTR" rm -f "$TMP_DUMP" "$TMP_TOC"
 step_done restore
 
@@ -165,13 +165,13 @@ step_done analyze
 
 # --- live ---------------------------------------------------------------------------
 STEP="live"
-psql_rw "$CTR" "$DB" -c "SET ROLE nameforge_admin" -f - < "$LIVE_SQL"
+psql_rw "$CTR" "$DB" -c "SET ROLE nameleaf_admin" -f - < "$LIVE_SQL"
 if [[ "$LIVE_MODE" == carry-from ]]; then
     docker exec -e PGOPTIONS="$PGOPTS_READONLY" "$CTR" \
         pg_dump -U postgres -d "$CARRY_FROM" -n live --data-only -Fc --lock-wait-timeout=30s \
       | docker exec -i -e PGOPTIONS="$PGOPTS_WRITE" "$CTR" \
         pg_restore -U postgres -d "$DB" --data-only --no-owner --no-privileges \
-        --role=nameforge_admin --exit-on-error
+        --role=nameleaf_admin --exit-on-error
     for t in sense_selection_stats sense_selection_events word_search_stats word_search_events; do
         a=$(psql_ro "$CTR" "$CARRY_FROM" -At -c "SELECT count(*) FROM live.$t")
         b=$(psql_ro "$CTR" "$DB" -At -c "SELECT count(*) FROM live.$t")
@@ -193,12 +193,12 @@ step_done check_restore
 
 STEP="check_roles"
 docker exec -i -e PGOPTIONS="$PGOPTS_WRITE" "$CTR" \
-    psql -X -v ON_ERROR_STOP=1 -U nameforge_app -d "$DB" < "$SCRIPT_DIR/check_roles.sql" \
+    psql -X -v ON_ERROR_STOP=1 -U nameleaf_app -d "$DB" < "$SCRIPT_DIR/check_roles.sql" \
     2>&1 | tee "$LOG_DIR/check_roles.txt"
 grep -q 'FAIL' "$LOG_DIR/check_roles.txt" && die "check_roles reported FAIL"
 [[ "$(grep -c 'PASS' "$LOG_DIR/check_roles.txt")" == 10 ]] || die "check_roles did not report 10 PASS lines"
 step_done check_roles
 
 note "restore complete: database $DB is ready. Next (by hand): point DATABASE_URL at"
-note "  postgresql+psycopg://nameforge_app:<password>@db:5432/$DB , restart the backend,"
+note "  postgresql+psycopg://nameleaf_app:<password>@db:5432/$DB , restart the backend,"
 note "  and keep the previous database for one publish cycle as the rollback."

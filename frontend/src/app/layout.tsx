@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { BRAND } from "@/lib/brand";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Namecraft",
-  description: "Discover names through meanings and languages.",
+  title: BRAND.name,
+  description: BRAND.tagline,
 };
 
 export default function RootLayout({

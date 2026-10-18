@@ -12,6 +12,7 @@ import {
   type LanguageInfo,
   type SearchLimits,
 } from "@/lib/api/explore";
+import { Wordmark } from "@/components/brand/Wordmark";
 import { InfoTip } from "@/components/generator/InfoTip";
 import { ResultDetails } from "@/components/generator/ResultDetails";
 import { VariantDropdown } from "@/components/generator/VariantDropdown";
@@ -487,18 +488,6 @@ function nameMeaningToShow(result: NameResult): string | null {
   if (value === result.meaning.trim()) return null;
   return value;
 }
-
-// Human labels for root provenance (the 5-rung ladder + orchestration,
-// Breakdown 4/4.5). Shown as a chip on non-English roots so a weak root
-// (fallback, pivoted_root) is diagnosable at a glance in the UI itself.
-const rootRungLabels: Record<string, string> = {
-  corroborated: "corroborated translation",
-  primary: "translation link",
-  ili: "wordnet synset",
-  llm: "LLM translation",
-  pivoted_root: "via English synonym",
-  fallback: "vector fallback",
-};
 
 type SliderLimits = Pick<SearchLimits, "maxWidth" | "maxDepth" | "largeThreshold">;
 
@@ -1369,8 +1358,8 @@ export function GeneratorPrototype() {
     <main className="min-h-screen">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Link href="/" className="text-xl font-bold tracking-tight">
-            Namecraft
+          <Link href="/">
+            <Wordmark />
           </Link>
 
         </div>

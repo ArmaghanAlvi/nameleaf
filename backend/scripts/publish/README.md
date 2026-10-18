@@ -26,7 +26,7 @@ database keeps serving:
    carried from the current database), applies `grants.sql`, and runs both
    checks.
 4. **Switch** (by hand; C6's runbook): point the backend's `DATABASE_URL` at
-   `nameforge_app@…/<new db>` and restart it. Keep the previous database for
+   `nameleaf_app@…/<new db>` and restart it. Keep the previous database for
    one publish cycle as the rollback.
 
 `live` and `public` share one database, because the dropdown joins
@@ -99,15 +99,15 @@ results at all, and by how much, is unverified until C5.
   to the outputs.
 - No script drops a database. A failed restore leaves the new database for
   inspection.
-- No passwords in the repo. `roles.sql` reads `NAMEFORGE_ADMIN_PASSWORD` and
-  `NAMEFORGE_APP_PASSWORD` with `\getenv`, passed in with `docker exec -e`.
+- No passwords in the repo. `roles.sql` reads `NAMELEAF_ADMIN_PASSWORD` and
+  `NAMELEAF_APP_PASSWORD` with `\getenv`, passed in with `docker exec -e`.
 
 ## Roles
 
 | Role | Privileges |
 |---|---|
-| `nameforge_admin` | Owns every restored object: `CREATE DATABASE … OWNER nameforge_admin`, `pg_restore --no-owner --role=nameforge_admin`, and `live_schema.sql` run after `SET ROLE` |
-| `nameforge_app` | The backend's role. `CONNECT`; `USAGE` and `SELECT` on `public`; `USAGE` on `live` with `SELECT`, `INSERT` and `UPDATE` on its tables and `USAGE` on its sequences; default privileges for future `live` objects. Nothing else. |
+| `nameleaf_admin` | Owns every restored object: `CREATE DATABASE … OWNER nameleaf_admin`, `pg_restore --no-owner --role=nameleaf_admin`, and `live_schema.sql` run after `SET ROLE` |
+| `nameleaf_app` | The backend's role. `CONNECT`; `USAGE` and `SELECT` on `public`; `USAGE` on `live` with `SELECT`, `INSERT` and `UPDATE` on its tables and `USAGE` on its sequences; default privileges for future `live` objects. Nothing else. |
 
 `CREATE EXTENSION vector` runs as the container superuser.
 
@@ -120,30 +120,30 @@ Run from `backend/scripts/publish/`. Names, ports and paths are examples.
 
 # 1. Build (Mac). Stop between steps with --stop-after <step> if wanted.
 ./build_reference.sh --source-container name_generator_db --source-db name_generator \
-    --build-container nameforge_build --port 55432 \
-    --out ~/Personal-Projects/nameforge_build_20261101 \
+    --build-container nameleaf_build --port 55432 \
+    --out ~/Personal-Projects/nameleaf_build_20261101 \
     --jobs 4 --maintenance-work-mem 2GB --parallel-workers 2 --shm-size 3g
 
 # 2. Rehearsal target: a clean pgvector/pgvector:pg17 container (C5 starts it;
-#    NOT master), e.g. nameforge_rehearsal with its own volume and
+#    NOT master), e.g. nameleaf_rehearsal with its own volume and
 #    --shm-size 1g (as production's compose; a parallel HNSW build needs
 #    /dev/shm >= maintenance_work_mem, and Docker's default is 64 MB --
 #    restore_reference.sh checks this). Then roles, once:
-export NAMEFORGE_ADMIN_PASSWORD=... NAMEFORGE_APP_PASSWORD=...
+export NAMELEAF_ADMIN_PASSWORD=... NAMELEAF_APP_PASSWORD=...
 docker exec -i -e PGOPTIONS='-c lock_timeout=30s' \
-    -e NAMEFORGE_ADMIN_PASSWORD -e NAMEFORGE_APP_PASSWORD nameforge_rehearsal \
+    -e NAMELEAF_ADMIN_PASSWORD -e NAMELEAF_APP_PASSWORD nameleaf_rehearsal \
     psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres < roles.sql
 
 # 3. Restore (first publish: empty live), including grants and both checks.
-./restore_reference.sh --container nameforge_rehearsal --db name_generator_20261101 \
-    --build-dir ~/Personal-Projects/nameforge_build_20261101 --live empty \
+./restore_reference.sh --container nameleaf_rehearsal --db name_generator_20261101 \
+    --build-dir ~/Personal-Projects/nameleaf_build_20261101 --live empty \
     --jobs 4 --maintenance-work-mem 1GB --parallel-workers 1
 
 # 4. (Optional) the checks on their own.
-./check_restore.sh --container nameforge_rehearsal --db name_generator_20261101 \
-    --build-dir ~/Personal-Projects/nameforge_build_20261101
-docker exec -i -e PGOPTIONS='-c lock_timeout=30s' nameforge_rehearsal \
-    psql -X -U nameforge_app -d name_generator_20261101 < check_roles.sql
+./check_restore.sh --container nameleaf_rehearsal --db name_generator_20261101 \
+    --build-dir ~/Personal-Projects/nameleaf_build_20261101
+docker exec -i -e PGOPTIONS='-c lock_timeout=30s' nameleaf_rehearsal \
+    psql -X -U nameleaf_app -d name_generator_20261101 < check_roles.sql
 
 # Later publishes: carry live from the current database.
 ./restore_reference.sh ... --live carry-from name_generator_20261101 [--allow-connections]

@@ -4,9 +4,9 @@
 #
 #   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
 #
-# The project name "nameforge" keeps containers and volumes separate from the
+# The project name "nameleaf" keeps containers and volumes separate from the
 # dev stack (docker-compose.yml), whose volume holds the master database.
-name: nameforge
+name: nameleaf
 
 services:
   db:
@@ -44,7 +44,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.prod
-    image: nameforge-backend:${IMAGE_TAG:-latest}
+    image: nameleaf-backend:${IMAGE_TAG:-latest}
     restart: unless-stopped
     environment:
       APP_ENV: production
@@ -76,7 +76,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
-    image: nameforge-frontend:${IMAGE_TAG:-latest}
+    image: nameleaf-frontend:${IMAGE_TAG:-latest}
     restart: unless-stopped
     networks: [edge]
     deploy:
