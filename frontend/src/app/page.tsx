@@ -1,6 +1,29 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { RotatingHeroSentence } from "@/components/landing/RotatingHeroSentence";
+import { BRAND } from "@/lib/brand";
+import { absoluteUrl, pageMetadata } from "@/lib/site";
+
+// No title: the landing page shares the root layout's segment, so it uses the
+// layout's default title ("NameLeaf") without the " · NameLeaf" template.
+export const metadata: Metadata = pageMetadata({
+  description:
+    "Pick a meaning and find real names and related words from 21 languages, from Arabic and Hindi to Old English and Welsh.",
+  path: "/",
+});
+
+// WebSite structured data (Stage 5c). No potentialAction / SearchAction:
+// /generate can't take a search from the URL. `<` is escaped as <, as
+// the Next JSON-LD guide recommends. The @context is schema.org's vocabulary
+// identifier, not a fetched URL (allowed in D3b planning).
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BRAND.name,
+  url: absoluteUrl("/"),
+  description: BRAND.tagline,
+};
 
 const categories = [
   {
@@ -23,6 +46,12 @@ const categories = [
 export default function HomePage() {
   return (
     <main className="landing-bg min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <header className="border-b border-slate-200 bg-white/70 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
           <Link href="/" className="inline-flex min-h-11 items-center">

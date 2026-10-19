@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/Wordmark";
+import { pageMetadata } from "@/lib/site";
 import { LEGAL_LAST_UPDATED } from "@/lib/legal";
 
 // Text approved in D2 (D-2.2), verbatim; only the markup is added here.
-export const metadata: Metadata = {
-  title: "Privacy · NameLeaf",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy",
+  description:
+    "How NameLeaf handles your searches: no accounts, cookies or tracking; searches aren't saved and IP addresses aren't logged.",
+  path: "/privacy",
+});
 
 const h2 = "mt-10 text-xl font-bold tracking-tight";
 const p = "mt-3 leading-7 text-slate-700";

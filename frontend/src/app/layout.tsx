@@ -1,11 +1,25 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { BRAND } from "@/lib/brand";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
+// Site-wide defaults. Each public page adds its own title, description,
+// canonical and og/twitter fields through pageMetadata() (lib/site.ts).
 export const metadata: Metadata = {
-  title: BRAND.name,
+  metadataBase: SITE_URL,
+  title: {
+    default: BRAND.name,
+    template: `%s · ${BRAND.name}`,
+  },
   description: BRAND.tagline,
+  openGraph: {
+    siteName: BRAND.name,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

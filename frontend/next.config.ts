@@ -18,8 +18,17 @@ const nextConfig: NextConfig = {
     proxyTimeout: 360_000,
   },
   async rewrites() {
-    if (process.env.NODE_ENV !== "development") return [];
-    return [{ source: "/api/:path*", destination: `${devApiTarget}/:path*` }];
+    // Every environment: browsers request /favicon.ico by default. Serve the
+    // generated 32 px PNG icon there (app/icon.tsx, drawn from lib/brand.ts),
+    // so the mark keeps one source (D-3a.8 F1). A plain array is applied
+    // after the filesystem check, and nothing else serves /favicon.ico.
+    const always = [{ source: "/favicon.ico", destination: "/icon/png" }];
+    // The /api proxy stays local dev only (see devApiTarget above).
+    if (process.env.NODE_ENV !== "development") return always;
+    return [
+      ...always,
+      { source: "/api/:path*", destination: `${devApiTarget}/:path*` },
+    ];
   },
 };
 

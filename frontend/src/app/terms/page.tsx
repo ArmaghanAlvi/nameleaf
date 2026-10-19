@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/Wordmark";
+import { pageMetadata } from "@/lib/site";
 import { LEGAL_LAST_UPDATED } from "@/lib/legal";
 
 // Text approved in D2 (D-2.2), verbatim; only the markup is added here.
-export const metadata: Metadata = {
-  title: "Terms · NameLeaf",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Terms",
+  description:
+    "The terms for using NameLeaf: a free service whose results are automatic suggestions, with data reusable under its sources' licenses.",
+  path: "/terms",
+});
 
 const h2 = "mt-10 text-xl font-bold tracking-tight";
 const p = "mt-3 leading-7 text-slate-700";

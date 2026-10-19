@@ -12,6 +12,13 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# Static pages (and the sitemap, robots.txt, canonical and og:* URLs) are
+# rendered at build time, so SITE_URL must be known here: a value set only
+# when the container runs would leave localhost URLs baked into the HTML
+# (src/lib/site.ts). tests/test_production_config.py checks these lines.
+ARG SITE_URL
+RUN test -n "$SITE_URL" || (echo "SITE_URL is required (set it in .env.production)" >&2; exit 1)
+ENV SITE_URL=$SITE_URL
 RUN npm run build
 
 FROM node:${NODE_VERSION}-slim AS runtime

@@ -15,6 +15,7 @@ import {
 import { Wordmark } from "@/components/brand/Wordmark";
 import { InfoTip } from "@/components/generator/InfoTip";
 import { ResultsDisclaimer } from "@/components/generator/ResultsDisclaimer";
+import { GENERATED_NAMES_ENABLED } from "@/lib/features";
 import { ResultDetails } from "@/components/generator/ResultDetails";
 import { VariantDropdown } from "@/components/generator/VariantDropdown";
 import {
@@ -1628,7 +1629,14 @@ export function GeneratorPrototype() {
             }
             className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 bg-white px-3 py-2"
           >
-            {categoryOptions.map((option) => (
+            {categoryOptions
+              // "Generated names" stays in the array; hidden while the
+              // feature is off (lib/features.ts).
+              .filter(
+                (option) =>
+                  GENERATED_NAMES_ENABLED || option.value !== "generated"
+              )
+              .map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -1817,6 +1825,9 @@ export function GeneratorPrototype() {
             </datalist>
           </div>
 
+          {/* Hidden until generated names exist (lib/features.ts). */}
+          {GENERATED_NAMES_ENABLED && (
+            <>
           <span className="mt-5 block text-sm font-semibold text-slate-400">
             Generation flavor
             <InfoTip label="Generation flavor">
@@ -1841,6 +1852,8 @@ export function GeneratorPrototype() {
               </option>
             ))}
           </select>
+            </>
+          )}
           </div>
 
           {sort === "language" && resultGroups.length > 1 && (
