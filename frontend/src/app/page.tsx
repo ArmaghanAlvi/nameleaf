@@ -14,8 +14,8 @@ const categories = [
     style: "border-yellow-200 bg-yellow-50",
   },
   {
-    title: "Generated names",
-    description: "New names crafted from your selected meanings.",
+    title: "Generated names (coming later)",
+    description: "New names built from your chosen meanings are planned, not yet available.",
     style: "border-blue-200 bg-blue-50",
   },
 ];
@@ -24,21 +24,21 @@ export default function HomePage() {
   return (
     <main className="landing-bg min-h-screen">
       <header className="border-b border-slate-200 bg-white/70 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-          <Link href="/">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6">
+          <Link href="/" className="inline-flex min-h-11 items-center">
             <Wordmark />
           </Link>
 
           <Link
             href="/generate"
-            className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700"
+            className="inline-flex min-h-11 items-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700"
           >
             Explore names
           </Link>
         </div>
       </header>
 
-      <section className="mx-auto max-w-6xl px-6 py-20 text-center sm:py-28">
+      <section className="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6 sm:py-28">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
           Names shaped by meaning
         </p>
@@ -46,9 +46,8 @@ export default function HomePage() {
         <RotatingHeroSentence />
 
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-          Explore established names, words across languages, and newly crafted names
-          <br />
-          inspired by languages from around the world.
+          Explore real names, related words and word roots from 21 languages that
+          share the meaning you choose.
         </p>
 
         <div className="mt-10">
@@ -61,7 +60,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-20">
+      <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
             <article

@@ -14,6 +14,23 @@
 # 2.11.4 rejects those option names, so add them only with the upgrade.
 # SITE_ADDRESS: "localhost" on the Mac (Caddy's internal CA), the real domain
 # on the server (automatic Let's Encrypt).
+
+# Global options. Must stay the first block; the timeouts above go in here
+# when Caddy is upgraded.
+#
+# No request logging at all (D-2.2 L1). There is no `log` directive in the
+# site block, so there is no access log. Caddy's default error logger,
+# http.log.error, would still record the request (client IP and the URI,
+# including the typed word) whenever Caddy returns a 5xx, so it is excluded
+# from the default logger. Upstream-error detail now comes from the backend's
+# own logs and `docker ps` (health status), not from Caddy.
+# tests/test_production_logging.py fails if this exclusion disappears.
+{
+	log default {
+		exclude http.log.error
+	}
+}
+
 {$SITE_ADDRESS} {
 	encode zstd gzip
 

@@ -8,10 +8,20 @@
 # dev stack (docker-compose.yml), whose volume holds the master database.
 name: nameleaf
 
+# Every container's Docker log is size-capped and rotated (D-2.2 L1): at most
+# 3 files of 10 MB each, oldest overwritten. tests/test_production_logging.py
+# fails if a service loses this.
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   db:
     image: pgvector/pgvector:pg17
     restart: unless-stopped
+    logging: *default-logging
     environment:
       # Bootstrap database only (C-5.8): published data lives in
       # name_generator_<stamp> databases created by restore_reference.sh.
@@ -46,6 +56,7 @@ services:
       dockerfile: Dockerfile.prod
     image: nameleaf-backend:${IMAGE_TAG:-latest}
     restart: unless-stopped
+    logging: *default-logging
     environment:
       APP_ENV: production
       DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL in .env.production}
@@ -78,6 +89,7 @@ services:
       dockerfile: Dockerfile.prod
     image: nameleaf-frontend:${IMAGE_TAG:-latest}
     restart: unless-stopped
+    logging: *default-logging
     networks: [edge]
     deploy:
       resources:
@@ -88,6 +100,7 @@ services:
     # Pinned, not caddy:2 -- see the comment at the top of deploy/Caddyfile.
     image: caddy:2.11.4
     restart: unless-stopped
+    logging: *default-logging
     ports:
       - "80:80"
       - "443:443"

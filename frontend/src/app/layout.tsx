@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SiteFooter } from "@/components/site/SiteFooter";
 import { BRAND } from "@/lib/brand";
 import "./globals.css";
 
@@ -14,8 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-stone-50 text-slate-900 antialiased">
-        {children}
+      <body className="flex min-h-screen flex-col bg-stone-50 text-slate-900 antialiased">
+        <div className="flex-1">{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );

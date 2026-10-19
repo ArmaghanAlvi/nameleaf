@@ -105,7 +105,7 @@ export function InfoTip({
           setHovered(false);
           setPinned(false);
         }}
-        className="ml-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full border border-slate-300 text-[10px] font-bold leading-none text-slate-500 transition hover:border-slate-500 hover:text-slate-700"
+        className="relative ml-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full border before:absolute before:-inset-[14px] before:content-[''] border-slate-300 text-[10px] font-bold leading-none text-slate-500 transition hover:border-slate-500 hover:text-slate-700"
       >
         i
       </button>

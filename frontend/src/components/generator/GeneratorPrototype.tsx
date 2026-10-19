@@ -14,6 +14,7 @@ import {
 } from "@/lib/api/explore";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { InfoTip } from "@/components/generator/InfoTip";
+import { ResultsDisclaimer } from "@/components/generator/ResultsDisclaimer";
 import { ResultDetails } from "@/components/generator/ResultDetails";
 import { VariantDropdown } from "@/components/generator/VariantDropdown";
 import {
@@ -512,6 +513,108 @@ function SliderTicks({ max }: { max: number }) {
   );
 }
 
+// B-6.3's note, verbatim: shown on the sliders and while a large search runs.
+const LARGE_SEARCH_NOTE =
+  "Large searches can take a few minutes. Keep this page open until it finishes.";
+
+// A fetch that fails after this long is most likely the browser or a proxy
+// closing a long search's connection rather than the network. Heuristic from
+// B-5.4's browser limits (~300 s, unverified), not a measured value.
+const LONG_SEARCH_CUTOFF_MS = 240_000;
+
+type ErrorTone = "error" | "busy";
+
+// How a failed search reads on the page (trace-E3). Backend messages for
+// 422/503/504 (B-5.1's {"detail": {code, message, retryAfter}}) are written
+// for users and shown as they are; everything else gets plain wording.
+function searchErrorView(
+  error: unknown,
+  elapsedMs: number
+): { text: string; tone: ErrorTone } {
+  if (error instanceof ApiError) {
+    if (error.userMessage) {
+      if (error.status === 503) {
+        const retry =
+          error.retryAfter !== null
+            ? ` You can try again in about ${error.retryAfter} seconds.`
+            : "";
+        return { text: `${error.userMessage}${retry}`, tone: "busy" };
+      }
+      return { text: error.userMessage, tone: "error" };
+    }
+    if (error.status === 502 || error.status === 503 || error.status === 504) {
+      return {
+        text: "NameLeaf's search isn't responding right now. Please try again in a minute.",
+        tone: "error",
+      };
+    }
+    return {
+      text: "Something went wrong on our side. Please try again; if it keeps happening, email contact@nameleaf.app.",
+      tone: "error",
+    };
+  }
+  if (error instanceof TypeError) {
+    // fetch() rejects with a TypeError when no response arrived at all.
+    return elapsedMs >= LONG_SEARCH_CUTOFF_MS
+      ? {
+          text: "The search ran too long and the connection closed. Try a smaller search (lower breadth or depth).",
+          tone: "error",
+        }
+      : {
+          text: "Couldn't reach NameLeaf. Check your connection and keep this page open while a search runs, then try again.",
+          tone: "error",
+        };
+  }
+  return {
+    text: "Something went wrong on our side. Please try again; if it keeps happening, email contact@nameleaf.app.",
+    tone: "error",
+  };
+}
+
+function formatElapsed(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
+// Shown in place of the results while a search is in flight.
+function SearchProgress({
+  elapsedSeconds,
+  languageCount,
+  large,
+}: {
+  elapsedSeconds: number;
+  languageCount: number;
+  large: boolean;
+}) {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="mt-6 rounded-3xl border border-slate-200 bg-white p-6 sm:p-10"
+    >
+      <div className="flex items-center gap-3">
+        <span
+          aria-hidden
+          className="h-3 w-3 shrink-0 animate-pulse rounded-full bg-slate-900"
+        />
+        <h3 className="font-bold">
+          Searching {languageCount} language{languageCount === 1 ? "" : "s"}…
+        </h3>
+        <span className="ml-auto text-sm tabular-nums text-slate-500">
+          {formatElapsed(elapsedSeconds)}
+        </span>
+      </div>
+      {elapsedSeconds >= 8 && (
+        <p className="mt-3 text-sm text-slate-600">
+          Still working. Searches across many languages can take a while.
+        </p>
+      )}
+      {large && <p className="mt-3 text-sm text-slate-600">{LARGE_SEARCH_NOTE}</p>}
+    </div>
+  );
+}
+
 export function GeneratorPrototype() {
   const [inputValue, setInputValue] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
@@ -535,6 +638,17 @@ export function GeneratorPrototype() {
   const [results, setResults] = useState<NameResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  // "busy" (a 503 with a message: queue full / large search running) is
+  // shown as a calm notice, not as an error.
+  const [errorTone, setErrorTone] = useState<ErrorTone>("error");
+  const [lookupFailed, setLookupFailed] = useState(false);
+  // Elapsed time of the search in flight, for the progress panel and to tell
+  // a long search's dropped connection from an ordinary network failure.
+  // The clock is read only in the ticking effect below; the error path reads
+  // the latest tick from elapsedMsRef (at most ~1 s stale).
+  const elapsedMsRef = useRef(0);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [searchIsLarge, setSearchIsLarge] = useState(false);
 
   const [senseOptions, setSenseOptions] = useState<SenseOption[]>([]);
   const [selectedSenseIds, setSelectedSenseIds] = useState<number[]>([]);
@@ -766,6 +880,19 @@ export function GeneratorPrototype() {
     return code && rtlCodes.has(code) ? "rtl" : undefined;
   }
 
+  // Ticks the progress panel's elapsed time while a search is in flight.
+  useEffect(() => {
+    if (!isLoading) return;
+    const startedAt = Date.now();
+    elapsedMsRef.current = 0;
+    const timer = setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      elapsedMsRef.current = elapsed;
+      setElapsedSeconds(Math.floor(elapsed / 1000));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [isLoading]);
+
   useEffect(() => {
     const query = inputValue.trim();
 
@@ -776,6 +903,7 @@ export function GeneratorPrototype() {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setSenseOptions([]);
       setShowDropdown(false);
+      setLookupFailed(false);
       return;
     }
 
@@ -785,9 +913,11 @@ export function GeneratorPrototype() {
         const response = await lookupSenses(query, "en");
         setSenseOptions(response.options);
         setShowDropdown(response.options.length > 0);
+        setLookupFailed(false);
       } catch {
         setSenseOptions([]);
         setShowDropdown(false);
+        setLookupFailed(true);
       } finally {
         setIsLookingUpSenses(false);
       }
@@ -853,9 +983,9 @@ export function GeneratorPrototype() {
         className={`rounded-3xl border p-5 ${categoryStyles[result.category]}`}
       >
         <div className="flex items-start justify-between gap-4">
-          <div>
+          <div className="min-w-0">
             <h3
-              className="text-2xl font-bold"
+              className="break-words text-2xl font-bold"
               dir={dirFor(result.languageCode)}
             >
               {result.name}
@@ -1263,8 +1393,12 @@ export function GeneratorPrototype() {
     const controller = new AbortController();
     inFlightRef.current = controller;
 
+    elapsedMsRef.current = 0;
+    setElapsedSeconds(0);
+    setSearchIsLarge(breadth * depth >= searchLimits.largeThreshold);
     setIsLoading(true);
     setErrorMessage(null);
+    setErrorTone("error");
 
     try {
       const response = await exploreSelectedSenses(
@@ -1298,12 +1432,11 @@ export function GeneratorPrototype() {
       setResults([]);
       setActiveSearch(queryAtDispatch);
       // B5: a limit (422), busy (503) or timeout (504) response carries a
-      // message meant for the user; show it instead of a generic failure.
-      setErrorMessage(
-        error instanceof ApiError && error.userMessage
-          ? error.userMessage
-          : "The exploration backend is unavailable. Start FastAPI and search again."
-      );
+      // message meant for the user; everything else gets plain wording
+      // (trace-E3). No status codes, JSON or stack traces reach the page.
+      const view = searchErrorView(error, elapsedMsRef.current);
+      setErrorMessage(view.text);
+      setErrorTone(view.tone);
     } finally {
       if (requestId === requestIdRef.current) setIsLoading(false);
     }
@@ -1357,8 +1490,8 @@ export function GeneratorPrototype() {
   return (
     <main className="min-h-screen">
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <Link href="/">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-5 sm:px-6">
+          <Link href="/" className="inline-flex min-h-11 items-center">
             <Wordmark />
           </Link>
 
@@ -1366,7 +1499,7 @@ export function GeneratorPrototype() {
       </header>
 
       <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <h1 className="text-3xl font-bold tracking-tight">
             Explore names by meaning
           </h1>
@@ -1457,15 +1590,29 @@ export function GeneratorPrototype() {
             </div>
           </form>
 
-          {errorMessage && (
-            <p className="mt-3 text-sm font-semibold text-red-600">
-              {errorMessage}
+          {errorMessage &&
+            (errorTone === "busy" ? (
+              <p
+                role="status"
+                className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900"
+              >
+                {errorMessage}
+              </p>
+            ) : (
+              <p role="alert" className="mt-3 text-sm font-semibold text-red-600">
+                {errorMessage}
+              </p>
+            ))}
+
+          {lookupFailed && (
+            <p className="mt-2 text-sm text-slate-600">
+              Couldn&apos;t load meanings right now. Try again in a moment.
             </p>
           )}
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-8 px-6 py-8 lg:grid-cols-[260px_1fr]">
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[260px_1fr]">
         <aside className="flex flex-col gap-6 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:self-start lg:overflow-y-auto">
           <div className="rounded-3xl border border-slate-200 bg-white p-5">
           <h2 className="font-bold">Filters</h2>
@@ -1479,7 +1626,7 @@ export function GeneratorPrototype() {
             onChange={(event) =>
               setCategory(event.target.value as CategoryFilter)
             }
-            className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-3 py-2"
+            className="mt-2 min-h-11 w-full rounded-xl border border-slate-300 bg-white px-3 py-2"
           >
             {categoryOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -1494,7 +1641,7 @@ export function GeneratorPrototype() {
               onClick={() => setLanguagesOpen((open) => !open)}
               aria-expanded={languagesOpen}
               aria-controls="language-panel"
-              className="flex w-full items-center justify-between gap-2 text-left text-sm font-semibold text-slate-700"
+              className="flex min-h-11 w-full items-center justify-between gap-2 text-left text-sm font-semibold text-slate-700"
             >
               <span>
                 Languages
@@ -1653,7 +1800,7 @@ export function GeneratorPrototype() {
               <SliderTicks max={searchLimits.maxDepth} />
               {breadth * depth >= searchLimits.largeThreshold && (
                 <p className="mt-2 text-slate-600" style={{ fontSize: "11px" }}>
-                  <i>Large searches can take a few minutes.</i>
+                  <i>{LARGE_SEARCH_NOTE}</i>
                 </p>
               )}
             </div>
@@ -1686,7 +1833,7 @@ export function GeneratorPrototype() {
             disabled
             aria-disabled="true"
             title="Generated names are not implemented yet"
-            className="mt-2 w-full cursor-not-allowed rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-400"
+            className="mt-2 min-h-11 w-full cursor-not-allowed rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-400"
           >
             {flavorOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -1747,7 +1894,7 @@ export function GeneratorPrototype() {
                 Results
               </p>
 
-              <h2 className="mt-1 text-2xl font-bold">
+              <h2 className="mt-1 break-words text-2xl font-bold">
                 {activeSearch
                   ? `${visibleResults.length} matches for “${activeSearch}”`
                   : "Search to begin"}
@@ -1765,7 +1912,7 @@ export function GeneratorPrototype() {
                     type="button"
                     onClick={() => setViewMode("cards")}
                     aria-pressed={viewMode === "cards"}
-                    className={`px-3 py-2 text-sm font-semibold transition ${
+                    className={`min-h-11 px-3 py-2 text-sm font-semibold transition ${
                       viewMode === "cards"
                         ? "bg-slate-900 text-white"
                         : "bg-white text-slate-600 hover:bg-slate-50"
@@ -1777,7 +1924,7 @@ export function GeneratorPrototype() {
                     type="button"
                     onClick={() => setViewMode("list")}
                     aria-pressed={viewMode === "list"}
-                    className={`border-l border-slate-300 px-3 py-2 text-sm font-semibold transition ${
+                    className={`min-h-11 border-l border-slate-300 px-3 py-2 text-sm font-semibold transition ${
                       viewMode === "list"
                         ? "bg-slate-900 text-white"
                         : "bg-white text-slate-600 hover:bg-slate-50"
@@ -1802,7 +1949,7 @@ export function GeneratorPrototype() {
                   onChange={(event) =>
                     setSort(event.target.value as SortOption)
                   }
-                  className="mt-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
+                  className="mt-1 min-h-11 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
                 >
                   <option value="cardtype">Type</option>
                   <option value="language">Language</option>
@@ -1816,8 +1963,16 @@ export function GeneratorPrototype() {
             </div>
           </div>
 
-          {visibleResults.length === 0 ? (
-            <div className="mt-6 rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center">
+          {isLoading ? (
+            <SearchProgress
+              elapsedSeconds={elapsedSeconds}
+              languageCount={
+                availableLanguages.length > 0 ? enabledCodes.length : 1
+              }
+              large={searchIsLarge}
+            />
+          ) : visibleResults.length === 0 ? (
+            <div className="mt-6 rounded-3xl border border-dashed border-slate-300 bg-white p-6 text-center sm:p-10">
               <h3 className="font-bold">
                 {activeSearch ? "No results found" : "Nothing searched yet"}
               </h3>
@@ -1845,7 +2000,7 @@ export function GeneratorPrototype() {
                         type="button"
                         onClick={() => toggleLanguageCollapsed(group.key)}
                         aria-expanded={!isCollapsed}
-                        className="flex w-full items-center gap-2 border-b border-slate-200 pb-2 text-left"
+                        className="flex min-h-11 w-full items-center gap-2 border-b border-slate-200 pb-2 text-left"
                       >
                         <span className="text-sm font-bold uppercase tracking-[0.16em] text-slate-600">
                           {group.label}
@@ -1887,6 +2042,7 @@ export function GeneratorPrototype() {
                   </section>
                 );
               })}
+              <ResultsDisclaimer />
             </div>
           )}
         </div>

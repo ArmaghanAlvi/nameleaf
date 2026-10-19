@@ -43,5 +43,10 @@ EXPOSE 8000
 # One worker: each worker loads its own model copy on a RAM-bound server.
 # --proxy-headers makes rate limiting see real visitor IPs; trusting "*" is
 # safe only because the backend has no published port (only Caddy reaches it).
+# --no-access-log (D-2.2 L1): production writes no access logs. uvicorn's
+# access line carried the visitor's IP plus the typed word in the query
+# string (D-2.5), which the privacy page says is never logged.
+# tests/test_production_logging.py fails if this flag disappears.
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
-     "--workers", "1", "--proxy-headers", "--forwarded-allow-ips", "*"]
+     "--workers", "1", "--proxy-headers", "--forwarded-allow-ips", "*", \
+     "--no-access-log"]

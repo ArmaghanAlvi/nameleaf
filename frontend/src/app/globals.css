@@ -16,11 +16,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Light-only until a real dark theme is designed (D-3a.7). The block that
+   create-next-app put here switched the page to dark colours on dark-mode
+   phones, while the cards stayed white. This also keeps form controls and
+   scrollbars in their light style. */
+:root {
+  color-scheme: light;
 }
 
 body {

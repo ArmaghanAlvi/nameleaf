@@ -106,14 +106,14 @@ export default function SourcesPage() {
   return (
     <main className="min-h-screen bg-stone-50">
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-5">
-          <Link href="/">
+        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-5 sm:px-6">
+          <Link href="/" className="inline-flex min-h-11 items-center">
             <Wordmark />
           </Link>
         </div>
       </header>
 
-      <div className="mx-auto max-w-4xl px-6 py-12">
+      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <h1 className="text-3xl font-bold tracking-tight">Sources</h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
           NameLeaf is built from the open sources below. Each one has been imported,
@@ -134,13 +134,13 @@ export default function SourcesPage() {
         </Section>
 
         <Section title="Machine-generated data">
-          {bySection("machine").map((source) => (
-            <SourceCard key={source.slug} source={source} />
-          ))}
           <p className="text-sm leading-6 text-slate-700">
             Origin labels on English-labelled names were resolved partly by Google
             Gemini, from each name and its meaning as recorded in Wiktionary.
           </p>
+          {bySection("machine").map((source) => (
+            <SourceCard key={source.slug} source={source} />
+          ))}
         </Section>
 
         <Section title="Model">
@@ -150,10 +150,10 @@ export default function SourcesPage() {
           {data.models.map((model) => (
             <article
               key={model.name}
-              className="rounded-2xl border border-slate-200 bg-white p-5"
+              className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5"
             >
-              <h3 className="font-semibold">{model.name}</h3>
-              <p className="mt-2 text-sm text-slate-500">Revision {model.revision}</p>
+              <h3 className="break-words font-semibold">{model.name}</h3>
+              <p className="mt-2 break-all text-sm text-slate-500">Revision {model.revision}</p>
               <pre className="mt-3 overflow-x-auto whitespace-pre-wrap rounded-lg bg-slate-50 p-3 text-xs leading-5 text-slate-700">
                 {model.citation}
               </pre>

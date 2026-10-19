@@ -138,7 +138,9 @@ function RotatingWord({ items, initialDelayMs = 0 }: RotatingWordProps) {
 
 export function RotatingHeroSentence() {
   return (
-    <h1 className="mx-auto max-w-6xl text-center text-4xl font-bold tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
+    // text-3xl below sm: the rotating phrases don't wrap (whitespace-nowrap),
+    // and "fictional character" at text-4xl is wider than a 360 px screen.
+    <h1 className="mx-auto max-w-6xl text-center text-3xl font-bold tracking-tight text-slate-950 sm:text-6xl lg:text-7xl">
       <span className="sr-only">
         I want to find or craft a name for my baby, fictional character, or
         creative project.
