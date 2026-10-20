@@ -259,8 +259,8 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7), sequenced into M
 | 1 CPU readiness | done (Breakdown B) |
 | 2 Production data build | done (Breakdown C) |
 | 3 Configuration and hardening | done (Breakdown A) |
-| 4 Name, legal pages, UI | in progress (D0 done) |
-| 5 Findability | not started |
+| 4 Name, legal pages, UI | done (Breakdown D) |
+| 5 Findability | done (Breakdown D; 5d Search Console in E3) |
 | 6 Hosting and first publish | not started (user) |
 | 7 Launch verification | not started |
 
