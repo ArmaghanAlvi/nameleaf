@@ -189,7 +189,7 @@ This project's standing convention (see `notes/CLEANUP_AND_TWEAKS_ROADMAP.MD` ap
 - These are run after any change touching `multi_hop_expansion.py`, `parallel_expansion.py`, `root_selection.py`, `vector_scope.py`, `sense_reranker.py`, `dropdown_ranker.py`, `embedding_provider.py`, etc. — a 0-diff result is the bar, not a nice-to-have.
 - `capture_api_current.py` has a side effect (writes `SenseSelectionStat`) that `capture_engine_reference.py` does not — re-baseline references before comparing if ordinary API usage happened in between.
 - The established-names invariant is 106,398 rows; a change that alters it is a finding, not a side effect.
-- The usage-statistics fingerprint, recorded before and after every gate run, is `count(*) | sum(selection_count) | max(last_selected_at)` over `live.sense_selection_stats` (over `public.sense_selection_stats` until C3 applies migration `a7c3e91f0b52`). `scripts/eval/db_preflight.py` prints it, read-only and without docker, through the model, so it follows the table.
+- The usage-statistics fingerprint, recorded before and after every gate run, is `count(*) | sum(selection_count) | max(last_selected_at)` over `live.sense_selection_stats`. `scripts/eval/db_preflight.py` prints it, read-only and without docker, through the model, so it follows the table.
 
 Additional rules for the publishing work:
 - **Gates certify production only when run in production's configuration**: `EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=2 RANKING_STATS_WRITE=0`, with the query-time LLM off. Say which configuration a gate ran in when reporting it.
@@ -211,7 +211,7 @@ If you're asked to change ranking/traversal/root-selection behavior, check `note
 
 - `src/app/generate/page.tsx` — main search page.
 - `src/components/generator/GeneratorPrototype.tsx` — primary search/results UI (a client component).
-- `src/lib/api/{generate,explore}.ts` — typed fetch wrappers for the backend endpoints. They currently hardcode `http://127.0.0.1:8000`; Stage 3b replaces this with one shared API-base helper.
+- `src/lib/api/{generate,explore}.ts` — typed fetch wrappers for the backend endpoints, built on `src/lib/api/base.ts` (`apiUrl()`: a relative `/api` by default; `NEXT_PUBLIC_API_BASE_URL` overrides it at build time).
 - `src/features/generator/types.ts` — shared result/request types mirroring the backend Pydantic schemas (`app/schemas/generate.py`, `app/schemas/explore_v2.py`) — keep them in sync manually, there's no codegen.
 
 **Next.js 16 has breaking changes** — APIs, conventions, and file structure may differ from your training data. Read the relevant guide in `frontend/node_modules/next/dist/docs/` before writing Next.js code (metadata, sitemap, robots, routing), and heed deprecation notices.
