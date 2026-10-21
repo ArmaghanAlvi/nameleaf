@@ -10,10 +10,10 @@ Launching soon at https://nameleaf.app
 
 ## What it does
 
-- **Search by meaning, not spelling.** A word you type opens a list of its senses, so *light* (not heavy) and *light* (illumination) give different results.
+- **Search by meaning** A word you type opens a list of its senses, so *light* (not heavy) and *light* (illumination) give different results.
 - **One result tree per language.** For each of the 21 languages, the backend finds the equivalent starting word, then expands from it up to 3 steps deep and 3 branches wide. Each starting word records which kind of evidence picked it.
 - **Real names alongside words.** 106,398 attested given names and surnames from the imported languages appear as name cards. Each card can show gender, a romanization, an origin, and a dropdown of variants and cognates.
-- **Honest waiting.** Large searches show "Large searches can take a few minutes." If the server is busy, the API answers with a plain message and a retry time instead of hanging.
+- **Latency.** Large searches show "Large searches can take a few minutes." If the server is busy, the API answers with a plain message and a retry time instead of hanging.
 
 ## Example
 
@@ -122,7 +122,7 @@ I design the system and direct all the work. Planning happens in conversation wi
 
 ## Why I built it
 
-My original inspiration for this project came from a Creative Writing Workshop gen-ed course I took in my freshman year at UMD. In the stories we had to write, a common thing I heard from almost every writer was that character naming was a long, tedious process, which some people dreaded so much they chose not to name their characters at all. When I myself was naming characters,  I always felt that the names should be meaningful, and would spend long hours with Google Translate, ChatGPT, and Gemini, trying to find different translations of words that could be names, or names from various languages that might match the meaning I was looking for. It is a common strategy, after all, to name things after words that have meanings connected to what you want them to represent. My own name "Armaghan" is just the Persian word for "gift", for example. There are also various examples you can find in fiction, like "Aslan" from Narnia, "Lupin" from Harry Potter, "Shifu" from Kung Fu Panda, "Candide" from Candide,  "Simba" and "Mufasa" from the Lion King, "Frieren" from Beyond Journey's End, and the list just goes on and on.
+My original inspiration for this project came from a Creative Writing Workshop gen-ed course I took in my freshman year at UMD. In the stories we had to write, a common thing I heard from almost every writer was that character naming was a long, tedious process, which some people dreaded so much they chose not to name their characters at all. When I myself was naming characters,  I always felt that the names should be meaningful, and would spend long hours with Google Translate, ChatGPT, and Gemini, trying to find different translations of words that could be names, or names from various languages that might match the meaning I was looking for. It is a common strategy, after all, to name things after words that have meanings connected to what you want them to represent. My own name "Armaghan" is just the Persian word for "gift", for example. There are also various examples you can find in fiction, like "Aslan" from Narnia, "Voldemort" from Harry Potter, "Shifu" from Kung Fu Panda, "Candide" from Candide,  "Simba" and "Mufasa" from the Lion King, "Frieren" from Beyond Journey's End, and the list just goes on and on.
 
 There weren't any sites online that could help me with the wide language search I was looking for, so I decided to try to create an application to make this process faster. This is when I realized that when trying to give anything a meaningful name by using words that represent a meaning, whether it be for a child, to a pet, to a company, to a fictional character, the process I was trying to optimize could be applied. There were sites out there that allow you to search meanings and find names, but they weren't capable of searching in a way that let you explore how a concept manifests in different ways around the world.
 
