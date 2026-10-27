@@ -244,8 +244,8 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7), sequenced into M
 
 **Production target** (so decisions made in different stages converge):
 - `docker-compose.prod.yml`: Caddy reverse proxy (`/` → frontend, `/api/*` → backend, automatic HTTPS), a CPU-only backend image with the model baked in (`HF_HUB_OFFLINE=1`), and Postgres on the internal network only, with no published port.
-- Images are built for both `linux/arm64` (free-tier host) and `linux/amd64` (future paid host).
-- Postgres schema `public` holds reference data and is replaced wholesale on each publish. Schema `live` holds live-traffic data (and later accounts) and is never touched by publishing.
+- Images are built for `linux/arm64` (the free-tier host). An amd64 build is added when moving to an x86 host (roadmap 6h; Findings E-0.7).
+- Images are built on the Mac with the server's `SITE_URL` and shipped over SSH (`docker save` / `docker load`); the server never builds images (Findings E-0.7).- Postgres schema `public` holds reference data and is replaced wholesale on each publish. Schema `live` holds live-traffic data (and later accounts) and is never touched by publishing.
 - The app connects as a least-privilege role: read-only on `public`, writes only to `live`.
 - Production defaults: `ROOT_LLM_QUERY_TIME=0`, ranking-stats writes off, API docs off, `includeHidden` ignored, one uvicorn worker with an explicit thread count, rate limits on expensive endpoints.
 - Search behaviour (Findings B-4.1–B-4.4): every search from 0×0 to 3×3 is allowed; width × depth ≥ 4 is "large", at most one at a time. Target on the server: normal searches within 30 s COLD median, large ones within the 300 s timeout without blocking a normal one. Limits are `SEARCH_*` settings, so tightening them is a configuration change.
