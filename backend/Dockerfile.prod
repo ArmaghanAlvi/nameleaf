@@ -47,6 +47,9 @@ EXPOSE 8000
 # access line carried the visitor's IP plus the typed word in the query
 # string (D-2.5), which the privacy page says is never logged.
 # tests/test_production_logging.py fails if this flag disappears.
+# --timeout-graceful-shutdown 320 (E-0.7 6c): on SIGTERM, wait up to 320 s for
+# in-flight searches, inside compose's 330 s stop_grace_period
+# (tests/test_production_config.py keeps 320 < 330).
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", \
      "--workers", "1", "--proxy-headers", "--forwarded-allow-ips", "*", \
-     "--no-access-log"]
+     "--no-access-log", "--timeout-graceful-shutdown", "320"]

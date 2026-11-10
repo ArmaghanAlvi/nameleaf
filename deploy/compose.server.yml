@@ -1,0 +1,15 @@
+# Server-only override for docker-compose.prod.yml (E1; E-0.7 6a).
+#
+# The server never builds images: they are built on the Mac for linux/arm64
+# and shipped (deploy/images.sh). `!reset` removes the base file's `build:`
+# sections, so even `up --build` cannot start a build here, and with
+# `pull_policy: never` (base file) a missing image is an error, not a pull.
+# Docs: docs.docker.com/reference/compose-file/merge/ ("Reset value").
+#
+# Never used directly: nameleaf-compose (deploy/server/compose.sh) passes it
+# after docker-compose.prod.yml on every server command.
+services:
+  backend:
+    build: !reset null
+  frontend:
+    build: !reset null

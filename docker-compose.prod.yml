@@ -4,6 +4,11 @@
 #
 #   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
 #
+# That is the Mac rehearsal. The server never builds (E-0.7 6a): images are
+# built on the Mac and shipped (deploy/images.sh), and every server command
+# goes through `nameleaf-compose` (deploy/server/compose.sh), which adds
+# deploy/compose.server.yml (removes `build:`) and the tooling's IMAGE_TAG.
+#
 # The project name "nameleaf" keeps containers and volumes separate from the
 # dev stack (docker-compose.yml), whose volume holds the master database.
 name: nameleaf
@@ -55,8 +60,18 @@ services:
       context: ./backend
       dockerfile: Dockerfile.prod
     image: nameleaf-backend:${IMAGE_TAG:-latest}
+    # Local images only: never try a registry (D-4.6). `up -d --build` still
+    # builds on the Mac; on the server compose.server.yml removes `build:`.
+    pull_policy: never
     restart: unless-stopped
     logging: *default-logging
+    # tini as PID 1 (D-3a.5, D-4.4): uvicorn re-raises SIGTERM after a clean
+    # shutdown, which PID 1 would ignore. Expect exit 143 on stop.
+    init: true
+    # Drain (E-0.7 6c): a search can run 300 s after up to 30 s queued, and
+    # uvicorn waits up to --timeout-graceful-shutdown 320 (Dockerfile.prod)
+    # for open requests before Docker's SIGKILL at 330 s.
+    stop_grace_period: 330s
     environment:
       APP_ENV: production
       DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL in .env.production}
@@ -90,6 +105,7 @@ services:
       args:
         SITE_URL: ${SITE_URL:?set SITE_URL in .env.production}
     image: nameleaf-frontend:${IMAGE_TAG:-latest}
+    pull_policy: never
     restart: unless-stopped
     logging: *default-logging
     networks: [edge]
