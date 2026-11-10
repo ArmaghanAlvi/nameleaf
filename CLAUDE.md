@@ -79,6 +79,23 @@ npm run lint
 
 The guard hook at `.claude/hooks/guard.py` enforces the destructive-command, secret-file, and git-write rules; its tests are `backend/tests/test_claude_guard.py`.
 
+### Deploy tooling (`deploy/`, E1)
+
+Scripts for the server and deploys exist, and **the user runs them** (E2–E4); Claude Code never runs them against a server. `deploy/README.md` has the order of use and what remains unverified.
+- `server/setup.sh`: hardening and setup, run on the server as root.
+- `images.sh`: build `linux/arm64` images tagged with the git short SHA, then ship them over SSH.
+- `deploy.sh`: bootstrap, deploy, rollback, status.
+- `smoke.py` and `load_probe.py`: 7a and 7b.
+- `vector_parity.sh`: embeds inside an image with `--network none`.
+- `server/backup_live.sh`: the nightly `live` dump.
+
+Arguments:
+- Every remote-facing script takes an **SSH alias** as a required argument (`nameleaf-prod`, or `nameleaf-prod-admin` for setup) and refuses hostnames and IPs.
+- Smoke and load take a **base URL**.
+- No file holds a hostname, IP or production URL.
+
+On the server, compose runs only through `nameleaf-compose` (`deploy/server/compose.sh`). It adds `deploy/compose.server.yml`, whose `build: !reset` means the server never builds, and the tooling's `IMAGE_TAG`. Tests: `backend/tests/test_deploy_scripts.py` and `test_deploy_smoke_load.py`, with every external binary faked; the guard blocks any command naming `deploy.sh`, so these tests are how it is exercised.
+
 ### Publish build (`backend/scripts/publish/`, C4; first run in C5)
 
 Mechanism: each publish restores a slimmed reference dump of schema `public` into a **new** database (`name_generator_<stamp>`) in the same Postgres instance, creates `live` (empty on the first publish, otherwise carried from the current database with no writes in flight), switches the backend's `DATABASE_URL` and restarts it, and keeps the previous database for one cycle as the rollback. `live` and `public` share a database because the dropdown joins them.
@@ -245,7 +262,8 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7), sequenced into M
 **Production target** (so decisions made in different stages converge):
 - `docker-compose.prod.yml`: Caddy reverse proxy (`/` → frontend, `/api/*` → backend, automatic HTTPS), a CPU-only backend image with the model baked in (`HF_HUB_OFFLINE=1`), and Postgres on the internal network only, with no published port.
 - Images are built for `linux/arm64` (the free-tier host). An amd64 build is added when moving to an x86 host (roadmap 6h; Findings E-0.7).
-- Images are built on the Mac with the server's `SITE_URL` and shipped over SSH (`docker save` / `docker load`); the server never builds images (Findings E-0.7).- Postgres schema `public` holds reference data and is replaced wholesale on each publish. Schema `live` holds live-traffic data (and later accounts) and is never touched by publishing.
+- Images are built on the Mac with the server's `SITE_URL` and shipped over SSH (`docker save` / `docker load`); the server never builds images (Findings E-0.7).
+- Postgres schema `public` holds reference data and is replaced wholesale on each publish. Schema `live` holds live-traffic data (and later accounts) and is never touched by publishing.
 - The app connects as a least-privilege role: read-only on `public`, writes only to `live`.
 - Production defaults: `ROOT_LLM_QUERY_TIME=0`, ranking-stats writes off, API docs off, `includeHidden` ignored, one uvicorn worker with an explicit thread count, rate limits on expensive endpoints.
 - Search behaviour (Findings B-4.1–B-4.4): every search from 0×0 to 3×3 is allowed; width × depth ≥ 4 is "large", at most one at a time. Target on the server: normal searches within 30 s COLD median, large ones within the 300 s timeout without blocking a normal one. Limits are `SEARCH_*` settings, so tightening them is a configuration change.
@@ -261,7 +279,7 @@ The plan lives in `notes/PUBLISHING_ROADMAP.md` (Stages 0–7), sequenced into M
 | 3 Configuration and hardening | done (Breakdown A) |
 | 4 Name, legal pages, UI | done (Breakdown D) |
 | 5 Findability | done (Breakdown D; 5d Search Console in E3) |
-| 6 Hosting and first publish | not started (user) |
+| 6 Hosting and first publish | in progress (E1 tooling done; E2 next) |
 | 7 Launch verification | not started |
 
 ## Notes directory
