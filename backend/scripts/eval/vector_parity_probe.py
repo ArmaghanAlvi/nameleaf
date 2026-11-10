@@ -7,7 +7,10 @@ numpy and the stdlib -- no app config, no database -- so it runs unchanged
 inside the production image with `--network none` and a read-only bind mount.
 It builds the model the same way embedding_provider.get_model() does for
 EMBEDDING_DEVICE=cpu TORCH_NUM_THREADS=N: set_num_threads first, then
-SentenceTransformer(MODEL, device="cpu").
+SentenceTransformer(MODEL, device="cpu", revision=R). Since B-2.4 the app pins
+R (DEFAULT_EMBEDDING_MODEL_REVISION) and the production image holds only that
+snapshot, with no refs/main, so inside the image pass --revision (E1;
+deploy/vector_parity.sh does). Without it the model resolves `main`, as in B1.
 
 TEXTS ARE ENCODED VERBATIM. The input file comes from
 `batch_embed_identity.py --export-texts`, whose texts already carry the
@@ -51,7 +54,7 @@ def _check_verbatim(texts: list[str]) -> None:
                  f"first: {bad[0][:60]!r}")
 
 
-def encode(texts_path: str, threads: int) -> None:
+def encode(texts_path: str, threads: int, revision: str | None = None) -> None:
     import numpy as np
     import torch
     import sentence_transformers
@@ -64,7 +67,7 @@ def encode(texts_path: str, threads: int) -> None:
     _check_verbatim(texts)
 
     torch.set_num_threads(threads)
-    model = SentenceTransformer(MODEL, device="cpu")
+    model = SentenceTransformer(MODEL, device="cpu", revision=revision)
     model.encode(PREFIX + "warmup", normalize_embeddings=True)
 
     vectors, times = [], []
@@ -85,6 +88,7 @@ def encode(texts_path: str, threads: int) -> None:
             "transformers": transformers.__version__,
             "device": str(model.device),
             "torch_num_threads": torch.get_num_threads(),
+            "revision": revision,
             "config_json": try_to_load_from_cache(MODEL, "config.json"),
             "n_texts": len(texts),
             "median_single_encode_ms": round(statistics.median(times) * 1000, 3),
@@ -132,12 +136,14 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--texts")
     ap.add_argument("--threads", type=int, default=2)
+    ap.add_argument("--revision", default=None,
+                    help="model snapshot, as embedding_provider pins it (needed in the image)")
     ap.add_argument("--compare", nargs=2, metavar=("A", "B"))
     args = ap.parse_args()
     if args.compare:
         compare(*args.compare)
     elif args.texts:
-        encode(args.texts, args.threads)
+        encode(args.texts, args.threads, args.revision)
     else:
         ap.error("pass --texts or --compare")
 
