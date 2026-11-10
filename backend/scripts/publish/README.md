@@ -185,10 +185,12 @@ instead of byte-identity.
     is a confound, not an index effect.
   - It writes `preflight.txt`, `cases.tsv`, `ids.tsv`, then `summary.txt`
     **last**, as the completion marker.
-- **`compare --baseline DIR --candidate DIR --max-drop X`** (files only). It
+- **`compare --baseline DIR --candidate DIR`** with thresholds (files only). It
   gives per-case, per-language and overall deltas; recall with and without
   cases whose plan type changed; and exact *distance* lists compared (a
-  difference means the data differs). `--max-drop` has no default. C7 set the publish thresholds (Findings C-7.2): an overall drop of at most 0.02 on `ann15` and `ann150`, and at most 0.07 on `ann1`. Until `compare` takes per-list thresholds (E1), run it with `--max-drop 0.07` and check `ann15` and `ann150` against 0.02 (runbook step 6).
+  difference means the data differs). Thresholds have no default: either one
+  `--max-drop X` for every list, or all three of `--max-drop-ann15`,
+  `--max-drop-ann150` and `--max-drop-ann1` (E1). C7 set the publish thresholds (Findings C-7.2): an overall drop of at most 0.02 on `ann15` and `ann150`, and at most 0.07 on `ann1`, i.e. `--max-drop-ann15 0.02 --max-drop-ann150 0.02 --max-drop-ann1 0.07` (runbook step 6).
 - **Exit codes:**
 
   | Code | Meaning |

@@ -497,13 +497,15 @@ EXACT = {(1, "ru"): [(10, "0.1"), (11, "0.2")], (1, "ga"): [(20, "0.3"), (21, "0
 
 
 def _compare(tmp_path, fakes, cand_cases, cand_exact=EXACT, max_drop="0.03",
-             cand_complete=True):
+             cand_complete=True, thresholds=None):
+    """`thresholds` (a flag list) replaces the default `--max-drop max_drop`."""
     base, cand = tmp_path / "base", tmp_path / "cand"
     _write_measure_dir(base, BASE_CASES, EXACT)
     _write_measure_dir(cand, cand_cases, cand_exact, complete=cand_complete)
+    flags = thresholds if thresholds is not None else ["--max-drop", max_drop]
     r, calls = _run("recall_check.sh",
                     ["compare", "--baseline", str(base), "--candidate", str(cand),
-                     "--max-drop", max_drop], fakes, tmp_path)
+                     *flags], fakes, tmp_path)
     assert calls == "", "compare must not call any binary"
     return r
 
@@ -582,6 +584,58 @@ def test_recall_compare_refuses_mismatched_probes(tmp_path, fakes):
 def test_recall_compare_bad_max_drop_exits_2(tmp_path, fakes):
     r = _compare(tmp_path, fakes, BASE_CASES, max_drop="abc")
     assert r.returncode == 2
+
+
+# Per-list thresholds (E1, C-7.2): ann15 0.02, ann150 0.02, ann1 0.07.
+C72 = ["--max-drop-ann15", "0.02", "--max-drop-ann150", "0.02", "--max-drop-ann1", "0.07"]
+
+
+def test_recall_compare_per_list_identical_passes(tmp_path, fakes):
+    r = _compare(tmp_path, fakes, BASE_CASES, thresholds=C72)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "max_drop: ann150=0.02 ann15=0.02 ann1=0.07" in r.stdout
+
+
+@pytest.mark.parametrize("index,case,failing_line", [
+    # ru ann15 13 -> 12: 21/30 -> 20/30, drop 0.0333 > 0.02
+    (1, (1, "ru", "ann15", 15, 15, 15, 12, "index"), "ann15\t0.7000\t0.6667\t+0.0333\tDROP>X"),
+    # ru ann150 140 -> 130: 260/300 -> 250/300, drop 0.0333 > 0.02
+    (0, (1, "ru", "ann150", 150, 150, 150, 130, "index"), "ann150\t0.8667\t0.8333\t+0.0333\tDROP>X"),
+    # ru ann1 1 -> 0: 2/2 -> 1/2, drop 0.5 > 0.07
+    (2, (1, "ru", "ann1", 1, 1, 1, 0, "index"), "ann1\t1.0000\t0.5000\t+0.5000\tDROP>X"),
+], ids=["ann15", "ann150", "ann1"])
+def test_recall_compare_each_list_fails_independently(tmp_path, fakes, index, case, failing_line):
+    cand = list(BASE_CASES)
+    cand[index] = case
+    r = _compare(tmp_path, fakes, cand, thresholds=C72)
+    assert r.returncode == 1, r.stdout
+    assert failing_line in r.stdout
+    failing = case[2]
+    for other in ("ann15", "ann150", "ann1"):
+        if other != failing:
+            assert re.search(rf"^{other}\t[^\n]*\tok\t\|", r.stdout, re.M), (other, r.stdout)
+    assert "RESULT: FAIL" in r.stdout
+
+
+def test_recall_compare_per_list_thresholds_apply_to_their_own_list(tmp_path, fakes):
+    cand = list(BASE_CASES)
+    cand[1] = (1, "ru", "ann15", 15, 15, 15, 12, "index")  # ann15 drop 0.0333
+    loose15 = ["--max-drop-ann15", "0.05", "--max-drop-ann150", "0.02", "--max-drop-ann1", "0.02"]
+    r = _compare(tmp_path, fakes, cand, thresholds=loose15)
+    assert r.returncode == 0, r.stdout
+    assert "ann15\t0.7000\t0.6667\t+0.0333\tok" in r.stdout
+
+
+@pytest.mark.parametrize("flags,why", [
+    (["--max-drop", "0.07", "--max-drop-ann15", "0.02"], "mixed forms"),
+    (["--max-drop-ann15", "0.02", "--max-drop-ann150", "0.02"], "ann1 missing"),
+    (["--max-drop-ann1", "0.07"], "two lists missing"),
+    ([], "no threshold"),
+    (["--max-drop-ann15", "x", "--max-drop-ann150", "0.02", "--max-drop-ann1", "0.07"], "bad value"),
+])
+def test_recall_compare_threshold_usage_errors_exit_2(tmp_path, fakes, flags, why):
+    r = _compare(tmp_path, fakes, BASE_CASES, thresholds=flags)
+    assert r.returncode == 2, why
 
 
 # --- the recall SQL mirrors the app -------------------------------------------

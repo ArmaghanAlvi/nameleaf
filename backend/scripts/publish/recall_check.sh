@@ -23,16 +23,19 @@
 #       boundary is not a miss. Writes preflight.txt, cases.tsv, ids.tsv,
 #       and summary.txt LAST (the completion marker).
 #
-#   compare --baseline DIR --candidate DIR --max-drop X
+#   compare --baseline DIR --candidate DIR
+#           (--max-drop X | --max-drop-ann15 X --max-drop-ann150 X --max-drop-ann1 X)
 #       Pure file comparison (no docker). Per case and in total; plan-type
 #       differences listed and recall shown with and without those cases;
 #       exact top-150 DISTANCE lists compared (ids may differ only inside a
 #       tie) -- a difference there is a DATA signal, not an index signal.
-#       --max-drop is required: the threshold is decided in C7.
+#       A threshold is required: either one --max-drop for every list, or
+#       all three per-list flags (E1; C-7.2's values are 0.02 / 0.02 / 0.07).
+#       Mixing the two forms, or giving only some per-list flags, is exit 2.
 #
 # Exit codes (both modes):
-#   0  ok (compare: no list's overall recall dropped by more than X)
-#   1  compare: overall recall dropped by more than X on ann150, ann15 or ann1
+#   0  ok (compare: no list's overall recall dropped by more than its X)
+#   1  compare: overall recall dropped by more than its X on ann150, ann15 or ann1
 #   2  usage or precondition error (bad/missing argument, existing --out,
 #      missing seed or language, not Postgres 17, exact plan used the index)
 #   3  compare: not comparable -- a directory lacks summary.txt, the probe
@@ -48,7 +51,8 @@
 #   ./recall_check.sh measure --container name_generator_db --db name_generator \
 #       --probe recall_probe.tsv --out c6_recall/master
 #   ./recall_check.sh compare --baseline c6_recall/master \
-#       --candidate c6_recall/restored --max-drop 0.03
+#       --candidate c6_recall/restored \
+#       --max-drop-ann15 0.02 --max-drop-ann150 0.02 --max-drop-ann1 0.07
 set -Eeuo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -68,7 +72,7 @@ block() {
     awk -v want="$2" '$0 == "@@begin " want {f = 1; next} $0 == "@@end" {f = 0} f' "$1"
 }
 
-usage() { die "usage: recall_check.sh measure --container C --db D --probe FILE --out DIR | compare --baseline DIR --candidate DIR --max-drop X"; }
+usage() { die "usage: recall_check.sh measure --container C --db D --probe FILE --out DIR | compare --baseline DIR --candidate DIR (--max-drop X | --max-drop-ann15 X --max-drop-ann150 X --max-drop-ann1 X)"; }
 
 # ---------------------------------------------------------------------------
 # measure
@@ -239,19 +243,37 @@ measure() {
 # compare (files only)
 # ---------------------------------------------------------------------------
 compare() {
-    local base="" cand="" maxdrop=""
+    local base="" cand="" maxdrop="" x15="" x150="" x1=""
     while [[ $# -gt 0 ]]; do
         case "$1" in
             --baseline) base="${2:-}"; shift 2 ;;
             --candidate) cand="${2:-}"; shift 2 ;;
             --max-drop) maxdrop="${2:-}"; shift 2 ;;
+            --max-drop-ann15) x15="${2:-}"; shift 2 ;;
+            --max-drop-ann150) x150="${2:-}"; shift 2 ;;
+            --max-drop-ann1) x1="${2:-}"; shift 2 ;;
             *) die "unknown argument: $1" ;;
         esac
     done
     require_arg --baseline "$base"
     require_arg --candidate "$cand"
-    require_arg --max-drop "$maxdrop"
-    [[ "$maxdrop" =~ ^[0-9]*\.?[0-9]+$ ]] || die "--max-drop must be a non-negative number"
+    # Either one --max-drop for every list, or all three per-list flags.
+    if [[ -n "$maxdrop" ]]; then
+        [[ -z "$x15$x150$x1" ]] || die "use either --max-drop or the three --max-drop-ann* flags, not both"
+        x15="$maxdrop"; x150="$maxdrop"; x1="$maxdrop"
+    elif [[ -n "$x15$x150$x1" ]]; then
+        require_arg --max-drop-ann15 "$x15"
+        require_arg --max-drop-ann150 "$x150"
+        require_arg --max-drop-ann1 "$x1"
+    else
+        die "a threshold is required: --max-drop X, or --max-drop-ann15/--max-drop-ann150/--max-drop-ann1"
+    fi
+    local flag val
+    for flag in ann15:"$x15" ann150:"$x150" ann1:"$x1"; do
+        val="${flag#*:}"
+        [[ "$val" =~ ^[0-9]*\.?[0-9]+$ ]] || die "the ${flag%%:*} threshold must be a non-negative number (got '$val')"
+    done
+    local thresholds="ann150=$x150 ann15=$x15 ann1=$x1"
     local d
     for d in "$base" "$cand"; do
         [[ -d "$d" ]] || die "not a directory: $d"
@@ -270,7 +292,7 @@ compare() {
         exit 3
     fi
 
-    echo "# recall_check compare: baseline=$base candidate=$cand max_drop=$maxdrop"
+    echo "# recall_check compare: baseline=$base candidate=$cand max_drop: $thresholds"
     echo
     echo "## exact top-150 distance lists (a difference = the DATA differs)"
     local exactdiff
@@ -301,7 +323,8 @@ compare() {
     echo
     echo "## overall recall per list: baseline candidate drop (all cases | excluding plan-type differences)"
     local overall
-    overall=$(awk -F "$TAB" -v X="$maxdrop" '
+    overall=$(awk -F "$TAB" -v X15="$x15" -v X150="$x150" -v X1="$x1" '
+        BEGIN { X["ann15"] = X15; X["ann150"] = X150; X["ann1"] = X1 }
         FNR == 1 {f++; next}
         { k = $1 "\t" $2 "\t" $3; h[f, k] = $7; e[f, k] = $5; p[f, k] = $8; li[k] = $3; keys[k] = 1 }
         END {
@@ -315,7 +338,8 @@ compare() {
                 b = be[l] ? bh[l] / be[l] : 0; c = ce[l] ? ch[l] / ce[l] : 0
                 bs = bes[l] ? bhs[l] / bes[l] : 0; cs = ces[l] ? chs[l] / ces[l] : 0
                 drop = b - c
-                verdict = (drop > X + 1e-12) ? "DROP>X" : "ok"
+                if (!(l in X)) { printf "unknown list %s\n", l; exit 9 }
+                verdict = (drop > X[l] + 1e-12) ? "DROP>X" : "ok"
                 if (verdict != "ok") fail = 1
                 printf "%s\t%.4f\t%.4f\t%+.4f\t%s\t|\t%.4f\t%.4f\t%+.4f\n", l, b, c, drop, verdict, bs, cs, bs - cs
             }
@@ -343,10 +367,10 @@ compare() {
         exit 3
     fi
     if [[ "$overall" == *"gate_fail=1"* ]]; then
-        echo "RESULT: FAIL (exit 1): overall recall dropped by more than $maxdrop on at least one list"
+        echo "RESULT: FAIL (exit 1): overall recall dropped by more than its threshold on at least one list ($thresholds)"
         exit 1
     fi
-    echo "RESULT: PASS (exit 0): no list's overall recall dropped by more than $maxdrop"
+    echo "RESULT: PASS (exit 0): no list's overall recall dropped by more than its threshold ($thresholds)"
 }
 
 case "${1:-}" in
