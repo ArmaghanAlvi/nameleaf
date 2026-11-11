@@ -655,8 +655,12 @@ def test_parity_encode_locally_runs_without_network(h):
     assert run.startswith("docker run --rm --network none")
     assert f"-v {REPO}/backend/scripts/eval:/probe:ro" in run
     # The image holds only the pinned snapshot (no refs/main): pass it.
-    pinned = re.search(r'^DEFAULT_EMBEDDING_MODEL_REVISION = "([0-9a-f]{40})"$',
-                       (REPO / "backend/app/services/embedding_provider.py").read_text(), re.M).group(1)
+    revision_match = re.search(
+        r'^DEFAULT_EMBEDDING_MODEL_REVISION = "([0-9a-f]{40})"$',
+        (REPO / "backend/app/services/embedding_provider.py").read_text(), re.M,
+    )
+    assert revision_match is not None
+    pinned = revision_match.group(1)
     assert run.endswith(f"--threads 2 --revision {pinned}")
     assert out.read_text().startswith("{")
 
@@ -894,7 +898,8 @@ def setup_server(h: Harness, docker_installed: bool = False, disk: str = "unform
     add("dpkg", "^-s ", rc=1)
     add("apt-get", "install .*docker-ce", create_launcher="docker",
         require_files=[str(root / "etc/docker/daemon.json"), str(root / "etc/containerd/config.toml"),
-                       str(root / "etc/iptables/rules.v4")])
+                       str(root / "etc/iptables/rules.v4"), *[str(p) for p in dropins(root)]])
+    add("systemctl", "^show -p RequiresMountsFor --value ", stdout="/mnt/data\n")
     add("curl", "", touch="-o")
     add("docker", r"^info --format \{\{\.DockerRootDir\}\}", stdout="/mnt/data/docker\n")
     add("docker", r"^info --format \{\{\.Driver\}\}", stdout='overlayfs [["driver-type","io.containerd.snapshotter.v1"]]\n')
@@ -906,6 +911,11 @@ def setup_server(h: Harness, docker_installed: bool = False, disk: str = "unform
     add("sshd", "^-T$", stdout="passwordauthentication no\nkbdinteractiveauthentication no\n"
                                "permitrootlogin no\npubkeyauthentication yes\nport 22\n")
     return root
+
+
+def dropins(root: Path) -> list[Path]:
+    return [root / "etc/systemd/system" / f"{unit}.d" / "10-nameleaf-data.conf"
+            for unit in ("docker.service", "containerd.service")]
 
 
 def run_setup(h: Harness, root: Path, *args: str):
@@ -995,6 +1005,12 @@ def test_setup_apply_end_to_end_in_order(h):
     assert json.loads((root / "etc/docker/daemon.json").read_text()) == {"data-root": "/mnt/data/docker"}
     assert 'root = "/mnt/data/containerd"' in (root / "etc/containerd/config.toml").read_text()
     assert "containerd image store under /mnt/data/containerd" in r.stdout
+    # Docker and containerd start only with the data volume mounted (E2), set before the first start.
+    for f in dropins(root):
+        assert f.read_text().splitlines()[1:] == ["[Unit]", "RequiresMountsFor=/mnt/data"], f
+    assert first("systemctl daemon-reload") < first("apt-get install -y -o")
+    assert "docker.service: RequiresMountsFor=/mnt/data" in r.stdout
+    assert "containerd.service: RequiresMountsFor=/mnt/data" in r.stdout
     assert first("sshd -t") < first("systemctl reload ssh")
     conf = (root / "etc/ssh/sshd_config.d/00-nameleaf.conf").read_text()
     assert "PasswordAuthentication no" in conf and "PermitRootLogin no" in conf
@@ -1049,3 +1065,25 @@ def test_setup_stops_if_images_would_land_on_the_boot_volume(h):
     r = run_setup(h, root, "apply", "--format-data-device", "/dev/oracleoci/oraclevdb")
     assert r.returncode == 2
     assert "whose root is '/var/lib/containerd'" in r.stdout  # apply tees stderr into its log
+
+
+def test_setup_rerun_keeps_the_mount_dropins_without_reloading(h):
+    root = setup_server(h, docker_installed=True, disk="ours")
+    h.config["rules"].insert(0, {"cmd": "iptables", "match": "^-C INPUT", "rc": 0})
+    h.config["rules"].insert(0, {"cmd": "id", "match": "^nameleaf$"})
+    h.config["rules"].insert(0, {"cmd": "id", "match": "^-nG nameleaf$", "stdout": "nameleaf docker\n"})
+    first = run_setup(h, root, "apply")
+    assert first.returncode == 0, first.stdout + first.stderr
+    assert h.calls().count("systemctl daemon-reload") == 1  # drop-ins added to an existing install
+    second = run_setup(h, root, "apply")
+    assert second.returncode == 0, second.stdout + second.stderr
+    assert h.calls().count("systemctl daemon-reload") == 1  # unchanged: no second reload
+
+
+def test_setup_stops_if_docker_would_start_without_the_data_volume(h):
+    root = setup_server(h)
+    h.config["rules"].insert(0, {"cmd": "systemctl", "match": "^show -p RequiresMountsFor --value docker",
+                                 "stdout": "\n"})
+    r = run_setup(h, root, "apply", "--format-data-device", "/dev/oracleoci/oraclevdb")
+    assert r.returncode == 2
+    assert "docker.service does not require /mnt/data" in r.stdout  # apply tees stderr into its log

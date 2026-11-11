@@ -40,8 +40,12 @@
 #           daemon.json data-root /mnt/data/docker and containerd root
 #           /mnt/data/containerd are written BEFORE the first start: on
 #           Engine 29 fresh installs images live in containerd's store, which
-#           data-root does not move (Findings E-1). Prints where images and
-#           volumes actually live.
+#           data-root does not move (Findings E-1). Also before the first
+#           start: systemd drop-ins with RequiresMountsFor=/mnt/data for
+#           docker.service and containerd.service, so a boot where the
+#           volume fails to mount (fstab has nofail) leaves Docker stopped
+#           instead of starting it on the boot disk with an empty data root.
+#           Prints where images and volumes actually live.
 #        5. user nameleaf (docker group, no sudo) with ubuntu's
 #           authorized_keys; sshd drop-in: key-only, no root login,
 #           validated with `sshd -t` before reload.
@@ -338,8 +342,37 @@ step_firewall() {
     note "persisted: tcp/80, tcp/443, udp/443 in ${saved#"$ROOT"}"
 }
 
+# Docker and containerd must never start without the data volume: fstab
+# mounts it with nofail (so a failed attach can't block boot and SSH), and
+# without this a failed mount would give them an empty data root on the boot
+# disk, where Postgres would initialise an empty cluster. RequiresMountsFor
+# adds Requires= and After= on the mount unit (systemd.unit(5)). Written
+# before Docker's first start, and on every run.
+MOUNT_UNITS="docker.service containerd.service"
+mount_dropins() {
+    local unit changed=0
+    for unit in $MOUNT_UNITS; do
+        write_file "$(P "/etc/systemd/system/$unit.d/10-nameleaf-data.conf")" 644 "# Written by deploy/server/setup.sh (E2): start only with the data volume mounted.
+[Unit]
+RequiresMountsFor=$DATA_MNT"
+        (( ! CHANGED )) || changed=1
+    done
+    (( ! changed )) || systemctl daemon-reload
+}
+
+verify_mount_dropins() {
+    local unit got
+    for unit in $MOUNT_UNITS; do
+        got=$(systemctl show -p RequiresMountsFor --value "$unit" 2>/dev/null || true)
+        [[ " $got " == *" $DATA_MNT "* ]] \
+            || die "$unit does not require $DATA_MNT (RequiresMountsFor='$got'): check /etc/systemd/system/$unit.d/"
+        echo "  $unit: RequiresMountsFor=$got"
+    done
+}
+
 step_docker() {
     note "== 4. Docker Engine + compose plugin (Docker's apt repository)"
+    mount_dropins
     if command -v docker > /dev/null 2>&1; then
         note "Docker is installed: not reinstalling"
     else
@@ -396,6 +429,8 @@ disabled_plugins = [\"cri\"]"
         echo "  Images and container snapshots: $status under $root"
     fi
     df -h / "$DATA_MNT" | sed 's/^/  /'
+    echo "Start only with $DATA_MNT mounted:"
+    verify_mount_dropins
     echo "iptables FORWARD after Docker (its jumps must sit above Oracle's REJECT; E2 records this):"
     iptables -L FORWARD -n --line-numbers -v | sed 's/^/  /'
 }
