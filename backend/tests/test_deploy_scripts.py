@@ -20,6 +20,7 @@ held, the dump user), the compose wrapper's refusals, vector parity's
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -75,6 +76,20 @@ class Harness:
             "NAMELEAF_HEALTH_TIMEOUT": "3",
             "LC_ALL": "C",
         }
+
+    def hide_real(self, prefix: str) -> None:
+        """Make every real binary starting with `prefix` unreachable from PATH.
+
+        CI runners ship /usr/bin/docker, so "Docker is not installed yet"
+        cannot rely on the real PATH lacking it: PATH becomes the fakes plus a
+        directory of symlinks to every other tool in /usr/bin and /bin."""
+        shadow = self.tmp / "realbin"
+        shadow.mkdir()
+        for d in ("/usr/bin", "/bin"):
+            for p in Path(d).iterdir():
+                if not p.name.startswith(prefix) and not os.path.lexists(shadow / p.name):
+                    (shadow / p.name).symlink_to(p)
+        self.env["PATH"] = f"{self.bin}:{shadow}"
 
     def rule(self, cmd: str, match: str = "", **kw) -> None:
         self.config["rules"].append({"cmd": cmd, "match": match, **kw})
@@ -655,12 +670,10 @@ def test_parity_encode_locally_runs_without_network(h):
     assert run.startswith("docker run --rm --network none")
     assert f"-v {REPO}/backend/scripts/eval:/probe:ro" in run
     # The image holds only the pinned snapshot (no refs/main): pass it.
-    revision_match = re.search(
-        r'^DEFAULT_EMBEDDING_MODEL_REVISION = "([0-9a-f]{40})"$',
-        (REPO / "backend/app/services/embedding_provider.py").read_text(), re.M,
-    )
-    assert revision_match is not None
-    pinned = revision_match.group(1)
+    m = re.search(r'^DEFAULT_EMBEDDING_MODEL_REVISION = "([0-9a-f]{40})"$',
+                  (REPO / "backend/app/services/embedding_provider.py").read_text(), re.M)
+    assert m, "DEFAULT_EMBEDDING_MODEL_REVISION is no longer a 40-hex literal in embedding_provider.py"
+    pinned = m.group(1)
     assert run.endswith(f"--threads 2 --revision {pinned}")
     assert out.read_text().startswith("{")
 
@@ -860,6 +873,9 @@ def setup_server(h: Harness, docker_installed: bool = False, disk: str = "unform
     (keys / "authorized_keys").write_text("ssh-ed25519 AAAAfake nameleaf-prod\n")
     if not docker_installed:
         (h.bin / "docker").unlink()
+        h.hide_real("docker")
+        r = subprocess.run(["bash", "-c", "command -v docker"], env=h.env, capture_output=True, text=True)
+        assert r.stdout.strip() == "", f"a real docker is still reachable: {r.stdout}"
     rules = h.config["rules"]
     add = lambda cmd, match="", **kw: rules.append({"cmd": cmd, "match": match, **kw})  # noqa: E731
     add("uname", "-m", stdout="aarch64\n")
